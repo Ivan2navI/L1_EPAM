@@ -1,0 +1,6 @@
+# Nmap 7.80 scan initiated Thu Oct 20 23:32:02 2022 as: nmap -sn -oG all_ip.log 192.168.0.*
+Host: 192.168.0.1 (DLINK__DIR_320)	Status: Up
+Host: 192.168.0.10 (NETIS)	Status: Up
+Host: 192.168.0.50 (AirStantion1_Torgmash)	Status: Up
+Host: 192.168.0.52 (AirStantion3)	Status: Up
+# Nmap done at Thu Oct 20 23:32:12 2022 -- 256 IP addresses (4 hosts up) scanned in 10.15 seconds
