@@ -46,23 +46,32 @@ echo
 echo "============================================="
 
 
-ip_search="`ifconfig | grep broadcast`"
-#echo "`ifconfig | grep broadcast`";
-echo $ip_search > ip_search.txt
-echo `cat ip_search.txt`
-echo
-
-
-
 #This will give you all IPv4 interfaces, including the loopback 127.0.0.1:
 echo "All IPv4 interfaces:"
 echo "`ip -4 addr | grep -oP '(?<=inet\s)\d+(\.\d+){3}'`"
 echo
 
-#List the current IP address
+
+#Current IP address
 IP_is=$(hostname -I)
 echo "Current IP address: $IP_is"
+
+#Current CUT IP address
+IP_cut="`hostname -I | grep -Eo '([0-9]*\.){2}[0-9]*'`"
+echo "Current CUT IP address: $IP_cut"
 echo
+
+
+#Use grep to filter IP address from ifconfig
+echo "Use grep to filter IP address from ifconfig"
+ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'
+echo
+
+# AND CUT to format 192.168.X 
+echo "AND CUT to format 192.168.x"
+ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){2}[0-9]*' | grep -Eo '([0-9]*\.){2}[0-9]*' | grep -v '127.0.0'
+echo
+
 
 echo "------------- PING -----------------"
 IP=192.168.0
