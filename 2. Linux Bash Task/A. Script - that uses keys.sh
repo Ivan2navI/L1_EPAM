@@ -11,6 +11,18 @@
 clear
 echo "------------------------------------"
 
+#Current IP address
+IP_is=$(hostname -I)
+echo "Current IP address: $IP_is"
+
+#Current CUT IP address
+IP_cut="`hostname -I | grep -Eo '([0-9]*\.){2}[0-9]*'`"
+echo "Current CUT IP address: $IP_cut"
+IP_cut2= "$IP_cut.*"
+echo "Current CUT2 IP address: $IP_cut2"
+echo
+
+
 while :
 do 
   echo "Enter command [--all, --target, exit]"
@@ -20,7 +32,7 @@ do
   case $cons_arg in
     #"--all")   echo "`nmap -sn -oG 'all_active_ip.log' 192.168.0.*`"; exit;;
     "--all")   echo "`ifconfig | grep broadcast`";
-                echo "`nmap -sP 192.168.0.* | grep '(1'`"; # Сканировать сеть в поиске Активных Хостов
+                echo "`nmap -sP $IP_cut2 | grep '(1'`"; # Сканировать сеть в поиске Активных Хостов
                 exit;; 
     "--target")      echo "`nmap localhost`"; exit;; 
     exit)     exit;;
