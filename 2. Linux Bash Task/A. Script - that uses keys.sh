@@ -20,7 +20,7 @@ do
   case $cons_arg in
     #"--all")   echo "`nmap -sn -oG 'all_active_ip.log' 192.168.0.*`"; exit;;
     "--all")   echo "`ifconfig | grep broadcast`";
-                echo "`nmap -sn 192.168.0.*`"; # Сканировать сеть в поиске Активных Хостов
+                echo "`nmap -sP 192.168.0.* | grep '(1'`"; # Сканировать сеть в поиске Активных Хостов
                 exit;; 
     "--target")      echo "`nmap localhost`"; exit;; 
     exit)     exit;;
