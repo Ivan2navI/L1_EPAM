@@ -73,6 +73,7 @@ ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){2}[0-9]*' | grep -Eo '([0-9]*\.){2}
 echo
 
 
+
 echo "------------- PING -----------------"
 IP=192.168.0
 for i in $(seq 1 254); do (ping -c1 $IP.$i >/dev/null && echo "ON: $IP.$i" &); done
