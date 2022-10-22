@@ -7,24 +7,25 @@
 #	The code that performs the functionality of each of the subtasks must be placed in a separate function
 
 
-
 #!/bin/bash
 clear
 echo "------------------------------------"
 
 #Current IP address
 IP_is=$(hostname -I)
-echo "Current IP address: $IP_is"
+#  echo "Current IP address: $IP_is"
 
 #Current CUT IP address
 IP_cut="`hostname -I | grep -Eo '([0-9]*\.){2}[0-9]*'`"
-echo "Current CUT IP address: $IP_cut"
+#echo "Current CUT IP address: $IP_cut + * "
 IP_cut2=$IP_cut.*
-echo "Current CUT2 IP address: $IP_cut2"
-echo
+#echo "Current CUT2 IP address: $IP_cut2"
+#echo
 
-#nmap -sn 192.168.2.* | grep -Eo '(for\.)'
-nmap -sn $IP_cut2 | grep -Eo '(for\.)' # Сканировать сеть в поиске Активных Хостов
+#Check GREP & SED with NMAP
+#  nmap -sn 192.168.2.* | grep 'Nmap scan report for '
+#  nmap -sn 192.168.2.* | grep 'Nmap scan report for ' | sed 's/Nmap scan report for \s*//'
+
 
 while :
 do 
@@ -33,14 +34,18 @@ do
   #echo "----->" 
   
   case $cons_arg in
-    #"--all")   echo "`nmap -sn -oG 'all_active_ip.log' 192.168.0.*`"; exit;;
-    "--all")  echo "`ifconfig | grep broadcast`";
-              nmap -sn $IP_cut2 | grep 'for'; # Сканировать сеть в поиске Активных Хостов
+    "--all")  echo;
+              echo "Current LAN: `ifconfig | grep broadcast | sed 's/       \s*//'`";
+              echo "--------------------------------------------------------------------------------";
+              echo "`nmap -sn $IP_cut2 | grep 'Nmap scan report for ' | sed 's/Nmap scan report for \s*//'`"; # Scan LAN for active HOSTS
+              echo "------------------------------------";
               exit;; 
-    "--target")      echo "`nmap localhost`"; exit;; 
-    exit)     exit;;
+    "--target")   echo;
+                  echo "`nmap $IP_is`"; 
+                  echo "------------------------------------";
+                  exit;; 
+    exit)     echo "------------------------------------";
+              exit;;
     *)        echo "PLS, re-ENTER parameter";;
-  esac
-  
-  echo "------------------------------------"   
+  esac  
 done
