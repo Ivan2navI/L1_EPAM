@@ -1,5 +1,36 @@
 #!/bin/bash
 
+#clear
+echo "------------------------------------"
+
+lan_scan_UPPER=('NMAP' 'MASSCAN' 'NETDISCOVER')
+lan_scan=('nmap' 'masscan' 'netdiscover')
+
+
+counter__lan_scan_UPPER=0
+
+for i in "${lan_scan[@]}"; do
+  #echo $i
+  #echo ${lan_scan_UPPER[counter__lan_scan_UPPER]}
+
+
+  echo "------------- ${lan_scan_UPPER[counter__lan_scan_UPPER]} check -------------"
+  check=`dpkg -s  $i | grep "Status"`
+  if [ -n "$check" ]        #проверяем что нашли строку со статусом (что строка не пуста)
+  then
+     echo "${lan_scan_UPPER[counter__lan_scan_UPPER]} installed" #выводим результат
+  else
+     echo "${lan_scan_UPPER[counter__lan_scan_UPPER]} not installed, but can be installed with: sudo apt install $i"
+  fi
+  echo
+
+  ((counter__lan_scan_UPPER++))
+done
+
+echo "===================================================================="
+#exit
+
+
 echo "------------- NMAP check -------------"
 #echo "`apt-cache policy nmap`"
 NMAP=`dpkg -s  nmap | grep "Status"`
