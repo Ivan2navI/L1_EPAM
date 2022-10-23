@@ -80,6 +80,8 @@ echo "============================================="
 #This will give you all IPv4 interfaces, including the loopback 127.0.0.1:
 echo "All IPv4 interfaces:"
 echo "`ip -4 addr | grep -oP '(?<=inet\s)\d+(\.\d+){3}'`"
+echo "`ip -br l | awk '$1 !~ "lo|vir|wl" { print $1}'`"  # Get LAN interfaces
+echo "`ls /sys/class/net | grep ^e`" # Get LAN interfaces V2
 echo
 
 
