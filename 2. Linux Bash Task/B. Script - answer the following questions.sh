@@ -107,10 +107,23 @@ echo "6. What search bots have accessed the site? (UA + IP) "
 # host yourdomain.com | cut -d ' ' -f 4 | curl ipinfo.io/$1
 # awk '{print $1}' apache_logs.txt | sort | uniq -c | sort -nr | curl ipinfo.io/$1
 # curl ipinfo.io/23.66.166.151
+# НЕТ UA IP
 echo
 echo "apache_logs.txt =>"
 awk '{print $1}' apache_logs.txt | sort | uniq | sort -n
 awk '{print $1}' apache_logs.txt | sort | uniq | sort -n | grep 'HTTP/1.0" 200' | grep -Eo "(http|https)://[a-zA-Z0-9./?=_%:-]*" | grep "/bot."
+cat apache_logs.txt | grep 'HTTP/1.0" 200' | grep -Eo "(http|https)://[a-zA-Z0-9./?=_%:-]*" | grep "/bot."
+
+cat apache_logs.txt | grep 'HTTP/1.0" 200' | grep -Eo "(http|https)://[a-zA-Z0-9./?=_%:-]*" | grep "/bot." | grep -Eo '([0-9]*\.){2}[0-9]*'
+
+cat apache_logs.txt | grep 'HTTP/1.0" 200' | grep -E "(http|https)://[a-zA-Z0-9./?=_%:-]*" | grep "/bot." | grep -E '([0-9]*\.){2}[0-9]*'
+
+
+
+#curl https://ipinfo.io/212.115.253.100 | grep "UA"
+#curl https://json.geoiplookup.io/212.115.253.100
+#curl https://ipapi.co/212.115.253.100/json
+# curl https://ipapi.co/212.115.253.100/country/
 
 echo
 echo "example_log.log =>"
