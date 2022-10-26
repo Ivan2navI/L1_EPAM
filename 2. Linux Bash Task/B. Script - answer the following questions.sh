@@ -80,11 +80,43 @@ echo "--------------------------------------------------------------------------
 echo "4. What non-existent pages were clients referred to?" 
 echo
 echo "apache_logs.txt =>"
-cat apache_logs.txt | grep -v '1.0" 200'
+cat apache_logs.txt | grep -v 'HTTP/1.0" 200' | grep -Eo "(http|https)://[a-zA-Z0-9./?=_%:-]*"
 
 echo
 echo "example_log.log =>"
-cat example_log.log | grep -v '1.0" 200'
+cat example_log.log | grep -v 'HTTP/1.0" 200' | grep -Eo "(http|https)://[a-zA-Z0-9./?=_%:-]*"
+echo "---------------------------------------------------------------------------------"
+echo
+
+
+echo "---------------------------------------------------------------------------------"
+echo "5. What time did site get the most requests?" 
+echo
+echo "apache_logs.txt =>"
+awk '{print $1, $4, $5}' apache_logs.txt | sort | uniq -c | sort -nr
+
+echo
+echo "example_log.log =>"
+awk '{print $1, $4, $5}' example_log.log | sort | uniq -c | sort -nr
+echo "---------------------------------------------------------------------------------"
+echo
+
+
+echo "---------------------------------------------------------------------------------"
+echo "6. What search bots have accessed the site? (UA + IP) " 
+# host yourdomain.com | cut -d ' ' -f 4 | curl ipinfo.io/$1
+# awk '{print $1}' apache_logs.txt | sort | uniq -c | sort -nr | curl ipinfo.io/$1
+# curl ipinfo.io/23.66.166.151
+echo
+echo "apache_logs.txt =>"
+awk '{print $1}' apache_logs.txt | sort | uniq | sort -n
+awk '{print $1}' apache_logs.txt | sort | uniq | sort -n | grep 'HTTP/1.0" 200' | grep -Eo "(http|https)://[a-zA-Z0-9./?=_%:-]*" | grep "/bot."
+
+echo
+echo "example_log.log =>"
+awk '{print $1}' example_log.log | sort | uniq | sort -n
+awk '{print $1}' example_log.log | sort | uniq | sort -n | grep 'HTTP/1.0" 200' | grep -Eo "(http|https)://[a-zA-Z0-9./?=_%:-]*" | grep "/bot."
+#  cat example_log.log | grep 'HTTP/1.0" 200' | grep -Eo "(http|https)://[a-zA-Z0-9./?=_%:-]*" | grep "/bot."
 
 echo "---------------------------------------------------------------------------------"
 echo
