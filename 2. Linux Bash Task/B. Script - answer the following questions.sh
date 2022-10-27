@@ -112,9 +112,6 @@ echo "6. What search bots have accessed the site? (UA + IP) "
 #curl https://ipapi.co/212.115.253.100/json
 # curl https://ipapi.co/212.115.253.100/country/
 
-echo
-echo "apache_logs.txt =>"
-
 #cat apache_logs.txt | grep -Eo "[[:alpha:]]*bot\/([a-zA-Z0-9_\-\.]*)"
 #cat apache_logs.txt | grep -Eo '([0-9]*\.){3}[0-9]*'
 #cat apache_logs.txt | grep -Eo "(http|https)://[a-zA-Z0-9./?=_%:-]*" 
@@ -125,15 +122,14 @@ echo "apache_logs.txt =>"
 #    cat apache_logs.txt | grep 'HTTP\/1.0\" 200' | grep -Eo '(([0-9]*\.){3}[0-9]*)(.*)([[:alpha:]]*bot\/([a-zA-Z0-9_\-\.]*))((http|https)://[a-zA-Z0-9./?=_%:-]*)' | sed 's/\[.*compatible; //'
 #!!!!
 
+echo
+echo "apache_logs.txt =>"
 #cat apache_logs.txt | grep "HTTP\/1.0\" 200" | grep "[[:alnum:]].*ot" | sed 's/\[.*compatible; //' | sort -n | uniq 
-cat apache_logs.txt | grep -v "HTTP\/1.0\" 4[0-9][0-9]" | grep "[[:alnum:]].*ot" | sed 's/\[.*compatible; //' | sort -n | uniq  #Find all BOT'S that not 400 
+cat apache_logs.txt | grep -v "HTTP\/1.0\" 4[0-9][0-9]" | sed 's/\[.*compatible; //' | grep "[[:alnum:]].*[bB]ot" | sort -n | uniq  #Find all BOT'S that not 400 
 
 echo
 echo "example_log.log =>"
-awk '{print $1}' example_log.log | sort | uniq | sort -n
-awk '{print $1}' example_log.log | sort | uniq | sort -n | grep 'HTTP/1.0" 200' | grep -Eo "(http|https)://[a-zA-Z0-9./?=_%:-]*" | grep "/bot."
-#  cat example_log.log | grep 'HTTP/1.0" 200' | grep -Eo "(http|https)://[a-zA-Z0-9./?=_%:-]*" | grep "/bot."
-
+cat example_log.log | grep -v 'HTTP\/1.0\" 4[0-9][0-9]' | sed 's/\[.*compatible; //' | sed 's/\[.*\"-\" //' | sed 's/\"GET .*[a-zA-Z0-9_\-\.]\"//' | sed 's/Linux x86_64; //' | grep '[[:alnum:]].*[bB]ot' | sort -n | uniq  #Find all BOT'S that not 400
 echo "---------------------------------------------------------------------------------"
 echo
 
