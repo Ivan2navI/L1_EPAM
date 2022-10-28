@@ -71,6 +71,5 @@ else
   echo "Path for Source of Syncing: $Path_From" >> $Backup_FileName
   echo "Path to the Destination: $Path2Sync">> $Backup_FileName
   chmod +x $FILE
-  echo
-  
+  echo  
 fi
