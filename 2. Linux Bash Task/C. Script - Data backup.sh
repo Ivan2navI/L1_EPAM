@@ -138,17 +138,15 @@ func_check_sync_path_from2to() {
 
 
 func_copy_from2to() {
-  echo "----------func_copy_from2to------------------"
+  #echo "----------func_copy_from2to------------------"
  
   echo "$LOGDATA == func_copy_from2to RUN" >> $for_log_file_info
-
   
   path_FROM=$(cat $FILE | grep "$Line1_Backup_Settings" | sed 's/.*: //')
   path_TO=$(cat $FILE | grep "$Line2_Backup_Settings" | sed 's/.*: //')
   #echo $path_FROM
   #echo $path_TO
-  
-  
+    
   list_files_FROM=$(cat $FILE | grep "List files in TO path" | sed 's/.*: //')
   list_files_TO=$(cat $FILE | grep "List files in FROM path" | sed 's/.*: //')
   #echo $list_files_FROM
