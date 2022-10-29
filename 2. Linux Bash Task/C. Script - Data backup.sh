@@ -33,20 +33,30 @@ echo "===================================================================="
 echo
 
 
+Path_Config=".config_Script_Data_backup"
 Backup_FileName=Backup_Setiings_for_C_Task.txt
-FILE=./$Backup_FileName
+LOGFILE=logs_sync_path_from2to.log
+
+FILE=./$Path_Config/$Backup_FileName
+
 Line1_Backup_Settings="Path to source:"
 Line2_Backup_Settings="Path to destination:"
 
 func_Backup_FileName_Create() {
   echo "===================================================================="
+  mkdir $Path_Config
+  chmod a+rwx $Path_Config
+  cd $Path_Config
+    
   echo "$Backup_FileName creating ... Done!"
   echo "Backup Setiings Create => $(date +%Y.%m.%d\ %Hh%Mm%Ss)" >> $Backup_FileName
   echo "$Line1_Backup_Settings $Path_From" >> $Backup_FileName
   echo "$Line2_Backup_Settings $Path2Sync">> $Backup_FileName
-  chmod a+rw $FILE
+  echo "LOGFILE create at: $(pwd)/$LOGFILE">> $Backup_FileName
+  echo "Backup Setiings Done => $(date +%Y.%m.%d\ %Hh%Mm%Ss)" >> $Backup_FileName
+  chmod a+rwx $Backup_FileName
   echo "===================================================================="
-  echo
+  echo  
 }
 
 
@@ -55,7 +65,7 @@ func_Path_2Sync_Directories_Create() {
   echo -n "Path for Source of Syncing: "
   read Path_From
   
-  until [ -d $Path_From ]
+  until [ -d "$Path_From" ]
   do
     echo "$Path_From doesn't exist. Please, create this directory or enter correct path:"
     read Path_From
@@ -67,7 +77,7 @@ func_Path_2Sync_Directories_Create() {
   echo -n "Path to Destination: "
   read Path2Sync
   
-  until [ -d $Path2Sync ]
+  until [ -d "$Path2Sync" ]
   do
     echo "$Path2Sync doesn't exist. Please, create this directory or enter correct path:"
     read Path2Sync
@@ -79,11 +89,32 @@ func_Path_2Sync_Directories_Create() {
   #exit
 }
 
+funct_check_sync_path_from2to() {
+  echo "===================================================================="  
+  Path_From_Check=$(cat $FILE | grep "$Line1_Backup_Settings" | sed 's/.*: //')
+  #echo "$Path_From_Check"
+  if [ ! -d "$Path_From_Check" ]; then
+    echo "!!! ----------------- ERROR ----------------- !!!"
+    echo "!!! $Line1_Backup_Settings $Path_From_Check => missing, needs to be edited: $FILE"
+  fi
+  
+  Path_From_Check=$(cat $FILE | grep "$Line2_Backup_Settings" | sed 's/.*: //')
+  #echo "$Path_From_Check"
+  if [ ! -d "$Path_From_Check" ]; then
+    echo "!!! ----------------- ERROR ----------------- !!!"
+    echo "!!! $Line2_Backup_Settings $Path_From_Check => missing, needs to be edited: $FILE"
+  fi
+  echo "===================================================================="  
+  echo
+}
+
+
 # ==================================== ========= ====================================
 
 # ====================================   MAIN    ====================================
 
-if [ -w $FILE ]; then
+
+if [ -w "$FILE" ]; then
   # При проверке существования файла наиболее часто используются операторы FILE -e и -f . 
   # Первый проверит, существует ли файл независимо от типа, а второй вернет истину, 
   # только если ФАЙЛ является обычным файлом (а не каталогом или устройством).
@@ -91,10 +122,20 @@ if [ -w $FILE ]; then
   # -f file    Проверяет, существует ли файл, и является ли он файлом.
   # -w file    Проверяет, существует ли файл, и доступен ли он для записи.
   echo "===================================================================="  
-  echo "$Backup_FileName exists, so Data backup was configureted."
+  echo "$Backup_FileName exists, so Data Backup was configureted."
+  
+  echo "--------------------------------------------------------------------" 
+  
+funct_check_sync_path_from2to
+  
+  echo "!!!!!!!!!!!!!!! FINISh !!!!!!!!!!!!!!!!!!!!!!!!!"  
   echo "===================================================================="
 else 
+
+  
   func_Path_2Sync_Directories_Create
+  #cd~
+  
   func_Backup_FileName_Create
   
 fi
