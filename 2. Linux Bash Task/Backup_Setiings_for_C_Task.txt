@@ -1,3 +1,0 @@
-Backup Setiings Create => 2022.10.29 19h32m38s
-Path to source: /home/ubuntu/L1_EPAM/2. Linux Bash Task/FROM
-Path to destination: /home/ubuntu/L1_EPAM/2. Linux Bash Task/TO
