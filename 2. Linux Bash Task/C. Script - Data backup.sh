@@ -150,7 +150,7 @@ func_copy_from2to() {
   echo "---------------------------" 
   echo
   
-  echo "...... Folder FROM consist from such files:"
+  echo "...... Folder FROM consist such files:"
   # ls >> dir.txt
   # ls "$path_FROM" > $list_files_FROM   # Перенес в блок сравнения CMP
   cat "$list_files_FROM"
@@ -182,11 +182,11 @@ func_copy_from2to() {
   echo "---------------------------"  
   echo
   
-  echo "...... Folder FROM consist from such files:"
+  echo "...... Folder FROM consist such files:"
   ls "$path_FROM" > "$list_files_FROM"
   cat "$list_files_FROM"
   echo
-  echo "...... Folder TO consist from such files:"
+  echo "...... Folder TO consist such files:"
   ls "$path_TO" > "$list_files_TO"
   cat "$list_files_TO"
   echo 
