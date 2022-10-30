@@ -5,7 +5,7 @@
 # File: add_current_shell_and_path_to_crontab.sh
 # Description: Add current user's shell and path to crontab
 # Source: http://brakertech.com/add-current-path-to-crontab
-# Github: hhttps://github.com/ssstonebraker/braker-scripts/blob/master/working-scripts/add_current_shell_and_path_to_crontab.sh
+# Github: https://github.com/ssstonebraker/braker-scripts/blob/master/working-scripts/add_current_shell_and_path_to_crontab.sh
 
 # function that is called when the script exits (cleans up our tmp.cron file)
 function finish { [ -e "tmp.cron" ] && rm tmp.cron; }
@@ -38,32 +38,31 @@ function require_gt1_user_crontab_job {
 ####################################
 # Add current shell and path to user's crontab
 function add_shell_path_to_crontab {
-    #print info about what's being added
-    print_notification "Current SHELL: ${SHELL}"
-    print_notification "Current PATH: ${PATH}"
+	#print info about what's being added
+	print_notification "Current SHELL: ${SHELL}"
+	print_notification "Current PATH: ${PATH}"
 
-    #Add current shell and path to crontab
-    print_status "Adding current SHELL and PATH to crontab \nold crontab:"
+	#Add current shell and path to crontab
+	print_status "Adding current SHELL and PATH to crontab \nold crontab:"
 
-    printline; crontab -l; printline
+	printline; crontab -l; printline
 
-    #keep old comments but start new crontab file
-    crontab -l | grep "^#" > tmp.cron
+	#keep old comments but start new crontab file
+	crontab -l | grep "^#" > tmp.cron
 
-    #Add our current shell and path to the new crontab file
-    echo -e "SHELL=${SHELL}\nPATH=${PATH}\n" >> tmp.cron 
+	#Add our current shell and path to the new crontab file
+	echo -e "SHELL=${SHELL}\nPATH=${PATH}\n" >> tmp.cron 
 
-    #Add old crontab entries but ignore comments or any shell or path statements
-    crontab -l | grep -v "^#" | grep -v "SHELL" | grep -v "PATH" >> tmp.cron
+	#Add old crontab entries but ignore comments or any shell or path statements
+	crontab -l | grep -v "^#" | grep -v "SHELL" | grep -v "PATH" >> tmp.cron
 
-    #load up the new crontab we just created
-    crontab tmp.cron
+	#load up the new crontab we just created
+	crontab tmp.cron
 
-    #Display new crontab
-    print_good "New crontab:"
-    printline; crontab -l; printline
+	#Display new crontab
+	print_good "New crontab:"
+	printline; crontab -l; printline
 }
 
 require_gt1_user_crontab_job
 add_shell_path_to_crontab
-
