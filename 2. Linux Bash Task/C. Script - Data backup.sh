@@ -183,11 +183,11 @@ func_copy_from2to() {
   echo
   
   echo "...... Folder FROM consist from such files:"
-  ls "$path_FROM" > $list_files_FROM
+  ls "$path_FROM" > "$list_files_FROM"
   cat "$list_files_FROM"
   echo
   echo "...... Folder TO consist from such files:"
-  ls "$path_TO" > $list_files_TO
+  ls "$path_TO" > "$list_files_TO"
   cat "$list_files_TO"
   echo 
   
@@ -234,14 +234,14 @@ if [ -w "$FILE" ]; then # Проверка наличия файла конфи�
   #echo $list_files_TO
   
     
-  ls "$path_FROM" > $list_files_FROM
-  ls "$path_TO" > $list_files_TO 
+  ls "$path_FROM" > "$list_files_FROM"
+  ls "$path_TO" > "$list_files_TO"
   if cmp -s "$list_files_FROM" "$list_files_TO"
   then
      #echo "The files match"
      exit
   else
-     echo "The files are different"
+     #echo "The files are different"
       # Перенаправляем вывод в файл и показываем его на экране
       #   Этот вариант подобен оператору > из предыдущего пункта, то имеется при записи в файл, 
       #   все старые данные будут удалены. Если вам нужно дописать в файл, в конструкцию необходимо 
@@ -265,6 +265,9 @@ fi
 #echo
 
 # ==================================== ========= ====================================
+
+#/home/ubuntu/L1_EPAM/2. Linux Bash Task/FROM
+#/home/ubuntu/L1_EPAM/2. Linux Bash Task/TO
 
 #------ V1:
 # sudo cp 'C. Script - Data backup.sh' /usr/local/bin/
