@@ -2,6 +2,8 @@
 
 clear
 
+export TERM=${TERM:-dumb}
+
 # Sometimes you need to pass a multiline text block to a command or variable. 
 # Bash has a special type of redirect called Here document (heredoc) that allows you to do that
 
@@ -269,19 +271,44 @@ fi
 #/home/ubuntu/L1_EPAM/2. Linux Bash Task/FROM
 #/home/ubuntu/L1_EPAM/2. Linux Bash Task/TO
 
-#------ V1:
-# sudo cp 'C. Script - Data backup.sh' /usr/local/bin/
-# sudo nano /etc/crontab
-# 0/1  *  * * * ubuntu    bash /usr/local/bin/script.sh
 
-#------ V2:
-# crontab -e
-# /home/ubuntu/L1_EPAM/2. Linux Bash Task/TO/C. Script - Gen_files_for_TO.sh
-# 1 * * * * sh './home/ubuntu/L1_EPAM/2. Linux Bash Task/C. Script - Gen_files_for_TO.sh'
-# 1 * * * * sh '/home/ubuntu/L1_EPAM/2.\ Linux\ Bash\ Task/C.\ Script\ -\ Data\ backup.sh'
+# !!!!!!!!!!!! Path for Source of Syncing:  doesn't exist. Please, create this directory or enter correct path:
 
+# !!!!!!!!!!!! TERM environment variable not set.
+
+# printenv  # Окружение текущей терминальной сессии 
+
+# * * * * * env > env_dump.txt # окружение crontab -e , если вписать туда это задание:
+# HOME=/home/ubuntu
+# LOGNAME=ubuntu
+# PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+# LANG=C.UTF-8
+# SHELL=/bin/sh
+# PWD=/home/ubuntu
+
+
+
+#crontab file - copy personal schedule from file 
+
+# crontab -e - launch vi editor to edit schedule 
+# crontab -l - view schedule 
+# crontab -r - delete schedule
+
+# sudo systemctl status cron.service
+
+# journalctl -xe -u cron.service
+
+# * * * * * /home/ubuntu/TEST/Data_backup.sh 2> /home/ubuntu/cron_error.txt 1> /home/ubuntu/cron_correct.txt
+ 
+# * * * * * bash '/home/ubuntu/L1_EPAM/2.\ Linux\ Bash\ Task/C.\ Script\ -\ Data\ backup.sh'
+# * * * * * /home/ubuntu/L1_EPAM/2.\ Linux\ Bash\ Task/C.\ Script\ -\ Data\ backup.sh > /dev/null 2>&1
+# * * * * * /home/ubuntu/L1_EPAM/2.\ Linux\ Bash\ Task/C.\ Script\ -\ Data\ backup.sh >> /home/ubuntu/cron_log.txt 2>&1
+
+#* * * * * "/home/ubuntu/L1_EPAM/2. Linux Bash Task/C. Script - Data backup.sh" >/dev/null 2>&1
 
 # crontab -l
+
+
 
 #    * * * * * Команда, которая будет выполнена
 #    - - - - -
@@ -292,5 +319,50 @@ fi
 #    | ---- Час (0 - 23)
 #    ----- Минута (0 - 59)
 #0/1 * * * * /usr/local/bin/script.sh
+
+# Commands for Ubuntu/Mint/Debian based Linux distro
+
+    # Debian Start cron service
+        # To start the cron service, use: /etc/init.d/cron start
+        # OR sudo /etc/init.d/cron start
+        # OR sudo service cron start
+
+    # Debian Stop cron service
+        # To stop the cron service, use: /etc/init.d/cron stop
+        # OR sudo /etc/init.d/cron stop
+        # OR sudo service cron stop
+
+    # Debian Restart cron service
+        # To restart the cron service, use: /etc/init.d/cron restart
+        # OR sudo /etc/init.d/cron restart
+        # OR sudo service cron restart
+
+
+# "(CRON) info (No MTA installed, discarding output)" error in the syslog
+# You can install a mail service, postfix for example, to solve this problem.
+# sudo apt-get install postfix
+#
+# and add >/dev/null 2>&1 to every job:
+# * * * * * yourCommand >/dev/null 2>&1
+# At the top of the file, enter:
+# MAILTO=""
+
+
+# How to remove "TERM environment variable not set"
+	# Running a program that demands a terminal via cron can lead to problems; 
+  #it won't have a terminal when it is run by cron.
+
+	# In case of doubt, though, ensure that the variable is set in the script, by adding a line:
+
+	# 		export TERM=${TERM:-dumb}
+
+	# If the environment variable TERM is already set, this is a no-op. 
+	# If it is not, it sets the terminal to a standard one with minimal 
+	# capabilities — this satisfies the program that complains about 
+	# TERM not being set.
+
+# MAILTO=""
+# SHELL=/bin/bash
+# HOME=/
 
 # ==================================== ========= ====================================
