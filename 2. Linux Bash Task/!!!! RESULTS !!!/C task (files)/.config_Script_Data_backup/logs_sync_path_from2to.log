@@ -1,0 +1,57 @@
+20221102_012109 == LOGFILE create at: /home/ubuntu/L1_EPAM/2. Linux Bash Task/.config_Script_Data_backup/logs_sync_path_from2to.log
+20221102_012038 == touch list_files_in_FROM.txt
+20221102_012038 == touch list_files_in_TO.txt
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+##################################################################
+20221102_013601 == func_copy_from2to RUN
+---------------------------
+------ BEFORE Sync --------
+---------------------------
+
+...... Folder FROM consist such files:
+f1
+f2
+f3
+
+...... In folder TO such files !!! WILL BE REMOVE !!!:
+T1
+T2
+T3
+T4
+T5
+T6
+f1
+
+:::::::::::::::::: DIFF between FROM & TO ::::::::::::::::::::::::
+::::::::::::::::::       BEFORE Sync      ::::::::::::::::::::::::
+							      >	T1
+							      >	T2
+							      >	T3
+							      >	T4
+							      >	T5
+							      >	T6
+f1								f1
+f2							      <
+f3							      <
+
+---------------------------
+------- AFTER Sync --------
+---------------------------
+
+...... Folder FROM consist such files:
+f1
+f2
+f3
+
+...... Folder TO consist such files:
+f1
+f2
+f3
+
+:::::::::::::::::: DIFF between FROM & TO ::::::::::::::::::::::::
+::::::::::::::::::       AFTER Sync       ::::::::::::::::::::::::
+f1								f1
+f2								f2
+f3								f3
+20221102_013601 == func_copy_from2to FINISH
+

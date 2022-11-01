@@ -1,0 +1,9 @@
+Backup Setiings Create => 2022.11.02 01h21m09s
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Path to source: ./FROM
+Path to destination: ./TO
+List files in TO path: /home/ubuntu/L1_EPAM/2. Linux Bash Task/.config_Script_Data_backup/list_files_in_FROM.txt
+List files in FROM path: /home/ubuntu/L1_EPAM/2. Linux Bash Task/.config_Script_Data_backup/list_files_in_TO.txt
+LOGFILE create at: /home/ubuntu/L1_EPAM/2. Linux Bash Task/.config_Script_Data_backup/logs_sync_path_from2to.log
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Backup Setiings Done => 2022.11.02 01h21m09s
