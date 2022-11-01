@@ -1,0 +1,37 @@
+# ---------------------------------------------------------------------------------
+#                                               C. Script - Data backup.sh
+# ---------------------------------------------------------------------------------
+# C. Create a data backup script that takes the following data as parameters:
+#     1. Path to the syncing  directory.
+#     2. The path to the directory where the copies of the files will be stored.
+#
+# In case of adding new or deleting old files, the script must add a corresponding
+# entry to the log file indicating the time, type of operation and file name.
+#
+# [The command to run the script must be added to crontab
+# with a run frequency of one minute]
+# ---------------------------------------------------------------------------------
+
+====================================================================
+Path for Source of Syncing: Test if not avalible
+Test if not avalible doesn't exist. Please, create this directory or enter correct path:
+--
+-- doesn't exist. Please, create this directory or enter correct path:
+./FROM
+Path to source: => ./FROM
+--------------------------------------------------------------------
+Path to Destination: Test if not avalible
+Test if not avalible doesn't exist. Please, create this directory or enter correct path:
+--
+-- doesn't exist. Please, create this directory or enter correct path:
+./TO
+Path to destination: => ./TO
+====================================================================
+
+====================================================================
+/home/ubuntu/L1_EPAM/2. Linux Bash Task/.config_Script_Data_backup/logs_sync_path_from2to.log creating ... Done!
+/home/ubuntu/L1_EPAM/2. Linux Bash Task/.config_Script_Data_backup/Backup_Setiings_for_C_Task.txt creating ... Done!
+====================================================================
+
+!!!!!!!!!!!!!!! RUN Script AGAIN for Sync !!!!!!!!!!!!!!!!!!!!!!!!!
+====================================================================

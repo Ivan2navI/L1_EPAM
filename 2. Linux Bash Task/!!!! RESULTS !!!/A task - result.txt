@@ -1,0 +1,84 @@
+[H[2J[3J# -----------------------------------------------------------------------------------------------------------
+#						A. Script - that uses keys.sh
+# -----------------------------------------------------------------------------------------------------------
+# A. Create a script that uses the following keys: 
+#     1. When starting without parameters, it will display a list of possible keys and their description.  
+#     2. The --all key displays the IP addresses and symbolic names of all hosts in the current subnet  
+#     3. The --target key displays a list of open system TCP ports. 
+# The code that performs the functionality of each of the subtasks must be placed in a separate function
+# -----------------------------------------------------------------------------------------------------------
+
+====================== Lan Scans Check ==============================
+
+------------- NMAP check -------------
+NMAP installed
+
+------------- MASSCAN check -------------
+MASSCAN installed
+
+------------- NETDISCOVER check -------------
+NETDISCOVER installed
+
+====================================================================
+
+Enter command [--all, --target, exit]
+
+------------- PING -----------------
+------------- ---- -----------------
+Host avalible: 192.168.2.1
+Host avalible: 192.168.2.14
+Host avalible: 192.168.2.13
+Host avalible: 192.168.2.4
+Host avalible: 192.168.2.6
+------------- ---- -----------------
+
+------------- NMAP -------------------------------------------------------------
+--------------------------------------------------------------------------------
+Current LAN: inet 192.168.2.13  netmask 255.255.255.0  broadcast 192.168.2.255
+--------------------------------------------------------------------------------
+_gateway (192.168.2.1)
+192.168.2.4
+192.168.2.6
+ubuntu-VirtualBox (192.168.2.13)
+192.168.2.14
+--------------------------------------------------------------------------------
+
+----------------- MASSCAN ------------------------------------------------
+--------------------------------------------------------------------------
+masscan 192.168.2.0/24 --ping --open-only
+
+Discovered open port 0/icmp on 192.168.2.1                                     
+Discovered open port 0/icmp on 192.168.2.6                                     
+Discovered open port 0/icmp on 192.168.2.14                                    
+Discovered open port 0/icmp on 192.168.2.4                                     
+--------------------------------------------------------------------------
+
+------------- NETDISCOVER check -------------------
+---------------------------------------------------
+netdiscover -i enp0s3 -r 192.168.2.0/24 -P
+ _____________________________________________________________________________
+   IP            At MAC Address     Count     Len  MAC Vendor / Hostname      
+ -----------------------------------------------------------------------------
+ 192.168.2.1     04:8d:38:cd:37:73      1      60  Netcore Technology Inc.
+ 192.168.2.14    a4:1f:72:79:b8:d1      1      60  Dell Inc.
+ 192.168.2.6     90:09:17:87:04:30      1      60  Far-sighted mobile
+ 192.168.2.4     9c:9c:1f:89:ef:35      1      60  Espressif Inc.
+
+-- Active scan completed, 4 Hosts found.
+---------------------------------------------------
+
+Enter command [--all, --target, exit]
+
+Starting Nmap 7.80 ( https://nmap.org ) at 2022-11-02 00:41 EET
+Nmap scan report for ubuntu-VirtualBox (192.168.2.13)
+Host is up (0.00012s latency).
+Not shown: 998 closed ports
+PORT     STATE SERVICE
+22/tcp   open  ssh
+8080/tcp open  http-proxy
+
+Nmap done: 1 IP address (1 host up) scanned in 0.08 seconds
+----------------------------------------------------------------
+
+Enter command [--all, --target, exit]
+------------------------------------
