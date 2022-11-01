@@ -7,7 +7,7 @@ export TERM=${TERM:-dumb}
 # Sometimes you need to pass a multiline text block to a command or variable. 
 # Bash has a special type of redirect called Here document (heredoc) that allows you to do that
 
-#cat << EOF
+cat << EOF
 # ---------------------------------------------------------------------------------
 #						C. Script - Data backup.sh
 # ---------------------------------------------------------------------------------
@@ -21,8 +21,8 @@ export TERM=${TERM:-dumb}
 # [The command to run the script must be added to crontab 
 # with a run frequency of one minute] 
 # ---------------------------------------------------------------------------------
-#EOF
-#echo
+EOF
+echo
 
 
 # ==================================== FUNCTIONS ====================================
@@ -265,27 +265,44 @@ else
   echo
 fi
 #echo
+# ==================================== ========= ====================================
+
+# ============================ Setiing for crontab -e ===============================
+# Setiing for crontab -e
+
+# SHELL=/bin/bash
+# HOME=/home/ubuntu
+# MAILTO=""
+# PATH=/home/ubuntu/L1_EPAM/2.\ Linux\ Bash\ Task/:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
+
+# * * * * * /home/ubuntu/L1_EPAM/2.\ Linux\ Bash\ Task/C.\ Script\ -\ Data\ backup.sh
+## * * * * * "/home/ubuntu/L1_EPAM/2. Linux Bash Task/C. Script - Data backup.sh"
 
 # ==================================== ========= ====================================
 
+# ----- Folders for check sync script ----- 
 #/home/ubuntu/L1_EPAM/2. Linux Bash Task/FROM
 #/home/ubuntu/L1_EPAM/2. Linux Bash Task/TO
 
+# ==================================== ========= ====================================
+
+# Other INFO for chech/use
 
 # !!!!!!!!!!!! Path for Source of Syncing:  doesn't exist. Please, create this directory or enter correct path:
 
 # !!!!!!!!!!!! TERM environment variable not set.
 
-# printenv  # Окружение текущей терминальной сессии 
+# printenv  # Окружение текущей терминальной сессии
+#      PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+
 
 # * * * * * env > env_dump.txt # окружение crontab -e , если вписать туда это задание:
 # HOME=/home/ubuntu
 # LOGNAME=ubuntu
-# PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+#      PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
 # LANG=C.UTF-8
 # SHELL=/bin/sh
 # PWD=/home/ubuntu
-
 
 
 #crontab file - copy personal schedule from file 
@@ -364,5 +381,13 @@ fi
 # MAILTO=""
 # SHELL=/bin/bash
 # HOME=/
+
+# HOME=/home/ubuntu
+# LOGNAME=ubuntu
+# PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+# LANG=C.UTF-8
+# SHELL=/bin/bash
+# PWD=/home/ubuntu
+
 
 # ==================================== ========= ====================================
