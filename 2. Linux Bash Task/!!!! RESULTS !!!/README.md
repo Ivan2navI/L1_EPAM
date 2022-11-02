@@ -4,6 +4,8 @@
 3. The --target key displays a list of open system TCP ports. 
 The code that performs the functionality of each of the subtasks must be placed in a separate function 
 
+
+
 ![Screenshot A](https://github.com/Ivan2navI/L1_EPAM/blob/main/2.%20Linux%20Bash%20Task/!!!!%20RESULTS%20!!!/A%20task%20-%20result.png)
 
 
@@ -26,5 +28,5 @@ In case of adding new or deleting old files, the script must add a corresponding
 ![Screenshot C1](https://github.com/Ivan2navI/L1_EPAM/blob/main/2.%20Linux%20Bash%20Task/!!!!%20RESULTS%20!!!/C%20task%20-%20result%201_Preparing.png)
 
 ### C2. Sync and Results
-Results info of sync
+Results info of sync [here](https://github.com/Ivan2navI/L1_EPAM/tree/main/2.%20Linux%20Bash%20Task/!!!!%20RESULTS%20!!!/C%20task%20(files)/.config_Script_Data_backup)
 ![Screenshot C2](https://github.com/Ivan2navI/L1_EPAM/blob/main/2.%20Linux%20Bash%20Task/!!!!%20RESULTS%20!!!/C%20task%20-%20result%202_Sync.png)
