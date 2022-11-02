@@ -31,4 +31,16 @@ In case of adding new or deleting old files, the script must add a corresponding
 
 ### C2. Sync and Results
 Results info of sync [here](https://github.com/Ivan2navI/L1_EPAM/tree/main/2.%20Linux%20Bash%20Task/!!!!%20RESULTS%20!!!/C%20task%20(files)/.config_Script_Data_backup)
+
+```console
+# ============================ Setiing for crontab -e ===============================
+# Setiing for crontab -e
+
+SHELL=/bin/bash
+HOME=/home/ubuntu
+MAILTO=""
+PATH=/home/ubuntu/L1_EPAM/2.\ Linux\ Bash\ Task/:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
+
+* * * * * /home/ubuntu/L1_EPAM/2.\ Linux\ Bash\ Task/C.\ Script\ -\ Data\ backup.sh
+```
 ![Screenshot C2](https://github.com/Ivan2navI/L1_EPAM/blob/main/2.%20Linux%20Bash%20Task/!!!!%20RESULTS%20!!!/C%20task%20-%20result%202_Sync.png)
