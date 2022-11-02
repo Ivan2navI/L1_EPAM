@@ -1,6 +1,6 @@
 # == L1_EPAM == 
 ## --- Home Task ---
-__Consist__:
+__Consist of:__
 
 _1. Final project_
 
