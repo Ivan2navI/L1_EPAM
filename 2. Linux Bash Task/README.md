@@ -1,3 +1,5 @@
+# ALL RESULTS and EXAMPLES are [HERE](https://github.com/Ivan2navI/L1_EPAM/tree/main/2.%20Linux%20Bash%20Task/!!!!%20RESULTS%20!!!)
+
 ## A. Create a script that uses the following keys: 
 1. When starting without parameters, it will display a list of possible keys and their description.  
 2. The --all key displays the IP addresses and symbolic names of all hosts in the current subnet  
