@@ -23,8 +23,8 @@ In case of adding new or deleting old files, the script must add a corresponding
 
 ### C1. Preparing to Sync
 
-![Screenshot C](https://github.com/Ivan2navI/L1_EPAM/blob/main/2.%20Linux%20Bash%20Task/!!!!%20RESULTS%20!!!/C%20task%20-%20result%201%20-Preparing).png
+![Screenshot C](https://github.com/Ivan2navI/L1_EPAM/blob/main/2.%20Linux%20Bash%20Task/!!!!%20RESULTS%20!!!/C%20task%20-%20result%201%20_Preparing).png
 
 ### C2. Sync and Results
 Results info of sync
-![Screenshot C](https://github.com/Ivan2navI/L1_EPAM/blob/main/2.%20Linux%20Bash%20Task/!!!!%20RESULTS%20!!!/C%20task%20-%20result%202%20-Sync).png
+![Screenshot C](https://github.com/Ivan2navI/L1_EPAM/blob/main/2.%20Linux%20Bash%20Task/!!!!%20RESULTS%20!!!/C%20task%20-%20result%202%20_Sync).png
