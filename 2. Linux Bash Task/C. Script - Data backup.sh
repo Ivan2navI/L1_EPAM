@@ -9,7 +9,7 @@ export TERM=${TERM:-dumb}
 
 cat << EOF
 # ---------------------------------------------------------------------------------
-#						C. Script - Data backup.sh
+#			C. Script - Data backup.sh
 # ---------------------------------------------------------------------------------
 # C. Create a data backup script that takes the following data as parameters: 
 #     1. Path to the syncing  directory. 
@@ -267,8 +267,8 @@ fi
 #echo
 # ==================================== ========= ====================================
 
-# ============================ Setiing for crontab -e ===============================
-# Setiing for crontab -e
+# ============================ Settings for crontab -e ===============================
+# Settings for crontab -e
 
 # SHELL=/bin/bash
 # HOME=/home/ubuntu
