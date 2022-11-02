@@ -33,8 +33,8 @@ In case of adding new or deleting old files, the script must add a corresponding
 Results info of sync [here](https://github.com/Ivan2navI/L1_EPAM/tree/main/2.%20Linux%20Bash%20Task/!!!!%20RESULTS%20!!!/C%20task%20(files)/.config_Script_Data_backup)
 
 ```console
-# ============================ Setting for crontab -e ===============================
-# Setting for crontab -e
+# ============================ Settings for crontab -e ===============================
+# Settings for crontab -e
 
 SHELL=/bin/bash
 HOME=/home/ubuntu
