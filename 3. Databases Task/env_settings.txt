@@ -1,0 +1,2 @@
+alias epam3='cd '\''/home/ubuntu/L1_EPAM/3. Databases Task/'\'''
+
