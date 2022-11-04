@@ -1,2 +1,21 @@
 alias epam3='cd '\''/home/ubuntu/L1_EPAM/3. Databases Task/'\'''
 
+==================================================================
+Installing/Delete MySQL on Ubuntu
+
+sudo apt update && sudo apt upgrade
+
+sudo apt install mysql-server
+
+#Check if MySQL was successfully installed by running:
+mysql --version
+
+#Secure your MySQL user account with password authentication by running the included security script:
+sudo mysql_secure_installation
+
+#Verify that the MySQL server is running by running:
+sudo systemctl status mysql
+
+#Log in to MySQL Server
+sudo mysql -u root
+==================================================================
