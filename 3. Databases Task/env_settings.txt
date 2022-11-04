@@ -1,7 +1,9 @@
 alias epam3='cd '\''/home/ubuntu/L1_EPAM/3. Databases Task/'\'''
 
 ==================================================================
-Installing/Delete MySQL on Ubuntu
+# ------------------ Installing MySQL on Ubuntu ------------------
+
+https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-20-04
 
 sudo apt update && sudo apt upgrade
 
@@ -10,12 +12,70 @@ sudo apt install mysql-server
 #Check if MySQL was successfully installed by running:
 mysql --version
 
-#Secure your MySQL user account with password authentication by running the included security script:
-sudo mysql_secure_installation
+!!!!!!!!!!!!!!!!!!!
+# Warning: As of July 2022, an error will occur when you run the mysql_secure_installation script without some 
+# further configuration. The reason is that this script will attempt to set a password for the installation’s root
+# MySQL account but, by default on Ubuntu installations, this account is not configured to connect using a
+# password.
+!!!!!!!!!!!!!!!!!!!
+
+#First, open up the MySQL prompt:
+
+    sudo mysql
+
+#Then run the following ALTER USER command to change the root user’s authentication method to one that uses a password. 
+#The following example changes the authentication method to mysql_native_password:
+
+    ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+
+#After making this change, exit the MySQL prompt:
+    exit
+
+#Following that, you can run the mysql_secure_installation script without issue.
+
+#Once the security script completes, you can then reopen MySQL and change the root user’s authentication method back to the default, auth_socket. 
+#To authenticate as the root MySQL user using a password, run this command:
+    mysql -u root -p
+
+#Then go back to using the default authentication method using this command:
+	ALTER USER 'root'@'localhost' IDENTIFIED WITH auth_socket;
+
+#This will mean that you can once again connect to MySQL as your root user using the sudo mysql command.
+
+#Run the security script with sudo:
+    	sudo mysql_secure_installation
+
+!!!!!!!!!!!!!!!!!!!
 
 #Verify that the MySQL server is running by running:
 sudo systemctl status mysql
 
 #Log in to MySQL Server
 sudo mysql -u root
+
 ==================================================================
+# ------------------- Delete MySQL on Ubuntu ---------------------
+
+https://www.linuxshelltips.com/completely-uninstall-mysql-server-in-ubuntu/
+
+#Note: Your all mysql data will be lost.
+#First make sure that MySQL service is stopped.
+
+sudo systemctl stop mysql
+
+#Remove MySQL related all packages completely.
+
+sudo apt-get purge mysql-server mysql-client mysql-common mysql-server-core-* mysql-client-core-*
+
+#Remove MySQL configuration and data. If you have changed database location in your MySQL configuration, 
+#you need to replace /var/lib/mysql according to it.
+
+sudo rm -rf /etc/mysql /var/lib/mysql
+
+#(Optional) Remove unnecessary packages.
+
+sudo apt autoremove
+
+#(Optional) Remove apt cache.
+
+sudo apt autoclean
