@@ -9,8 +9,12 @@ sudo apt update && sudo apt upgrade
 
 sudo apt install mysql-server
 
+#Ensure that the server is running using the systemctl start command:
+    sudo systemctl status mysql.service    
+          sudo systemctl start mysql.service
+
 #Check if MySQL was successfully installed by running:
-mysql --version
+    mysql --version
 
 !!!!!!!!!!!!!!!!!!!
 # Warning: As of July 2022, an error will occur when you run the mysql_secure_installation script without some 
@@ -31,7 +35,8 @@ mysql --version
 #After making this change, exit the MySQL prompt:
     exit
 
-#Following that, you can run the mysql_secure_installation script without issue.
+#Following that, you can run the 
+    mysql_secure_installation script without issue.
 
 #Once the security script completes, you can then reopen MySQL and change the root user’s authentication method back to the default, auth_socket. 
 #To authenticate as the root MySQL user using a password, run this command:
