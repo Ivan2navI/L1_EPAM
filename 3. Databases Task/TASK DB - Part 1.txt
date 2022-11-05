@@ -8,8 +8,8 @@
 # 6. Construct and execute SELECT operator with WHERE, GROUP BY and ORDER BY. 
 # 7. Execute other different SQL queries DDL, DML, DCL. 
 # 8. Create a database of new users with different privileges. Connect to the 
-# database as a new user and verify that the privileges allow or deny certain 
-# actions. 
+#    database as a new user and verify that the privileges allow or deny certain 
+#    actions. 
 # 9. Make a selection from the main table DB MySQL.
 # ===============================================================================
 
@@ -77,7 +77,7 @@ mysql> show databases;
   # Creating tables
 mysql> 
 USE myAVIAdb;
-  Database changed
+  ============> Database changed
 
 mysql> CREATE TABLE Company (
     -> ID_comp int NOT NULL ,
@@ -194,7 +194,11 @@ mysql> select * from INFORMATION_SCHEMA.TABLE_CONSTRAINTS where TABLE_SCHEMA  = 
 # ===============================================================================
 
 
-# 5. Fill in tables. 
+# 5. Fill in tables.
+mysql> 
+USE myAVIAdb;
+  ============> Database changed
+  
   #---- Company ----
 insert into Company values(1,'Ukraine_International_Airlines  ');
 insert into Company values(2,'Bees_Airline                    ');
@@ -414,6 +418,89 @@ mysql> select * from Pass_in_trip;
 # ===============================================================================
 
 
+# 6. Construct and execute SELECT operator with WHERE, GROUP BY and ORDER BY. 
+mysql> 
+USE myAVIAdb;
+  ============> Database changed
+
+mysql> SELECT * FROM Trip
++---------+---------+---------+------------+------------+---------------------+---------------------+
+| trip_no | ID_comp | plane   | town_from  | town_to    | time_out            | time_in             |
++---------+---------+---------+------------+------------+---------------------+---------------------+
+|    1100 |       4 | Boeing  | Zaporizhia | Paris      | 1900-01-01 14:30:00 | 1900-01-01 17:50:00 |
+|    1101 |       4 | Boeing  | Paris      | Zaporizhia | 1900-01-01 08:12:00 | 1900-01-01 11:45:00 |
+|    1123 |       3 | AN      | Zaporizhia | Odessa     | 1900-01-01 16:20:00 | 1900-01-01 03:40:00 |
+|    1124 |       3 | AN      | Odessa     | Zaporizhia | 1900-01-01 09:00:00 | 1900-01-01 19:50:00 |
+|    1145 |       2 | Embraer | Kyiv       | Zaporizhia | 1900-01-01 09:35:00 | 1900-01-01 11:23:00 |
+|    1146 |       2 | Embraer | Zaporizhia | Kyiv       | 1900-01-01 17:55:00 | 1900-01-01 20:01:00 |
+|    1181 |       1 | Airbus  | Zaporizhia | Kyiv       | 1900-01-01 06:12:00 | 1900-01-01 08:01:00 |
+|    1182 |       1 | Airbus  | Kyiv       | Zaporizhia | 1900-01-01 12:35:00 | 1900-01-01 14:30:00 |
+|    1187 |       1 | Airbus  | Zaporizhia | Kyiv       | 1900-01-01 15:42:00 | 1900-01-01 17:39:00 |
+|    1188 |       1 | Airbus  | Kyiv       | Zaporizhia | 1900-01-01 22:50:00 | 1900-01-01 00:48:00 |
+|    1195 |       1 | AN      | Zaporizhia | Kyiv       | 1900-01-01 23:30:00 | 1900-01-01 01:11:00 |
+|    1196 |       1 | AN      | Kyiv       | Zaporizhia | 1900-01-01 04:00:00 | 1900-01-01 05:45:00 |
+|    7771 |       5 | Boeing  | London     | Singapore  | 1900-01-01 01:00:00 | 1900-01-01 11:00:00 |
+|    7772 |       5 | Boeing  | Singapore  | London     | 1900-01-01 12:00:00 | 1900-01-01 02:00:00 |
+|    7773 |       5 | Boeing  | London     | Singapore  | 1900-01-01 03:00:00 | 1900-01-01 13:00:00 |
+|    7774 |       5 | Boeing  | Singapore  | London     | 1900-01-01 14:00:00 | 1900-01-01 06:00:00 |
+|    7775 |       5 | Boeing  | London     | Singapore  | 1900-01-01 09:00:00 | 1900-01-01 20:00:00 |
+|    7776 |       5 | Boeing  | Singapore  | London     | 1900-01-01 18:00:00 | 1900-01-01 08:00:00 |
+|    7777 |       5 | Boeing  | London     | Singapore  | 1900-01-01 18:00:00 | 1900-01-01 06:00:00 |
+|    7778 |       5 | Boeing  | Singapore  | London     | 1900-01-01 22:00:00 | 1900-01-01 12:00:00 |
+|    8881 |       5 | Boeing  | London     | Paris      | 1900-01-01 03:00:00 | 1900-01-01 04:00:00 |
+|    8882 |       5 | Boeing  | Paris      | London     | 1900-01-01 22:00:00 | 1900-01-01 23:00:00 |
++---------+---------+---------+------------+------------+---------------------+---------------------+
+22 rows in set (0,00 sec)
+  
+mysql> SELECT * FROM Trip  WHERE ID_comp IN (select ID_comp from Company where name="Ukraine_International_Airlines") ORDER by town_from;
++---------+---------+--------+------------+------------+---------------------+---------------------+
+| trip_no | ID_comp | plane  | town_from  | town_to    | time_out            | time_in             |
++---------+---------+--------+------------+------------+---------------------+---------------------+
+|    1182 |       1 | Airbus | Kyiv       | Zaporizhia | 1900-01-01 12:35:00 | 1900-01-01 14:30:00 |
+|    1188 |       1 | Airbus | Kyiv       | Zaporizhia | 1900-01-01 22:50:00 | 1900-01-01 00:48:00 |
+|    1196 |       1 | AN     | Kyiv       | Zaporizhia | 1900-01-01 04:00:00 | 1900-01-01 05:45:00 |
+|    1181 |       1 | Airbus | Zaporizhia | Kyiv       | 1900-01-01 06:12:00 | 1900-01-01 08:01:00 |
+|    1187 |       1 | Airbus | Zaporizhia | Kyiv       | 1900-01-01 15:42:00 | 1900-01-01 17:39:00 |
+|    1195 |       1 | AN     | Zaporizhia | Kyiv       | 1900-01-01 23:30:00 | 1900-01-01 01:11:00 |
++---------+---------+--------+------------+------------+---------------------+---------------------+
+6 rows in set (0,00 sec)
+
+mysql> SELECT count(town_from), town_from, time_out FROM Trip  GROUP BY town_from, time_out ORDER BY count(town_from) DESC;
++------------------+------------+---------------------+
+| count(town_from) | town_from  | time_out            |
++------------------+------------+---------------------+
+|                2 | London     | 1900-01-01 03:00:00 |
+|                1 | Zaporizhia | 1900-01-01 23:30:00 |
+|                1 | Paris      | 1900-01-01 22:00:00 |
+|                1 | Singapore  | 1900-01-01 22:00:00 |
+|                1 | London     | 1900-01-01 18:00:00 |
+|                1 | Singapore  | 1900-01-01 18:00:00 |
+|                1 | London     | 1900-01-01 09:00:00 |
+|                1 | Singapore  | 1900-01-01 14:00:00 |
+|                1 | Singapore  | 1900-01-01 12:00:00 |
+|                1 | London     | 1900-01-01 01:00:00 |
+|                1 | Kyiv       | 1900-01-01 04:00:00 |
+|                1 | Zaporizhia | 1900-01-01 14:30:00 |
+|                1 | Kyiv       | 1900-01-01 22:50:00 |
+|                1 | Zaporizhia | 1900-01-01 15:42:00 |
+|                1 | Kyiv       | 1900-01-01 12:35:00 |
+|                1 | Zaporizhia | 1900-01-01 06:12:00 |
+|                1 | Zaporizhia | 1900-01-01 17:55:00 |
+|                1 | Kyiv       | 1900-01-01 09:35:00 |
+|                1 | Odessa     | 1900-01-01 09:00:00 |
+|                1 | Zaporizhia | 1900-01-01 16:20:00 |
+|                1 | Paris      | 1900-01-01 08:12:00 |
++------------------+------------+---------------------+
+21 rows in set (0,00 sec)
+# ===============================================================================
+
+# 7. Execute other different SQL queries DDL, DML, DCL.
+mysql> 
+USE myAVIAdb;
+  ============> Database changed
+  
+  
+# ===============================================================================
 
 
   #Create a new user named ‘user_avia’ for our database called myAVIAdb as follows with password called Disp.2022
