@@ -1,0 +1,44 @@
+# ===============================================================================
+# PART 1 
+# 1. Download MySQL server for your OS on VM. 
+# 2. Install MySQL server on VM. 
+# 3. Select a subject area and describe the database schema, (minimum 3 tables) 
+# 4. Create a database on the server through the console. 
+# 5. Fill in tables. 
+# 6. Construct and execute SELECT operator with WHERE, GROUP BY and ORDER BY. 
+# 7. Execute other different SQL queries DDL, DML, DCL. 
+# 8. Create a database of new users with different privileges. Connect to the 
+# database as a new user and verify that the privileges allow or deny certain 
+# actions. 
+# 9. Make a selection from the main table DB MySQL.
+# ===============================================================================
+
+# 1. Download MySQL server for your OS on VM. 
+sudo apt update
+sudo apt list --upgradable # get a list of upgrades
+sudo apt upgrade
+
+
+# 2. Install MySQL server on VM.
+apt install mysql-server-8.0
+sudo mysql
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'PASSWORD';
+exit
+  
+  # Securing MySQL 8 server
+sudo mysql_secure_installation
+  
+  # Enabling the MySQL server at boot time
+  # Make sure our MySQL server 8 starts when the system boots using the systemctl command:
+sudo systemctl is-enabled mysql.service
+  # If not enabled, type the following command to enable the server:
+sudo systemctl enable mysql.service
+
+  # Verify MySQL 8 server status on Ubuntu Linux 20.04 LTS by typing the following systemctl command:
+sudo systemctl status mysql.service
+
+  # Starting/Stopping/Restarting the MySQL server
+sudo systemctl start mysql.service
+sudo systemctl stop mysql.service
+sudo systemctl restart mysql.service
+sudo journalctl -u mysql.service -xe  
