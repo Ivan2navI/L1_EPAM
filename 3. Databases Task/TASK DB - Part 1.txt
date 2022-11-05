@@ -13,10 +13,12 @@
 # 9. Make a selection from the main table DB MySQL.
 # ===============================================================================
 
+
 # 1. Download MySQL server for your OS on VM. 
 sudo apt update
 sudo apt list --upgradable # get a list of upgrades
 sudo apt upgrade
+# ===============================================================================
 
 
 # 2. Install MySQL server on VM.
@@ -41,4 +43,381 @@ sudo systemctl status mysql.service
 sudo systemctl start mysql.service
 sudo systemctl stop mysql.service
 sudo systemctl restart mysql.service
-sudo journalctl -u mysql.service -xe  
+sudo journalctl -u mysql.service -xe
+
+  # STATUS command that displays the version and other info about your MySQL server:
+STATUS;
+
+  #We can see MySQL version as follows:
+SHOW VARIABLES LIKE "%version%";
+# ===============================================================================
+
+
+# 3. Select a subject area and describe the database schema, (minimum 3 tables)
+  #Login into MySQL 8 server for testing purpose
+mysql -u root -p
+
+CREATE DATABASE myAVIAdb;
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| myAVIAdb           |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0,00 sec) 
+# ===============================================================================
+
+
+# 4. Create a database on the server through the console. 
+  # Creating tables
+mysql> 
+USE myAVIAdb;
+  Database changed
+
+mysql> CREATE TABLE Company (
+    -> ID_comp int NOT NULL ,
+    -> name char (40) NOT NULL
+    -> );
+Query OK, 0 rows affected (0,09 sec)
+
+mysql> CREATE TABLE Pass_in_trip (
+    -> trip_no int NOT NULL ,
+    -> date datetime NOT NULL ,
+    -> ID_psg int NOT NULL ,
+    -> place char (10) NOT NULL
+    -> );
+Query OK, 0 rows affected (0,09 sec)
+
+mysql> CREATE TABLE Passenger (
+    -> ID_psg int NOT NULL ,
+    -> name char (20) NOT NULL
+    -> );
+Query OK, 0 rows affected (0,05 sec)
+
+mysql> CREATE TABLE Trip (
+    -> trip_no int NOT NULL ,
+    -> ID_comp int NOT NULL ,
+    -> plane char (10) NOT NULL ,
+    -> town_from char (25) NOT NULL ,
+    -> town_to char (25) NOT NULL ,
+    -> time_out datetime NOT NULL ,
+    -> time_in datetime NOT NULL
+    -> );
+Query OK, 0 rows affected (0,03 sec)
+
+mysql> show tables;
++--------------------+
+| Tables_in_myAVIAdb |
++--------------------+
+| Company            |
+| Pass_in_trip       |
+| Passenger          |
+| Trip               |
++--------------------+
+4 rows in set (0,00 sec)
+
+
+ALTER TABLE Company  ADD 
+	CONSTRAINT PK2 PRIMARY KEY
+	(
+		ID_comp
+	);   
+
+
+ALTER TABLE Pass_in_trip  ADD 
+	CONSTRAINT PK_pt PRIMARY KEY  CLUSTERED 
+	(
+		trip_no,
+		date,
+		ID_psg
+	);   
+
+
+ALTER TABLE Passenger  ADD 
+	CONSTRAINT PK_psg PRIMARY KEY  CLUSTERED 
+	(
+		ID_psg
+	);   
+
+
+ALTER TABLE Trip  ADD 
+	CONSTRAINT PK_t PRIMARY KEY  CLUSTERED 
+	(
+		trip_no
+	);   
+
+
+ALTER TABLE Pass_in_trip ADD 
+	CONSTRAINT FK_Pass_in_trip_Passenger FOREIGN KEY 
+	(
+		ID_psg
+	) REFERENCES Passenger (
+		ID_psg
+	);
+
+ALTER TABLE Pass_in_trip ADD 
+	CONSTRAINT FK_Pass_in_trip_Trip FOREIGN KEY 
+	(
+		trip_no
+	) REFERENCES Trip (
+		trip_no
+	);
+
+
+ALTER TABLE Trip ADD 
+	CONSTRAINT FK_Trip_Company FOREIGN KEY 
+	(
+		ID_comp
+	) REFERENCES Company (
+		ID_comp
+	);
+
+
+mysql> select * from INFORMATION_SCHEMA.TABLE_CONSTRAINTS where TABLE_SCHEMA  = 'myAVIAdb';
++--------------------+-------------------+---------------------------+--------------+--------------+-----------------+----------+
+| CONSTRAINT_CATALOG | CONSTRAINT_SCHEMA | CONSTRAINT_NAME           | TABLE_SCHEMA | TABLE_NAME   | CONSTRAINT_TYPE | ENFORCED |
++--------------------+-------------------+---------------------------+--------------+--------------+-----------------+----------+
+| def                | myAVIAdb          | PRIMARY                   | myAVIAdb     | Company      | PRIMARY KEY     | YES      |
+| def                | myAVIAdb          | PRIMARY                   | myAVIAdb     | Pass_in_trip | PRIMARY KEY     | YES      |
+| def                | myAVIAdb          | FK_Pass_in_trip_Passenger | myAVIAdb     | Pass_in_trip | FOREIGN KEY     | YES      |
+| def                | myAVIAdb          | FK_Pass_in_trip_Trip      | myAVIAdb     | Pass_in_trip | FOREIGN KEY     | YES      |
+| def                | myAVIAdb          | PRIMARY                   | myAVIAdb     | Passenger    | PRIMARY KEY     | YES      |
+| def                | myAVIAdb          | PRIMARY                   | myAVIAdb     | Trip         | PRIMARY KEY     | YES      |
+| def                | myAVIAdb          | FK_Trip_Company           | myAVIAdb     | Trip         | FOREIGN KEY     | YES      |
++--------------------+-------------------+---------------------------+--------------+--------------+-----------------+----------+
+7 rows in set (0,00 sec)
+# ===============================================================================
+
+
+# 5. Fill in tables. 
+  #---- Company ----
+insert into Company values(1,'Ukraine_International_Airlines  ');
+insert into Company values(2,'Bees_Airline                    ');
+insert into Company values(3,'SkyUp_Airlines                  ');
+insert into Company values(4,'air_France                      ');
+insert into Company values(5,'British_AW                      ');
+
+mysql> select * from Company;
++---------+--------------------------------+
+| ID_comp | name                           |
++---------+--------------------------------+
+|       1 | Ukraine_International_Airlines |
+|       2 | Bees_Airline                   |
+|       3 | SkyUp_Airlines                 |
+|       4 | air_France                     |
+|       5 | British_AW                     |
++---------+--------------------------------+
+
+  #---- Passenger ----
+insert into Passenger values(1,'Bruce Willis        ');
+insert into Passenger values(2,'George Clooney      ');
+insert into Passenger values(3,'Kevin Costner       ');
+insert into Passenger values(4,'Donald Sutherland   ');
+insert into Passenger values(5,'Jennifer Lopez      ');
+insert into Passenger values(6,'Ray Liotta          ');
+insert into Passenger values(7,'Samuel L. Jackson   ');
+insert into Passenger values(8,'Nikole Kidman       ');
+insert into Passenger values(9,'Alan Rickman        ');
+insert into Passenger values(10,'Kurt Russell        ');
+insert into Passenger values(11,'Harrison Ford       ');
+insert into Passenger values(12,'Russell Crowe       ');
+insert into Passenger values(13,'Steve Martin        ');
+insert into Passenger values(14,'Michael Caine       ');
+insert into Passenger values(15,'Angelina Jolie      ');
+insert into Passenger values(16,'Mel Gibson          ');
+insert into Passenger values(17,'Michael Douglas     ');
+insert into Passenger values(18,'John Travolta       ');
+insert into Passenger values(19,'Sylvester Stallone  ');
+insert into Passenger values(20,'Tommy Lee Jones     ');
+insert into Passenger values(21,'Catherine Zeta-Jones');
+insert into Passenger values(22,'Antonio Banderas    ');
+insert into Passenger values(23,'Kim Basinger        ');
+insert into Passenger values(24,'Sam Neill           ');
+insert into Passenger values(25,'Gary Oldman         ');
+insert into Passenger values(26,'Clint Eastwood      ');
+insert into Passenger values(27,'Brad Pitt           ');
+insert into Passenger values(28,'Johnny Depp         ');
+insert into Passenger values(29,'Pierce Brosnan      ');
+insert into Passenger values(30,'Sean Connery        ');
+insert into Passenger values(31,'Bruce Willis        ');
+insert into Passenger values(37,'Mullah Omar         ');
+
+mysql> select * from Passenger;
++--------+----------------------+
+| ID_psg | name                 |
++--------+----------------------+
+|      1 | Bruce Willis         |
+|      2 | George Clooney       |
+|      3 | Kevin Costner        |
+|      4 | Donald Sutherland    |
+|      5 | Jennifer Lopez       |
+|      6 | Ray Liotta           |
+|      7 | Samuel L. Jackson    |
+|      8 | Nikole Kidman        |
+|      9 | Alan Rickman         |
+|     10 | Kurt Russell         |
+|     11 | Harrison Ford        |
+|     12 | Russell Crowe        |
+|     13 | Steve Martin         |
+|     14 | Michael Caine        |
+|     15 | Angelina Jolie       |
+|     16 | Mel Gibson           |
+|     17 | Michael Douglas      |
+|     18 | John Travolta        |
+|     19 | Sylvester Stallone   |
+|     20 | Tommy Lee Jones      |
+|     21 | Catherine Zeta-Jones |
+|     22 | Antonio Banderas     |
+|     23 | Kim Basinger         |
+|     24 | Sam Neill            |
+|     25 | Gary Oldman          |
+|     26 | Clint Eastwood       |
+|     27 | Brad Pitt            |
+|     28 | Johnny Depp          |
+|     29 | Pierce Brosnan       |
+|     30 | Sean Connery         |
+|     31 | Bruce Willis         |
+|     37 | Mullah Omar          |
++--------+----------------------+
+32 rows in set (0,00 sec)
+
+  #----Trip----
+insert into Trip values(1100,4,'Boeing    ','Zaporizhia               ','Paris                    ','1900-01-01 14:30:00','1900-01-01 17:50:00');
+insert into Trip values(1101,4,'Boeing    ','Paris                    ','Zaporizhia               ','1900-01-01 08:12:00','1900-01-01 11:45:00');
+insert into Trip values(1123,3,'AN        ','Zaporizhia               ','Odessa                   ','1900-01-01 16:20:00','1900-01-01 03:40:00');
+insert into Trip values(1124,3,'AN        ','Odessa                   ','Zaporizhia               ','1900-01-01 09:00:00','1900-01-01 19:50:00');
+insert into Trip values(1145,2,'Embraer   ','Kyiv                     ','Zaporizhia               ','1900-01-01 09:35:00','1900-01-01 11:23:00');
+insert into Trip values(1146,2,'Embraer   ','Zaporizhia               ','Kyiv                     ','1900-01-01 17:55:00','1900-01-01 20:01:00');
+insert into Trip values(1181,1,'Airbus    ','Zaporizhia               ','Kyiv                     ','1900-01-01 06:12:00','1900-01-01 08:01:00');
+insert into Trip values(1182,1,'Airbus    ','Kyiv                     ','Zaporizhia               ','1900-01-01 12:35:00','1900-01-01 14:30:00');
+insert into Trip values(1187,1,'Airbus    ','Zaporizhia               ','Kyiv                     ','1900-01-01 15:42:00','1900-01-01 17:39:00');
+insert into Trip values(1188,1,'Airbus    ','Kyiv                     ','Zaporizhia               ','1900-01-01 22:50:00','1900-01-01 00:48:00');
+insert into Trip values(1195,1,'AN        ','Zaporizhia               ','Kyiv                     ','1900-01-01 23:30:00','1900-01-01 01:11:00');
+insert into Trip values(1196,1,'AN        ','Kyiv                     ','Zaporizhia               ','1900-01-01 04:00:00','1900-01-01 05:45:00');
+insert into Trip values(7771,5,'Boeing    ','London                   ','Singapore                ','1900-01-01 01:00:00','1900-01-01 11:00:00');
+insert into Trip values(7772,5,'Boeing    ','Singapore                ','London                   ','1900-01-01 12:00:00','1900-01-01 02:00:00');
+insert into Trip values(7773,5,'Boeing    ','London                   ','Singapore                ','1900-01-01 03:00:00','1900-01-01 13:00:00');
+insert into Trip values(7774,5,'Boeing    ','Singapore                ','London                   ','1900-01-01 14:00:00','1900-01-01 06:00:00');
+insert into Trip values(7775,5,'Boeing    ','London                   ','Singapore                ','1900-01-01 09:00:00','1900-01-01 20:00:00');
+insert into Trip values(7776,5,'Boeing    ','Singapore                ','London                   ','1900-01-01 18:00:00','1900-01-01 08:00:00');
+insert into Trip values(7777,5,'Boeing    ','London                   ','Singapore                ','1900-01-01 18:00:00','1900-01-01 06:00:00');
+insert into Trip values(7778,5,'Boeing    ','Singapore                ','London                   ','1900-01-01 22:00:00','1900-01-01 12:00:00');
+insert into Trip values(8881,5,'Boeing    ','London                   ','Paris                    ','1900-01-01 03:00:00','1900-01-01 04:00:00');
+insert into Trip values(8882,5,'Boeing    ','Paris                    ','London                   ','1900-01-01 22:00:00','1900-01-01 23:00:00');
+
+mysql> select * from Trip;
++---------+---------+---------+------------+------------+---------------------+---------------------+
+| trip_no | ID_comp | plane   | town_from  | town_to    | time_out            | time_in             |
++---------+---------+---------+------------+------------+---------------------+---------------------+
+|    1100 |       4 | Boeing  | Zaporizhia | Paris      | 1900-01-01 14:30:00 | 1900-01-01 17:50:00 |
+|    1101 |       4 | Boeing  | Paris      | Zaporizhia | 1900-01-01 08:12:00 | 1900-01-01 11:45:00 |
+|    1123 |       3 | AN      | Zaporizhia | Odessa     | 1900-01-01 16:20:00 | 1900-01-01 03:40:00 |
+|    1124 |       3 | AN      | Odessa     | Zaporizhia | 1900-01-01 09:00:00 | 1900-01-01 19:50:00 |
+|    1145 |       2 | Embraer | Kyiv       | Zaporizhia | 1900-01-01 09:35:00 | 1900-01-01 11:23:00 |
+|    1146 |       2 | Embraer | Zaporizhia | Kyiv       | 1900-01-01 17:55:00 | 1900-01-01 20:01:00 |
+|    1181 |       1 | Airbus  | Zaporizhia | Kyiv       | 1900-01-01 06:12:00 | 1900-01-01 08:01:00 |
+|    1182 |       1 | Airbus  | Kyiv       | Zaporizhia | 1900-01-01 12:35:00 | 1900-01-01 14:30:00 |
+|    1187 |       1 | Airbus  | Zaporizhia | Kyiv       | 1900-01-01 15:42:00 | 1900-01-01 17:39:00 |
+|    1188 |       1 | Airbus  | Kyiv       | Zaporizhia | 1900-01-01 22:50:00 | 1900-01-01 00:48:00 |
+|    1195 |       1 | AN      | Zaporizhia | Kyiv       | 1900-01-01 23:30:00 | 1900-01-01 01:11:00 |
+|    1196 |       1 | AN      | Kyiv       | Zaporizhia | 1900-01-01 04:00:00 | 1900-01-01 05:45:00 |
+|    7771 |       5 | Boeing  | London     | Singapore  | 1900-01-01 01:00:00 | 1900-01-01 11:00:00 |
+|    7772 |       5 | Boeing  | Singapore  | London     | 1900-01-01 12:00:00 | 1900-01-01 02:00:00 |
+|    7773 |       5 | Boeing  | London     | Singapore  | 1900-01-01 03:00:00 | 1900-01-01 13:00:00 |
+|    7774 |       5 | Boeing  | Singapore  | London     | 1900-01-01 14:00:00 | 1900-01-01 06:00:00 |
+|    7775 |       5 | Boeing  | London     | Singapore  | 1900-01-01 09:00:00 | 1900-01-01 20:00:00 |
+|    7776 |       5 | Boeing  | Singapore  | London     | 1900-01-01 18:00:00 | 1900-01-01 08:00:00 |
+|    7777 |       5 | Boeing  | London     | Singapore  | 1900-01-01 18:00:00 | 1900-01-01 06:00:00 |
+|    7778 |       5 | Boeing  | Singapore  | London     | 1900-01-01 22:00:00 | 1900-01-01 12:00:00 |
+|    8881 |       5 | Boeing  | London     | Paris      | 1900-01-01 03:00:00 | 1900-01-01 04:00:00 |
+|    8882 |       5 | Boeing  | Paris      | London     | 1900-01-01 22:00:00 | 1900-01-01 23:00:00 |
++---------+---------+---------+------------+------------+---------------------+---------------------+
+22 rows in set (0,00 sec)
+
+  #----Pass_in_trip----
+insert into Pass_in_trip values(1100,'2003-04-29 00:00:00',1,'1a        ');
+insert into Pass_in_trip values(1123,'2003-04-05 00:00:00',3,'2a        ');
+insert into Pass_in_trip values(1123,'2003-04-08 00:00:00',1,'4c        ');
+insert into Pass_in_trip values(1123,'2003-04-08 00:00:00',6,'4b        ');
+insert into Pass_in_trip values(1124,'2003-04-02 00:00:00',2,'2d        ');
+insert into Pass_in_trip values(1145,'2003-04-05 00:00:00',3,'2c        ');
+insert into Pass_in_trip values(1181,'2003-04-01 00:00:00',1,'1a        ');
+insert into Pass_in_trip values(1181,'2003-04-01 00:00:00',6,'1b        ');
+insert into Pass_in_trip values(1181,'2003-04-01 00:00:00',8,'3c        ');
+insert into Pass_in_trip values(1181,'2003-04-13 00:00:00',5,'1b        ');
+insert into Pass_in_trip values(1182,'2003-04-13 00:00:00',5,'4b        ');
+insert into Pass_in_trip values(1187,'2003-04-14 00:00:00',8,'3a        ');
+insert into Pass_in_trip values(1188,'2003-04-01 00:00:00',8,'3a        ');
+insert into Pass_in_trip values(1182,'2003-04-13 00:00:00',9,'6d        ');
+insert into Pass_in_trip values(1145,'2003-04-25 00:00:00',5,'1d        ');
+insert into Pass_in_trip values(1187,'2003-04-14 00:00:00',10,'3d        ');
+insert into Pass_in_trip values(8882,'2005-11-06 00:00:00',37,'1a        '); 
+insert into Pass_in_trip values(7771,'2005-11-07 00:00:00',37,'1c        '); 
+insert into Pass_in_trip values(7772,'2005-11-07 00:00:00',37,'1a        '); 
+insert into Pass_in_trip values(8881,'2005-11-08 00:00:00',37,'1d        '); 
+insert into Pass_in_trip values(7778,'2005-11-05 00:00:00',10,'2a        '); 
+insert into Pass_in_trip values(7772,'2005-11-29 00:00:00',10,'3a        ');
+insert into Pass_in_trip values(7771,'2005-11-04 00:00:00',11,'4a        ');
+insert into Pass_in_trip values(7771,'2005-11-07 00:00:00',11,'1b        ');
+insert into Pass_in_trip values(7771,'2005-11-09 00:00:00',11,'5a        ');
+insert into Pass_in_trip values(7772,'2005-11-07 00:00:00',12,'1d        ');
+insert into Pass_in_trip values(7773,'2005-11-07 00:00:00',13,'2d        ');
+insert into Pass_in_trip values(7772,'2005-11-29 00:00:00',13,'1b        ');
+insert into Pass_in_trip values(8882,'2005-11-13 00:00:00',14,'3d        ');
+insert into Pass_in_trip values(7771,'2005-11-14 00:00:00',14,'4d        ');
+insert into Pass_in_trip values(7771,'2005-11-16 00:00:00',14,'5d        ');
+insert into Pass_in_trip values(7772,'2005-11-29 00:00:00',14,'1c        ');
+
+mysql> select * from Pass_in_trip;
++---------+---------------------+--------+-------+
+| trip_no | date                | ID_psg | place |
++---------+---------------------+--------+-------+
+|    1100 | 2003-04-29 00:00:00 |      1 | 1a    |
+|    1123 | 2003-04-05 00:00:00 |      3 | 2a    |
+|    1123 | 2003-04-08 00:00:00 |      1 | 4c    |
+|    1123 | 2003-04-08 00:00:00 |      6 | 4b    |
+|    1124 | 2003-04-02 00:00:00 |      2 | 2d    |
+|    1145 | 2003-04-05 00:00:00 |      3 | 2c    |
+|    1145 | 2003-04-25 00:00:00 |      5 | 1d    |
+|    1181 | 2003-04-01 00:00:00 |      1 | 1a    |
+|    1181 | 2003-04-01 00:00:00 |      6 | 1b    |
+|    1181 | 2003-04-01 00:00:00 |      8 | 3c    |
+|    1181 | 2003-04-13 00:00:00 |      5 | 1b    |
+|    1182 | 2003-04-13 00:00:00 |      5 | 4b    |
+|    1182 | 2003-04-13 00:00:00 |      9 | 6d    |
+|    1187 | 2003-04-14 00:00:00 |      8 | 3a    |
+|    1187 | 2003-04-14 00:00:00 |     10 | 3d    |
+|    1188 | 2003-04-01 00:00:00 |      8 | 3a    |
+|    7771 | 2005-11-04 00:00:00 |     11 | 4a    |
+|    7771 | 2005-11-07 00:00:00 |     11 | 1b    |
+|    7771 | 2005-11-07 00:00:00 |     37 | 1c    |
+|    7771 | 2005-11-09 00:00:00 |     11 | 5a    |
+|    7771 | 2005-11-14 00:00:00 |     14 | 4d    |
+|    7771 | 2005-11-16 00:00:00 |     14 | 5d    |
+|    7772 | 2005-11-07 00:00:00 |     12 | 1d    |
+|    7772 | 2005-11-07 00:00:00 |     37 | 1a    |
+|    7772 | 2005-11-29 00:00:00 |     10 | 3a    |
+|    7772 | 2005-11-29 00:00:00 |     13 | 1b    |
+|    7772 | 2005-11-29 00:00:00 |     14 | 1c    |
+|    7773 | 2005-11-07 00:00:00 |     13 | 2d    |
+|    7778 | 2005-11-05 00:00:00 |     10 | 2a    |
+|    8881 | 2005-11-08 00:00:00 |     37 | 1d    |
+|    8882 | 2005-11-06 00:00:00 |     37 | 1a    |
+|    8882 | 2005-11-13 00:00:00 |     14 | 3d    |
++---------+---------------------+--------+-------+
+32 rows in set (0,00 sec)
+# ===============================================================================
+
+
+
+
+  #Create a new user named ‘user_avia’ for our database called myAVIAdb as follows with password called Disp.2022
+CREATE USER 'user_avia'@'%' IDENTIFIED BY 'Disp.2022';  
+  
+  # give permissions:
+GRANT SELECT, INSERT, UPDATE, DELETE ON myAVIAdb.* TO 'user_avia'@'%';
