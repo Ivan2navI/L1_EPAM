@@ -1,6 +1,45 @@
 https://ru.stackoverflow.com/questions/1006292/%D0%A3%D0%B4%D0%B0%D0%BB%D0%B5%D0%BD%D0%BD%D1%8B%D0%B9-%D0%B4%D0%BE%D1%81%D1%82%D1%83%D0%BF-%D0%BA-mysql-%D1%87%D0%B5%D1%80%D0%B5%D0%B7-workbench
 
+https://stackoverflow.com/questions/50177216/how-to-grant-all-privileges-to-root-user-in-mysql-8-0
 
+========================================
+
+mysql> CREATE USER 'root'@'%' IDENTIFIED BY 'PASSWORD';
+mysql> GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
+mysql> FLUSH PRIVILEGES;
+
+
+#I see a lot of (wrong) answers, it is just as simple as this:
+
+USE mysql;
+CREATE USER 'user'@'localhost' IDENTIFIED BY 'P@ssW0rd';
+GRANT ALL ON *.* TO 'user'@'localhost';
+FLUSH PRIVILEGES;
+
+#Note: instead of a self-created user you can use root to connect to the database. However, using the default root account to let an application connect to the database is not the preferred way.
+
+#Alternative privileges (be careful and remember the least-privilege principle):
+
+-- Grant user permissions to all tables in my_database from localhost --
+GRANT ALL ON my_database.* TO 'user'@'localhost';
+
+-- Grant user permissions to my_table in my_database from localhost --
+GRANT ALL ON my_database.my_table TO 'user'@'localhost';
+
+-- Grant user permissions to all tables and databases from all hosts --
+GRANT ALL ON *.* TO 'user'@'*';
+
+
+#You need add/change the following two lines in /etc/mysql/my.cnf and restart mysql:
+[mysqld]
+bind-address=0.0.0.0
+
+sudo service mysql restart
+
+netstat -tln
+              must be: 0.0.0.0:3306
+
+=========================================
 
 Что бы настроить удаленный доступ с других IP:
 

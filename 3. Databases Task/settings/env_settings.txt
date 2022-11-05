@@ -1,4 +1,7 @@
+sudo nano ~/.bashrc
 alias epam3='cd '\''/home/ubuntu/L1_EPAM/3. Databases Task/'\'''
+
+https://www.cyberciti.biz/faq/installing-mysql-server-on-ubuntu-22-04-lts-linux/
 
 ==================================================================
 # ------------------ Installing MySQL on Ubuntu ------------------
