@@ -1,10 +1,14 @@
 # 3. Databases Task
 ## PART 1
+:star: [PART 1 (results are here)](https://github.com/Ivan2navI/L1_EPAM/blob/main/3.%20Databases%20Task/TASK%20DB%20-%20Part%201.txt)
 1. Download MySQL server for your OS on VM. 
 2. Install MySQL server on VM. 
 3. Select a subject area and describe the database schema, (minimum 3 tables) 
 4. Create a database on the server through the console. 
-5. Fill in tables. 
+5. Fill in tables.
+
+![Task1__Q1_5](https://github.com/Ivan2navI/L1_EPAM/blob/main/3.%20Databases%20Task/info_and_pictures/Task1__Q1_5.png)
+
 6. Construct and execute SELECT operator with WHERE, GROUP BY and ORDER BY. 
 7. Execute other different SQL queries DDL, DML, DCL. 
 8. Create a database of new users with different privileges. Connect to the database as a new user and verify that the privileges allow or deny certain actions. 
