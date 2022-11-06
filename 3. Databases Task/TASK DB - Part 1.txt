@@ -1,4 +1,4 @@
-# ===============================================================================
+my# ===============================================================================
 # PART 1 
 # 1. Download MySQL server for your OS on VM. 
 # 2. Install MySQL server on VM. 
@@ -12,7 +12,8 @@
 #    actions. 
 # 9. Make a selection from the main table DB MySQL.
 # ===============================================================================
-
+# https://dev.mysql.com/doc/refman/8.0/en/sql-statements.html
+# ===============================================================================
 
 # 1. Download MySQL server for your OS on VM. 
 sudo apt update
@@ -495,16 +496,292 @@ mysql> SELECT count(town_from), town_from, time_out FROM Trip  GROUP BY town_fro
 # ===============================================================================
 
 # 7. Execute other different SQL queries DDL, DML, DCL.
+
+      DDL [Data Definition Language]: 
+          • Create (Done): It is used to create objects in the database.
+          • Alter (Done):  It is used to alter the structure of the database.
+          • Drop (-): 	   It is used to delete objects from the database.
+          • Truncate (-):  It is used to remove all records from a table.
+          • Rename (-):    It is used to rename an object.
+          • Comment (-):   It is used to comment on the data dictionary.
+      
+      DML [Data Manipulation Language]:
+          • Select (Done):    It is used to retrieve data from a database.
+          • Insert (Done):    It is used to insert data into a table.
+          • Update (-):       It is used to update existing data within a table.
+          • Delete (-):       It is used to delete all records from a table.
+          • Merge (-):        It performs UPSERT operation, i.e., insert or update operations.
+          • Call (-):         It is used to call a structured query language or a Java subprogram.
+          • Explain Plan (-): It has the parameter of explaining data.
+          • Lock Table (-):   It controls concurrency.
+      
+      DCL [Data Control Language]:
+          • Grant (Done):  It is used to give user access privileges to a database.
+          • Revoke (-): It is used to take back permissions from the user.
 mysql> 
 USE myAVIAdb;
   ============> Database changed
-  
-  
+
+• DDL = Rename (-/DONE):    It is used to rename an object.
+          mysql> select * from  Company;
+          +---------+--------------------------------+
+          | ID_comp | name                           |
+          +---------+--------------------------------+
+          |       1 | Ukraine_International_Airlines |
+          |       2 | Bees_Airline                   |
+          |       3 | SkyUp_Airlines                 |
+          |       4 | air_France                     |
+          |       5 | British_AW                     |
+          +---------+--------------------------------+
+          5 rows in set (0,00 sec)
+          
+          mysql> RENAME TABLE Company to Company2;
+          Query OK, 0 rows affected (0,03 sec)
+          
+          mysql> select * from  Company;
+          ERROR 1146 (42S02): Table 'myAVIAdb.Company' doesn't exist
+          mysql> select * from  Company2;
+          +---------+--------------------------------+
+          | ID_comp | name                           |
+          +---------+--------------------------------+
+          |       1 | Ukraine_International_Airlines |
+          |       2 | Bees_Airline                   |
+          |       3 | SkyUp_Airlines                 |
+          |       4 | air_France                     |
+          |       5 | British_AW                     |
+          +---------+--------------------------------+
+          5 rows in set (0,00 sec)
+
+• DML = Update (-/DONE):       It is used to update existing data within a table.
+          mysql> select * from  Company;
+          +---------+--------------------------------+
+          | ID_comp | name                           |
+          +---------+--------------------------------+
+          |       1 | Ukraine_International_Airlines |
+          |       2 | Bees_Airline                   |
+          |       3 | SkyUp_Airlines                 |
+          |       4 | air_France                     |
+          |       5 | British_AW                     |
+          +---------+--------------------------------+
+          5 rows in set (0,00 sec)
+          
+          mysql> UPDATE Company set name='TEST' WHERE ID_comp=5;
+          Query OK, 1 row affected (0,01 sec)
+          Rows matched: 1  Changed: 1  Warnings: 0
+          
+          mysql> select * from  Company;
+          +---------+--------------------------------+
+          | ID_comp | name                           |
+          +---------+--------------------------------+
+          |       1 | Ukraine_International_Airlines |
+          |       2 | Bees_Airline                   |
+          |       3 | SkyUp_Airlines                 |
+          |       4 | air_France                     |
+          |       5 | TEST                           |
+          +---------+--------------------------------+
+          5 rows in set (0,00 sec)
+
+• DML = Delete (-/DONE): 
+          mysql> SELECT * FROM Pass_in_trip WHERE trip_no <1181 ;
+          +---------+---------------------+--------+-------+
+          | trip_no | date                | ID_psg | place |
+          +---------+---------------------+--------+-------+
+          |    1100 | 2003-04-29 00:00:00 |      1 | 1a    |
+          |    1123 | 2003-04-05 00:00:00 |      3 | 2a    |
+          |    1123 | 2003-04-08 00:00:00 |      1 | 4c    |
+          |    1123 | 2003-04-08 00:00:00 |      6 | 4b    |
+          |    1124 | 2003-04-02 00:00:00 |      2 | 2d    |
+          |    1145 | 2003-04-05 00:00:00 |      3 | 2c    |
+          |    1145 | 2003-04-25 00:00:00 |      5 | 1d    |
+          +---------+---------------------+--------+-------+
+          7 rows in set (0,00 sec)
+          
+          mysql> DELETE FROM Pass_in_trip WHERE trip_no=1123;
+          Query OK, 3 rows affected (0,00 sec)
+          
+          mysql> SELECT * FROM Pass_in_trip WHERE trip_no <1181;
+          +---------+---------------------+--------+-------+
+          | trip_no | date                | ID_psg | place |
+          +---------+---------------------+--------+-------+
+          |    1100 | 2003-04-29 00:00:00 |      1 | 1a    |
+          |    1124 | 2003-04-02 00:00:00 |      2 | 2d    |
+          |    1145 | 2003-04-05 00:00:00 |      3 | 2c    |
+          |    1145 | 2003-04-25 00:00:00 |      5 | 1d    |
+          +---------+---------------------+--------+-------+
+          4 rows in set (0,00 sec)
+
+• DCL = Grant & Revoke(-/DONE):
+          # https://www.geeksforgeeks.org/mysql-grant-revoke-privileges/
+          mysql> GRANT SELECT ON Company TO 'root'@'%';
+                 Query OK, 0 rows affected (0,01 sec)
+          
+          mysql> REVOKE SELECT ON Company FROM 'root'@'%';
+                 Query OK, 0 rows affected (0,00 sec)
 # ===============================================================================
 
 
-  #Create a new user named ‘user_avia’ for our database called myAVIAdb as follows with password called Disp.2022
-CREATE USER 'user_avia'@'%' IDENTIFIED BY 'Disp.2022';  
+# 8. Create a database of new users with different privileges. Connect to the 
+#    database as a new user and verify that the privileges allow or deny certain 
+#    actions. 
+mysql> 
+USE myAVIAdb;
+
+  # To allow the user account to connect to the database server 
+  # from any subdomain of the “mysqltutorial.org” host, then the percentage 
+  # wildcard % should be used as follows:
+  # CREATE USER 'username'@'%' IDENTIFIED BY 'password'
+  # CREATE USER 'username'@'hostname' IDENTIFIED BY 'password';
+
+  # Create a new user named ‘user_select’ for our database called myAVIAdb 
+  # as follows with password called Select.2022
+CREATE USER 'user_select'@'localhost' IDENTIFIED BY 'Select.2022';  
   
   # give permissions:
-GRANT SELECT, INSERT, UPDATE, DELETE ON myAVIAdb.* TO 'user_avia'@'%';
+GRANT SELECT ON myAVIAdb.* TO 'user_select'@'localhost';
+
+mysql> SHOW GRANTS FOR 'user_select'@'localhost';
+        +-----------------------------------------------------------+
+        | Grants for user_select@localhost                          |
+        +-----------------------------------------------------------+
+        | GRANT USAGE ON *.* TO `user_select`@`localhost`           |
+        | GRANT SELECT ON `myAVIAdb`.* TO `user_select`@`localhost` |
+        +-----------------------------------------------------------+
+        2 rows in set (0,00 sec)
+
+  # CREATE USER 'username'@'%' IDENTIFIED BY 'password'
+CREATE USER 'user_diff_priv'@'%' IDENTIFIED BY 'DiffPriv.2022';   
+
+  # give permissions:
+GRANT SELECT, INSERT, UPDATE, DELETE ON myAVIAdb.* TO 'user_diff_priv'@'%';
+
+mysql> SHOW GRANTS FOR 'user_diff_priv'@'%';
+        +------------------------------------------------------------------------------+
+        | Grants for user_diff_priv@%                                                  |
+        +------------------------------------------------------------------------------+
+        | GRANT USAGE ON *.* TO `user_diff_priv`@`%`                                   |
+        | GRANT SELECT, INSERT, UPDATE, DELETE ON `myAVIAdb`.* TO `user_diff_priv`@`%` |
+        +------------------------------------------------------------------------------+
+        2 rows in set (0,00 sec)
+
+mysql> SELECT user FROM mysql.user;
+        +------------------+
+        | user             |
+        +------------------+
+        | root             |
+        | user_avia        |
+        | user_diff_priv   |
+        | debian-sys-maint |
+        | mysql.infoschema |
+        | mysql.session    |
+        | mysql.sys        |
+        | user_select      |
+        +------------------+
+        8 rows in set (0,00 sec)
+
+mysql> FLUSH PRIVILEGES;
+# ===============================================================================
+
+
+# 9. Make a selection from the main table DB MySQL.
+mysql> Show databases;
+        +--------------------+
+        | Database           |
+        +--------------------+
+        | information_schema |
+        | myAVIAdb           |
+        | mysql              |
+        | performance_schema |
+        | sys                |
+        +--------------------+
+        5 rows in set (0,00 sec)
+
+mysql> Use mysql;
+        Reading table information for completion of table and column names
+        You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> show tables;
+        +------------------------------------------------------+
+        | Tables_in_mysql                                      |
+        +------------------------------------------------------+
+        | columns_priv                                         |
+        | component                                            |
+        | db                                                   |
+        | default_roles                                        |
+        | engine_cost                                          |
+        | func                                                 |
+        | general_log                                          |
+        | global_grants                                        |
+        | gtid_executed                                        |
+        | help_category                                        |
+        | help_keyword                                         |
+        | help_relation                                        |
+        | help_topic                                           |
+        | innodb_index_stats                                   |
+        | innodb_table_stats                                   |
+        | password_history                                     |
+        | plugin                                               |
+        | procs_priv                                           |
+        | proxies_priv                                         |
+        | replication_asynchronous_connection_failover         |
+        | replication_asynchronous_connection_failover_managed |
+        | replication_group_configuration_version              |
+        | replication_group_member_actions                     |
+        | role_edges                                           |
+        | server_cost                                          |
+        | servers                                              |
+        | slave_master_info                                    |
+        | slave_relay_log_info                                 |
+        | slave_worker_info                                    |
+        | slow_log                                             |
+        | tables_priv                                          |
+        | time_zone                                            |
+        | time_zone_leap_second                                |
+        | time_zone_name                                       |
+        | time_zone_transition                                 |
+        | time_zone_transition_type                            |
+        | user                                                 |
+        +------------------------------------------------------+
+        37 rows in set (0,00 sec)
+
+mysql> select * from plugin;
+mysql> select * from mysql.plugin;
+        +-------------+----------------+
+        | name        | dl             |
+        +-------------+----------------+
+        | auth_socket | auth_socket.so |
+        +-------------+----------------+
+        1 row in set (0,00 sec)
+
+
+mysql> show columns from db;
+        +-----------------------+---------------+------+-----+---------+-------+
+        | Field                 | Type          | Null | Key | Default | Extra |
+        +-----------------------+---------------+------+-----+---------+-------+
+        | Host                  | char(255)     | NO   | PRI |         |       |
+        | Db                    | char(64)      | NO   | PRI |         |       |
+        | User                  | char(32)      | NO   | PRI |         |       |
+        | Select_priv           | enum('N','Y') | NO   |     | N       |       |
+        | Insert_priv           | enum('N','Y') | NO   |     | N       |       |
+        | Update_priv           | enum('N','Y') | NO   |     | N       |       |
+        | Delete_priv           | enum('N','Y') | NO   |     | N       |       |
+        | Create_priv           | enum('N','Y') | NO   |     | N       |       |
+        | Drop_priv             | enum('N','Y') | NO   |     | N       |       |
+        | Grant_priv            | enum('N','Y') | NO   |     | N       |       |
+        | References_priv       | enum('N','Y') | NO   |     | N       |       |
+        | Index_priv            | enum('N','Y') | NO   |     | N       |       |
+        | Alter_priv            | enum('N','Y') | NO   |     | N       |       |
+        | Create_tmp_table_priv | enum('N','Y') | NO   |     | N       |       |
+        | Lock_tables_priv      | enum('N','Y') | NO   |     | N       |       |
+        | Create_view_priv      | enum('N','Y') | NO   |     | N       |       |
+        | Show_view_priv        | enum('N','Y') | NO   |     | N       |       |
+        | Create_routine_priv   | enum('N','Y') | NO   |     | N       |       |
+        | Alter_routine_priv    | enum('N','Y') | NO   |     | N       |       |
+        | Execute_priv          | enum('N','Y') | NO   |     | N       |       |
+        | Event_priv            | enum('N','Y') | NO   |     | N       |       |
+        | Trigger_priv          | enum('N','Y') | NO   |     | N       |       |
+        +-----------------------+---------------+------+-----+---------+-------+
+        22 rows in set (0,00 sec)
+# ===============================================================================
+
+
