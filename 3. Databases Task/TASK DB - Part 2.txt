@@ -1,0 +1,19 @@
+# ===============================================================================
+# =============================       PART 2        =============================
+# =============================================================================== 
+# 10.Make backup of your database. 
+# 11.Delete the table and/or part of the data in the table. 
+# 12.Restore your database. 
+# 13.Transfer your local database to RDS AWS. 
+# 14.Connect to your database. 
+# 15.Execute SELECT operator similar step 6. 
+# 16.Create the dump of your database. 
+# ===============================================================================
+# https://dev.mysql.com/doc/refman/8.0/en/sql-statements.html
+# ===============================================================================
+
+
+# 10.Make backup of your database. 
+
+# ===============================================================================
+
