@@ -19,6 +19,8 @@
 ![Task1__Q8](https://github.com/Ivan2navI/L1_EPAM/blob/main/3.%20Databases%20Task/info_and_pictures/Task1__Q8.png)
 
 9. Make a selection from the main table DB MySQL.
+![Task1__Q9](https://github.com/Ivan2navI/L1_EPAM/blob/main/3.%20Databases%20Task/info_and_pictures/Task1__Q9.png)
+
 
 ## PART 2 
 10. Make backup of your database. 
