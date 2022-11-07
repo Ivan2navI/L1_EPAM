@@ -34,16 +34,22 @@
 12. Restore your database.\
 ![Task2__Q12](https://github.com/Ivan2navI/L1_EPAM/blob/main/3.%20Databases%20Task/info_and_pictures/Task2__Q12.png)
 
-13. Transfer your local database to RDS AWS. \
+13. Transfer your local database to RDS AWS.
+14. Connect to your database.
 * Creating an Amazon Relational Database Service (Amazon RDS): \
 ![Task2__Q13_1](https://github.com/Ivan2navI/L1_EPAM/blob/main/3.%20Databases%20Task/info_and_pictures/Task2__Q13_1.AWS_RDS_Settings.png)
 
 * Connecting from local host (Ubuntu 22.04.1LTS) to RDS, then create DB "myAVIAdb.sql" and backup from local database to RDS: \
 ![Task2__Q13_2](https://github.com/Ivan2navI/L1_EPAM/blob/main/3.%20Databases%20Task/info_and_pictures/Task2__Q13_2.png)
 
-14. Connect to your database.
-15. Execute SELECT operator similar step 6.
-16. Create the dump of your database.
+* Check DB Shema: \
+![Task2__Q14](https://github.com/Ivan2navI/L1_EPAM/blob/main/3.%20Databases%20Task/info_and_pictures/Task2__Q14.png)
+
+15. Execute SELECT operator similar step 6. \
+![Task2__Q15](https://github.com/Ivan2navI/L1_EPAM/blob/main/3.%20Databases%20Task/info_and_pictures/Task2__Q15.png)
+
+16. Create the dump of your database. \
+![Task2__Q16](https://github.com/Ivan2navI/L1_EPAM/blob/main/3.%20Databases%20Task/info_and_pictures/Task2__Q16.png)
 
 ## PART 3 – MongoDB 
 17. Create a database. Use the use command to connect to a new database (If it doesn't exist, Mongo will create it when you write to it). 
