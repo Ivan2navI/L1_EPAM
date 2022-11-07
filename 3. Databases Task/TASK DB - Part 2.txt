@@ -9,11 +9,221 @@
 # 15.Execute SELECT operator similar step 6. 
 # 16.Create the dump of your database. 
 # ===============================================================================
-# https://dev.mysql.com/doc/refman/8.0/en/sql-statements.html
+# https://
+# ===============================================================================
+
+#     https://support.hostway.com/hc/en-us/articles/360000220190-How-to-backup-and-restore-MySQL-databases-on-Linux
+# A simple and easy method for creating MySQL backups is to use the mysqldump command. This command will 
+# create a simple .sql file of an existing database, which can then be restored to any other empty 
+# MySQL database. This article will work for any Linux distribution running MySQL.
+
+# 1. Back up the database using the following command:
+#     mysqldump -u [username] -p[password] [database_name] > [dump_file.sql]
+# The parameters of the said command as follows:
+	# [username] - A valid MySQL username.
+	# [password] - A valid MySQL password for the user.
+	# [database_name] - A valid Database name you want to take backup.
+	# [dump_file.sql] - The name of backup dump file you want to generate.
+
+# 2. Restore the backup to a local database server - the mysql command will let you take the contents 
+# of a .sql file backup, and restore it directly to a database. This is the syntax for the command:
+#     mysql -u [username] -p[password] [database_name] < [dump_file.sql]
+ 
+# 3. Restore the backup to a remote database server - you can also use the mysql command to restore a .sql file
+# backup to a remote MySQL server. If you have another server running MySQL, and you have the database
+# credentials, you can define a hostname in the command by adding the -h flag to specify a hostname. This 
+# changes the syntax of the command to:
+#     mysql –h [hostname] -u [username] -p[password] [database_name] < [dump_file.sql]
+#
 # ===============================================================================
 
 
-# 10.Make backup of your database. 
+# 10.Make backup of your database.
+#     mysqldump -u [username] -p[password] [database_name] > [dump_file.sql]
+
+mysqldump -u root -p myAVIAdb > ./backup_4_DB/myAVIAdb.sql
+Enter password:*************
+
+      ls -aF backup_4_DB
+      ./  ../  myAVIAdb.sql
+      
+      cat ./backup_4_DB/myAVIAdb.sql
+      -- MySQL dump 10.13  Distrib 8.0.31, for Linux (x86_64)
+      --
+      -- Host: localhost    Database: myAVIAdb
+      -- ------------------------------------------------------
+      -- Server version       8.0.31-0ubuntu0.22.04.1
+      
+      /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+      /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+      /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+      /*!50503 SET NAMES utf8mb4 */;
+      /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+      /*!40103 SET TIME_ZONE='+00:00' */;
+      /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+      /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+      /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+      /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+      
+      --
+      -- Table structure for table `Company`
+      --
+... MORE ...           
+# ===============================================================================
+
+
+# 11.Delete the table and/or part of the data in the table. 
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| myAVIAdb           |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0,00 sec)
+
+mysql> USE myAVIAdb;
+Database changed
+
+mysql> show tables;
++--------------------+
+| Tables_in_myAVIAdb |
++--------------------+
+| Company            |
+| Pass_in_trip       |
+| Passenger          |
+| Trip               |
++--------------------+
+4 rows in set (0,00 sec)
+
+mysql> select * from INFORMATION_SCHEMA.TABLE_CONSTRAINTS where TABLE_SCHEMA  = 'myAVIAdb';
++--------------------+-------------------+---------------------------+--------------+--------------+-----------------+----------+
+| CONSTRAINT_CATALOG | CONSTRAINT_SCHEMA | CONSTRAINT_NAME           | TABLE_SCHEMA | TABLE_NAME   | CONSTRAINT_TYPE | ENFORCED |
++--------------------+-------------------+---------------------------+--------------+--------------+-----------------+----------+
+| def                | myAVIAdb          | PRIMARY                   | myAVIAdb     | Company      | PRIMARY KEY     | YES      |
+| def                | myAVIAdb          | PRIMARY                   | myAVIAdb     | Pass_in_trip | PRIMARY KEY     | YES      |
+| def                | myAVIAdb          | FK_Pass_in_trip_Passenger | myAVIAdb     | Pass_in_trip | FOREIGN KEY     | YES      |
+| def                | myAVIAdb          | FK_Pass_in_trip_Trip      | myAVIAdb     | Pass_in_trip | FOREIGN KEY     | YES      |
+| def                | myAVIAdb          | PRIMARY                   | myAVIAdb     | Passenger    | PRIMARY KEY     | YES      |
+| def                | myAVIAdb          | PRIMARY                   | myAVIAdb     | Trip         | PRIMARY KEY     | YES      |
+| def                | myAVIAdb          | FK_Trip_Company           | myAVIAdb     | Trip         | FOREIGN KEY     | YES      |
++--------------------+-------------------+---------------------------+--------------+--------------+-----------------+----------+
+7 rows in set (0,00 sec)
+
+mysql> SELECT * FROM Pass_in_trip;
++---------+---------------------+--------+-------+
+| trip_no | date                | ID_psg | place |
++---------+---------------------+--------+-------+
+|    1100 | 2003-04-29 00:00:00 |      1 | 1a    |
+|    1123 | 2003-04-05 00:00:00 |      3 | 2a    |
+|    1123 | 2003-04-08 00:00:00 |      1 | 4c    |
+|    1123 | 2003-04-08 00:00:00 |      6 | 4b    |
+|    1124 | 2003-04-02 00:00:00 |      2 | 2d    |
+|    1145 | 2003-04-05 00:00:00 |      3 | 2c    |
+|    1145 | 2003-04-25 00:00:00 |      5 | 1d    |
+|    1181 | 2003-04-01 00:00:00 |      1 | 1a    |
+|    1181 | 2003-04-01 00:00:00 |      6 | 1b    |
+|    1181 | 2003-04-01 00:00:00 |      8 | 3c    |
+|    1181 | 2003-04-13 00:00:00 |      5 | 1b    |
+|    1182 | 2003-04-13 00:00:00 |      5 | 4b    |
+|    1182 | 2003-04-13 00:00:00 |      9 | 6d    |
+|    1187 | 2003-04-14 00:00:00 |      8 | 3a    |
+|    1187 | 2003-04-14 00:00:00 |     10 | 3d    |
+|    1188 | 2003-04-01 00:00:00 |      8 | 3a    |
+|    7771 | 2005-11-04 00:00:00 |     11 | 4a    |
+|    7771 | 2005-11-07 00:00:00 |     11 | 1b    |
+|    7771 | 2005-11-07 00:00:00 |     37 | 1c    |
+|    7771 | 2005-11-09 00:00:00 |     11 | 5a    |
+|    7771 | 2005-11-14 00:00:00 |     14 | 4d    |
+|    7771 | 2005-11-16 00:00:00 |     14 | 5d    |
+|    7772 | 2005-11-07 00:00:00 |     12 | 1d    |
+|    7772 | 2005-11-07 00:00:00 |     37 | 1a    |
+|    7772 | 2005-11-29 00:00:00 |     10 | 3a    |
+|    7772 | 2005-11-29 00:00:00 |     13 | 1b    |
+|    7772 | 2005-11-29 00:00:00 |     14 | 1c    |
+|    7773 | 2005-11-07 00:00:00 |     13 | 2d    |
+|    7778 | 2005-11-05 00:00:00 |     10 | 2a    |
+|    8881 | 2005-11-08 00:00:00 |     37 | 1d    |
+|    8882 | 2005-11-06 00:00:00 |     37 | 1a    |
+|    8882 | 2005-11-13 00:00:00 |     14 | 3d    |
++---------+---------------------+--------+-------+
+32 rows in set (0,00 sec)
+
+mysql> DELETE FROM Pass_in_trip;
+Query OK, 32 rows affected (0,01 sec)
+
+mysql> SELECT * FROM Pass_in_trip;
+Empty set (0,00 sec)
+# ===============================================================================
+
+
+# 12.Restore your database. 
+#     mysql -u [username] -p[password] [database_name] < [dump_file.sql]
+
+mysql -u root -p myAVIAdb < ./backup_4_DB/myAVIAdb.sql
+Enter password:*************
+
+mysql> USE myAVIAdb;
+Database changed
+mysql> SELECT * FROM Pass_in_trip;
++---------+---------------------+--------+-------+
+| trip_no | date                | ID_psg | place |
++---------+---------------------+--------+-------+
+|    1100 | 2003-04-29 00:00:00 |      1 | 1a    |
+|    1123 | 2003-04-05 00:00:00 |      3 | 2a    |
+|    1123 | 2003-04-08 00:00:00 |      1 | 4c    |
+|    1123 | 2003-04-08 00:00:00 |      6 | 4b    |
+|    1124 | 2003-04-02 00:00:00 |      2 | 2d    |
+|    1145 | 2003-04-05 00:00:00 |      3 | 2c    |
+|    1145 | 2003-04-25 00:00:00 |      5 | 1d    |
+|    1181 | 2003-04-01 00:00:00 |      1 | 1a    |
+|    1181 | 2003-04-01 00:00:00 |      6 | 1b    |
+|    1181 | 2003-04-01 00:00:00 |      8 | 3c    |
+|    1181 | 2003-04-13 00:00:00 |      5 | 1b    |
+|    1182 | 2003-04-13 00:00:00 |      5 | 4b    |
+|    1182 | 2003-04-13 00:00:00 |      9 | 6d    |
+|    1187 | 2003-04-14 00:00:00 |      8 | 3a    |
+|    1187 | 2003-04-14 00:00:00 |     10 | 3d    |
+|    1188 | 2003-04-01 00:00:00 |      8 | 3a    |
+|    7771 | 2005-11-04 00:00:00 |     11 | 4a    |
+|    7771 | 2005-11-07 00:00:00 |     11 | 1b    |
+|    7771 | 2005-11-07 00:00:00 |     37 | 1c    |
+|    7771 | 2005-11-09 00:00:00 |     11 | 5a    |
+|    7771 | 2005-11-14 00:00:00 |     14 | 4d    |
+|    7771 | 2005-11-16 00:00:00 |     14 | 5d    |
+|    7772 | 2005-11-07 00:00:00 |     12 | 1d    |
+|    7772 | 2005-11-07 00:00:00 |     37 | 1a    |
+|    7772 | 2005-11-29 00:00:00 |     10 | 3a    |
+|    7772 | 2005-11-29 00:00:00 |     13 | 1b    |
+|    7772 | 2005-11-29 00:00:00 |     14 | 1c    |
+|    7773 | 2005-11-07 00:00:00 |     13 | 2d    |
+|    7778 | 2005-11-05 00:00:00 |     10 | 2a    |
+|    8881 | 2005-11-08 00:00:00 |     37 | 1d    |
+|    8882 | 2005-11-06 00:00:00 |     37 | 1a    |
+|    8882 | 2005-11-13 00:00:00 |     14 | 3d    |
++---------+---------------------+--------+-------+
+32 rows in set (0,00 sec)
+# ===============================================================================
+
+
+# 13.Transfer your local database to RDS AWS. 
 
 # ===============================================================================
 
+
+# 14.Connect to your database. 
+
+# ===============================================================================
+
+
+# 15.Execute SELECT operator similar step 6. 
+
+# ===============================================================================
+
+
+# 16.Create the dump of your database.
+
+# ===============================================================================
