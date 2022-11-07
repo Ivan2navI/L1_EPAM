@@ -23,10 +23,19 @@
 
 
 ## PART 2 
+:star: [PART 2 (results are here)](https://github.com/Ivan2navI/L1_EPAM/blob/main/3.%20Databases%20Task/TASK%20DB%20-%20Part%202.txt)
+
 10. Make backup of your database. 
+![Task2__Q10](https://github.com/Ivan2navI/L1_EPAM/blob/main/3.%20Databases%20Task/info_and_pictures/Task2__Q10.png)
+
 11. Delete the table and/or part of the data in the table. 
+![Task2__Q11](https://github.com/Ivan2navI/L1_EPAM/blob/main/3.%20Databases%20Task/info_and_pictures/Task2__Q11.png)
+
 12. Restore your database.
+![Task2__Q12](https://github.com/Ivan2navI/L1_EPAM/blob/main/3.%20Databases%20Task/info_and_pictures/Task2__Q12.png)
+
 13. Transfer your local database to RDS AWS.
+
 14. Connect to your database.
 15. Execute SELECT operator similar step 6.
 16. Create the dump of your database.
