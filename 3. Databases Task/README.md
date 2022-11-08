@@ -52,7 +52,16 @@
 ![Task2__Q16](https://github.com/Ivan2navI/L1_EPAM/blob/main/3.%20Databases%20Task/info_and_pictures/Task2__Q16.png)
 
 ## PART 3 – MongoDB 
-17. Create a database. Use the use command to connect to a new database (If it doesn't exist, Mongo will create it when you write to it). 
-18. Create a collection. Use db.createCollection to create a collection. I'll leave the subject up to you. Run show dbs and show collections to view your database and collections. 
-19. Create some documents. Insert a couple of documents into your collection. I'll leave the subject matter up to you, perhaps cars or hats. 
-20. Use find() to list documents out. 
+:star: [PART 3 (results are here)](https://github.com/Ivan2navI/L1_EPAM/blob/main/3.%20Databases%20Task/TASK%20DB%20-%20Part%203.txt)
+
+17. Create a database. Use the use command to connect to a new database (If it doesn't exist, Mongo will create it when you write to it). \
+![Task3__Q17](https://github.com/Ivan2navI/L1_EPAM/blob/main/3.%20Databases%20Task/info_and_pictures/Task3__Q17.png)
+
+18-19. Create a collection. Use db.createCollection to create a collection. I'll leave the subject up to you. Run show dbs and show collections to view your database and collections. \
+Create some documents. Insert a couple of documents into your collection. I'll leave the subject matter up to you, perhaps cars or hats. \
+![Task3__Q18.19_1](https://github.com/Ivan2navI/L1_EPAM/blob/main/3.%20Databases%20Task/info_and_pictures/Task3__Q18.19_1.png)
+![Task3__Q18.19_2](https://github.com/Ivan2navI/L1_EPAM/blob/main/3.%20Databases%20Task/info_and_pictures/Task3__Q18.19_2.png)
+![Task3__Q18.19_3](https://github.com/Ivan2navI/L1_EPAM/blob/main/3.%20Databases%20Task/info_and_pictures/Task3__Q18.19_3.png)
+
+20. Use find() to list documents out. \
+![Task3__Q20](https://github.com/Ivan2navI/L1_EPAM/blob/main/3.%20Databases%20Task/info_and_pictures/Task3__Q20.png)
