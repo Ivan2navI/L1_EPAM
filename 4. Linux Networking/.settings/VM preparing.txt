@@ -11,11 +11,11 @@ tmpfs           198M  4.0K  198M   1% /run/user/1000
 
 
 Изменение имени сервера/хоста:
-hostnamectl set-hostname NEW-HOSTANAME
+sudo hostnamectl set-hostname NEW-HOSTNAME
 
-server_1
-client_1
-client_2
+server_1 = sudo ifconfig enp0s3 192.168.2.30 netmask 255.255.255.0
+client_1 = sudo ifconfig enp0s3 192.168.2.31 netmask 255.255.255.0
+client_2 = sudo ifconfig enp0s3 192.168.2.32 netmask 255.255.255.0
 
 Дополнительные пакеты для сервера:
 sudo apt install vim net-tools tree ncdu bash-completion curl dnsutils htop iftop pwgen screen sudo wget nmon git mc
@@ -27,6 +27,17 @@ sudo apt install nmap masscan netdiscover
 ip a  == внутренний 
 curl ifconfig.me == внешний
 
+================
+ifconfig
+
+To change the settings, you also use the ifconfig command, this time with a few additional parameters. The following command changes the network interface named “eth0” to use the IP address 102.168.0.1, and assigns the subnet mask 255.255.255.0:
+
+sudo ifconfig eth0 192.168.0.1 netmask 255.255.255.0
+
+If you also need to change the Default Gateway used by the network interface, you can use the route command. The following command, for example, sets the default gateway for the “eth0” interface to 192.168.0.253:
+
+sudo route add default gw 192.168.0.253 eth0
+================
 
 #Установка fail2ban:
 
