@@ -1,22 +1,28 @@
 # 4. Linux Networking
 ## INTRO
-Практична частина модуля Linux Networking  передбачає створення засобами 
-Virtual Box мережі, що показаний на рисунку 1
-![INTRO.Pic_1](./4. Linux Networking/.settings/INTRO.Pic_1.png)
-Host – це комп’ютер, на якому запущений Virtual Box; 
-Server_1 – Віртуальна машина, на якій розгорнуто ОС Linux. Int1 цієї машини в 
+Практична частина модуля Linux Networking  передбачає створення засобами Virtual Box мережі, що показаний на рисунку 1
+<p align="center">
+  <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main/4.%20Linux%20Networking/.settings/INTRO.Pic_1.png">
+</p>
+  
+__Host__ – це комп’ютер, на якому запущений Virtual Box;
+
+__Server_1__ – Віртуальна машина, на якій розгорнуто ОС Linux. Int1 цієї машини в 
 режимі «Мережевий міст» підключений до мережі Net1, тобто знаходиться в адресному 
 просторі домашньої мережі. IP-адреса Int1 встановлюється статично відповідно до 
 адресного простору, наприклад 192.168.1.200/24. Інтерфейси Int2 та Int3 відповідно 
 підключено в режимі «Внутрішня мережа» до мереж Net2 та Net3. 
-Client_1 та Client_2 – Віртуальні машини, на яких розгорнуто ОС Linux (бажано 
+
+__Client_1 та Client_2__ – Віртуальні машини, на яких розгорнуто ОС Linux (бажано 
 різні дистрибутиви, наприклад Ubuntu та CentOS). Інтерфейси підключені в режимі 
 «Внутрішня мережа» до мереж Net2, Net3 та Net4 як показано на рисунку 1. 
+
 Адреса мережі Net2 – 10.Y.D.0/24, де Y – дві останні цифри з вашого року 
 народження, D – дата народження.   
 Адреса мережі Net3 – 10.M.Y.0/24, де M – номер місяця народження. 
-Адреса мережі Net4 – 172.16.D.0/24. 
-Увага! Якщо, адресний простір Net2, Net3 або Net4 перетинається з адресним 
+Адреса мережі Net4 – 172.16.D.0/24.
+
+__Увага!__ Якщо, адресний простір Net2, Net3 або Net4 перетинається з адресним 
 простором Net1 – відповідну адресу можна змінити на власний розсуд. 
 1. На Server_1 налаштувати статичні адреси на всіх інтерфейсах. 
 2. На Server_1 налаштувати DHCP сервіс, який буде конфігурувати адреси Int1 
@@ -43,3 +49,21 @@ Client_1 та Client_2
 8. Якщо в п.3 була налаштована маршрутизація для доступу Client_1 та Client_2 до 
 мережі Інтернет – видалити відповідні записи. На Server_1 налаштувати NAT 
 сервіс таким чином, щоб з Client_1 та Client_2 проходив ping в мережу Інтернет
+
+***
+Once done, run the Docker image and map the port to whatever you wish on
+your host. In this example, we simply map port 8000 of the host to
+port 8080 of the Docker (or whatever port was exposed in the Dockerfile):
+
+```sh
+docker run -d -p 8000:8080 --restart=always --cap-add=SYS_ADMIN --name=dillinger <youruser>/dillinger:${package.json.version}
+```
+
+> Note: `--capt-add=SYS-ADMIN` is required for PDF rendering.
+
+Verify the deployment by navigating to your server address in
+your preferred browser.
+
+```sh
+127.0.0.1:8000
+```
