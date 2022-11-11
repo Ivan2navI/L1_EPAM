@@ -52,7 +52,32 @@ __Client_1 та Client_2__ \
 _1. На Server_1 налаштувати статичні адреси на всіх інтерфейсах._ \
 _2. На Server_1 налаштувати DHCP сервіс, який буде конфігурувати адреси Int1, Client_1 та Client_2_ \
 _3. За допомогою команд ping та traceroute перевірити зв'язок між віртуальними машинами. Результат пояснити._ \
-ТЕКСТ
+
+''' console
+ip a
+
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host
+       valid_lft forever preferred_lft forever
+2: enp0s3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 08:00:27:cd:e4:7e brd ff:ff:ff:ff:ff:ff
+    inet 192.168.2.30/24 metric 100 brd 192.168.2.255 scope global enp0s3
+       valid_lft forever preferred_lft forever
+    inet6 fe80::a00:27ff:fecd:e47e/64 scope link
+       valid_lft forever preferred_lft forever
+3: enp0s8: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN group default qlen 1000
+    link/ether 08:00:27:e9:21:a2 brd ff:ff:ff:ff:ff:ff
+4: enp0s9: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN group default qlen 1000
+    link/ether 08:00:27:0f:fc:0e brd ff:ff:ff:ff:ff:ff
+'''
+
+
+Remove any configuration files .yaml present in the /etc/netplan directory.
+  sudo rm -rf /etc/netplan/*
+
 
 
 
