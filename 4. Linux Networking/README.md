@@ -46,6 +46,9 @@ __Client_1 та Client_2__ \
  - Net3: 10.3.85.0/24
  - Net4: 172.16.8.0/24
 
+<p align="center">
+  <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main/4.%20Linux%20Networking/.settings/My_Schem.png">
+</p>
 
 ***
 Once done, run the Docker image and map the port to whatever you wish on
