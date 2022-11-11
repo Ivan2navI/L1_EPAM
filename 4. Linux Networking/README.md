@@ -73,11 +73,10 @@ ip a
 4: enp0s9: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN group default qlen 1000
     link/ether 08:00:27:0f:fc:0e brd ff:ff:ff:ff:ff:ff
 ```
-
-
 Remove any configuration files .yaml present in the /etc/netplan directory.
+```console 
   sudo rm -rf /etc/netplan/*
-
+```
 
 
 
