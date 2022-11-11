@@ -71,8 +71,18 @@ sudo nano /etc/sysctl.conf
 # Uncomment the next line to enable packet forwarding for IPv4
 net.ipv4.ip_forward=1
 ```
-• To review routing table: $ip route show
-
+OR
+```console
+sysctl -w net.ipv4.ip_forward=1
+```
+After editing the file, run the following command to make the changes take effect right away.
+```console
+sysctl -p
+```
+• To review routing table: 
+```console
+ip route show
+```
 
 ```console
 ip a
