@@ -51,28 +51,7 @@ __Client_1 та Client_2__ \
 ## Answers
 _1. На Server_1 налаштувати статичні адреси на всіх інтерфейсах._ \
 _2. На Server_1 налаштувати DHCP сервіс, який буде конфігурувати адреси Int1, Client_1 та Client_2_ \
-_3. За допомогою команд ping та traceroute перевірити зв'язок між віртуальними машинами. Результат пояснити._ \
-
-
-####Linux Routing switch on
-
-• Switch on routing is needed only on transit devices.
-• To check out routing enable use
-''' console
-ubuntu@server1:~$ sysctl net.ipv4.conf.all.forwarding
-net.ipv4.conf.all.forwarding = 0
-
-ubuntu@server1:~$ cat /proc/sys/net/ipv4/ip_forward
-0
-'''
-• To switch “on” or “off” routing you must edit 
-''' console
-sudo nano /etc/sysctl.conf
-# Uncomment the next line to enable packet forwarding for IPv4
-net.ipv4.ip_forward=1
-'''
-• To review routing table: $ip route show
-
+_3. За допомогою команд ping та traceroute перевірити зв'язок між віртуальними машинами. Результат пояснити._
 
 ''' console
 ip a
@@ -95,87 +74,10 @@ ip a
     link/ether 08:00:27:0f:fc:0e brd ff:ff:ff:ff:ff:ff
 '''
 
-View the content of Netplan network configuration file Server_1
-''' console
-cat /etc/netplan/*.yaml
-    cat /etc/netplan/00-installer-config.yaml
 
-# This is the network config written by 'subiquity'
-network:
-  ethernets:
-    enp0s3:
-      dhcp4: true
-  version: 2
-'''
-__MODIFY__
-''' console
-sudo nano /etc/netplan/*.yaml
-
-network:
-  ethernets:
-    enp0s3:
-      dhcp4: false
-      addresses: [192.168.2.30/24]
-      gateway4: 192.168.2.1
-    enp0s8:
-      dhcp4: true
-      addresses: [10.85.8.1/24]
-    enp0s9:
-      dhcp4: true
-      addresses: [10.3.85.1/24]
-  version: 2
-'''
-
----
 Remove any configuration files .yaml present in the /etc/netplan directory.
-''' console
   sudo rm -rf /etc/netplan/*
-'''
 
-''' console
-sudo nano /etc/netplan/Serv_Int1.yaml
-
-network:
-    ethernets:
-        enp0s3:
-            dhcp4: false
-            addresses: [192.168.2.30/24]
-            gateway4: 192.168.2.1
-            nameservers:
-              addresses: [8.8.8.8,8.8.4.4,192.168.2.1]
-    version: 2
-
-sudo netplan apply
-'''
-
-''' console
-sudo nano /etc/netplan/Serv_Int2.yaml
-
-network:
-    ethernets:
-        enp0s8:
-            dhcp4: true
-            addresses: [10.85.8.1/24]
-            gateway4: 192.168.2.30
-            nameservers:
-              addresses: [8.8.8.8,8.8.4.4,10.85.8.1]
-    version: 2
-
-sudo netplan apply
-'''
-
-''' console
-sudo nano /etc/netplan/Serv_Int3.yaml
-
-network:
-    ethernets:
-        enp0s9:
-            dhcp4: true
-            addresses: [10.3.85.1/24]
-            gateway4: 192.168.2.30
-            nameservers:
-              addresses: [8.8.8.8,8.8.4.4,10.3.85.1]
-    version: 2
 
 sudo netplan apply
 '''
