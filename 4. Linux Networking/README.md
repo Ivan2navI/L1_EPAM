@@ -53,7 +53,7 @@ _1. На Server_1 налаштувати статичні адреси на вс
 _2. На Server_1 налаштувати DHCP сервіс, який буде конфігурувати адреси Int1, Client_1 та Client_2_ \
 _3. За допомогою команд ping та traceroute перевірити зв'язок між віртуальними машинами. Результат пояснити._ \
 
-''' console
+```console
 ip a
 
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
@@ -72,7 +72,7 @@ ip a
     link/ether 08:00:27:e9:21:a2 brd ff:ff:ff:ff:ff:ff
 4: enp0s9: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN group default qlen 1000
     link/ether 08:00:27:0f:fc:0e brd ff:ff:ff:ff:ff:ff
-'''
+```
 
 
 Remove any configuration files .yaml present in the /etc/netplan directory.
