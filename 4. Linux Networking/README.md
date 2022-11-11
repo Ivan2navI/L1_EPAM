@@ -120,6 +120,43 @@ network:
 
 __MODIFY__
 ```console
+# rename to disable default setting
+
+root@localhost:~# sudo mv /etc/netplan/00-installer-config.yaml /etc/netplan/00-installer-config.yaml.org
+
+root@localhost:~# sudo nano /etc/netplan/01-netcfg.yaml
+# create new
+
+network:
+  ethernets:
+    # interface name
+    enp0s3:
+      dhcp4: false
+      # IP address/subnet mask
+      addresses: [192.168.2.30/24]
+      # default gateway
+      # [metric] : set priority (specify it if multiple NICs are set)
+      # lower value is higher priority
+      routes:
+        - to: default
+          via: 192.168.2.1
+          metric: 100
+      #nameservers:
+        # name server to bind
+        #addresses: [10.0.0.10,10.0.0.11]
+        # DNS search base
+        #search: [srv.world,server.education]
+      #dhcp6: false
+  version: 2
+
+# apply changes
+
+root@localhost:~# sudo netplan apply
+root@localhost:~# ip addr 
+```
+
+!!!!!!!!!!!!!!!!!!!!!
+```console
 sudo nano /etc/netplan/*.yaml
 
 network:
