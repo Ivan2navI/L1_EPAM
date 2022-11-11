@@ -54,7 +54,7 @@ _2. На Server_1 налаштувати DHCP сервіс, який буде к
 _3. За допомогою команд ping та traceroute перевірити зв'язок між віртуальними машинами. Результат пояснити._
 
 
-####Linux Routing switch on
+#### Linux Routing switch on
 
 • Switch on routing is needed only on transit devices.
 • To check out routing enable use
