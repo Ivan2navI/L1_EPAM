@@ -73,7 +73,7 @@ net.ipv4.ip_forward=1
 
 OR
 
-sysctl -w net.ipv4.ip_forward=1
+sudo sysctl -w net.ipv4.ip_forward=1
 ```
 After editing the file, run the following command to make the changes take effect right away.
 ```console
