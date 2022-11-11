@@ -48,6 +48,13 @@ __Client_1 та Client_2__ \
   <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main/4.%20Linux%20Networking/.settings/My_Schem.png">
 </p>
 
+#### Add some packages
+```console
+sudo apt install vim net-tools tree ncdu bash-completion curl dnsutils htop iftop pwgen screen sudo wget nmon git mc
+
+sudo apt install nmap masscan netdiscover
+```
+
 ## Answers
 _1. На Server_1 налаштувати статичні адреси на всіх інтерфейсах._ \
 _2. На Server_1 налаштувати DHCP сервіс, який буде конфігурувати адреси Int1, Client_1 та Client_2_ \
