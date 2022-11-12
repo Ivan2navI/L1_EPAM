@@ -147,7 +147,7 @@ subnet  10.3.85.0 netmask 255.255.255.0 {
         max-lease-time 86400;
 }
 ```
---- Open DHCP Server Ports on Firewall ---
+--- Open DHCP Server Ports on Firewall --- \
 Allow DHCP port on firewall for Server_1, Client_1, Client_2:
 ```console
 sudo ufw allow  67/udp
