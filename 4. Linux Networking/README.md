@@ -55,10 +55,10 @@ sudo apt install vim net-tools traceroute tree ncdu bash-completion curl dnsutil
 sudo apt install nmap masscan netdiscover
 ```
 
-## Answers
-_1. На Server_1 налаштувати статичні адреси на всіх інтерфейсах._ \
-_2. На Server_1 налаштувати DHCP сервіс, який буде конфігурувати адреси Int1, Client_1 та Client_2_ \
-_3. За допомогою команд ping та traceroute перевірити зв'язок між віртуальними машинами. Результат пояснити._
+## Answers: 1, 2, 3.
+### 1. На Server_1 налаштувати статичні адреси на всіх інтерфейсах.
+### 2. На Server_1 налаштувати DHCP сервіс, який буде конфігурувати адреси Int1, Client_1 та Client_2.
+### 3. За допомогою команд ping та traceroute перевірити зв'язок між віртуальними машинами. Результат пояснити.
 
 #### Linux Routing switch ON
 
@@ -132,7 +132,7 @@ subnet  10.3.85.0 netmask 255.255.255.0 {
         max-lease-time 86400;
 }
 ```
---- Open DHCP Server Ports on Firewall --- \
+--- __Open DHCP Server Ports on Firewall__ --- \
 Allow DHCP port on firewall for Server_1, Client_1, Client_2:
 ```console
 sudo ufw allow  67/udp
