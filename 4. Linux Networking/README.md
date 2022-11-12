@@ -50,7 +50,7 @@ __Client_1 та Client_2__ \
 
 #### Add some packages
 ```console
-sudo apt install vim net-tools tree ncdu bash-completion curl dnsutils htop iftop pwgen screen sudo wget nmon git mc
+sudo apt install vim net-tools traceroute tree ncdu bash-completion curl dnsutils htop iftop pwgen screen sudo wget nmon git mc
 
 sudo apt install nmap masscan netdiscover
 ```
@@ -61,7 +61,7 @@ _2. На Server_1 налаштувати DHCP сервіс, який буде к
 _3. За допомогою команд ping та traceroute перевірити зв'язок між віртуальними машинами. Результат пояснити._
 
 
-#### Linux Routing switch on
+#### Linux Routing switch ON
 
 • Switch on routing is needed only on transit devices. \
 • To check out routing enable use
@@ -90,6 +90,84 @@ sysctl -p
 ```console
 ip route show
 ```
+
+#### Install DHCP Server on Server_1 (Ubuntu 22.04.1 LTS)
+https://askubuntu.com/questions/601882/how-to-setup-multi-dhcp-server
+https://itnixpro.com/install-dhcp-server-on-ubuntu-22-04/
+https://www.server-world.info/en/note?os=Ubuntu_22.04&p=dhcp&f=1
+
+Setup DHCP Server:
+```console
+sudo apt update
+
+sudo apt install isc-dhcp-server
+```
+First select Interface card:
+```console
+sudo nano /etc/default/isc-dhcp-server
+
+INTERFACESv4="enp0s8 enp0s9"
+```
+Configure Subnet:
+```console
+sudo nano /etc/dhcp/dhcpd.conf
+
+# option definitions common to all supported networks...
+####option domain-name "example.org";
+####option domain-name-servers ns1.example.org, ns2.example.org;
+
+####default-lease-time 600;
+####max-lease-time 7200;
+
+# The ddns-updates-style parameter controls whether or not the server will
+# attempt to do a DNS update when a lease is confirmed. We default to the
+# behavior of the version 2 packages ('none', since DHCP v2 didn't
+# have support for DDNS.)
+####ddns-update-style none;
+
+# Net2 from Server_1(enp0s8) to Client_1 
+subnet 10.85.8.0 netmask 255.255.255.0 {
+       range 10.85.8.20 10.85.8.200;
+        option routers                  10.85.8.1;
+        option subnet-mask              255.255.255.0;
+        option broadcast-address        10.85.8.255;
+        option domain-name-servers      10.85.8.1, 8.8.8.8;
+        default-lease-time 86400;
+        max-lease-time 86400;
+}
+
+# Net2 from Server_1(enp0s9) to Client_2 
+subnet  10.3.85.0 netmask 255.255.255.0 {
+        range 10.3.85.20 10.3.85.200;
+        option routers                  10.3.85.1;
+        option subnet-mask              255.255.255.0;
+        option broadcast-address        10.3.85.255;
+        option domain-name-servers      10.3.85.1, 8.8.8.8;
+        default-lease-time 86400;
+        max-lease-time 86400;
+}
+```
+--- Open DHCP Server Ports on Firewall ---
+Allow DHCP port on firewall for Server_1, Client_1, Client_2:
+```console
+sudo ufw allow  67/udp
+```
+Restart DHCP server to apply changes.
+```console
+sudo service isc-dhcp-server restart
+#OR
+sudo systemctl restart isc-dhcp-server.service
+```
+DHCP server should be up and running, check status using the command below.
+```console
+sudo systemctl status isc-dhcp-server
+```
+Restart systemd networkd for Server_1, Client_1, Client_2 and check IP:
+```console
+sudo systemctl restart systemd-networkd
+ip addr 
+```
+
 #### Server_1
 ```console
 ip a
@@ -212,6 +290,7 @@ network:
     # interface name
     enp0s3:
       dhcp4: false
+      optional: true
       # IP address/subnet mask
       addresses: [192.168.2.30/24]
       # default gateway
@@ -237,6 +316,7 @@ network:
     # interface name
     enp0s3:
       dhcp4: false
+      optional: true # to any devices that may not always be available. A start job is running without wait for network to be configured.
       # IP address/subnet mask
       addresses: [192.168.2.30/24]
       # default gateway
@@ -254,6 +334,7 @@ network:
       #dhcp6: false
     enp0s8:
       dhcp4: false
+      optional: true # to any devices that may not always be available. A start job is running without wait for network to be configured.
       # IP address/subnet mask
       addresses: [10.85.8.1/24]
       # default gateway
@@ -265,9 +346,8 @@ network:
          # metric: 100
     enp0s9:
       dhcp4: false
+      optional: true # to any devices that may not always be available. A start job is running without wait for network to be configured.
       addresses: [10.3.85.1/24]
-
-
 
 # apply changes
 
@@ -295,6 +375,7 @@ network:
     # interface name
     enp0s3:
       dhcp4: false
+      optional: true
       # IP address/subnet mask
       addresses: [192.168.2.31/24]
       # default gateway
@@ -310,8 +391,10 @@ network:
         # DNS search base
         #search: [srv.world,server.education]
       #dhcp6: false
+      
     enp0s8:
       dhcp4: false
+      optional: true
       # IP address/subnet mask
       addresses: [10.85.8.11/24]
       # default gateway
@@ -321,7 +404,6 @@ network:
       #  - to: default
       #    via: 192.168.2.1
          # metric: 100
-
 
 # !!! sudo apply changes
 
@@ -349,8 +431,10 @@ network:
     # interface name
     enp0s3:
       dhcp4: true
+      optional: true
     enp0s8:
       dhcp4: false
+      optional: true
       # IP address/subnet mask
       addresses: [10.3.85.11/24]
       # default gateway
@@ -360,7 +444,6 @@ network:
       #  - to: default
       #    via: 192.168.2.1
          # metric: 100
-
 
 # !!! sudo apply changes
 
