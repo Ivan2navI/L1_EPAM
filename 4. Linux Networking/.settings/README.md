@@ -454,6 +454,17 @@ Restart systemd networkd for Server_1, Client_1, Client_2 and check IP:
 sudo systemctl restart systemd-networkd
 ip addr 
 ```
+Show active DHCP leases:
+```console
+dhcp-lease-list
+
+Reading leases from /var/lib/dhcp/dhcpd.leases
+MAC                IP              hostname       valid until         manufacturer
+===============================================================================================
+08:00:27:3e:81:b4  10.3.85.20      client2        2022-11-13 19:57:33 -NA-
+08:00:27:b4:41:7a  10.85.8.20      client1        2022-11-13 19:56:53 -NA-
+```
+
 #### Ping and Traceroute reluts between :computer: Client_1 :left_right_arrow: Server_1 :left_right_arrow: Client_2 :computer:
 Ping commands send multiple requests (usually four or five) and display the results. The echo ping results show whether a particular request received a successful response. It also includes the number of bytes received and the time it took to receive a reply or the time-to-live.
 
