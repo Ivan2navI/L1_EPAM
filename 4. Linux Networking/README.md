@@ -63,8 +63,8 @@ _3. За допомогою команд ping та traceroute перевірит
 
 #### Linux Routing switch on
 
-• Switch on routing is needed only on transit devices.
-• To check out routing enable use
+• Switch on routing is needed only on transit devices. \
+• To check out routing enable use \
 ```console
 ubuntu@server1:~$ sysctl net.ipv4.conf.all.forwarding
 net.ipv4.conf.all.forwarding = 0
