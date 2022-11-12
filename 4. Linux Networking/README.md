@@ -125,14 +125,87 @@ network:
   version: 2
 ```
 
-__MODIFY__
+#### Client_1
 ```console
+ip a
+
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host
+       valid_lft forever preferred_lft forever
+2: enp0s3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 08:00:27:e2:7a:ce brd ff:ff:ff:ff:ff:ff
+    inet 192.168.2.31/24 metric 100 brd 192.168.2.255 scope global enp0s3
+       valid_lft forever preferred_lft forever
+    inet6 fe80::a00:27ff:fee2:7ace/64 scope link
+       valid_lft forever preferred_lft forever
+3: enp0s8: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN group default qlen 1000
+    link/ether 08:00:27:b4:41:7a brd ff:ff:ff:ff:ff:ff
+```
+
+View the content of Netplan network configuration file Server_1
+```console
+cat /etc/netplan/*.yaml
+    cat /etc/netplan/00-installer-config.yaml
+
+# This is the network config written by 'subiquity'
+network:
+  ethernets:
+    enp0s3:
+      dhcp4: true
+  version: 2
+```
+
+#### Client_2
+```console
+ip a
+
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host
+       valid_lft forever preferred_lft forever
+2: enp0s3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 08:00:27:95:31:bf brd ff:ff:ff:ff:ff:ff
+    inet 192.168.2.32/24 metric 100 brd 192.168.2.255 scope global enp0s3
+       valid_lft forever preferred_lft forever
+    inet6 fe80::a00:27ff:fe95:31bf/64 scope link
+       valid_lft forever preferred_lft forever
+3: enp0s8: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN group default qlen 1000
+    link/ether 08:00:27:3e:81:b4 brd ff:ff:ff:ff:ff:ff
+```
+
+View the content of Netplan network configuration file Server_1
+```console
+cat /etc/netplan/*.yaml
+    cat /etc/netplan/00-installer-config.yaml
+
+# This is the network config written by 'subiquity'
+network:
+  ethernets:
+    enp0s3:
+      dhcp4: true
+  version: 2
+```
+
+
+
+
+__MODIFY SERVER_1__
+```console
+https://hackmd.io/@IgorLitvin/HkqwLqeft
+
+sudo nano /etc/netplan/*.yaml
+
 # rename to disable default setting
+sudo mv /etc/netplan/00-installer-config.yaml /etc/netplan/00-installer-config.yaml.org
 
-root@localhost:~# sudo mv /etc/netplan/00-installer-config.yaml /etc/netplan/00-installer-config.yaml.org
-
-root@localhost:~# sudo nano /etc/netplan/01-netcfg.yaml
 # create new
+sudo nano /etc/netplan/01-netcfg.yaml
+
 ----- V1 ----
 network:
   ethernets:
@@ -157,6 +230,7 @@ network:
   version: 2
 
 ----- V2 ----
+network:
   version: 2
   renderer: networkd
   ethernets:
@@ -171,20 +245,131 @@ network:
       routes:
         - to: default
           via: 192.168.2.1
-          metric: 100
-      #nameservers:
+         # metric: 100
+      nameservers:
         # name server to bind
-        #addresses: [10.0.0.10,10.0.0.11]
+        addresses: [192.168.2.1, 8.8.8.8]
         # DNS search base
         #search: [srv.world,server.education]
       #dhcp6: false
+    enp0s8:
+      dhcp4: false
+      # IP address/subnet mask
+      addresses: [10.85.8.1/24]
+      # default gateway
+      # [metric] : set priority (specify it if multiple NICs are set)
+      # lower value is higher priority
+      #routes:
+      #  - to: default
+      #    via: 192.168.2.1
+         # metric: 100
+    enp0s9:
+      dhcp4: false
+      addresses: [10.3.85.1/24]
+
 
 
 # apply changes
 
-root@localhost:~# sudo netplan apply
-root@localhost:~# ip addr 
+sudo netplan apply
+sudo systemctl restart systemd-networkd
+ip addr 
 ```
+
+__MODIFY Client_1__
+```console
+https://hackmd.io/@IgorLitvin/HkqwLqeft
+
+sudo nano /etc/netplan/*.yaml
+
+# rename to disable default setting
+sudo mv /etc/netplan/00-installer-config.yaml /etc/netplan/00-installer-config.yaml.org
+
+# create new
+sudo nano /etc/netplan/01-netcfg.yaml
+
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    # interface name
+    enp0s3:
+      dhcp4: false
+      # IP address/subnet mask
+      addresses: [192.168.2.31/24]
+      # default gateway
+      # [metric] : set priority (specify it if multiple NICs are set)
+      # lower value is higher priority
+      routes:
+        - to: default
+          via: 192.168.2.1
+         # metric: 100
+      nameservers:
+        # name server to bind
+        addresses: [192.168.2.1, 8.8.8.8]
+        # DNS search base
+        #search: [srv.world,server.education]
+      #dhcp6: false
+    enp0s8:
+      dhcp4: false
+      # IP address/subnet mask
+      addresses: [10.85.8.11/24]
+      # default gateway
+      # [metric] : set priority (specify it if multiple NICs are set)
+      # lower value is higher priority
+      #routes:
+      #  - to: default
+      #    via: 192.168.2.1
+         # metric: 100
+
+
+# !!! sudo apply changes
+
+sudo netplan apply
+sudo systemctl restart systemd-networkd
+ip addr 
+```
+
+__MODIFY Client_2__
+```console
+https://hackmd.io/@IgorLitvin/HkqwLqeft
+
+sudo cat /etc/netplan/*.yaml
+
+# rename to disable default setting
+sudo mv /etc/netplan/00-installer-config.yaml /etc/netplan/00-installer-config.yaml.org
+
+# create new
+sudo nano /etc/netplan/01-netcfg.yaml
+
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    # interface name
+    enp0s3:
+      dhcp4: true
+    enp0s8:
+      dhcp4: false
+      # IP address/subnet mask
+      addresses: [10.3.85.11/24]
+      # default gateway
+      # [metric] : set priority (specify it if multiple NICs are set)
+      # lower value is higher priority
+      #routes:
+      #  - to: default
+      #    via: 192.168.2.1
+         # metric: 100
+
+
+# !!! sudo apply changes
+
+sudo netplan apply
+sudo systemctl restart systemd-networkd
+ip addr 
+```
+
+
 
 !!!!!!!!!!!!!!!!!!!!!
 ```console
