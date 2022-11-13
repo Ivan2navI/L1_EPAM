@@ -282,10 +282,10 @@ ip addr
 ```
 
 
-#### Configure NATing and Forwarding on Linux Router
+#### Configure NATing and Forwarding on Server_1
 NATing and Forwarding can be handled using iptables or via the iptables front-end utility like UFW.
 __Configure Packet Forwarding__ \
-Configure the packets received from router LAN interfaces (enp0s8 and enp0s9) to be forwarded through the WAN interface, which in our case is enp0s3.
+Configure the packets received from router LAN interfaces (enp0s8 [from Client_1] and enp0s9 [from Client_2]) to be forwarded through the WAN interface, which in our case is enp0s3.
 ```console
 sudo iptables -A FORWARD -i enp0s8 -o enp0s3 -j ACCEPT
 
@@ -302,7 +302,7 @@ Next, configure NATing:
 ```console
 sudo iptables -t nat -A POSTROUTING -o enp0s3 -j MASQUERADE
 ```
-:computer: :computer: To ensure that the two local networks can also communicate, run the commands below:
+:computer: :computer: To ensure that the two local networks [Net2 & Net3] can also communicate, run the commands below:
 ```console
 sudo iptables -t nat -A POSTROUTING -o enp0s8 -j MASQUERADE
 
