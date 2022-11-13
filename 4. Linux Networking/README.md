@@ -397,9 +397,19 @@ Traceroute works by using the time-to-live (TTL) field in the IP header. Each ro
 
 #### Configure Loopback Interface for Client_1 
 Net4 – 172.16.D.0/24 or 172.16.8.0/24 \
-So, for Client_1 (lo) - 172.17.D+10.1/24 та 172.17.D+20.1/24 \
-wiil be next: 172.17.18.1/24, 172.17.28.1/24
+So, for Client_1 (lo) - 172.17.D+10.1/24 та 172.17.D+20.1/24, \
+wiil be next: __172.17.18.1/24, 172.17.28.1/24__
 ```console
-ip address add 172.17.18.1/24 dev lo
-ip address add 172.17.28.1/24 dev lo
+# TEST
+sudo ip address add 172.17.18.1/24 dev lo
+sudo ip address add 172.17.28.1/24 dev lo
+
+# For NETPLAN
+network:
+    version: 2
+    renderer: networkd
+    ethernets:
+        lo:
+            addresses: [ "172.17.18.1/24", "172.17.28.1/24" ]
 ```
+

@@ -576,16 +576,6 @@ ip neigh
   <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main/4.%20Linux%20Networking/.settings/My_Schem%20of%20Linux%20Networking%20(Loopback%20Interface).png">
 </p>
 
-
-#### Configure Loopback Interface for Client_1 
-Net4 – 172.16.D.0/24 or 172.16.8.0/24 \
-So, for Client_1 (lo) - 172.17.D+10.1/24 та 172.17.D+20.1/24 \
-wiil be next: 172.17.18.1/24, 172.17.28.1/24
-```console
-ip address add 172.17.18.1/24 dev lo
-ip address add 172.17.28.1/24 dev lo
-```
-
 Loopback интерфейс: Что это и как его использовать?
 Источник: http://geek-nose.com/loopback-interfejs/
 
@@ -638,15 +628,207 @@ network:
         lo:
             addresses: [ "127.0.0.1/8", "::1/128", "7.7.7.7/32" ]
 ```
+#### Configure Loopback Interface for Client_1 
+Net4 – 172.16.D.0/24 or 172.16.8.0/24 \
+So, for Client_1 (lo) - 172.17.D+10.1/24 та 172.17.D+20.1/24, \
+wiil be next: 172.17.18.1/24, 172.17.28.1/24
+```console
+# TEST
+sudo ip address add 172.17.18.1/24 dev lo
+sudo ip address add 172.17.28.1/24 dev lo
 
+# For NETPLAN
+network:
+    version: 2
+    renderer: networkd
+    ethernets:
+        lo:
+            addresses: [ "172.17.18.1/24", "172.17.28.1/24" ]
 
+```
+
+__MODIFY Client_2__
+```console
+sudo nano /etc/netplan/01-netcfg.yaml
+
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    # interface name
+    enp0s3:
+      dhcp4: true
+      optional: true
+      routes:
+        - to: 172.17.18.1 # QUESTION 4: From Client_2 (10.85.8.x) TO Client_1 (lo: 172.17.18.1/24) through Server_1
+          via: 10.3.85.1  # QUESTION 4: From Client_2 (10.85.8.x) TO Client_1 (lo: 172.17.18.1/24) through Server_1
+          metric: 100
+    enp0s8:
+      dhcp4: false
+      optional: true
+      # IP address/subnet mask
+      addresses: [172.16.8.2/24]
+      # default gateway
+      # [metric] : set priority (specify it if multiple NICs are set)
+      # lower value is higher priority
+      #routes:
+      routes:
+        - to: 172.16.8.1   # Use Net4 - for connect to  Client_1 IP (172.16.8.1)
+          via: 172.16.8.2  # Use Net4 - This Client_2 IP (172.16.8.2)
+          metric: 100
+        - to: 172.17.28.1  # QUESTION 4: TO Client_1 (lo: 172.17.28.1/24) through  Net4
+          via: 172.16.8.2  # QUESTION 4: and this Client_2 IP (172.16.8.2) from Net4
+          metric: 100
+    enp0s9: # <-------------------- FOR connect from VBox
+      dhcp4: false
+      optional: true
+      # IP address/subnet mask
+      addresses: [192.168.2.32/24]
+      # default gateway
+      # [metric] : set priority (specify it if multiple NICs are set)
+      # lower value is higher priority
+      routes:
+        - to: default
+          via: 10.3.85.1
+          metric: 120
+
+# !!! sudo apply changes
+sudo netplan generate
+sudo netplan apply
+sudo systemctl restart systemd-networkd
+ip addr 
+```
+
+__MODIFY SERVER_1__
+```console
+sudo nano /etc/netplan/*.yaml
+
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    # interface name
+    enp0s3:
+      dhcp4: false
+      optional: true
+      # IP address/subnet mask
+      addresses: [192.168.2.30/24]
+      # default gateway
+      # [metric] : set priority (specify it if multiple NICs are set)
+      # lower value is higher priority
+      routes:
+        - to: default
+          via: 192.168.2.1
+          metric: 90
+      nameservers:
+        # name server to bind
+        addresses: [192.168.2.1, 8.8.8.8]
+        # DNS search base
+        #search: [srv.world,server.education]
+      #dhcp6: false
+    enp0s8:
+      dhcp4: false
+      optional: true
+      # IP address/subnet mask
+      addresses: [10.85.8.1/24]
+      # default gateway
+      # [metric] : set priority (specify it if multiple NICs are set)
+      # lower value is higher priority
+      #routes:
+      #  - to: default
+      #    via: 192.168.2.1
+         # metric: 100
+    enp0s9:
+      dhcp4: false
+      optional: true
+      addresses: [10.3.85.1/24]
+      routes:
+        - to: 172.17.18.1 # # QUESTION 4: From Client_2 (10.85.8.x) TO Client_1 (lo: 172.17.18.1/24) through Server_1
+          via: 10.85.8.1  # QUESTION 4
+          metric: 80     # QUESTION 4
+
+# !!! sudo apply changes
+sudo netplan generate
+sudo netplan apply
+sudo systemctl restart systemd-networkd
+ip addr 
+```
+
+__MODIFY Client_1__
+```console
+sudo nano /etc/netplan/01-netcfg.yaml
+
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    lo:
+      addresses: [ "172.17.18.1/24", "172.17.28.1/24" ] # QUESTION 4: ADD loopback interface TO Client_1 (lo: 172.17.18.1/24, 172.17.28.1/24)
+    # interface name
+    enp0s3:
+      dhcp4: true
+      optional: true
+      routes:
+        - to: 172.17.18.1 # QUESTION 4: From Client_2 (10.85.8.x) TO Client_1 (lo: 172.17.18.1/24) through Server_1
+          via: 10.3.85.1  # QUESTION 4: From Client_2 (10.85.8.x) TO Client_1 (lo: 172.17.18.1/24) through Server_1
+          metric: 100
+      # IP address/subnet mask
+      #addresses: [192.168.2.31/24]
+      # default gateway
+      # [metric] : set priority (specify it if multiple NICs are set)
+      # lower value is higher priority
+      #routes:
+      #  - to: default
+      #    via: 192.168.2.1
+         # metric: 100
+      #nameservers:
+        # name server to bind
+       # addresses: [192.168.2.1, 8.8.8.8]
+        # DNS search base
+        #search: [srv.world,server.education]
+      #dhcp6: false
+    enp0s8:
+      dhcp4: false
+      optional: true
+      # IP address/subnet mask
+      addresses: [172.16.8.1/24]
+      # default gateway
+      # [metric] : set priority (specify it if multiple NICs are set)
+      # lower value is higher priority
+      routes:
+        - to: 172.16.8.2  # Use Net4 - for connect to  Client_2 IP (172.16.8.2)
+          via: 172.16.8.1 # Use Net4 - This Client_1 IP (172.16.8.1)
+          metric: 100
+        - to: 172.17.28.1 # QUESTION 4: FROM Client_2 (lo: 172.17.28.1/24) through  Net4
+          via: 172.16.8.1  # QUESTION 4: and this Client_1 IP (172.16.8.1) from Net4
+          metric: 100
+
+    enp0s9: # <-------------------- FOR connect from VBox
+      dhcp4:  false
+      optional: true
+      # IP address/subnet mask
+      addresses: [192.168.2.31/24]
+      # default gateway
+      # [metric] : set priority (specify it if multiple NICs are set)
+      # lower value is higher priority
+      routes:
+        - to: default
+          via: 10.85.8.1
+          metric: 120
+
+# !!! sudo apply changes
+sudo netplan generate
+sudo netplan apply
+sudo systemctl restart systemd-networkd
+ip addr 
+```
 
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 __Команда IP в Linux: руководство с примерами__ \
 https://wiki.merionet.ru/servernye-resheniya/46/komanda-ip-v-linux-rukovodstvo-s-primerami/ \
-__Руководство администратора Linux по устранению неполадок и отладке__
+__Руководство администратора Linux по устранению неполадок и отладке__ \
 https://wiki.merionet.ru/servernye-resheniya/18/rukovodstvo-administratora-linux-po-ustraneniyu-nepoladok-i-otladke/ \
 __Погружение в Iptables – теория и настройка__ \
 https://wiki.merionet.ru/servernye-resheniya/14/pogruzhenie-v-iptables-teoriya-i-nastrojka/
@@ -659,6 +841,7 @@ ip -s link
 
 # просмотр ip адресов 
 ip addr
+ip -4 addr # отобразить только IPv4
 
 # просмотр таблицы маршрутизации
 ip route
@@ -691,6 +874,10 @@ ip addr add brd [ip_address] dev [interface]
 
 # Чтобы удалить IP-адрес из интерфейса, выполните следующие действия.
 ip addr del [ip_address] dev [interface]
+
+#Чтобы показать текущую таблицу соседей в ядре, введите:
+ip neigh
+
 
 # MTR - это современный инструмент для диагностики сети из командной строки, который объединяет функции ping и traceroute в одном диагностическом инструменте. Его вывод обновляется в режиме реального времени, по умолчанию, пока вы не выйдете из программы, нажав q.
 # Самый простой способ запустить mtr - указать в качестве аргумента имя хоста или IP-адрес следующим образом:
