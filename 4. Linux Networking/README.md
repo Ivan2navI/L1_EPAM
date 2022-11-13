@@ -391,4 +391,15 @@ Traceroute works by using the time-to-live (TTL) field in the IP header. Each ro
 ## Answers: 4, 5.
 ### 4. На віртуальному інтерфейсу lo Client_1 призначити дві ІР адреси за таким правилом: 172.17.D+10.1/24 та 172.17.D+20.1/24. Налаштувати маршрутизацію таким чином, щоб трафік з Client_2 до 172.17.D+10.1 проходив через Server_1, а до 172.17.D+20.1 через Net4. Для перевірки використати traceroute. 
 ### 5. Розрахувати спільну адресу та маску (summarizing) адрес 172.17.D+10.1 та 172.17.D+20.1, при чому префікс має бути максимально можливим. Видалити маршрути, встановлені на попередньому кроці та замінити їх об’єднаним маршрутом, якій має проходити через Server_1. 
+<p align="center">
+  <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main/4.%20Linux%20Networking/.settings/My_Schem%20of%20Linux%20Networking%20(Loopback%20Interface).png">
+</p>
 
+#### Configure Loopback Interface for Client_1 
+Net4 – 172.16.D.0/24 or 172.16.8.0/24 \
+So, for Client_1 (lo) - 172.17.D+10.1/24 та 172.17.D+20.1/24 \
+wiil be next: 172.17.18.1/24, 172.17.28.1/24
+```console
+ip address add 172.17.18.1/24 dev lo
+ip address add 172.17.28.1/24 dev lo
+```
