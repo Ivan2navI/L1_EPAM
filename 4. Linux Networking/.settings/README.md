@@ -61,7 +61,6 @@ _2. На Server_1 налаштувати DHCP сервіс, який буде к
 _3. За допомогою команд ping та traceroute перевірити зв'язок між віртуальними машинами. Результат пояснити. \
 __Увага!__ Для того, щоб з Client_1 та Client_2 проходили пакети в мережу Internet (точніше щоб повертались з Internet на Client_1 та Client_2) на Wi-Fi Router необхідно налаштувати статичні маршрути для мереж Net2 та Net3. Якщо такої можливості немає інтерфейс Int1 на Server_1 перевести в режим NAT._
 
-
 #### Linux Routing switch ON
 
 • Switch on routing is needed only on transit devices. \
@@ -69,9 +68,6 @@ __Увага!__ Для того, щоб з Client_1 та Client_2 проходи
 ```console
 ubuntu@server1:~$ sysctl net.ipv4.conf.all.forwarding
 net.ipv4.conf.all.forwarding = 0
-
-ubuntu@server1:~$ cat /proc/sys/net/ipv4/ip_forward
-0
 ```
 • To switch “on” or “off” routing you must edit 
 ```console
@@ -81,13 +77,15 @@ net.ipv4.ip_forward=1
 ```
 After editing the file, run the following command to make the changes take effect right away.
 ```console
-sysctl -p
+sudo sysctl -p
+
+sysctl net.ipv4.conf.all.forwarding
+net.ipv4.conf.all.forwarding = 1
 ```
 • To review routing table: 
 ```console
 ip route show
 ```
-
 
 
 #### Server_1
