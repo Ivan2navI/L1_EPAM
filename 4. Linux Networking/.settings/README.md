@@ -578,8 +578,8 @@ ip neigh
 
 
 #### Configure Loopback Interface for Client_1 
-Net4 – 172.16.D.0/24 or 172.16.8.0/24
-Client_1 (lo) - 172.17.D+10.1/24 та 172.17.D+20.1/24
+Net4 – 172.16.D.0/24 or 172.16.8.0/24 \
+So, for Client_1 (lo) - 172.17.D+10.1/24 та 172.17.D+20.1/24
 
 Loopback интерфейс: Что это и как его использовать?
 Источник: http://geek-nose.com/loopback-interfejs/
@@ -589,7 +589,7 @@ Loopback - канал коммуникации с одной конечной т
 
 На устройствах Cisco Loopback Interface относится к логическим интерфейсам, наряду с Null Interface и Tunnel Interface. Loopback Interface поддерживается на всех устройствах Cisco. Здесь можно создать Loopback Interface с произвольным адресом, это будет чисто программный интерфейс, эмулирующий работу физического. Он может использоваться для удаленного администрирования, и его функционирование не будет зависеть от состояния физических интерфейсов, он будет всегда поднят и доступен для BGP и RSRB сессий.
 
-Router(config)#interface loopback 20
+Router(config)#interface loopback 20 \
 Router(config-if)#ip address 10.10.20.5 255.255.255.254
 
 Если нужно обеспечить доступ к Loopback Interface снаружи, то необходимо указать маршрут до подсети, которой принадлежит Loopback Interface.
@@ -598,15 +598,15 @@ https://parallel.uran.ru/book/export/html/442
 
 Дополнительный IP адрес на интерфейсе eth1
 
-ONBOOT=no
-DEVICE=eth1:0
-BOOTPROTO=static
-IPADDR=172.16.12.6
-NETMASK=255.255.0.0
-# следующие два параметра можно не писать
-# они вычисляются из IP и маски
-BROADCAST=172.16.255.255
-NETWORK=172.16.0.0
+ONBOOT=no \
+DEVICE=eth1:0 \
+BOOTPROTO=static \
+IPADDR=172.16.12.6 \
+NETMASK=255.255.0.0 \
+#следующие два параметра можно не писать
+#они вычисляются из IP и маски
+BROADCAST=172.16.255.255 \
+NETWORK=172.16.0.0 \
 
 Ручная настройка сети в Ubuntu 20 и старше
 
