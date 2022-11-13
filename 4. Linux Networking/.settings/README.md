@@ -491,22 +491,22 @@ sudo iptables -A FORWARD -i  enp0s3 -o enp0s9 -m state --state RELATED,ESTABLISH
 __Configure NATing__ \
 Next, configure NATing:
 ```console
-iptables -t nat -A POSTROUTING -o enp0s3 -j MASQUERADE
+sudo iptables -t nat -A POSTROUTING -o enp0s3 -j MASQUERADE
 ```
 To ensure that the two local networks can also communicate, run the commands below:
 ```console
-iptables -t nat -A POSTROUTING -o enp0s8 -j MASQUERADE
+sudo iptables -t nat -A POSTROUTING -o enp0s8 -j MASQUERADE
 
-iptables -t nat -A POSTROUTING -o enp0s9 -j MASQUERADE
+sudo iptables -t nat -A POSTROUTING -o enp0s9 -j MASQUERADE
 ```
 __Save iptables rules Permanently in Linux__ \
 In order to permanently save iptables rules, simply install the iptables-persistent package and run the iptables-save command as follows.
 ```console
-apt install iptables-persistent
+sudo apt install iptables-persistent
 ```
 The current rules will be saved during package installation but can still save them thereafter by running the command:
 ```console
-iptables-save > /etc/iptables/rules.v4
+sudo iptables-save > /etc/iptables/rules.v4
 ```
 Now, LAN systems should be now be able to connect to internet via the Server_1.
 
