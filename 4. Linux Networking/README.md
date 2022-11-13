@@ -77,7 +77,10 @@ net.ipv4.ip_forward=1
 ```
 After editing the file, run the following command to make the changes take effect right away.
 ```console
-sysctl -p
+sudo sysctl -p
+
+sysctl net.ipv4.conf.all.forwarding
+net.ipv4.conf.all.forwarding = 1
 ```
 • To review routing table: 
 ```console
