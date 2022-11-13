@@ -493,7 +493,7 @@ Next, configure NATing:
 ```console
 sudo iptables -t nat -A POSTROUTING -o enp0s3 -j MASQUERADE
 ```
-To ensure that the two local networks can also communicate, run the commands below:
+:computer: :computer: To ensure that the two local networks can also communicate, run the commands below:
 ```console
 sudo iptables -t nat -A POSTROUTING -o enp0s8 -j MASQUERADE
 
