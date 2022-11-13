@@ -551,8 +551,26 @@ COMMIT
 COMMIT
 # Completed on Sun Nov 13 01:51:56 2022
 ```
+Route Table:
+```console
+route
 
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+default         _gateway        0.0.0.0         UG    90     0        0 enp0s3
+10.3.85.0       0.0.0.0         255.255.255.0   U     0      0        0 enp0s9
+10.85.8.0       0.0.0.0         255.255.255.0   U     0      0        0 enp0s8
+192.168.2.0     0.0.0.0         255.255.255.0   U     0      0        0 enp0s3
+```
+Neighbors address resolution:
+```console
+ip neigh
 
+10.85.8.20 dev enp0s8 lladdr 08:00:27:b4:41:7a STALE
+192.168.2.1 dev enp0s3 lladdr 04:8d:38:cd:37:73 STALE
+192.168.2.14 dev enp0s3 lladdr a4:1f:72:79:b8:d1 REACHABLE
+10.3.85.20 dev enp0s9 lladdr 08:00:27:3e:81:b4 STALE
+```
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ```console
