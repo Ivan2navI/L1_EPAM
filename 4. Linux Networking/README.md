@@ -112,6 +112,8 @@ sudo nano /etc/dhcp/dhcpd.conf
 
 ####ddns-update-style none;
 
+option domain-name-servers 8.8.8.8, 8.8.8.4;
+
 # Net2 from Server_1(enp0s8) to Client_1 
 subnet 10.85.8.0 netmask 255.255.255.0 {
        range 10.85.8.20 10.85.8.200;
