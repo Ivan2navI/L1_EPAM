@@ -516,7 +516,6 @@ Get status:
 ```console
 sudo systemctl status netfilter-persistent.service
 ```
-
 The current rules will be saved during package installation but can still save them thereafter by running the command:
 ```console
 sudo iptables-save > /etc/iptables/rules.v4
@@ -524,6 +523,7 @@ sudo iptables-save > /etc/iptables/rules.v4
 sudo /sbin/iptables-save > /etc/iptables/rules.v4
 ```
 Now, LAN systems should be now be able to connect to internet via the Server_1.
+
 Displaying saved rules:
 ```console
 cat /etc/iptables/rules.v4
