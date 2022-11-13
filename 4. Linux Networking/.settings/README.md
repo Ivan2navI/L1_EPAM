@@ -472,7 +472,23 @@ Traceroute works by using the time-to-live (TTL) field in the IP header. Each ro
 
 
 
+#### Configure NATing and Forwarding on Linux Router
 
+NATing and Forwarding can be handled using iptables or via the iptables front-end utility like UFW.
+
+__Configure Packet Forwarding__
+Configure the packets received from router LAN interfaces (enp0s8 and enp0s9) to be forwarded through the WAN interface, which in our case is enp0s3.
+```console
+sudo iptables -A FORWARD -i enp0s8 -o enp0s3 -j ACCEPT
+
+sudo iptables -A FORWARD -i enp0s9 -o enp0s3 -j ACCEPT
+```
+Similarly, configure packets that are associated with existing connections received on a WAN interface to be forwarded to the LAN interfaces;
+```console
+sudo iptables -A FORWARD -i  enp0s3 -o enp0s8 -m state --state RELATED,ESTABLISHED -j ACCEPT
+
+sudo iptables -A FORWARD -i  enp0s3 -o enp0s9 -m state --state RELATED,ESTABLISHED -j ACCEPT
+```
 
 
 
