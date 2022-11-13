@@ -213,13 +213,14 @@ network:
       optional: true
       # IP address/subnet mask
       addresses: [192.168.2.30/24]
+      gateway4: 192.168.2.1
       # default gateway
       # [metric] : set priority (specify it if multiple NICs are set)
       # lower value is higher priority
-      routes:
-        - to: default
-          via: 192.168.2.1
-          metric: 100
+      #routes:
+        #- to: default
+          #via: 192.168.2.1
+          #metric: 100
       #nameservers:
         # name server to bind
         #addresses: [10.0.0.10,10.0.0.11]
@@ -239,12 +240,13 @@ network:
       optional: true # to any devices that may not always be available. A start job is running without wait for network to be configured.
       # IP address/subnet mask
       addresses: [192.168.2.30/24]
+      gateway4: 192.168.2.1
       # default gateway
       # [metric] : set priority (specify it if multiple NICs are set)
       # lower value is higher priority
-      routes:
-        - to: default
-          via: 192.168.2.1
+      #routes:
+        #- to: default
+          #via: 192.168.2.1
          # metric: 100
       nameservers:
         # name server to bind
