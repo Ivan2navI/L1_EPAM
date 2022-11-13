@@ -270,8 +270,8 @@ network:
       optional: true # to any devices that may not always be available. A start job is running without wait for network to be configured.
       addresses: [10.3.85.1/24]
 
-# apply changes
-
+# !!! sudo apply changes
+sudo netplan generate
 sudo netplan apply
 sudo systemctl restart systemd-networkd
 ip addr 
@@ -327,7 +327,7 @@ network:
          # metric: 100
 
 # !!! sudo apply changes
-
+sudo netplan generate
 sudo netplan apply
 sudo systemctl restart systemd-networkd
 ip addr 
@@ -367,7 +367,7 @@ network:
          # metric: 100
 
 # !!! sudo apply changes
-
+sudo netplan generate
 sudo netplan apply
 sudo systemctl restart systemd-networkd
 ip addr 
