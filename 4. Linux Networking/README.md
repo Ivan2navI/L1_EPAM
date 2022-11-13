@@ -51,7 +51,7 @@ __Client_1 та Client_2__ \
 ```console
 sudo apt install vim net-tools traceroute tree ncdu bash-completion curl dnsutils htop iftop pwgen screen sudo wget nmon git mc
 
-sudo apt install nmap masscan netdiscover
+sudo apt install nmap masscan netdiscover network-manager
 ```
 
 ## Answers: 1, 2, 3.
