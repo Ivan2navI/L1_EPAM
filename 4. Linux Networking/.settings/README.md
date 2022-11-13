@@ -488,7 +488,7 @@ sudo iptables -A FORWARD -i  enp0s3 -o enp0s8 -m state --state RELATED,ESTABLISH
 
 sudo iptables -A FORWARD -i  enp0s3 -o enp0s9 -m state --state RELATED,ESTABLISHED -j ACCEPT
 ```
-__Configure NATing__ /
+__Configure NATing__ \
 Next, configure NATing:
 ```console
 iptables -t nat -A POSTROUTING -o enp0s3 -j MASQUERADE
@@ -499,7 +499,7 @@ iptables -t nat -A POSTROUTING -o enp0s8 -j MASQUERADE
 
 iptables -t nat -A POSTROUTING -o enp0s9 -j MASQUERADE
 ```
-__Save iptables rules Permanently in Linux__ /
+__Save iptables rules Permanently in Linux__ \
 In order to permanently save iptables rules, simply install the iptables-persistent package and run the iptables-save command as follows.
 ```console
 apt install iptables-persistent
