@@ -475,7 +475,6 @@ Traceroute works by using the time-to-live (TTL) field in the IP header. Each ro
 #### Configure NATing and Forwarding on Linux Router
 https://kifarunix.com/configure-ubuntu-20-04-as-linux-router/ \
 NATing and Forwarding can be handled using iptables or via the iptables front-end utility like UFW.
-
 __Configure Packet Forwarding__ \
 Configure the packets received from router LAN interfaces (enp0s8 and enp0s9) to be forwarded through the WAN interface, which in our case is enp0s3.
 ```console
