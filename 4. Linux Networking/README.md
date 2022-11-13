@@ -217,6 +217,7 @@ network:
       addresses: [10.3.85.1/24]
 
 # !!! sudo apply changes
+sudo netplan generate
 sudo netplan apply
 sudo systemctl restart systemd-networkd
 ip addr 
@@ -245,6 +246,7 @@ network:
       optional: true
 
 # !!! sudo apply changes
+sudo netplan generate
 sudo netplan apply
 sudo systemctl restart systemd-networkd
 ip addr 
@@ -273,6 +275,7 @@ network:
       optional: true
 
 # !!! sudo apply changes
+sudo netplan generate
 sudo netplan apply
 sudo systemctl restart systemd-networkd
 ip addr 
