@@ -168,7 +168,7 @@ MAC                IP              hostname       valid until         manufactur
 
 __MODIFY SERVER_1__
 ```console
-sudo nano /etc/netplan/*.yaml
+sudo cat /etc/netplan/*.yaml
 
 # rename to disable default setting
 sudo mv /etc/netplan/00-installer-config.yaml /etc/netplan/00-installer-config.yaml.org
