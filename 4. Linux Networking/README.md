@@ -74,8 +74,6 @@ net.ipv4.conf.all.forwarding = 0
 sudo nano /etc/sysctl.conf
 # Uncomment the next line to enable packet forwarding for IPv4
 net.ipv4.ip_forward=1
-#OR
-sudo sysctl -w net.ipv4.ip_forward=1
 ```
 After editing the file, run the following command to make the changes take effect right away.
 ```console
