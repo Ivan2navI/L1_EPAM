@@ -588,33 +588,33 @@ http://microsin.net/adminstuff/cisco/loopback-null-tunnel-interfaces.html
 Loopback - канал коммуникации с одной конечной точкой. Любые сообщения, посылаемые на этот канал, немедленно принимаются тем же самым каналом. Любые сообщения, которые отправляются с этого интерфейса, но у которых адрес не Loopback Interface, отбрасываются. В компьютерах таким адресом loopback interface является адрес 127.0.0.1, он фиксированный и изменению не подлежит. На Unix-like системах loopback interface называется lo или lo0.
 
 На устройствах Cisco Loopback Interface относится к логическим интерфейсам, наряду с Null Interface и Tunnel Interface. Loopback Interface поддерживается на всех устройствах Cisco. Здесь можно создать Loopback Interface с произвольным адресом, это будет чисто программный интерфейс, эмулирующий работу физического. Он может использоваться для удаленного администрирования, и его функционирование не будет зависеть от состояния физических интерфейсов, он будет всегда поднят и доступен для BGP и RSRB сессий.
-
-Router(config)#interface loopback 20 \
+```console
+Router(config)#interface loopback 20
 Router(config-if)#ip address 10.10.20.5 255.255.255.254
-
+```
 Если нужно обеспечить доступ к Loopback Interface снаружи, то необходимо указать маршрут до подсети, которой принадлежит Loopback Interface.
 
 https://parallel.uran.ru/book/export/html/442
 
 Дополнительный IP адрес на интерфейсе eth1
-
-ONBOOT=no \
-DEVICE=eth1:0 \
-BOOTPROTO=static \
-IPADDR=172.16.12.6 \
-NETMASK=255.255.0.0 \
+```console
+ONBOOT=no
+DEVICE=eth1:0
+BOOTPROTO=static
+IPADDR=172.16.12.6
+NETMASK=255.255.0.0
 #следующие два параметра можно не писать
 #они вычисляются из IP и маски
-BROADCAST=172.16.255.255 \
-NETWORK=172.16.0.0 \
-
+BROADCAST=172.16.255.255
+NETWORK=172.16.0.0
+```
 Ручная настройка сети в Ubuntu 20 и старше
 
 В Ubuntu 20 система скриптов ifup/ifdown заменена программой netplan, со своими конфигурационными файлами на языке YAML — /etc/netplan/имяфайла.yaml
 Пример конфигурации
 
 Здесь только секция ethernets, но могут быть секции для vlan, bonding и т.д. Массивы имеют две альтернативные формы записи — в квадратных скобках и построчно, где каждая строка начинается с "- ". link-local: [] — запрет IPV6
-
+```console
 network:
   version: 2
   renderer: networkd
@@ -629,26 +629,26 @@ network:
       gateway4: 192.168.56.1
     nameservers:
         addresses: [8.8.8.8, 8.8.4.4]
-
+```
 Команды
 netplan generate — генерация из файлов YAML конфигураций для бэкендов NetworkManager или systemd-networkd в каталогах /run/каталог_бэкенда/. Здесь же проходит валидация синтаксиса.
 
 netplan apply — применение конфигурации
 
-__ В современных дистрибутивах линукса на смену ifconfig и route приходит универсальная утилита ip __
-
+__В современных дистрибутивах линукса на смену ifconfig и route приходит универсальная утилита ip__
+```console
 #просмотр списка доступных интерфейсов
 ip link
 
 #просмотр статистики по интерфейсам
 ip -s link
 
-#просмотр ip адресов
+#просмотр ip адресов 
 ip addr
 
 #просмотр таблицы маршрутизации
 ip route
-
+```
 
 
 
