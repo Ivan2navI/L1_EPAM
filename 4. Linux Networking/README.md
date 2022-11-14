@@ -306,6 +306,53 @@ sudo iptables -t nat -A POSTROUTING -o enp0s3 -j MASQUERADE
 sudo iptables -t nat -A POSTROUTING -o enp0s8 -j MASQUERADE
 
 sudo iptables -t nat -A POSTROUTING -o enp0s9 -j MASQUERADE
+
+# !!! Show iptables !!!
+# sudo iptables -L -nv
+Chain INPUT (policy ACCEPT 678 packets, 280K bytes)
+ pkts bytes target     prot opt in     out     source               destination
+
+Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+    0     0 ACCEPT     all  --  enp0s8 enp0s3  0.0.0.0/0            0.0.0.0/0
+    0     0 ACCEPT     all  --  enp0s9 enp0s3  0.0.0.0/0            0.0.0.0/0
+    0     0 ACCEPT     all  --  enp0s3 enp0s8  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
+    0     0 ACCEPT     all  --  enp0s3 enp0s9  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
+
+Chain OUTPUT (policy ACCEPT 453 packets, 51986 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+
+
+# sudo iptables -t filter -L -nv
+Chain INPUT (policy ACCEPT 655 packets, 279K bytes)
+ pkts bytes target     prot opt in     out     source               destination
+
+Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+    0     0 ACCEPT     all  --  enp0s8 enp0s3  0.0.0.0/0            0.0.0.0/0
+    0     0 ACCEPT     all  --  enp0s9 enp0s3  0.0.0.0/0            0.0.0.0/0
+    0     0 ACCEPT     all  --  enp0s3 enp0s8  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
+    0     0 ACCEPT     all  --  enp0s3 enp0s9  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
+
+Chain OUTPUT (policy ACCEPT 430 packets, 49802 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+
+
+# sudo iptables -t nat -L -nv
+Chain PREROUTING (policy ACCEPT 51 packets, 4265 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+
+Chain INPUT (policy ACCEPT 50 packets, 4197 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+
+Chain OUTPUT (policy ACCEPT 16 packets, 1154 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+
+Chain POSTROUTING (policy ACCEPT 3 packets, 217 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+   13   937 MASQUERADE  all  --  *      enp0s3  0.0.0.0/0            0.0.0.0/0
+    0     0 MASQUERADE  all  --  *      enp0s8  0.0.0.0/0            0.0.0.0/0
+    0     0 MASQUERADE  all  --  *      enp0s9  0.0.0.0/0            0.0.0.0/0
 ```
 __Save iptables rules Permanently in Linux__ \
 In order to permanently save iptables rules, simply install the iptables-persistent package and run the iptables-save command as follows.
@@ -410,6 +457,6 @@ network:
     renderer: networkd
     ethernets:
         lo:
-            addresses: [ "172.17.18.1/24", "172.17.28.1/24" ]
+            addresses: [172.17.18.1/24, 172.17.28.1/24]
 ```
 
