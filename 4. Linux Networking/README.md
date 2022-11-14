@@ -307,52 +307,38 @@ sudo iptables -t nat -A POSTROUTING -o enp0s8 -j MASQUERADE
 
 sudo iptables -t nat -A POSTROUTING -o enp0s9 -j MASQUERADE
 
-# !!! Show iptables !!!
-# sudo iptables -L -nv
-Chain INPUT (policy ACCEPT 678 packets, 280K bytes)
- pkts bytes target     prot opt in     out     source               destination
 
-Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
- pkts bytes target     prot opt in     out     source               destination
-    0     0 ACCEPT     all  --  enp0s8 enp0s3  0.0.0.0/0            0.0.0.0/0
-    0     0 ACCEPT     all  --  enp0s9 enp0s3  0.0.0.0/0            0.0.0.0/0
-    0     0 ACCEPT     all  --  enp0s3 enp0s8  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
-    0     0 ACCEPT     all  --  enp0s3 enp0s9  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
+#  !!! Show iptables !!!
 
-Chain OUTPUT (policy ACCEPT 453 packets, 51986 bytes)
- pkts bytes target     prot opt in     out     source               destination
+sudo iptables -L -nv
+# Chain INPUT (policy ACCEPT 678 packets, 280K bytes)
+ # pkts bytes target     prot opt in     out     source               destination
 
+# Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
+ # pkts bytes target     prot opt in     out     source               destination
+    # 0     0 ACCEPT     all  --  enp0s8 enp0s3  0.0.0.0/0            0.0.0.0/0
+    # 0     0 ACCEPT     all  --  enp0s9 enp0s3  0.0.0.0/0            0.0.0.0/0
+    # 0     0 ACCEPT     all  --  enp0s3 enp0s8  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
+    # 0     0 ACCEPT     all  --  enp0s3 enp0s9  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
 
-# sudo iptables -t filter -L -nv
-Chain INPUT (policy ACCEPT 655 packets, 279K bytes)
- pkts bytes target     prot opt in     out     source               destination
+# Chain OUTPUT (policy ACCEPT 453 packets, 51986 bytes)
+ # pkts bytes target     prot opt in     out     source               destination
 
-Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
- pkts bytes target     prot opt in     out     source               destination
-    0     0 ACCEPT     all  --  enp0s8 enp0s3  0.0.0.0/0            0.0.0.0/0
-    0     0 ACCEPT     all  --  enp0s9 enp0s3  0.0.0.0/0            0.0.0.0/0
-    0     0 ACCEPT     all  --  enp0s3 enp0s8  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
-    0     0 ACCEPT     all  --  enp0s3 enp0s9  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
+sudo iptables -t nat -L -nv
+# Chain PREROUTING (policy ACCEPT 51 packets, 4265 bytes)
+ # pkts bytes target     prot opt in     out     source               destination
 
-Chain OUTPUT (policy ACCEPT 430 packets, 49802 bytes)
- pkts bytes target     prot opt in     out     source               destination
+# Chain INPUT (policy ACCEPT 50 packets, 4197 bytes)
+ # pkts bytes target     prot opt in     out     source               destination
 
+# Chain OUTPUT (policy ACCEPT 16 packets, 1154 bytes)
+ # pkts bytes target     prot opt in     out     source               destination
 
-# sudo iptables -t nat -L -nv
-Chain PREROUTING (policy ACCEPT 51 packets, 4265 bytes)
- pkts bytes target     prot opt in     out     source               destination
-
-Chain INPUT (policy ACCEPT 50 packets, 4197 bytes)
- pkts bytes target     prot opt in     out     source               destination
-
-Chain OUTPUT (policy ACCEPT 16 packets, 1154 bytes)
- pkts bytes target     prot opt in     out     source               destination
-
-Chain POSTROUTING (policy ACCEPT 3 packets, 217 bytes)
- pkts bytes target     prot opt in     out     source               destination
-   13   937 MASQUERADE  all  --  *      enp0s3  0.0.0.0/0            0.0.0.0/0
-    0     0 MASQUERADE  all  --  *      enp0s8  0.0.0.0/0            0.0.0.0/0
-    0     0 MASQUERADE  all  --  *      enp0s9  0.0.0.0/0            0.0.0.0/0
+# Chain POSTROUTING (policy ACCEPT 3 packets, 217 bytes)
+ # pkts bytes target     prot opt in     out     source               destination
+   # 13   937 MASQUERADE  all  --  *      enp0s3  0.0.0.0/0            0.0.0.0/0
+    # 0     0 MASQUERADE  all  --  *      enp0s8  0.0.0.0/0            0.0.0.0/0
+    # 0     0 MASQUERADE  all  --  *      enp0s9  0.0.0.0/0            0.0.0.0/0
 ```
 __Save iptables rules Permanently in Linux__ \
 In order to permanently save iptables rules, simply install the iptables-persistent package and run the iptables-save command as follows.
@@ -373,8 +359,10 @@ sudo systemctl status netfilter-persistent.service
 ```
 The current rules will be saved during package installation but can still save them thereafter by running the command:
 ```console
+sudo sh -c "iptables-save > /etc/iptables/rules.v4"
+# OR
 sudo iptables-save > /etc/iptables/rules.v4
-#OR
+# OR
 sudo /sbin/iptables-save > /etc/iptables/rules.v4
 ```
 Now, LAN systems should be now be able to connect to internet via the Server_1.
@@ -435,9 +423,9 @@ Traceroute works by using the time-to-live (TTL) field in the IP header. Each ro
   <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main/4.%20Linux%20Networking/.settings/Pind_and_Traceroute.png">
 </p>
 
-## Answers: 4, 5.
+## Answers: 4.
 ### 4. На віртуальному інтерфейсу lo Client_1 призначити дві ІР адреси за таким правилом: 172.17.D+10.1/24 та 172.17.D+20.1/24. Налаштувати маршрутизацію таким чином, щоб трафік з Client_2 до 172.17.D+10.1 проходив через Server_1, а до 172.17.D+20.1 через Net4. Для перевірки використати traceroute. 
-### 5. Розрахувати спільну адресу та маску (summarizing) адрес 172.17.D+10.1 та 172.17.D+20.1, при чому префікс має бути максимально можливим. Видалити маршрути, встановлені на попередньому кроці та замінити їх об’єднаним маршрутом, якій має проходити через Server_1. 
+ 
 <p align="center">
   <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main/4.%20Linux%20Networking/.settings/My_Schem%20of%20Linux%20Networking%20(Loopback%20Interface).png">
 </p>
@@ -451,7 +439,7 @@ wiil be next: __172.17.18.1/24, 172.17.28.1/24__
 sudo ip address add 172.17.18.1/24 dev lo
 sudo ip address add 172.17.28.1/24 dev lo
 
-# For NETPLAN
+# For netplan
 network:
     version: 2
     renderer: networkd
@@ -459,4 +447,21 @@ network:
         lo:
             addresses: [172.17.18.1/24, 172.17.28.1/24]
 ```
+#### Configure NETPLAN
+<p align="center">
+  <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main/4.%20Linux%20Networking/.settings/A4_1_Netplan_Conf.png">
+</p>
 
+
+
+#### Configure Packet Forwarding on Server_1
+
+# ADD 2 rules for transfering packets Client_1 <=> Server_1 <=> Client_2  
+```console
+sudo iptables -A FORWARD -i enp0s8 -o enp0s9 -j ACCEPT
+sudo iptables -A FORWARD -i enp0s9 -o enp0s8 -j ACCEPT
+```
+
+
+## Answers: 5.
+### 5. Розрахувати спільну адресу та маску (summarizing) адрес 172.17.D+10.1 та 172.17.D+20.1, при чому префікс має бути максимально можливим. Видалити маршрути, встановлені на попередньому кроці та замінити їх об’єднаним маршрутом, якій має проходити через Server_1.

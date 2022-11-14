@@ -495,52 +495,53 @@ sudo iptables -t nat -A POSTROUTING -o enp0s3 -j MASQUERADE
 sudo iptables -t nat -A POSTROUTING -o enp0s8 -j MASQUERADE
 
 sudo iptables -t nat -A POSTROUTING -o enp0s9 -j MASQUERADE
-# !!! Show iptables !!!
-# sudo iptables -L -nv
-Chain INPUT (policy ACCEPT 678 packets, 280K bytes)
- pkts bytes target     prot opt in     out     source               destination
 
-Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
- pkts bytes target     prot opt in     out     source               destination
-    0     0 ACCEPT     all  --  enp0s8 enp0s3  0.0.0.0/0            0.0.0.0/0
-    0     0 ACCEPT     all  --  enp0s9 enp0s3  0.0.0.0/0            0.0.0.0/0
-    0     0 ACCEPT     all  --  enp0s3 enp0s8  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
-    0     0 ACCEPT     all  --  enp0s3 enp0s9  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
+#  !!! Show iptables !!!
+sudo iptables -L -nv
+# Chain INPUT (policy ACCEPT 678 packets, 280K bytes)
+ # pkts bytes target     prot opt in     out     source               destination
 
-Chain OUTPUT (policy ACCEPT 453 packets, 51986 bytes)
- pkts bytes target     prot opt in     out     source               destination
+# Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
+ # pkts bytes target     prot opt in     out     source               destination
+    # 0     0 ACCEPT     all  --  enp0s8 enp0s3  0.0.0.0/0            0.0.0.0/0
+    # 0     0 ACCEPT     all  --  enp0s9 enp0s3  0.0.0.0/0            0.0.0.0/0
+    # 0     0 ACCEPT     all  --  enp0s3 enp0s8  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
+    # 0     0 ACCEPT     all  --  enp0s3 enp0s9  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
 
-
-# sudo iptables -t filter -L -nv
-Chain INPUT (policy ACCEPT 655 packets, 279K bytes)
- pkts bytes target     prot opt in     out     source               destination
-
-Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
- pkts bytes target     prot opt in     out     source               destination
-    0     0 ACCEPT     all  --  enp0s8 enp0s3  0.0.0.0/0            0.0.0.0/0
-    0     0 ACCEPT     all  --  enp0s9 enp0s3  0.0.0.0/0            0.0.0.0/0
-    0     0 ACCEPT     all  --  enp0s3 enp0s8  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
-    0     0 ACCEPT     all  --  enp0s3 enp0s9  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
-
-Chain OUTPUT (policy ACCEPT 430 packets, 49802 bytes)
- pkts bytes target     prot opt in     out     source               destination
+# Chain OUTPUT (policy ACCEPT 453 packets, 51986 bytes)
+ # pkts bytes target     prot opt in     out     source               destination
 
 
-# sudo iptables -t nat -L -nv
-Chain PREROUTING (policy ACCEPT 51 packets, 4265 bytes)
- pkts bytes target     prot opt in     out     source               destination
+sudo iptables -t filter -L -nv
+# Chain INPUT (policy ACCEPT 655 packets, 279K bytes)
+ # pkts bytes target     prot opt in     out     source               destination
 
-Chain INPUT (policy ACCEPT 50 packets, 4197 bytes)
- pkts bytes target     prot opt in     out     source               destination
+# Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
+ # pkts bytes target     prot opt in     out     source               destination
+    # 0     0 ACCEPT     all  --  enp0s8 enp0s3  0.0.0.0/0            0.0.0.0/0
+    # 0     0 ACCEPT     all  --  enp0s9 enp0s3  0.0.0.0/0            0.0.0.0/0
+    # 0     0 ACCEPT     all  --  enp0s3 enp0s8  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
+    # 0     0 ACCEPT     all  --  enp0s3 enp0s9  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
 
-Chain OUTPUT (policy ACCEPT 16 packets, 1154 bytes)
- pkts bytes target     prot opt in     out     source               destination
+# Chain OUTPUT (policy ACCEPT 430 packets, 49802 bytes)
+ # pkts bytes target     prot opt in     out     source               destination
 
-Chain POSTROUTING (policy ACCEPT 3 packets, 217 bytes)
- pkts bytes target     prot opt in     out     source               destination
-   13   937 MASQUERADE  all  --  *      enp0s3  0.0.0.0/0            0.0.0.0/0
-    0     0 MASQUERADE  all  --  *      enp0s8  0.0.0.0/0            0.0.0.0/0
-    0     0 MASQUERADE  all  --  *      enp0s9  0.0.0.0/0            0.0.0.0/0
+
+sudo iptables -t nat -L -nv
+# Chain PREROUTING (policy ACCEPT 51 packets, 4265 bytes)
+ # pkts bytes target     prot opt in     out     source               destination
+
+# Chain INPUT (policy ACCEPT 50 packets, 4197 bytes)
+ # pkts bytes target     prot opt in     out     source               destination
+
+# Chain OUTPUT (policy ACCEPT 16 packets, 1154 bytes)
+ # pkts bytes target     prot opt in     out     source               destination
+
+# Chain POSTROUTING (policy ACCEPT 3 packets, 217 bytes)
+ # pkts bytes target     prot opt in     out     source               destination
+   # 13   937 MASQUERADE  all  --  *      enp0s3  0.0.0.0/0            0.0.0.0/0
+    # 0     0 MASQUERADE  all  --  *      enp0s8  0.0.0.0/0            0.0.0.0/0
+    # 0     0 MASQUERADE  all  --  *      enp0s9  0.0.0.0/0            0.0.0.0/0
 ```
 __Save iptables rules Permanently in Linux__ \
 In order to permanently save iptables rules, simply install the iptables-persistent package and run the iptables-save command as follows.
@@ -561,8 +562,10 @@ sudo systemctl status netfilter-persistent.service
 ```
 The current rules will be saved during package installation but can still save them thereafter by running the command:
 ```console
+sudo sh -c "iptables-save > /etc/iptables/rules.v4"
+# OR
 sudo iptables-save > /etc/iptables/rules.v4
-#OR
+# OR
 sudo /sbin/iptables-save > /etc/iptables/rules.v4
 ```
 Now, LAN systems should be now be able to connect to internet via the Server_1.
@@ -666,14 +669,7 @@ netplan apply — применение конфигурации
 
 __Configuring a loopback interface__ \
 Networkd does not allow creating new loopback devices, but a user can add new addresses to the standard loopback interface, lo, in order to have it considered a valid address on the machine as well as for custom routing:
-```console
-network:
-    version: 2
-    renderer: networkd
-    ethernets:
-        lo:
-            addresses: [ "127.0.0.1/8", "::1/128", "7.7.7.7/32" ]
-```
+
 #### Configure Loopback Interface for Client_1 
 Net4 – 172.16.D.0/24 or 172.16.8.0/24 \
 So, for Client_1 (lo) - 172.17.D+10.1/24 та 172.17.D+20.1/24, \
@@ -683,7 +679,7 @@ wiil be next: 172.17.18.1/24, 172.17.28.1/24
 sudo ip address add 172.17.18.1/24 dev lo
 sudo ip address add 172.17.28.1/24 dev lo
 
-# For NETPLAN
+# ADD to netplan for Client_1
 network:
     version: 2
     renderer: networkd
@@ -693,49 +689,45 @@ network:
 
 ```
 
-__MODIFY Client_2__
+__MODIFY Client_1__
 ```console
-sudo nano /etc/netplan/01-netcfg.yaml
-
+# sudo nano /etc/netplan/01-netcfg.yaml
 network:
   version: 2
   renderer: networkd
   ethernets:
     # interface name
+    lo:
+      addresses: [172.17.18.1/24, 172.17.28.1/24] # QUESTION 4: ADD loopback interface TO Client_1 (lo: 172.17.18.1/24, 172.17.28.1/24)
     enp0s3:
       dhcp4: true
       optional: true
-      routes:
-        - to: 172.17.18.1 # QUESTION 4: From Client_2 (10.85.8.x) TO Client_1 (lo: 172.17.18.1/24) through Server_1
-          via: 10.3.85.1  # QUESTION 4: From Client_2 (10.85.8.x) TO Client_1 (lo: 172.17.18.1/24) through Server_1
-          metric: 100
     enp0s8:
       dhcp4: false
       optional: true
       # IP address/subnet mask
-      addresses: [172.16.8.2/24]
+      addresses: [172.16.8.1/24]
       # default gateway
       # [metric] : set priority (specify it if multiple NICs are set)
       # lower value is higher priority
-      #routes:
       routes:
-        - to: 172.16.8.1   # Use Net4 - for connect to  Client_1 IP (172.16.8.1)
-          via: 172.16.8.2  # Use Net4 - This Client_2 IP (172.16.8.2)
-          metric: 100
-        - to: 172.17.28.1  # QUESTION 4: TO Client_1 (lo: 172.17.28.1/24) through  Net4
-          via: 172.16.8.2  # QUESTION 4: and this Client_2 IP (172.16.8.2) from Net4
-          metric: 100
+        - to: 172.16.8.2  # Use Net4 - for connect to  Client_2 IP (172.16.8.2)
+          via: 172.16.8.1 # Use Net4 - This Client_1 IP (172.16.8.1)
+          metric: 110
+        - to: 172.17.28.1 # QUESTION 4: FROM Client_2 (lo: 172.17.28.1/24) through  Net4
+          via: 172.16.8.1  # QUESTION 4: and this Client_1 IP (172.16.8.1) from Net4
+          metric: 110
     enp0s9: # <-------------------- FOR connect from VBox
-      dhcp4: false
+      dhcp4:  false
       optional: true
       # IP address/subnet mask
-      addresses: [192.168.2.32/24]
+      addresses: [192.168.2.31/24]
       # default gateway
       # [metric] : set priority (specify it if multiple NICs are set)
       # lower value is higher priority
       routes:
         - to: default
-          via: 10.3.85.1
+          via: 10.85.8.1
           metric: 120
 
 # !!! sudo apply changes
@@ -745,10 +737,54 @@ sudo systemctl restart systemd-networkd
 ip addr 
 ```
 
-__MODIFY SERVER_1__
-```console
-sudo nano /etc/netplan/*.yaml
 
+__MODIFY SERVER_1__
+__Configure Packet Forwarding__
+```console
+# ADD 2 rules for transfering packets Client_1 <=> Server_1 <=> Client_2  
+sudo iptables -A FORWARD -i enp0s8 -o enp0s9 -j ACCEPT
+sudo iptables -A FORWARD -i enp0s9 -o enp0s8 -j ACCEPT
+
+#  !!! Show iptables !!!
+sudo iptables -L -nv
+# Chain INPUT (policy ACCEPT 3145 packets, 437K bytes)
+ # pkts bytes target     prot opt in     out     source               destination
+
+# Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
+ # pkts bytes target     prot opt in     out     source               destination
+   # 34  7641 ACCEPT     all  --  enp0s8 enp0s3  0.0.0.0/0            0.0.0.0/0
+  # 172 17267 ACCEPT     all  --  enp0s9 enp0s3  0.0.0.0/0            0.0.0.0/0
+   # 33 31369 ACCEPT     all  --  enp0s3 enp0s8  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
+  # 214  264K ACCEPT     all  --  enp0s3 enp0s9  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
+  # 293 24684 ACCEPT     all  --  enp0s8 enp0s9  0.0.0.0/0            0.0.0.0/0
+  # 421 34356 ACCEPT     all  --  enp0s9 enp0s8  0.0.0.0/0            0.0.0.0/0
+
+# Chain OUTPUT (policy ACCEPT 1880 packets, 191K bytes)
+ # pkts bytes target     prot opt in     out     source               destination
+
+
+sudo iptables -t nat -L -nv
+# Chain PREROUTING (policy ACCEPT 425 packets, 35364 bytes)
+ # pkts bytes target     prot opt in     out     source               destination
+
+# Chain INPUT (policy ACCEPT 327 packets, 28751 bytes)
+ # pkts bytes target     prot opt in     out     source               destination
+
+# Chain OUTPUT (policy ACCEPT 23 packets, 1546 bytes)
+ # pkts bytes target     prot opt in     out     source               destination
+
+# Chain POSTROUTING (policy ACCEPT 3 packets, 217 bytes)
+ # pkts bytes target     prot opt in     out     source               destination
+   # 56  4154 MASQUERADE  all  --  *      enp0s3  0.0.0.0/0            0.0.0.0/0
+   # 51  3132 MASQUERADE  all  --  *      enp0s8  0.0.0.0/0            0.0.0.0/0
+    # 1    48 MASQUERADE  all  --  *      enp0s9  0.0.0.0/0            0.0.0.0/0
+
+# Save current rules:
+sudo sh -c "iptables-save > /etc/iptables/rules.v4"
+```
+__Configure NETPLAN__
+```console
+# sudo nano /etc/netplan/01-netcfg.yaml
 network:
   version: 2
   renderer: networkd
@@ -784,13 +820,17 @@ network:
       #  - to: default
       #    via: 192.168.2.1
          # metric: 100
+      routes:
+        - to: 172.17.18.1 # QUESTION 4: From Client_2 (10.85.8.x) TO Client_1 (lo: 172.17.18.1/24) through Server_1
+          via: 10.85.8.1  # QUESTION 4
+          metric: 80     # QUESTION 4
     enp0s9:
       dhcp4: false
       optional: true
       addresses: [10.3.85.1/24]
       routes:
-        - to: 172.17.18.1 # # QUESTION 4: From Client_2 (10.85.8.x) TO Client_1 (lo: 172.17.18.1/24) through Server_1
-          via: 10.85.8.1  # QUESTION 4
+        - to: 172.17.18.1 # QUESTION 4: From Client_2 (10.85.8.x) TO Client_1 (lo: 172.17.18.1/24) through Server_1
+          via: 10.3.85.1  # QUESTION 4
           metric: 80     # QUESTION 4
 
 # !!! sudo apply changes
@@ -800,66 +840,43 @@ sudo systemctl restart systemd-networkd
 ip addr 
 ```
 
-__MODIFY Client_1__
+__MODIFY Client_2__
 ```console
-sudo nano /etc/netplan/01-netcfg.yaml
-
+# sudo nano /etc/netplan/01-netcfg.yaml
 network:
   version: 2
   renderer: networkd
   ethernets:
-    lo:
-      addresses: [172.17.18.1/24, 172.17.28.1/24] # QUESTION 4: ADD loopback interface TO Client_1 (lo: 172.17.18.1/24, 172.17.28.1/24)
     # interface name
     enp0s3:
       dhcp4: true
       optional: true
-      routes:
-        - to: 172.17.18.1 # QUESTION 4: From Client_2 (10.85.8.x) TO Client_1 (lo: 172.17.18.1/24) through Server_1
-          via: 10.3.85.1  # QUESTION 4: From Client_2 (10.85.8.x) TO Client_1 (lo: 172.17.18.1/24) through Server_1
-          metric: 100
-      # IP address/subnet mask
-      #addresses: [192.168.2.31/24]
-      # default gateway
-      # [metric] : set priority (specify it if multiple NICs are set)
-      # lower value is higher priority
-      #routes:
-      #  - to: default
-      #    via: 192.168.2.1
-         # metric: 100
-      #nameservers:
-        # name server to bind
-       # addresses: [192.168.2.1, 8.8.8.8]
-        # DNS search base
-        #search: [srv.world,server.education]
-      #dhcp6: false
     enp0s8:
       dhcp4: false
       optional: true
       # IP address/subnet mask
-      addresses: [172.16.8.1/24]
+      addresses: [172.16.8.2/24]
       # default gateway
       # [metric] : set priority (specify it if multiple NICs are set)
       # lower value is higher priority
       routes:
-        - to: 172.16.8.2  # Use Net4 - for connect to  Client_2 IP (172.16.8.2)
-          via: 172.16.8.1 # Use Net4 - This Client_1 IP (172.16.8.1)
-          metric: 100
-        - to: 172.17.28.1 # QUESTION 4: FROM Client_2 (lo: 172.17.28.1/24) through  Net4
-          via: 172.16.8.1  # QUESTION 4: and this Client_1 IP (172.16.8.1) from Net4
-          metric: 100
-
+        - to: 172.16.8.1   # Use Net4 - for connect to  Client_1 IP (172.16.8.1)
+          via: 172.16.8.2  # Use Net4 - This Client_2 IP (172.16.8.2)
+          metric: 110
+        - to: 172.17.28.1  # QUESTION 4: TO Client_1 (lo: 172.17.28.1/24) through  Net4
+          via: 172.16.8.2  # QUESTION 4: and this Client_2 IP (172.16.8.2) from Net4
+          metric: 110
     enp0s9: # <-------------------- FOR connect from VBox
-      dhcp4:  false
+      dhcp4: false
       optional: true
       # IP address/subnet mask
-      addresses: [192.168.2.31/24]
+      addresses: [192.168.2.32/24]
       # default gateway
       # [metric] : set priority (specify it if multiple NICs are set)
       # lower value is higher priority
       routes:
         - to: default
-          via: 10.85.8.1
+          via: 10.3.85.1
           metric: 120
 
 # !!! sudo apply changes
@@ -868,6 +885,7 @@ sudo netplan apply
 sudo systemctl restart systemd-networkd
 ip addr 
 ```
+
 
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
