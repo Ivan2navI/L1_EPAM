@@ -447,20 +447,26 @@ network:
         lo:
             addresses: [172.17.18.1/24, 172.17.28.1/24]
 ```
-#### Configure NETPLAN
+#### Configure NETPLAN:
 <p align="center">
   <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main/4.%20Linux%20Networking/.settings/A4_1_Netplan_Conf.png">
 </p>
 
-
-
-#### Configure Packet Forwarding on Server_1
-
-# ADD 2 rules for transfering packets Client_1 <=> Server_1 <=> Client_2  
+#### Configure Packet Forwarding on Server_1:
+ADD 2 rules for transfering packets Client_1 <=> Server_1 <=> Client_2  
 ```console
 sudo iptables -A FORWARD -i enp0s8 -o enp0s9 -j ACCEPT
 sudo iptables -A FORWARD -i enp0s9 -o enp0s8 -j ACCEPT
+
+# Save current rules:
+sudo sh -c "iptables-save > /etc/iptables/rules.v4"
 ```
+<p align="center">
+  <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main/4.%20Linux%20Networking/.settings/A4_2_SERVER_1_Conf_Packet_Forwarding.png">
+</p>
+
+
+
 
 
 ## Answers: 5.
