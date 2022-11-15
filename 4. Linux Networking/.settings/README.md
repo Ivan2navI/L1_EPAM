@@ -616,7 +616,7 @@ ip neigh
 10.3.85.20 dev enp0s9 lladdr 08:00:27:3e:81:b4 STALE
 ```
 
-## Answers: 4, 5.
+## Answers: 4.
 ### 4. На віртуальному інтерфейсу lo Client_1 призначити дві ІР адреси за таким правилом: 172.17.D+10.1/24 та 172.17.D+20.1/24. Налаштувати маршрутизацію таким чином, щоб трафік з Client_2 до 172.17.D+10.1 проходив через Server_1, а до 172.17.D+20.1 через Net4. Для перевірки використати traceroute. 
 
 <p align="center">
@@ -627,10 +627,9 @@ ip neigh
 1. [Настраиваем iptables с нуля](https://www.youtube.com/watch?v=Q0EC8kJlB64&t=757s "Настраиваем iptables с нуля")
 2. [IPTables: NAT и Port forwarding](https://www.youtube.com/watch?v=u_a3ouarrVU&t=870s "IPTables: NAT и Port forwarding")
 3. [Kirill Semaev. Прокси+firewall. 8 Частей](https://youtu.be/O1SI_ELNoZg "Kirill Semaev. Прокси+firewall. 8 Частей") 
- 
 
-Loopback интерфейс: Что это и как его использовать?
-Источник: http://geek-nose.com/loopback-interfejs/
+
+[Loopback интерфейс: Что это и как его использовать?](http://geek-nose.com/loopback-interfejs/ "Loopback интерфейс: Что это и как его использовать?") 
 
 http://microsin.net/adminstuff/cisco/loopback-null-tunnel-interfaces.html
 Loopback - канал коммуникации с одной конечной точкой. Любые сообщения, посылаемые на этот канал, немедленно принимаются тем же самым каналом. Любые сообщения, которые отправляются с этого интерфейса, но у которых адрес не Loopback Interface, отбрасываются. В компьютерах таким адресом loopback interface является адрес 127.0.0.1, он фиксированный и изменению не подлежит. На Unix-like системах loopback interface называется lo или lo0.
@@ -642,9 +641,8 @@ Router(config-if)#ip address 10.10.20.5 255.255.255.254
 ```
 Если нужно обеспечить доступ к Loopback Interface снаружи, то необходимо указать маршрут до подсети, которой принадлежит Loopback Interface.
 
-https://parallel.uran.ru/book/export/html/442
 
-Ручная настройка сети в Ubuntu 20 и старше
+[Ручная настройка сети в Ubuntu 20 и старше](https://parallel.uran.ru/book/export/html/442 "Ручная настройка сети в Ubuntu 20 и старше") 
 
 В Ubuntu 20 система скриптов ifup/ifdown заменена программой netplan, со своими конфигурационными файлами на языке YAML — /etc/netplan/имяфайла.yaml
 Пример конфигурации
@@ -897,8 +895,33 @@ ip addr
   <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main/4.%20Linux%20Networking/.settings/A4_3_My_Schem of Linux Networking (Loopback Interface)_TraceRoute.png">
 </p>
 
+
+## Answers: 5.
 ### 5. Розрахувати спільну адресу та маску (summarizing) адрес 172.17.D+10.1 та 172.17.D+20.1, при чому префікс має бути максимально можливим. Видалити маршрути, встановлені на попередньому кроці та замінити їх об’єднаним маршрутом, якій має проходити через Server_1.
 
+For IP's: 172.17.18.1/24, 172.17.28.1/24
+
+Address:   172.17.18.1           10101100.00010001 .00010010.00000001
+Netmask:   255.255.0.0/16        11111111.11111111 .00000000.00000000
+
+Network
+(Class B): 172.17.0.0/16         10101100.00010001 .00000000.00000000 
+Broadcast: 172.17.255.255        10101100.00010001 .11111111.11111111
+HostMin:   172.17.0.1            10101100.00010001 .00000000.00000001
+HostMax:   172.17.255.254        10101100.00010001 .11111111.11111110
+Hosts/Net: 65534  
+
+
+
+Supernet Address: 172.17.16.0/20
+Supernet Range:172.17.16.0 - 172.17.31.255
+Total IPs: 4 096
+Subnet/Network Mask: 255.255.240.0
+Wildcard/Host Mask: 0.0.15.255
+
+
+10101100.00010000.00000000.00000000 (172.16.0.0)
+10101100.00011111.11111111.11111111 (172.31.255.255)
 
 
 
@@ -1113,3 +1136,35 @@ your preferred browser.
 ```
 
 [пример](http://example.com/ "Необязательная подсказка")
+
+
+> [!NOTE]
+> Information the user should notice even if skimming.
+
+> [!TIP]
+> Optional information to help a user be more successful.
+
+> [!IMPORTANT]
+> Essential information required for user success.
+
+> [!CAUTION]
+> Negative potential consequences of an action.
+
+> [!WARNING]
+> Dangerous certain consequences of an action.
+
+
+:::row:::
+   :::column span="2":::
+      **This is a 2-span column with lots of text.**
+
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vestibulum mollis nunc
+      ornare commodo. Nullam ac metus imperdiet, rutrum justo vel, vulputate leo. Donec
+      rutrum non eros eget consectetur.
+   :::column-end:::
+   :::column span="":::
+      **This is a single-span column with an image in it.**
+
+      ![Doc.U.Ment](media/markdown-reference/document.png)
+   :::column-end:::
+:::row-end:::
