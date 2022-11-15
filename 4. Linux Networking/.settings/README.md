@@ -901,6 +901,7 @@ ip addr
 
 For IP's: 172.17.18.1/24, 172.17.28.1/24
 
+!!! =============== Variant 1 =============== !!!
 Address:   172.17.18.1           10101100.00010001 .00010010.00000001
 Netmask:   255.255.0.0/16        11111111.11111111 .00000000.00000000
 
@@ -910,6 +911,10 @@ Broadcast: 172.17.255.255        10101100.00010001 .11111111.11111111
 HostMin:   172.17.0.1            10101100.00010001 .00000000.00000001
 HostMax:   172.17.255.254        10101100.00010001 .11111111.11111110
 Hosts/Net: 65534  
+
+
+
+
 
 
 
@@ -1138,33 +1143,17 @@ your preferred browser.
 [пример](http://example.com/ "Необязательная подсказка")
 
 
-> [!NOTE]
-> Information the user should notice even if skimming.
+Вертикальные линии обозначают столбцы.
 
-> [!TIP]
-> Optional information to help a user be more successful.
+| Таблицы       | Это                | Круто |
+| ------------- |:------------------:| -----:|
+| столбец 3     | выровнен вправо    | $1600 |
+| столбец 2     | выровнен по центру |   $12 |
+| зебра-строки  | прикольные         |    $1 |
 
-> [!IMPORTANT]
-> Essential information required for user success.
+Внешние вертикальные линии (|) не обязательны и нужны только, чтобы сам код Markdown выглядел красиво. Тот же код можно записать так:
 
-> [!CAUTION]
-> Negative potential consequences of an action.
-
-> [!WARNING]
-> Dangerous certain consequences of an action.
-
-
-:::row:::
-   :::column span="2":::
-      **This is a 2-span column with lots of text.**
-
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vestibulum mollis nunc
-      ornare commodo. Nullam ac metus imperdiet, rutrum justo vel, vulputate leo. Donec
-      rutrum non eros eget consectetur.
-   :::column-end:::
-   :::column span="":::
-      **This is a single-span column with an image in it.**
-
-      ![Doc.U.Ment](media/markdown-reference/document.png)
-   :::column-end:::
-:::row-end:::
+Markdown | не такой | красивый
+--- | --- | ---
+*Но выводится* | `так же` | **клево**
+1 | 2 | 3
