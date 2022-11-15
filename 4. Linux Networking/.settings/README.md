@@ -186,9 +186,6 @@ network:
   version: 2
 ```
 
-
-
-
 __MODIFY SERVER_1__
 ```console
 https://hackmd.io/@IgorLitvin/HkqwLqeft
@@ -468,7 +465,6 @@ Traceroute works by using the time-to-live (TTL) field in the IP header. Each ro
 </p>
 
 
-
 #### Configure NATing and Forwarding on Server_1
 https://kifarunix.com/configure-ubuntu-20-04-as-linux-router/ \
 NATing and Forwarding can be handled using iptables or via the iptables front-end utility like UFW.
@@ -623,17 +619,15 @@ ip neigh
 ## Answers: 4, 5.
 ### 4. На віртуальному інтерфейсу lo Client_1 призначити дві ІР адреси за таким правилом: 172.17.D+10.1/24 та 172.17.D+20.1/24. Налаштувати маршрутизацію таким чином, щоб трафік з Client_2 до 172.17.D+10.1 проходив через Server_1, а до 172.17.D+20.1 через Net4. Для перевірки використати traceroute. 
 
-Видео: \
-
-
-[пример](http://example.com/ "Необязательная подсказка")
-
-1. [Настраиваем iptables с нуля](https://www.youtube.com/watch?v=Q0EC8kJlB64&t=757s "Настраиваем iptables с нуля")
-
-### 5. Розрахувати спільну адресу та маску (summarizing) адрес 172.17.D+10.1 та 172.17.D+20.1, при чому префікс має бути максимально можливим. Видалити маршрути, встановлені на попередньому кроці та замінити їх об’єднаним маршрутом, якій має проходити через Server_1. 
 <p align="center">
   <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main/4.%20Linux%20Networking/.settings/My_Schem%20of%20Linux%20Networking%20(Loopback%20Interface).png">
 </p>
+
+Видео:
+1. [Настраиваем iptables с нуля](https://www.youtube.com/watch?v=Q0EC8kJlB64&t=757s "Настраиваем iptables с нуля")
+2. [IPTables: NAT и Port forwarding](https://www.youtube.com/watch?v=u_a3ouarrVU&t=870s "IPTables: NAT и Port forwarding")
+3. [Kirill Semaev. Прокси+firewall. 8 Частей](https://youtu.be/O1SI_ELNoZg "Kirill Semaev. Прокси+firewall. 8 Частей") 
+ 
 
 Loopback интерфейс: Что это и как его использовать?
 Источник: http://geek-nose.com/loopback-interfejs/
@@ -794,6 +788,7 @@ sudo iptables-save
 
 sudo sh -c "iptables-save > /etc/iptables/rules.v4"
 ```
+
 __Configure NETPLAN__
 ```console
 # sudo nano /etc/netplan/01-netcfg.yaml
@@ -901,6 +896,11 @@ ip addr
 <p align="center">
   <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main/4.%20Linux%20Networking/.settings/A4_3_My_Schem of Linux Networking (Loopback Interface)_TraceRoute.png">
 </p>
+
+### 5. Розрахувати спільну адресу та маску (summarizing) адрес 172.17.D+10.1 та 172.17.D+20.1, при чому префікс має бути максимально можливим. Видалити маршрути, встановлені на попередньому кроці та замінити їх об’єднаним маршрутом, якій має проходити через Server_1.
+
+
+
 
 
 
@@ -1112,3 +1112,4 @@ your preferred browser.
 127.0.0.1:8000
 ```
 
+[пример](http://example.com/ "Необязательная подсказка")
