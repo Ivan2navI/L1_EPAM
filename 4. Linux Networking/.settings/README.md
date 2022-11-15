@@ -562,6 +562,8 @@ sudo systemctl status netfilter-persistent.service
 ```
 The current rules will be saved during package installation but can still save them thereafter by running the command:
 ```console
+sudo iptables-save
+
 sudo sh -c "iptables-save > /etc/iptables/rules.v4"
 # OR
 sudo iptables-save > /etc/iptables/rules.v4
@@ -780,6 +782,8 @@ sudo iptables -t nat -L -nv
     # 1    48 MASQUERADE  all  --  *      enp0s9  0.0.0.0/0            0.0.0.0/0
 
 # Save current rules:
+sudo iptables-save
+
 sudo sh -c "iptables-save > /etc/iptables/rules.v4"
 ```
 __Configure NETPLAN__
