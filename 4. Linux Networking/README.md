@@ -142,7 +142,7 @@ sudo ufw allow  67/udp
 Restart DHCP server to apply changes.
 ```console
 sudo service isc-dhcp-server restart
-#OR
+# OR
 sudo systemctl restart isc-dhcp-server.service
 ```
 DHCP server should be up and running, check status using the command below.
@@ -343,6 +343,8 @@ sudo iptables -t nat -L -nv
 __Save iptables rules Permanently in Linux__ \
 In order to permanently save iptables rules, simply install the iptables-persistent package and run the iptables-save command as follows.
 ```console
+sudo iptables-save
+
 sudo apt install iptables-persistent
 ```
 Make sure services are enabled on Debian or Ubuntu using the systemctl command:
@@ -459,6 +461,8 @@ sudo iptables -A FORWARD -i enp0s8 -o enp0s9 -j ACCEPT
 sudo iptables -A FORWARD -i enp0s9 -o enp0s8 -j ACCEPT
 
 # Save current rules:
+sudo iptables-save
+
 sudo sh -c "iptables-save > /etc/iptables/rules.v4"
 ```
 <p align="center">
