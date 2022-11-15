@@ -885,6 +885,10 @@ sudo netplan apply
 sudo systemctl restart systemd-networkd
 ip addr 
 ```
+#### Check traceroute from Client_2 to Client_1 (172.17.18.1/24 & 172.17.28.1/24):
+<p align="center">
+  <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main/4.%20Linux%20Networking/.settings/A4_3_My_Schem of Linux Networking (Loopback Interface)_TraceRoute.png">
+</p>
 
 
 
