@@ -899,6 +899,7 @@ ip addr
 ## Answers: 5.
 ### 5. Розрахувати спільну адресу та маску (summarizing) адрес 172.17.D+10.1 та 172.17.D+20.1, при чому префікс має бути максимально можливим. Видалити маршрути, встановлені на попередньому кроці та замінити їх об’єднаним маршрутом, якій має проходити через Server_1.
 
+#### Summarizing
 INFO:
 1. [Route Summarization Theory](https://asecuritysite.com/IP/routesum1 "Route Summarization Theory")
 2. [Route Summarization Calc](https://asecuritysite.com/IP/routesum "Route Summarization Calc")
