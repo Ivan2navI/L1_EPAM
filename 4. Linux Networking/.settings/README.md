@@ -629,6 +629,8 @@ ip neigh
 3. [Kirill Semaev. Прокси+firewall. 8 Частей](https://youtu.be/O1SI_ELNoZg "Kirill Semaev. Прокси+firewall. 8 Частей") 
 
 
+[Netplan configuration examples](https://netplan.io/examples "Netplan configuration examples") 
+
 [Loopback интерфейс: Что это и как его использовать?](http://geek-nose.com/loopback-interfejs/ "Loopback интерфейс: Что это и как его использовать?") 
 
 http://microsin.net/adminstuff/cisco/loopback-null-tunnel-interfaces.html
@@ -899,7 +901,7 @@ ip addr
 ## Answers: 5.
 ### 5. Розрахувати спільну адресу та маску (summarizing) адрес 172.17.D+10.1 та 172.17.D+20.1, при чому префікс має бути максимально можливим. Видалити маршрути, встановлені на попередньому кроці та замінити їх об’єднаним маршрутом, якій має проходити через Server_1.
 
-#### Summarizing
+#### Summarizing:
 INFO:
 1. [Route Summarization Theory](https://asecuritysite.com/IP/routesum1 "Route Summarization Theory")
 2. [Route Summarization Calc](https://asecuritysite.com/IP/routesum "Route Summarization Calc")
@@ -933,15 +935,123 @@ which gives: 172.17.16.0 and since we using 20 bits (8+8+4) to give a route summ
 Supernet Address: 172.17.16.0/20 \
 Supernet Range:172.17.16.0 - 172.17.31.255 \
 Total IPs: 4 096 \
-Subnet/Network Mask: 255.255.240.0 \ 
-Wildcard/Host Mask: 0.0.15.255 \
+Subnet/Network Mask: 255.255.240.0 \
+Wildcard/Host Mask: 0.0.15.255
 
 10101100.00010000.00000000.00000000 (172.16.0.0) \
-10101100.00011111.11111111.11111111 (172.31.255.255) \
+10101100.00011111.11111111.11111111 (172.31.255.255)
+
+#### Configuring Packet Forwarding through Server_1 for Host Max 172.17.31.254/20:
+| 172.17.16.0/20     |        Dec       |
+| ------------------ |:----------------:|
+| Host Max:          | 172.17.31.254    |
+
+#### Check traceroute from Client_2 to Client_1 (loopback interface: 172.17.31.254/20):
+<p align="center">
+  <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main/4.%20Linux%20Networking/.settings/A5_My_Schem of Linux Networking (Loopback Interface_Q5)_TraceRoute.png">
+</p>
 
 
+__MODIFY Client_1__
+```console
+sudo nano /etc/netplan/01-netcfg.yaml
+
+#Client_1
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    # interface name
+    lo:
+      addresses: [172.17.31.254/20] # QUESTION 5: Conf loopback interface for summarizing on  Client_1
+    enp0s3:
+      dhcp4: true
+      optional: true
+    enp0s8:
+      dhcp4: false
+      optional: true
+      # IP address/subnet mask
+      addresses: [172.16.8.1/24]
+      # default gateway
+      # [metric] : set priority (specify it if multiple NICs are set)
+      # lower value is higher priority
+      routes:
+        - to: 172.16.8.2  # Use Net4 - for connect to  Client_2 IP (172.16.8.2)
+          via: 172.16.8.1 # Use Net4 - This Client_1 IP (172.16.8.1)
+          metric: 110
+    enp0s9: # <-------------------- FOR connect from VBox
+      dhcp4:  false
+      optional: true
+      # IP address/subnet mask
+      addresses: [192.168.2.31/24]
+      # default gateway
+      # [metric] : set priority (specify it if multiple NICs are set)
+      # lower value is higher priority
+      routes:
+        - to: default
+          via: 10.85.8.1
+          metric: 120
+
+# !!! sudo apply changes
+sudo netplan generate
+sudo netplan apply
+sudo systemctl restart systemd-networkd
+ip addr 
+```
 
 
+__MODIFY Server_1__
+```console
+sudo nano /etc/netplan/01-netcfg.yaml
+
+#Server_1
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    # interface name
+    enp0s3:
+      dhcp4: false
+      optional: true
+      # IP address/subnet mask
+      addresses: [192.168.2.30/24]
+      # default gateway
+      # [metric] : set priority (specify it if multiple NICs are set)
+      # lower value is higher priority
+      routes:
+        - to: default
+          via: 192.168.2.1
+          metric: 90
+      nameservers:
+        # name server to bind
+        addresses: [192.168.2.1, 8.8.8.8]
+        # DNS search base
+        #search: [srv.world,server.education]
+      #dhcp6: false
+    enp0s8:
+      dhcp4: false
+      optional: true
+      # IP address/subnet mask
+      addresses: [10.85.8.1/24]
+      routes:
+        - to: 172.17.31.254 # QUESTION 5: From Client_2 (10.85.8.x) TO Client_1 (lo: 172.17.31.254/20) through Server_1
+          via: 10.85.8.1  # QUESTION 5
+          metric: 80     # QUESTION 5
+    enp0s9:
+      dhcp4: false
+      optional: true
+      addresses: [10.3.85.1/24]
+      routes:
+        - to: 172.17.31.254 # QUESTION 5: From Client_2 (10.85.8.x) TO Client_1 (lo: 172.17.31.254/20) through Server_1
+          via: 10.3.85.1  # QUESTION 5
+          metric: 80     # QUESTION 5
+
+# !!! sudo apply changes
+sudo netplan generate
+sudo netplan apply
+sudo systemctl restart systemd-networkd
+ip addr 
+```
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 

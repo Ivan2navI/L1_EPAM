@@ -224,7 +224,7 @@ ip addr
 
 __MODIFY Client_1__
 ```console
-sudo nano /etc/netplan/*.yaml
+sudo nano /etc/netplan/01-netcfg.yaml
 
 # rename to disable default setting
 sudo mv /etc/netplan/00-installer-config.yaml /etc/netplan/00-installer-config.yaml.org
@@ -253,7 +253,7 @@ ip addr
 
 __MODIFY Client_2__
 ```console
-sudo cat /etc/netplan/*.yaml
+sudo nano /etc/netplan/01-netcfg.yaml
 
 # rename to disable default setting
 sudo mv /etc/netplan/00-installer-config.yaml /etc/netplan/00-installer-config.yaml.org
@@ -478,7 +478,7 @@ sudo sh -c "iptables-save > /etc/iptables/rules.v4"
 ## Answers: 5.
 ### 5. Розрахувати спільну адресу та маску (summarizing) адрес 172.17.D+10.1 та 172.17.D+20.1, при чому префікс має бути максимально можливим. Видалити маршрути, встановлені на попередньому кроці та замінити їх об’єднаним маршрутом, якій має проходити через Server_1.
 
-#### Summarizing
+#### Summarizing:
 ```console
 So, 172.17.18.1-172.17.28.1 (172.17.18.1-172.17.28.255) gives: 
 
@@ -502,3 +502,18 @@ which gives: 172.17.16.0 and since we using 20 bits (8+8+4) to give a route summ
 | Host Min:          | 172.17.16.1      |  10101100.00010001.0001 0000.00000001 |
 | Host Max:          | 172.17.31.254    |  10101100.00010001.0001 1111.11111110 |
 | Hosts:             | 4094             | 
+
+#### Configuring Packet Forwarding through Server_1 for Host Max 172.17.31.254/20:
+| 172.17.16.0/20     |        Dec       |
+| ------------------ |:----------------:|
+| Host Max:          | 172.17.31.254    |
+
+<p align="center">
+  <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main/4.%20Linux%20Networking/.settings/A5_Netplan_Conf.png">
+</p>
+
+#### Check traceroute from Client_2 to Client_1 (loopback interface: 172.17.31.254/20):
+<p align="center">
+  <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main/4.%20Linux%20Networking/.settings/A5_My_Schem of Linux Networking (Loopback Interface_Q5)_TraceRoute.png">
+</p>
+
