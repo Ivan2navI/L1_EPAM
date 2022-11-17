@@ -503,7 +503,7 @@ which gives: 172.17.16.0 and since we using 20 bits (8+8+4) to give a route summ
 | Host Max:          | 172.17.31.254    |  10101100.00010001.0001 1111.11111110 |
 | Hosts:             | 4094             | 
 
-#### Configuring Packet Forwarding through Server_1 for Host Max 172.17.31.254/20:
+#### Configuring Packet Forwarding through Server_1 for loopback interface Client_1 with Host Max IP 172.17.31.254/20:
 | 172.17.16.0/20     |        Dec       |
 | ------------------ |:----------------:|
 | Host Max:          | 172.17.31.254    |
@@ -512,7 +512,7 @@ which gives: 172.17.16.0 and since we using 20 bits (8+8+4) to give a route summ
   <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main/4.%20Linux%20Networking/.settings/A5_Netplan_Conf.png">
 </p>
 
-#### Check traceroute from Client_2 to Client_1 (loopback interface: 172.17.31.254/20):
+#### Check traceroute from Client_2 to Client_1 (loopback interface: 172.17.31.254/20) through Server_1:
 <p align="center">
   <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main/4.%20Linux%20Networking/.settings/A5_My_Schem of Linux Networking (Loopback Interface_Q5)_TraceRoute.png">
 </p>

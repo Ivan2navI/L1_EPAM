@@ -941,12 +941,12 @@ Wildcard/Host Mask: 0.0.15.255
 10101100.00010000.00000000.00000000 (172.16.0.0) \
 10101100.00011111.11111111.11111111 (172.31.255.255)
 
-#### Configuring Packet Forwarding through Server_1 for Host Max 172.17.31.254/20:
+#### Configuring Packet Forwarding through Server_1 for loopback interface Client_1 with Host Max IP 172.17.31.254/20:
 | 172.17.16.0/20     |        Dec       |
 | ------------------ |:----------------:|
 | Host Max:          | 172.17.31.254    |
 
-#### Check traceroute from Client_2 to Client_1 (loopback interface: 172.17.31.254/20):
+#### Check traceroute from Client_2 to Client_1 (loopback interface: 172.17.31.254/20) through Server_1:
 <p align="center">
   <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main/4.%20Linux%20Networking/.settings/A5_My_Schem of Linux Networking (Loopback Interface_Q5)_TraceRoute.png">
 </p>
@@ -1052,6 +1052,54 @@ sudo netplan apply
 sudo systemctl restart systemd-networkd
 ip addr 
 ```
+
+
+__MODIFY Client_2__
+```console
+sudo nano /etc/netplan/01-netcfg.yaml
+
+#Client_2
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    # interface name
+    enp0s3:
+      dhcp4: true
+      optional: true
+    enp0s8:
+      dhcp4: false
+      optional: true
+      # IP address/subnet mask
+      addresses: [172.16.8.2/24]
+      # default gateway
+      # [metric] : set priority (specify it if multiple NICs are set)
+      # lower value is higher priority
+      routes:
+        - to: 172.16.8.1   # Use Net4 - for connect to  Client_1 IP (172.16.8.1)
+          via: 172.16.8.2  # Use Net4 - This Client_2 IP (172.16.8.2)
+          metric: 110
+    enp0s9: # <-------------------- FOR connect from VBox
+      dhcp4: false
+      optional: true
+      # IP address/subnet mask
+      addresses: [192.168.2.32/24]
+      # default gateway
+      # [metric] : set priority (specify it if multiple NICs are set)
+      # lower value is higher priority
+      routes:
+        - to: default
+          via: 10.3.85.1
+          metric: 120
+# !!! sudo apply changes
+sudo netplan generate
+sudo netplan apply
+sudo systemctl restart systemd-networkd
+ip addr 
+```
+
+
+
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
