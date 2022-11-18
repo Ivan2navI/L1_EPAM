@@ -1129,7 +1129,6 @@ sudo ufw allow 22/tcp
 # Connect to SSH Server
 ssh username@ip-address/hostname
 
-
 # !!! Disabling OpenSSH !!!
 # The systems with physical access are less required SSH access. In that case, you can either block ssh access using the firewall or disable the SSH service on your system.
 
@@ -1139,6 +1138,7 @@ sudo ufw deny 22/tcp
 # You can also completely disable the SSH service (OpenSSH) to prevent remote access.
 sudo systemctl stop --now ssh 
 sudo systemctl disable --now ssh 
+
 
 # !!! Add new user with password !!!: 
 sudo useradd -m -d /home/ssh_user_4client1 -s /bin/bash ssh_user_4client1
@@ -1171,9 +1171,13 @@ chmod 600 /home/ssh_user_4client1/.ssh/authorized_keys
 # Last, if you want the new user to have sudo access, be sure to add them to the sudo group:
 sudo usermod -a -G sudo username
 
-#If you don’t have a sudo group, you can manually edit the /etc/sudoers file.
-
+# If you don’t have a sudo group, you can manually edit the 
+/etc/sudoers file.
+```
+```console
+# !!! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! !!!:
 # !!! To display all users run following command !!!:
+# !!! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! !!!:
 compgen -u
 
 To display all groups run following command:
@@ -1183,7 +1187,7 @@ compgen -g
 cut -d ":" -f 1 /etc/passwd.
 ```
 
-!!! Then create ssh_user_4client1 on Client_2 server. !!!
+__!!! Then create ssh_user_4client1 on Client_2 server. !!!__s
 
 Connect from Client_1 to Client_2 (10.3.85.21) with ssh_user_4client1 using SSH Public Key Based Authentication:
 ```console
@@ -1239,8 +1243,8 @@ client2
 10.3.85.21 172.16.8.2 192.168.2.32
 ```
 
-__MODIFY Client_2__
-!!! Create ssh_user_4client2 on Client_2 server. !!!
+__MODIFY Client_2__ \
+!!! Create ssh_user_4client2 on Client_2 server. !!! \
 !!! Create ssh_user_4client2 on Client_1 server. !!!
 ```console
 sudo useradd -m -d /home/ssh_user_4client2 -s /bin/bash ssh_user_4client2
@@ -1270,19 +1274,6 @@ ssh_user_4client2@client1:~$ hostname && hostname -I
 client1
 10.85.8.21 172.16.8.1 192.168.2.31
 ```
-
-
-
-
-
-
-
-
-
-sudo chown -R username:username /home/username/.ssh # -R, --recursive: operate on files and directories recursively
-sudo chmod 0700 /home/username/.ssh
-sudo chmod 0600 /home/username/.ssh/authorized_keys
-
 
 
 ## Answers: 7.
