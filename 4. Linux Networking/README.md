@@ -27,7 +27,7 @@ __Увага!__ Для того, щоб з Client_1 та Client_2 проходи
 7. Налаштуйте на Server_1 firewall таким чином:
 - Дозволено підключатись через SSH з Client_1 та заборонено з Client_2 
 - З Client_2 на 172.17.D+10.1 ping проходив, а на 172.17.D+20.1 не проходив 
-9. Якщо в п.3 була налаштована маршрутизація для доступу Client_1 та Client_2 до мережі Інтернет – видалити відповідні записи. На Server_1 налаштувати NAT 
+8. Якщо в п.3 була налаштована маршрутизація для доступу Client_1 та Client_2 до мережі Інтернет – видалити відповідні записи. На Server_1 налаштувати NAT 
 сервіс таким чином, щоб з Client_1 та Client_2 проходив ping в мережу Інтернет.
 
 ## Preparing
@@ -517,3 +517,21 @@ which gives: 172.17.16.0 and since we using 20 bits (8+8+4) to give a route summ
   <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main/4.%20Linux%20Networking/.settings/A5_My_Schem of Linux Networking (Loopback Interface_Q5)_TraceRoute.png">
 </p>
 
+## Answers: 6.
+### 6. Налаштувати SSH сервіс таким чином, щоб Client_1 та Client_2 могли підключатись до Server_1 та один до одного.  
+
+
+
+
+
+
+
+
+## Answers: 7.
+### 7. Налаштуйте на Server_1 firewall таким чином:
+### - Дозволено підключатись через SSH з Client_1 та заборонено з Client_2 
+### - З Client_2 на 172.17.D+10.1 ping проходив, а на 172.17.D+20.1 не проходив 
+
+
+## Answers: 8.
+### 8. Якщо в п.3 була налаштована маршрутизація для доступу Client_1 та Client_2 до мережі Інтернет – видалити відповідні записи. На Server_1 налаштувати NAT сервіс таким чином, щоб з Client_1 та Client_2 проходив ping в мережу Інтернет.

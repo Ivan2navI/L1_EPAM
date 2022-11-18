@@ -25,7 +25,7 @@ __Увага!__ Для того, щоб з Client_1 та Client_2 проходи
 7. Налаштуйте на Server_1 firewall таким чином:
 - Дозволено підключатись через SSH з Client_1 та заборонено з Client_2 
 - З Client_2 на 172.17.D+10.1 ping проходив, а на 172.17.D+20.1 не проходив 
-9. Якщо в п.3 була налаштована маршрутизація для доступу Client_1 та Client_2 до мережі Інтернет – видалити відповідні записи. На Server_1 налаштувати NAT 
+8. Якщо в п.3 була налаштована маршрутизація для доступу Client_1 та Client_2 до мережі Інтернет – видалити відповідні записи. На Server_1 налаштувати NAT 
 сервіс таким чином, щоб з Client_1 та Client_2 проходив ping в мережу Інтернет.
 
 ## Preparing
@@ -1097,7 +1097,122 @@ sudo netplan apply
 sudo systemctl restart systemd-networkd
 ip addr 
 ```
+## Answers: 6.
+### 6. Налаштувати SSH сервіс таким чином, щоб Client_1 та Client_2 могли підключатись до Server_1 та один до одного.  
 
+__INFO__:
+1. [How to Set Up SSH Keys on Ubuntu 20.04](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys-on-ubuntu-20-04 "How to Set Up SSH Keys on Ubuntu 20.04")
+2. [How To Install and Enable SSH Server on Ubuntu 20.04](https://devconnected.com/how-to-install-and-enable-ssh-server-on-ubuntu-20-04/ "How To Install and Enable SSH Server on Ubuntu 20.04")
+3. [How to Install and Enable OpenSSH on Ubuntu 22.04](https://linuxhint.com/install-enable-openssh-ubuntu-22-04/ "How to Install and Enable OpenSSH on Ubuntu 22.04")
+4. [How to Use ssh-keygen to Generate an SSH Key](https://linuxhint.com/use-ssh-keygen-to-generate-an-ssh-key/ "How to Use ssh-keygen to Generate an SSH Key")
+
+__MODIFY Client_1__
+```console
+# !!! Install OpenSSH Server !!!
+# System Update
+sudo apt update && sudo apt upgrade
+
+# Install OpenSSH
+sudo apt install openssh-server
+
+# Enable OpenSSH
+sudo systemctl enable --now ssh
+
+# Evaluate OpenSSH Status
+sudo systemctl status ssh
+
+# The Ubuntu systems ships with default UFW firewall, If the UFW is active, you need to allow SSH port 22 for remote users. To allow port 22 in UFW type:
+sudo ufw allow 22/tcp 
+
+# Connect to SSH Server
+ssh username@ip-address/hostname
+
+# !!! Disabling OpenSSH !!!
+# The systems with physical access are less required SSH access. In that case, you can either block ssh access using the firewall or disable the SSH service on your system.
+
+# To block SSH access via UFW firewall, type:
+sudo ufw deny 22/tcp 
+
+# You can also completely disable the SSH service (OpenSSH) to prevent remote access.
+sudo systemctl stop --now ssh 
+sudo systemctl disable --now ssh 
+
+# !!! Add new user with password !!!: 
+sudo useradd -m -d /home/bash ssh_user_4client1 -s /bin/bash ssh_user_4client1
+sudo passwd ssh_user_4client1
+
+# Create a .ssh directory in the new_user home directory:
+mkdir .ssh
+
+# ensure the directory ir owned by the new user
+# chown -R username:username /home/username/.ssh
+chown -R ssh_user_4client1:ssh_user_4client1 /home/ssh_user_4client1/.ssh
+
+# Use the chmod command to change the .ssh directory's permissions to 700. Changing the permissions restricts access so that only the new_user can read, write, or open the .ssh directory.
+# chmod 700 /home/username/.ssh
+chmod 700 /home/ssh_user_4client1/.ssh
+
+# Use the touch command to create the authorized_keys file in the .ssh directory:
+# $ touch .ssh/authorized_keys
+
+
+
+chmod 600 /home/username/.ssh/authorized_keys
+
+
+chmod 700 /home/ssh_user_4client1/.ssh
+chmod 600 /home/ssh_user_4client1/.ssh/authorized_keys
+
+# Last, if you want the new user to have sudo access, be sure to add them to the sudo group:
+sudo usermod -a -G sudo username
+
+#If you don’t have a sudo group, you can manually edit the /etc/sudoers file.
+
+# To display all users run following command:
+compgen -u
+
+To display all groups run following command:
+compgen -g
+
+# However you can also display all users by 
+cut -d ":" -f 1 /etc/passwd.
+```
+Connect from Client2 with ssh_user_4client1:
+```console
+ubuntu@client2:~$ ssh ssh_user_4client1@10.85.8.21
+# The authenticity of host '10.85.8.21 (10.85.8.21)' can't be established.
+# ED25519 key fingerprint is SHA256:NPz1sLLW8+oY6KOczKqeUhuB3DSFz8TZKnm9E9O0TOg.
+# This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '10.85.8.21' (ED25519) to the list of known hosts.
+ssh_user_4client1@10.85.8.21's password:
+# Welcome to Ubuntu 22.04.1 LTS (GNU/Linux 5.15.0-52-generic x86_64)
+```
+
+
+
+
+
+
+
+
+
+sudo chown -R username:username /home/username/.ssh # -R, --recursive: operate on files and directories recursively
+sudo chmod 0700 /home/username/.ssh
+sudo chmod 0600 /home/username/.ssh/authorized_keys
+
+
+
+## Answers: 7.
+### 7. Налаштуйте на Server_1 firewall таким чином:
+### - Дозволено підключатись через SSH з Client_1 та заборонено з Client_2 
+### - З Client_2 на 172.17.D+10.1 ping проходив, а на 172.17.D+20.1 не проходив 
+
+__INFO__:
+1. [Step 4 — Setting Up a Basic Firewall](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-20-04 "Step 4 — Setting Up a Basic Firewall")
+
+## Answers: 8.
+### 8. Якщо в п.3 була налаштована маршрутизація для доступу Client_1 та Client_2 до мережі Інтернет – видалити відповідні записи. На Server_1 налаштувати NAT сервіс таким чином, щоб з Client_1 та Client_2 проходив ping в мережу Інтернет.
 
 
 
