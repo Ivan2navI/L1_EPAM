@@ -1107,6 +1107,7 @@ __INFO__:
 4. [How to Use ssh-keygen to Generate an SSH Key](https://linuxhint.com/use-ssh-keygen-to-generate-an-ssh-key/ "How to Use ssh-keygen to Generate an SSH Key")
 5. [How do I add new user accounts with SSH access to my Amazon EC2 Linux instance?](https://aws.amazon.com/ru/premiumsupport/knowledge-center/new-user-accounts-linux-instance/ "How do I add new user accounts with SSH access to my Amazon EC2 Linux instance?")
 6. [SSH Public Key Based Authentication on a Linux/Unix server](https://www.cyberciti.biz/tips/ssh-public-key-based-authentication-how-to.html "SSH Public Key Based Authentication on a Linux/Unix server")
+7. [How to Show All Active SSH Connections in Linux](https://www.maketecheasier.com/show-active-ssh-connections-linux/ "How to Show All Active SSH Connections in Linux")
 
 __MODIFY Client_1__
 ```console
@@ -1254,7 +1255,7 @@ sudo passwd ssh_user_4client2
 su ssh_user_4client2
 cd ~
 ```
-Connect from Client_2 to Client_1 (10.85.8.21) with ssh_user_4client2 directly:
+Connect directly from Client_2 to Client_1 (10.85.8.21) with ssh_user_4client2:
 ```console
 ssh ssh_user_4client2@10.85.8.21
 ssh_user_4client2@client2:~$ ssh ssh_user_4client2@10.85.8.21
@@ -1274,7 +1275,123 @@ ssh_user_4client2@client1:~$ hostname && hostname -I
 client1
 10.85.8.21 172.16.8.1 192.168.2.31
 ```
+__MODIFY Server_1__ \
+!!! Create ssh_user_4client2 on Client_2 server. !!! \
+!!! Create ssh_user_4client2 on Client_1 server. !!!
+```console
+sudo useradd -m -d /home/ssh_user_4client1 -s /bin/bash ssh_user_4client1
+sudo passwd ssh_user_4client1
+```
 
+Connect directly from Client_1 (10.85.8.21) to Server_1 (10.85.8.1) with ssh_user_4client1:
+```console
+ubuntu@client1:$ ssh ssh_user_4client1@10.85.8.1
+
+The authenticity of host '10.85.8.1 (10.85.8.1)' can't be established.
+ED25519 key fingerprint is SHA256:NPz1sLLW8+oY6KOczKqeUhuB3DSFz8TZKnm9E9O0TOg.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? 
+yes
+
+Warning: Permanently added '10.85.8.1' (ED25519) to the list of known hosts.
+ssh_user_4client1@10.85.8.1's password:
+
+# Welcome to Ubuntu 22.04.1 LTS (GNU/Linux 5.15.0-52-generic x86_64)
+
+ssh_user_4client1@server1:~$ hostname && hostname -I
+server1
+192.168.2.30 10.85.8.1 10.3.85.1
+```
+
+Connect directly from Client_2 (10.3.85.21) to Server_1 (10.3.85.1) with ssh_user_4client1:
+```console
+ubuntu@client2:~$ ssh ssh_user_4client2@10.3.85.1
+
+The authenticity of host '10.3.85.1 (10.3.85.1)' can't be established.
+ED25519 key fingerprint is SHA256:NPz1sLLW8+oY6KOczKqeUhuB3DSFz8TZKnm9E9O0TOg.
+This host key is known by the following other names/addresses:
+    ~/.ssh/known_hosts:1: [hashed name]
+Are you sure you want to continue connecting (yes/no/[fingerprint])? 
+yes
+
+Warning: Permanently added '10.3.85.1' (ED25519) to the list of known hosts.
+ssh_user_4client2@10.3.85.1's password:
+
+# Welcome to Ubuntu 22.04.1 LTS (GNU/Linux 5.15.0-52-generic x86_64)
+
+ssh_user_4client2@server1:~$ hostname && hostname -I
+server1
+192.168.2.30 10.85.8.1 10.3.85.1
+```
+__Show All Active SSH Connections__
+```console
+ubuntu@server1:~$ who
+ubuntu   pts/0        2022-11-18 17:46 (192.168.2.14)
+ssh_user_4client1 pts/1        2022-11-18 17:50 (10.85.8.21)
+ssh_user_4client2 pts/2        2022-11-18 17:55 (10.3.85.21)
+
+
+ubuntu@server1:~$ w
+ 18:01:13 up  2:47,  3 users,  load average: 0.00, 0.00, 0.00
+USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT
+ubuntu   pts/0    192.168.2.14     17:46    1.00s  0.03s  0.00s w
+ssh_user pts/1    10.85.8.21       17:50    9:21   0.01s  0.01s -bash
+ssh_user pts/2    10.3.85.21       17:55   47.00s  0.02s  0.02s -bash
+
+
+ubuntu@server1:~$ last
+ssh_user pts/2        10.3.85.21       Fri Nov 18 17:55   still logged in
+ssh_user pts/1        10.85.8.21       Fri Nov 18 17:50   still logged in
+ubuntu   pts/0        192.168.2.14     Fri Nov 18 17:46   still logged in
+reboot   system boot  5.15.0-52-generi Fri Nov 18 15:14   still running
+ubuntu   pts/0        192.168.2.14     Thu Nov 17 21:28 - 22:13  (00:44)
+reboot   system boot  5.15.0-52-generi Thu Nov 17 20:57 - 22:13  (01:15)
+ubuntu   pts/0        192.168.2.14     Thu Nov 17 00:16 - 01:07  (00:51)
+...
+
+
+ubuntu@server1:~$ last | grep still
+ssh_user pts/2        10.3.85.21       Fri Nov 18 17:55   still logged in
+ssh_user pts/1        10.85.8.21       Fri Nov 18 17:50   still logged in
+ubuntu   pts/0        192.168.2.14     Fri Nov 18 17:46   still logged in
+reboot   system boot  5.15.0-52-generi Fri Nov 18 15:14   still running
+
+
+ubuntu@server1:~$ last -w
+ssh_user_4client2 pts/2        10.3.85.21       Fri Nov 18 17:55   still logged in
+ssh_user_4client1 pts/1        10.85.8.21       Fri Nov 18 17:50   still logged in
+ubuntu   pts/0        192.168.2.14     Fri Nov 18 17:46   still logged in
+reboot   system boot  5.15.0-52-generic Fri Nov 18 15:14   still running
+ubuntu   pts/0        192.168.2.14     Thu Nov 17 21:28 - 22:13  (00:44)
+...
+
+
+ubuntu@server1:~$ netstat | grep ssh
+tcp        0     64 server1:ssh             192.168.2.14:53785      ESTABLISHED
+tcp        0      0 server1:ssh             10.3.85.21:59476        ESTABLISHED
+tcp        0      0 server1:ssh             10.85.8.21:59250        ESTABLISHED
+tcp        0      0 server1:ssh             192.168.2.14:53786      ESTABLISHED
+
+
+
+ubuntu@server1:~$ ss -a | grep ssh
+u_str LISTEN 0      4096         /run/user/1002/gnupg/S.gpg-agent.ssh 24410                          * 0
+u_str LISTEN 0      4096         /run/user/1001/gnupg/S.gpg-agent.ssh 24058                          * 0
+u_str LISTEN 0      4096         /run/user/1000/gnupg/S.gpg-agent.ssh 22665                          * 0
+tcp   LISTEN 0      128                                       0.0.0.0:ssh                      0.0.0.0:*
+tcp   ESTAB  0      0                                    192.168.2.30:ssh                 192.168.2.14:53785
+tcp   ESTAB  0      0                                       10.3.85.1:ssh                   10.3.85.21:59476
+tcp   ESTAB  0      0                                       10.85.8.1:ssh                   10.85.8.21:59250
+tcp   ESTAB  0      0                                    192.168.2.30:ssh                 192.168.2.14:53786
+tcp   LISTEN 0      128                                          [::]:ssh                         [::]:*
+
+
+ubuntu@server1:~$ ss -a | grep ssh | grep ESTAB
+tcp   ESTAB  0      64                                   192.168.2.30:ssh                 192.168.2.14:53785
+tcp   ESTAB  0      0                                       10.3.85.1:ssh                   10.3.85.21:59476
+tcp   ESTAB  0      0                                       10.85.8.1:ssh                   10.85.8.21:59250
+tcp   ESTAB  0      0                                    192.168.2.30:ssh                 192.168.2.14:53786
+```
 
 ## Answers: 7.
 ### 7. Налаштуйте на Server_1 firewall таким чином:

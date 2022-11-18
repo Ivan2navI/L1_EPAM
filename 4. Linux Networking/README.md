@@ -520,9 +520,15 @@ which gives: 172.17.16.0 and since we using 20 bits (8+8+4) to give a route summ
 ## Answers: 6.
 ### 6. Налаштувати SSH сервіс таким чином, щоб Client_1 та Client_2 могли підключатись до Server_1 та один до одного.  
 
+#### Creating users ssh_user_4client1 & ssh_user_4client2 for connect to Client_1 (10.85.8.x), Client_2 (10.3.85.x) and Server_1 (10.85.8.1, 10.3.85.1).
+<p align="center">
+  <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main/4.%20Linux%20Networking/.settings/A6_Show_All_Active_SSH_Connections.png">
+</p>
 
-
-
+#### Show All Active SSH Connections (for example on Server_1)
+<p align="center">
+  <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main/4.%20Linux%20Networking/.settings/A6_Show_All_Active_SSH_Connections.png">
+</p>
 
 
 
