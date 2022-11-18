@@ -1105,6 +1105,8 @@ __INFO__:
 2. [How To Install and Enable SSH Server on Ubuntu 20.04](https://devconnected.com/how-to-install-and-enable-ssh-server-on-ubuntu-20-04/ "How To Install and Enable SSH Server on Ubuntu 20.04")
 3. [How to Install and Enable OpenSSH on Ubuntu 22.04](https://linuxhint.com/install-enable-openssh-ubuntu-22-04/ "How to Install and Enable OpenSSH on Ubuntu 22.04")
 4. [How to Use ssh-keygen to Generate an SSH Key](https://linuxhint.com/use-ssh-keygen-to-generate-an-ssh-key/ "How to Use ssh-keygen to Generate an SSH Key")
+5. [How do I add new user accounts with SSH access to my Amazon EC2 Linux instance?](https://aws.amazon.com/ru/premiumsupport/knowledge-center/new-user-accounts-linux-instance/ "How do I add new user accounts with SSH access to my Amazon EC2 Linux instance?")
+6. [SSH Public Key Based Authentication on a Linux/Unix server](https://www.cyberciti.biz/tips/ssh-public-key-based-authentication-how-to.html "SSH Public Key Based Authentication on a Linux/Unix server")
 
 __MODIFY Client_1__
 ```console
@@ -1127,6 +1129,7 @@ sudo ufw allow 22/tcp
 # Connect to SSH Server
 ssh username@ip-address/hostname
 
+
 # !!! Disabling OpenSSH !!!
 # The systems with physical access are less required SSH access. In that case, you can either block ssh access using the firewall or disable the SSH service on your system.
 
@@ -1138,11 +1141,15 @@ sudo systemctl stop --now ssh
 sudo systemctl disable --now ssh 
 
 # !!! Add new user with password !!!: 
-sudo useradd -m -d /home/bash ssh_user_4client1 -s /bin/bash ssh_user_4client1
+sudo useradd -m -d /home/ssh_user_4client1 -s /bin/bash ssh_user_4client1
 sudo passwd ssh_user_4client1
 
+# Change user:
+su ssh_user_4client1
+cd ~
+
 # Create a .ssh directory in the new_user home directory:
-mkdir .ssh
+mkdir /home/ssh_user_4client1/.ssh
 
 # ensure the directory ir owned by the new user
 # chown -R username:username /home/username/.ssh
@@ -1153,22 +1160,20 @@ chown -R ssh_user_4client1:ssh_user_4client1 /home/ssh_user_4client1/.ssh
 chmod 700 /home/ssh_user_4client1/.ssh
 
 # Use the touch command to create the authorized_keys file in the .ssh directory:
-# $ touch .ssh/authorized_keys
+# touch /home/username/.ssh/authorized_keys
+touch /home/ssh_user_4client1/.ssh/authorized_keys
 
-
-
-chmod 600 /home/username/.ssh/authorized_keys
-
-
-chmod 700 /home/ssh_user_4client1/.ssh
+# Use the chmod command to change the .ssh/authorized_keys file permissions to 600. Changing the file permissions restricts read or write access to the new_user.
+# chmod 600 /home/username/.ssh/authorized_keys
 chmod 600 /home/ssh_user_4client1/.ssh/authorized_keys
+
 
 # Last, if you want the new user to have sudo access, be sure to add them to the sudo group:
 sudo usermod -a -G sudo username
 
 #If you don’t have a sudo group, you can manually edit the /etc/sudoers file.
 
-# To display all users run following command:
+# !!! To display all users run following command !!!:
 compgen -u
 
 To display all groups run following command:
@@ -1177,16 +1182,93 @@ compgen -g
 # However you can also display all users by 
 cut -d ":" -f 1 /etc/passwd.
 ```
-Connect from Client2 with ssh_user_4client1:
+
+!!! Then create ssh_user_4client1 on Client_2 server. !!!
+
+Connect from Client_1 to Client_2 (10.3.85.21) with ssh_user_4client1 using SSH Public Key Based Authentication:
 ```console
-ubuntu@client2:~$ ssh ssh_user_4client1@10.85.8.21
-# The authenticity of host '10.85.8.21 (10.85.8.21)' can't be established.
-# ED25519 key fingerprint is SHA256:NPz1sLLW8+oY6KOczKqeUhuB3DSFz8TZKnm9E9O0TOg.
-# This key is not known by any other names
-Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+# Create the cryptographic keys on Client_1
+ssh_user_4client1@client1:~$ ssh-keygen -t rsa
+# Generating public/private rsa key pair.
+Enter file in which to save the key (/home/ssh_user_4client1/.ssh/id_rsa):
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+# Your identification has been saved in /home/ssh_user_4client1/.ssh/id_rsa
+# Your public key has been saved in /home/ssh_user_4client1/.ssh/id_rsa.pub
+# The key fingerprint is:
+# SHA256:+Mm94lDdE8ygQDDYHHGTB3fpqOyyZ/JuZd+rDYiCQiw ssh_user_4client1@client1
+# The key's randomart image is:
++---[RSA 3072]----+
+|   +==*o. o.     |
+|  . oo.+.o.+     |
+|       ..o  +    |
+|.      ..... .   |
+|Eo   ...S . o    |
+|o  .  o=o+   .   |
+|. . ..oo=.o.     |
+| .  o.=.. .+.    |
+|    .Xo...o.o.   |
++----[SHA256]-----+
+
+# Use the scp command to copy the id_rsa.pub (public key) from Client_1 to Client_2 as authorized_keys file, this is know as, “installing the public key to server”:
+scp ~/.ssh/id_rsa.pub vivek@rh9linux.nixcraft.org:~/.ssh/authorized_keys
+
+# Another option is to use the ssh-copy-id command as follows from Client_1:
+ssh-copy-id ssh_user_4client1@10.3.85.21
+# OR
+ssh-copy-id -i ~/.ssh/id_rsa.pub ssh_user_4client1@10.3.85.21
+
+ssh_user_4client1@client1:~$ ssh-copy-id ssh_user_4client1@10.3.85.21
+/usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "/home/ssh_user_4client1/.ssh/id_rsa.pub"
+/usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
+/usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
+ssh_user_4client1@10.3.85.21's password:
+
+# Number of key(s) added: 1
+
+# Now try logging into the machine, with:   "ssh 'ssh_user_4client1@10.3.85.21'"
+and check to make sure that only the key(s) you wanted were added.
+
+ssh_user_4client1@client1:~$ ssh ssh_user_4client1@10.3.85.21
+Enter passphrase for key '/home/ssh_user_4client1/.ssh/id_rsa':
+
+# Welcome to Ubuntu 22.04.1 LTS (GNU/Linux 5.15.0-53-generic x86_64)
+
+ssh_user_4client1@client2:~$ hostname && hostname -I
+client2
+10.3.85.21 172.16.8.2 192.168.2.32
+```
+
+__MODIFY Client_2__
+!!! Create ssh_user_4client2 on Client_2 server. !!!
+!!! Create ssh_user_4client2 on Client_1 server. !!!
+```console
+sudo useradd -m -d /home/ssh_user_4client2 -s /bin/bash ssh_user_4client2
+sudo passwd ssh_user_4client2
+
+# Change user:
+su ssh_user_4client2
+cd ~
+```
+Connect from Client_2 to Client_1 (10.85.8.21) with ssh_user_4client2 directly:
+```console
+ssh ssh_user_4client2@10.85.8.21
+ssh_user_4client2@client2:~$ ssh ssh_user_4client2@10.85.8.21
+
+The authenticity of host '10.85.8.21 (10.85.8.21)' can't be established.
+ED25519 key fingerprint is SHA256:NPz1sLLW8+oY6KOczKqeUhuB3DSFz8TZKnm9E9O0TOg.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? 
+yes
 Warning: Permanently added '10.85.8.21' (ED25519) to the list of known hosts.
-ssh_user_4client1@10.85.8.21's password:
+
+ssh_user_4client2@10.85.8.21's password:
+
 # Welcome to Ubuntu 22.04.1 LTS (GNU/Linux 5.15.0-52-generic x86_64)
+
+ssh_user_4client2@client1:~$ hostname && hostname -I
+client1
+10.85.8.21 172.16.8.1 192.168.2.31
 ```
 
 
