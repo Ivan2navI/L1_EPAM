@@ -531,8 +531,6 @@ which gives: 172.17.16.0 and since we using 20 bits (8+8+4) to give a route summ
 </p>
 
 
-
-
 ## Answers: 7.
 ### 7. Налаштуйте на Server_1 firewall таким чином:
 ### - Дозволено підключатись через SSH з Client_1 та заборонено з Client_2 
