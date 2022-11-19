@@ -1745,6 +1745,79 @@ Chain ufw-before-input (1 references)
 ## Answers: 8.
 ### 8. Якщо в п.3 була налаштована маршрутизація для доступу Client_1 та Client_2 до мережі Інтернет – видалити відповідні записи. На Server_1 налаштувати NAT сервіс таким чином, щоб з Client_1 та Client_2 проходив ping в мережу Інтернет.
 
+```console
+# !!! Disable UFW for ALL servers!!!
+sudo ufw disable
+
+Firewall stopped and disabled on system startup
+```
+
+Check intenet connection:
+```console
+# Server_1
+ubuntu@server1:~$ wget www.i.ua
+--2022-11-19 15:17:03--  http://www.i.ua/
+Resolving www.i.ua (www.i.ua)... 104.18.2.81, 104.18.3.81
+Connecting to www.i.ua (www.i.ua)|104.18.2.81|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [text/html]
+Saving to: ‘index.html.1’
+
+index.html.1            [ <=>                ]  73.54K  --.-KB/s    in 0.01s
+
+2022-11-19 15:17:03 (4.83 MB/s) - ‘index.html.1’ saved [75308]
+# ----------------------------------------------------------------------------
+
+# Client_1
+ubuntu@client1:~$ wget www.i.ua
+--2022-11-19 15:16:58--  http://www.i.ua/
+Resolving www.i.ua (www.i.ua)... 104.18.3.81, 104.18.2.81
+Connecting to www.i.ua (www.i.ua)|104.18.3.81|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [text/html]
+Saving to: ‘index.html.3’
+
+index.html.3            [ <=>                ]  73.64K  --.-KB/s    in 0.02s
+
+2022-11-19 15:16:58 (4.70 MB/s) - ‘index.html.3’ saved [75403]
+# ----------------------------------------------------------------------------
+
+
+# Client_2
+ubuntu@client2:~$ wget www.i.ua
+--2022-11-19 15:17:08--  http://www.i.ua/
+Resolving www.i.ua (www.i.ua)... 104.18.2.81, 104.18.3.81
+Connecting to www.i.ua (www.i.ua)|104.18.2.81|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [text/html]
+Saving to: ‘index.html.1’
+
+index.html.1            [ <=>                ]  73.58K  --.-KB/s    in 0.007s
+
+2022-11-19 15:17:08 (9.91 MB/s) - ‘index.html.1’ saved [75350]
+# ----------------------------------------------------------------------------
+```
+
+
+```console
+# Server_1 NAT Table 
+
+ubuntu@server1:~$ sudo iptables -t nat -L -nv
+Chain PREROUTING (policy ACCEPT 176 packets, 11290 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+
+Chain INPUT (policy ACCEPT 43 packets, 3115 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+
+Chain OUTPUT (policy ACCEPT 67 packets, 4709 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+
+Chain POSTROUTING (policy ACCEPT 55 packets, 3885 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+   23  1662 MASQUERADE  all  --  *      enp0s3  0.0.0.0/0            0.0.0.0/0
+    1    48 MASQUERADE  all  --  *      enp0s8  0.0.0.0/0            0.0.0.0/0
+    1    48 MASQUERADE  all  --  *      enp0s9  0.0.0.0/0            0.0.0.0/0
+```
 
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
