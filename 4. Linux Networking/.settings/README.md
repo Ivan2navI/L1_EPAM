@@ -1619,8 +1619,8 @@ __MODIFY Client_2__
 ```
 
 Client_2 (10.3.85.x) :arrow_right: [trought Server_1] :arrow_right: Client_1 (10.85.8.x): \
-:arrow_right: 172.17.18.1 - ALLOW \
-:arrow_right: 172.17.28.1 - DENY
+:arrow_right: 172.17.18.1 - :ok: ALLOW :ok: \
+:arrow_right: 172.17.28.1 - :no_entry: DENY :no_entry:
 
 __MODIFY Client_1__
 ```console
@@ -1697,10 +1697,47 @@ Chain ufw-before-input (1 references)
     0     0 ACCEPT     udp  --  *      *       0.0.0.0/0            224.0.0.251          udp dpt:5353
     0     0 ACCEPT     udp  --  *      *       0.0.0.0/0            239.255.255.250      udp dpt:1900
   158  7387 ufw-user-input  all  --  *      *       0.0.0.0/0            0.0.0.0/0
-
 ```
 <p align="center">
   <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main/4.%20Linux%20Networking/.settings/A7_UFW_block_PING2LO.png">
+</p>
+
+__IF need source IP For Drop icmp to specific IP__
+```console
+# !!! IF need source IP !!!:
+
+ubuntu@server1:~$ sudo nano /etc/ufw/before.rules
+...
+# End required lines
+
+# Drop icmp to specific IP
+-A ufw-before-input -s 10.3.85.0/24 -p icmp --icmp-type echo-request -d 172.17.28.1 -j REJECT
+...
+
+ubuntu@server1:~$ sudo ufw reload
+  Firewall reloaded
+
+
+ubuntu@client1:~$ sudo ufw status numbered
+Status: active
+
+     To                         Action      From
+     --                         ------      ----
+[ 1] 67/udp                     ALLOW IN    Anywhere
+[ 2] OpenSSH                    ALLOW IN    Anywhere
+[ 3] 67/udp (v6)                ALLOW IN    Anywhere (v6)
+[ 4] OpenSSH (v6)               ALLOW IN    Anywhere (v6)
+
+
+ubuntu@client1:~$ sudo iptables -L -nv
+Chain ufw-before-input (1 references)
+ pkts bytes target     prot opt in     out     source               destination
+    0     0 REJECT     icmp --  *      *       10.3.85.0/24         172.17.28.1          icmptype 8 reject-with icmp-port-unreachable
+    4   436 ACCEPT     all  --  lo     *       0.0.0.0/0            0.0.0.0/0
+   11   680 ACCEPT     all  --  *      *       0.0.0.0/0            0.0.0.0/0            ctstate RELATED,ESTABLISHED
+```
+<p align="center">
+  <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main/4.%20Linux%20Networking/.settings/A7_UFW_block_PING2LO_with_Source.png">
 </p>
 
 

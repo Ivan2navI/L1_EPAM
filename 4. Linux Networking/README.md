@@ -614,8 +614,8 @@ ubuntu@server1:~$ sudo ufw reload
 #### - З Client_2 на 172.17.D+10.1 ping проходив, а на 172.17.D+20.1 не проходив 
 
 Client_2 (10.3.85.x) :arrow_right: [trought Server_1] :arrow_right: Client_1 (10.85.8.x): \
-:arrow_right: 172.17.18.1 - ALLOW \
-:arrow_right: 172.17.28.1 - DENY
+:arrow_right: 172.17.18.1 - :ok: ALLOW :ok: \
+:arrow_right: 172.17.28.1 - :no_entry: DENY :no_entry:
 
 ```console
 
