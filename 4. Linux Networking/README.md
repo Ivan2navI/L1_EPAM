@@ -534,7 +534,9 @@ which gives: 172.17.16.0 and since we using 20 bits (8+8+4) to give a route summ
 ## Answers: 7.
 ### 7. Налаштуйте на Server_1 firewall таким чином:
 ### - Дозволено підключатись через SSH з Client_1 та заборонено з Client_2 
+### - З Client_2 на 172.17.D+10.1 ping проходив, а на 172.17.D+20.1 не проходив 
 
+#### - Дозволено підключатись через SSH з Client_1 та заборонено з Client_2
 Applications can register their profiles with UFW upon installation. These profiles allow UFW to manage these applications by name. OpenSSH, the service allowing us to connect to our server now, has a profile registered with UFW.
 
 ```console
@@ -551,9 +553,8 @@ ubuntu@server1:~$ sudo ufw allow OpenSSH
 # Enable the firewall by typing:
 ubuntu@server1:~$ sudo ufw enable
 Command may disrupt existing ssh connections. Proceed with operation (y|n)? 
-y
+  y
 Firewall is active and enabled on system startup
-
 
 # Check that SSH connections are still allowed:
 ubuntu@server1:~$ sudo ufw status
@@ -567,7 +568,7 @@ Status: active
     OpenSSH (v6)               ALLOW       Anywhere (v6)
 
 
-# UFW block subnet (CIDR)
+# !!! UFW block subnet (CIDR) !!!
 # Server_1 interface IP 10.3.85.1 for Client_2, so
 sudo ufw deny proto tcp from 10.3.85.1/24 to any port 22
 
@@ -621,7 +622,16 @@ ubuntu@server1:~$ sudo ufw reload
 </p>
 
 
-### - З Client_2 на 172.17.D+10.1 ping проходив, а на 172.17.D+20.1 не проходив 
+#### - З Client_2 на 172.17.D+10.1 ping проходив, а на 172.17.D+20.1 не проходив 
+
+Client_2 (10.3.85.x) :arrow_right: [trought Server_1] :arrow_right: Client_1 (10.85.8.x):
+:arrow_right: 172.17.18.1 - ALLOW
+:arrow_right: 172.17.18.2 - DENY
+
+```console
+
+
+```
 
 
 ## Answers: 8.

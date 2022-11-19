@@ -1426,9 +1426,8 @@ ubuntu@server1:~$ sudo ufw allow OpenSSH
 # Enable the firewall by typing:
 ubuntu@server1:~$ sudo ufw enable
 Command may disrupt existing ssh connections. Proceed with operation (y|n)? 
-y
+  y
 Firewall is active and enabled on system startup
-
 
 # Check that SSH connections are still allowed:
 ubuntu@server1:~$ sudo ufw status
@@ -1442,7 +1441,7 @@ Status: active
     OpenSSH (v6)               ALLOW       Anywhere (v6)
 
 
-# UFW block subnet (CIDR)
+# !!! UFW block subnet (CIDR) !!!
 # Server_1 interface IP 10.3.85.1 for Client_2, so
 sudo ufw deny proto tcp from 10.3.85.1/24 to any port 22
 
@@ -1496,12 +1495,7 @@ ubuntu@server1:~$ sudo ufw reload
 </p>
 
 
-
-
-
-
 #### - З Client_2 на 172.17.D+10.1 ping проходив, а на 172.17.D+20.1 не проходив 
-
 
 __MODIFY Client_1__
 ```console
