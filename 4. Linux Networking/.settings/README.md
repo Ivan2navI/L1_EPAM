@@ -1400,6 +1400,234 @@ tcp   ESTAB  0      0                                    192.168.2.30:ssh       
 
 __INFO__:
 1. [Step 4 — Setting Up a Basic Firewall](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-20-04 "Step 4 — Setting Up a Basic Firewall")
+2. [How to open ssh 22/TCP port using ufw on Ubuntu/Debian Linux](https://www.cyberciti.biz/faq/ufw-allow-incoming-ssh-connections-from-a-specific-ip-address-subnet-on-ubuntu-debian/ "How to open ssh 22/TCP port using ufw on Ubuntu/Debian Linux")
+3. [How to block an IP address with ufw on Ubuntu Linux server](https://www.cyberciti.biz/faq/how-to-block-an-ip-address-with-ufw-on-ubuntu-linux-server/ "How to block an IP address with ufw on Ubuntu Linux server")
+
+
+#### - Дозволено підключатись через SSH з Client_1 та заборонено з Client_2
+
+Client_1 (10.85.8.x) 
+Client_2 (10.3.85.x) 
+Server_1 (10.85.8.1, 10.3.85.1)
+
+Applications can register their profiles with UFW upon installation. These profiles allow UFW to manage these applications by name. OpenSSH, the service allowing us to connect to our server now, has a profile registered with UFW.
+
+```console
+# Check OpenSSH, the service has a profile registered with UFW:
+ubuntu@server1:~$ sudo ufw app list
+  Available applications:
+    OpenSSH
+
+# Make sure that the firewall allows SSH connections:
+ubuntu@server1:~$ sudo ufw allow OpenSSH
+  Rules updated
+  Rules updated (v6)
+
+# Enable the firewall by typing:
+ubuntu@server1:~$ sudo ufw enable
+Command may disrupt existing ssh connections. Proceed with operation (y|n)? 
+y
+Firewall is active and enabled on system startup
+
+
+# Check that SSH connections are still allowed:
+ubuntu@server1:~$ sudo ufw status
+Status: active
+
+    To                         Action      From
+    --                         ------      ----
+    67/udp                     ALLOW       Anywhere
+    OpenSSH                    ALLOW       Anywhere
+    67/udp (v6)                ALLOW       Anywhere (v6)
+    OpenSSH (v6)               ALLOW       Anywhere (v6)
+
+
+# UFW block subnet (CIDR)
+# Server_1 interface IP 10.3.85.1 for Client_2, so
+sudo ufw deny proto tcp from 10.3.85.1/24 to any port 22
+
+ubuntu@server1:~$ sudo ufw deny proto tcp from 10.3.85.1/24 to any port 22
+  [sudo] password for ubuntu:
+  WARN: Rule changed after normalization
+  Rule added
+
+ubuntu@server1:~$ sudo ufw status
+  Status: active
+
+  To                         Action      From
+  --                         ------      ----
+  67/udp                     ALLOW       Anywhere
+  OpenSSH                    ALLOW       Anywhere
+  22/tcp                     DENY        10.3.85.0/24
+  67/udp (v6)                ALLOW       Anywhere (v6)
+  OpenSSH (v6)               ALLOW       Anywhere (v6)
+
+ubuntu@server1:~$ sudo ufw status numbered
+  Status: active
+
+      To                         Action      From
+      --                         ------      ----
+  [ 1] 67/udp                     ALLOW IN    Anywhere
+  [ 2] OpenSSH                    ALLOW IN    Anywhere
+  [ 3] 22/tcp                     DENY IN     10.3.85.0/24
+  [ 4] 67/udp (v6)                ALLOW IN    Anywhere (v6)
+  [ 5] OpenSSH (v6)               ALLOW IN    Anywhere (v6)
+
+
+# !!! Tip: UFW NOT blocking an IP address !!! 
+
+# UFW (iptables) rules are applied in order of appearance, and the inspection ends immediately when there is a match. Therefore, for example, if a rule is allowing access to tcp port 22 (say using sudo ufw allow 22), and afterward another Rule is specified blocking an IP address (say using ufw deny proto tcp from 10.3.85.1 to any port 22), the rule to access port 22 is applied and the later rule to block the hacker IP address 10.3.85.1 is not. It is all about the order. To avoid such problem you need to edit the /etc/ufw/before.rules file and add a section to “Block an IP Address” after “# End required lines” section.
+
+ubuntu@server1:~$ sudo nano /etc/ufw/before.rules
+...
+# End required lines
+
+# Block ip/net (subnet)
+-A ufw-before-input -s 10.3.85.0/24 -j DROP
+...
+
+ubuntu@server1:~$ sudo ufw reload
+  Firewall reloaded
+
+```
+#### Show All Active SSH Connections (for example on Server_1)
+<p align="center">
+  <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main/4.%20Linux%20Networking/.settings/A7_UFW_block_subnet_(CIDR).png">
+</p>
+
+
+
+
+
+
+#### - З Client_2 на 172.17.D+10.1 ping проходив, а на 172.17.D+20.1 не проходив 
+
+
+__MODIFY Client_1__
+```console
+sudo nano /etc/netplan/01-netcfg.yaml
+
+#Client_1
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    # interface name
+    lo:
+      addresses: [172.17.18.1/20, 172.17.28.1/20, 172.17.31.254/20] # QUESTION 7
+    enp0s3:
+      dhcp4: true
+      optional: true
+    enp0s8:
+      dhcp4: false
+      optional: true
+      # IP address/subnet mask
+      addresses: [172.16.8.1/24]
+      # default gateway
+      # [metric] : set priority (specify it if multiple NICs are set)
+      # lower value is higher priority
+      routes:
+        - to: 172.16.8.2  # Use Net4 - for connect to  Client_2 IP (172.16.8.2)
+          via: 172.16.8.1 # Use Net4 - This Client_1 IP (172.16.8.1)
+          metric: 110
+    enp0s9: # <-------------------- FOR connect from VBox
+      dhcp4:  false
+      optional: true
+      # IP address/subnet mask
+      addresses: [192.168.2.31/24]
+      # default gateway
+      # [metric] : set priority (specify it if multiple NICs are set)
+      # lower value is higher priority
+      routes:
+        - to: default
+          via: 10.85.8.1
+          metric: 120
+
+# !!! sudo apply changes
+sudo netplan generate
+sudo netplan apply
+sudo systemctl restart systemd-networkd
+ip addr 
+```
+
+
+__MODIFY Server_1__
+```console
+sudo nano /etc/netplan/01-netcfg.yaml
+
+#Server_1
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    # interface name
+    enp0s3:
+      dhcp4: false
+      optional: true
+      # IP address/subnet mask
+      addresses: [192.168.2.30/24]
+      # default gateway
+      # [metric] : set priority (specify it if multiple NICs are set)
+      # lower value is higher priority
+      routes:
+        - to: default
+          via: 192.168.2.1
+          metric: 90
+      nameservers:
+        # name server to bind
+        addresses: [192.168.2.1, 8.8.8.8]
+        # DNS search base
+        #search: [srv.world,server.education]
+      #dhcp6: false
+    enp0s8:
+      dhcp4: false
+      optional: true
+      # IP address/subnet mask
+      addresses: [10.85.8.1/24]
+      routes:
+        - to: 172.17.18.1 # QUESTION 7
+          via: 10.85.8.1  # QUESTION 7
+          metric: 70      # QUESTION 7
+        - to: 172.17.28.1 # QUESTION 7
+          via: 10.85.8.1  # QUESTION 7
+          metric: 71     # QUESTION 7
+        - to: 172.17.31.254 # QUESTION 7
+          via: 10.85.8.1  # QUESTION 7
+          metric: 72     # QUESTION 7
+    enp0s9:
+      dhcp4: false
+      optional: true
+      addresses: [10.3.85.1/24]
+      routes:
+        - to: 172.17.18.1 # QUESTION 7: From Client_2 (10.85.8.x) TO Client_1 (lo: 172.17.18.1/20) through Server_1
+          via: 10.3.85.1  # QUESTION 7
+          metric: 80     # QUESTION 7
+        - to: 172.17.28.1 # QUESTION 7: From Client_2 (10.85.8.x) TO Client_1 (lo: 172.17.28.1/20) through Server_1
+          via: 10.3.85.1  # QUESTION 7
+          metric: 81     # QUESTION 7
+        - to: 172.17.31.254 # QUESTION 7: From Client_2 (10.85.8.x) TO Client_1 (lo: 172.17.31.254/20) through Server_1
+          via: 10.3.85.1  # QUESTION 7
+          metric: 82     # QUESTION 7
+
+# !!! sudo apply changes
+sudo netplan generate
+sudo netplan apply
+sudo systemctl restart systemd-networkd
+ip addr 
+```
+
+
+__MODIFY Client_2__
+```console
+
+!!! Didn't need to modify !!!
+
+```
+
+
+
+
+
 
 ## Answers: 8.
 ### 8. Якщо в п.3 була налаштована маршрутизація для доступу Client_1 та Client_2 до мережі Інтернет – видалити відповідні записи. На Server_1 налаштувати NAT сервіс таким чином, щоб з Client_1 та Client_2 проходив ping в мережу Інтернет.

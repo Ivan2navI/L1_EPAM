@@ -534,6 +534,93 @@ which gives: 172.17.16.0 and since we using 20 bits (8+8+4) to give a route summ
 ## Answers: 7.
 ### 7. Налаштуйте на Server_1 firewall таким чином:
 ### - Дозволено підключатись через SSH з Client_1 та заборонено з Client_2 
+
+Applications can register their profiles with UFW upon installation. These profiles allow UFW to manage these applications by name. OpenSSH, the service allowing us to connect to our server now, has a profile registered with UFW.
+
+```console
+# Check OpenSSH, the service has a profile registered with UFW:
+ubuntu@server1:~$ sudo ufw app list
+  Available applications:
+    OpenSSH
+
+# Make sure that the firewall allows SSH connections:
+ubuntu@server1:~$ sudo ufw allow OpenSSH
+  Rules updated
+  Rules updated (v6)
+
+# Enable the firewall by typing:
+ubuntu@server1:~$ sudo ufw enable
+Command may disrupt existing ssh connections. Proceed with operation (y|n)? 
+y
+Firewall is active and enabled on system startup
+
+
+# Check that SSH connections are still allowed:
+ubuntu@server1:~$ sudo ufw status
+Status: active
+
+    To                         Action      From
+    --                         ------      ----
+    67/udp                     ALLOW       Anywhere
+    OpenSSH                    ALLOW       Anywhere
+    67/udp (v6)                ALLOW       Anywhere (v6)
+    OpenSSH (v6)               ALLOW       Anywhere (v6)
+
+
+# UFW block subnet (CIDR)
+# Server_1 interface IP 10.3.85.1 for Client_2, so
+sudo ufw deny proto tcp from 10.3.85.1/24 to any port 22
+
+ubuntu@server1:~$ sudo ufw deny proto tcp from 10.3.85.1/24 to any port 22
+  [sudo] password for ubuntu:
+  WARN: Rule changed after normalization
+  Rule added
+
+ubuntu@server1:~$ sudo ufw status
+  Status: active
+
+  To                         Action      From
+  --                         ------      ----
+  67/udp                     ALLOW       Anywhere
+  OpenSSH                    ALLOW       Anywhere
+  22/tcp                     DENY        10.3.85.0/24
+  67/udp (v6)                ALLOW       Anywhere (v6)
+  OpenSSH (v6)               ALLOW       Anywhere (v6)
+
+ubuntu@server1:~$ sudo ufw status numbered
+  Status: active
+
+      To                         Action      From
+      --                         ------      ----
+  [ 1] 67/udp                     ALLOW IN    Anywhere
+  [ 2] OpenSSH                    ALLOW IN    Anywhere
+  [ 3] 22/tcp                     DENY IN     10.3.85.0/24
+  [ 4] 67/udp (v6)                ALLOW IN    Anywhere (v6)
+  [ 5] OpenSSH (v6)               ALLOW IN    Anywhere (v6)
+
+
+# !!! Tip: UFW NOT blocking an IP address !!! 
+
+# UFW (iptables) rules are applied in order of appearance, and the inspection ends immediately when there is a match. Therefore, for example, if a rule is allowing access to tcp port 22 (say using sudo ufw allow 22), and afterward another Rule is specified blocking an IP address (say using ufw deny proto tcp from 10.3.85.1 to any port 22), the rule to access port 22 is applied and the later rule to block the hacker IP address 10.3.85.1 is not. It is all about the order. To avoid such problem you need to edit the /etc/ufw/before.rules file and add a section to “Block an IP Address” after “# End required lines” section.
+
+ubuntu@server1:~$ sudo nano /etc/ufw/before.rules
+...
+# End required lines
+
+# Block ip/net (subnet)
+-A ufw-before-input -s 10.3.85.0/24 -j DROP
+...
+
+ubuntu@server1:~$ sudo ufw reload
+  Firewall reloaded
+
+```
+#### Show All Active SSH Connections (for example on Server_1)
+<p align="center">
+  <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main/4.%20Linux%20Networking/.settings/A7_UFW_block_subnet_(CIDR).png">
+</p>
+
+
 ### - З Client_2 на 172.17.D+10.1 ping проходив, а на 172.17.D+20.1 не проходив 
 
 
