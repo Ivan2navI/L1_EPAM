@@ -577,17 +577,6 @@ ubuntu@server1:~$ sudo ufw deny proto tcp from 10.3.85.1/24 to any port 22
   WARN: Rule changed after normalization
   Rule added
 
-ubuntu@server1:~$ sudo ufw status
-  Status: active
-
-  To                         Action      From
-  --                         ------      ----
-  67/udp                     ALLOW       Anywhere
-  OpenSSH                    ALLOW       Anywhere
-  22/tcp                     DENY        10.3.85.0/24
-  67/udp (v6)                ALLOW       Anywhere (v6)
-  OpenSSH (v6)               ALLOW       Anywhere (v6)
-
 ubuntu@server1:~$ sudo ufw status numbered
   Status: active
 
@@ -626,13 +615,57 @@ ubuntu@server1:~$ sudo ufw reload
 
 Client_2 (10.3.85.x) :arrow_right: [trought Server_1] :arrow_right: Client_1 (10.85.8.x): \
 :arrow_right: 172.17.18.1 - ALLOW \
-:arrow_right: 172.17.18.2 - DENY
+:arrow_right: 172.17.28.1 - DENY
 
 ```console
 
+# !!! Configure UFW for Client_1 like in previous example for Server_1
 
+ubuntu@server1:~$ sudo nano /etc/ufw/before.rules
+...
+# End required lines
+
+# Drop icmp to specific IP
+-A ufw-before-input -p icmp --icmp-type echo-request -d 172.17.28.1 -j REJECT
+...
+
+ubuntu@server1:~$ sudo ufw reload
+  Firewall reloaded
+
+
+ubuntu@client1:~$ sudo ufw status numbered
+Status: active
+
+     To                         Action      From
+     --                         ------      ----
+[ 1] 67/udp                     ALLOW IN    Anywhere
+[ 2] OpenSSH                    ALLOW IN    Anywhere
+[ 3] 67/udp (v6)                ALLOW IN    Anywhere (v6)
+[ 4] OpenSSH (v6)               ALLOW IN    Anywhere (v6)
+
+
+ubuntu@client1:~$ sudo iptables -L -nv
+
+Chain ufw-before-input (1 references)
+ pkts bytes target     prot opt in     out     source               destination
+    7   588 REJECT     icmp --  *      *       0.0.0.0/0            172.17.28.1          icmptype 8 reject-with icmp-port-unreachable
+   38  4054 ACCEPT     all  --  lo     *       0.0.0.0/0            0.0.0.0/0
+  670 59144 ACCEPT     all  --  *      *       0.0.0.0/0            0.0.0.0/0            ctstate RELATED,ESTABLISHED
+    0     0 ufw-logging-deny  all  --  *      *       0.0.0.0/0            0.0.0.0/0            ctstate INVALID
+    0     0 DROP       all  --  *      *       0.0.0.0/0            0.0.0.0/0            ctstate INVALID
+    0     0 ACCEPT     icmp --  *      *       0.0.0.0/0            0.0.0.0/0            icmptype 3
+    0     0 ACCEPT     icmp --  *      *       0.0.0.0/0            0.0.0.0/0            icmptype 11
+    0     0 ACCEPT     icmp --  *      *       0.0.0.0/0            0.0.0.0/0            icmptype 12
+    2   168 ACCEPT     icmp --  *      *       0.0.0.0/0            0.0.0.0/0            icmptype 8
+    0     0 ACCEPT     udp  --  *      *       0.0.0.0/0            0.0.0.0/0            udp spt:67 dpt:68
+  158  7387 ufw-not-local  all  --  *      *       0.0.0.0/0            0.0.0.0/0
+    0     0 ACCEPT     udp  --  *      *       0.0.0.0/0            224.0.0.251          udp dpt:5353
+    0     0 ACCEPT     udp  --  *      *       0.0.0.0/0            239.255.255.250      udp dpt:1900
+  158  7387 ufw-user-input  all  --  *      *       0.0.0.0/0            0.0.0.0/0  
 ```
-
+<p align="center">
+  <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main/4.%20Linux%20Networking/.settings/A7_UFW_block_PING2LO.png">
+</p>
 
 ## Answers: 8.
 ### 8. Якщо в п.3 була налаштована маршрутизація для доступу Client_1 та Client_2 до мережі Інтернет – видалити відповідні записи. На Server_1 налаштувати NAT сервіс таким чином, щоб з Client_1 та Client_2 проходив ping в мережу Інтернет.

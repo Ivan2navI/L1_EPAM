@@ -1402,6 +1402,7 @@ __INFO__:
 1. [Step 4 — Setting Up a Basic Firewall](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-20-04 "Step 4 — Setting Up a Basic Firewall")
 2. [How to open ssh 22/TCP port using ufw on Ubuntu/Debian Linux](https://www.cyberciti.biz/faq/ufw-allow-incoming-ssh-connections-from-a-specific-ip-address-subnet-on-ubuntu-debian/ "How to open ssh 22/TCP port using ufw on Ubuntu/Debian Linux")
 3. [How to block an IP address with ufw on Ubuntu Linux server](https://www.cyberciti.biz/faq/how-to-block-an-ip-address-with-ufw-on-ubuntu-linux-server/ "How to block an IP address with ufw on Ubuntu Linux server")
+[How To Configure Firewall with UFW on Ubuntu 20.04 LTS](https://www.cyberciti.biz/faq/how-to-configure-firewall-with-ufw-on-ubuntu-20-04-lts/ "How To Configure Firewall with UFW on Ubuntu 20.04 LTS")
 
 
 #### - Дозволено підключатись через SSH з Client_1 та заборонено з Client_2
@@ -1610,7 +1611,6 @@ sudo systemctl restart systemd-networkd
 ip addr 
 ```
 
-
 __MODIFY Client_2__
 ```console
 
@@ -1618,8 +1618,90 @@ __MODIFY Client_2__
 
 ```
 
+Client_2 (10.3.85.x) :arrow_right: [trought Server_1] :arrow_right: Client_1 (10.85.8.x): \
+:arrow_right: 172.17.18.1 - ALLOW \
+:arrow_right: 172.17.28.1 - DENY
+
+__MODIFY Client_1__
+```console
+
+# Check OpenSSH, the service has a profile registered with UFW:
+ubuntu@server1:~$ sudo ufw app list
+  Available applications:
+    OpenSSH
+
+# Make sure that the firewall allows SSH connections:
+ubuntu@server1:~$ sudo ufw allow OpenSSH
+  Rules updated
+  Rules updated (v6)
+
+# Enable the firewall by typing:
+ubuntu@server1:~$ sudo ufw enable
+Command may disrupt existing ssh connections. Proceed with operation (y|n)? 
+  y
+Firewall is active and enabled on system startup
+
+# Check that SSH connections are still allowed:
+ubuntu@server1:~$ sudo ufw status
+Status: active
+
+    To                         Action      From
+    --                         ------      ----
+    67/udp                     ALLOW       Anywhere
+    OpenSSH                    ALLOW       Anywhere
+    67/udp (v6)                ALLOW       Anywhere (v6)
+    OpenSSH (v6)               ALLOW       Anywhere (v6)
+
+# !!! Tip: UFW NOT blocking an IP address !!! 
+
+# UFW (iptables) rules are applied in order of appearance, and the inspection ends immediately when there is a match. Therefore, for example, if a rule is allowing access to tcp port 22 (say using sudo ufw allow 22), and afterward another Rule is specified blocking an IP address (say using ufw deny proto tcp from 10.3.85.1 to any port 22), the rule to access port 22 is applied and the later rule to block the hacker IP address 10.3.85.1 is not. It is all about the order. To avoid such problem you need to edit the /etc/ufw/before.rules file and add a section to “Block an IP Address” after “# End required lines” section.
+
+ubuntu@server1:~$ sudo nano /etc/ufw/before.rules
+...
+# End required lines
+
+# Drop icmp to specific IP
+-A ufw-before-input -p icmp --icmp-type echo-request -d 172.17.28.1 -j REJECT
+...
+
+ubuntu@server1:~$ sudo ufw reload
+  Firewall reloaded
 
 
+ubuntu@client1:~$ sudo ufw status numbered
+Status: active
+
+     To                         Action      From
+     --                         ------      ----
+[ 1] 67/udp                     ALLOW IN    Anywhere
+[ 2] OpenSSH                    ALLOW IN    Anywhere
+[ 3] 67/udp (v6)                ALLOW IN    Anywhere (v6)
+[ 4] OpenSSH (v6)               ALLOW IN    Anywhere (v6)
+
+
+ubuntu@client1:~$ sudo iptables -L -nv
+
+Chain ufw-before-input (1 references)
+ pkts bytes target     prot opt in     out     source               destination
+    7   588 REJECT     icmp --  *      *       0.0.0.0/0            172.17.28.1          icmptype 8 reject-with icmp-port-unreachable
+   38  4054 ACCEPT     all  --  lo     *       0.0.0.0/0            0.0.0.0/0
+  670 59144 ACCEPT     all  --  *      *       0.0.0.0/0            0.0.0.0/0            ctstate RELATED,ESTABLISHED
+    0     0 ufw-logging-deny  all  --  *      *       0.0.0.0/0            0.0.0.0/0            ctstate INVALID
+    0     0 DROP       all  --  *      *       0.0.0.0/0            0.0.0.0/0            ctstate INVALID
+    0     0 ACCEPT     icmp --  *      *       0.0.0.0/0            0.0.0.0/0            icmptype 3
+    0     0 ACCEPT     icmp --  *      *       0.0.0.0/0            0.0.0.0/0            icmptype 11
+    0     0 ACCEPT     icmp --  *      *       0.0.0.0/0            0.0.0.0/0            icmptype 12
+    2   168 ACCEPT     icmp --  *      *       0.0.0.0/0            0.0.0.0/0            icmptype 8
+    0     0 ACCEPT     udp  --  *      *       0.0.0.0/0            0.0.0.0/0            udp spt:67 dpt:68
+  158  7387 ufw-not-local  all  --  *      *       0.0.0.0/0            0.0.0.0/0
+    0     0 ACCEPT     udp  --  *      *       0.0.0.0/0            224.0.0.251          udp dpt:5353
+    0     0 ACCEPT     udp  --  *      *       0.0.0.0/0            239.255.255.250      udp dpt:1900
+  158  7387 ufw-user-input  all  --  *      *       0.0.0.0/0            0.0.0.0/0
+
+```
+<p align="center">
+  <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main/4.%20Linux%20Networking/.settings/A7_UFW_block_PING2LO.png">
+</p>
 
 
 
