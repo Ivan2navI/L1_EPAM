@@ -671,6 +671,12 @@ Chain ufw-before-input (1 references)
 ### 8. Якщо в п.3 була налаштована маршрутизація для доступу Client_1 та Client_2 до мережі Інтернет – видалити відповідні записи. На Server_1 налаштувати NAT сервіс таким чином, щоб з Client_1 та Client_2 проходив ping в мережу Інтернет.
 
 Let's execute PING, CURL requests from Client_1, Client_2, and also display the IPTABLES settings for Server_1.
+
+Results of PING and CURL requests:
+<p align="center">
+  <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main/4.%20Linux%20Networking/.settings/A8_1_PING_and_CURL.png">
+</p>
+
 __IP Tables on Server_1 before EDIT__
 ```console
 ubuntu@server1:~$ sudo iptables-save
@@ -703,10 +709,6 @@ COMMIT
 COMMIT
 # Completed on Sun Nov 20 20:28:20 2022
 ```
-Results of PING and CURL requests:
-<p align="center">
-  <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main/4.%20Linux%20Networking/.settings/A8_1_PING_and_CURL.png">
-</p>
 
 __Use this script to change iptables:
 [A8_IP_Tables_only_PING.sh](https://github.com/Ivan2navI/L1_EPAM/blob/main/4.%20Linux%20Networking/.settings/A8_IP_Tables_only_PING.sh "A8_IP_Tables_only_PING.sh")__
@@ -770,7 +772,8 @@ COMMIT
 COMMIT
 # Completed on Sun Nov 20 21:36:05 2022
 ```
-Result after making changes to iptables:
+
+Results after making changes to Server_1 iptables:
 <p align="center">
   <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main/4.%20Linux%20Networking/.settings/A8_2_PING_and_CURL.png">
 </p>
