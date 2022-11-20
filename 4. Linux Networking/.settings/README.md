@@ -803,6 +803,13 @@ sudo iptables -t nat -L -nv
 sudo iptables-save
 
 sudo sh -c "iptables-save > /etc/iptables/rules.v4"
+
+# !!! Restore the saved rules by reading the file you saved.
+# Overwrite the current rules
+sudo iptables-restore < /etc/iptables/rules.v4
+# Add the new rules keeping the current ones
+sudo iptables-restore -n < /etc/iptables/rules.v4
+
 ```
 
 __Configure NETPLAN__
@@ -1763,7 +1770,10 @@ Chain ufw-before-input (1 references)
 INFO:
 1. [Прокси+firewall. Часть первая, подготовка сервера (VIDEO)](https://www.youtube.com/watch?v=O1SI_ELNoZg "Прокси+firewall. Часть первая, подготовка сервера (VIDEO)")
 2. [Мануал по созданию простейшего прокси+firewall на Ubuntu (дополнение к пункту 1)](https://github.com/Ivan2navI/L1_EPAM/blob/main/4.%20Linux%20Networking/.settings/Proxy%20and%20firewall%20on%20Ubuntu.pdf "Мануал по созданию простейшего прокси+firewall на Ubuntu")
-3. [Allow/deny ping on Linux server – iptables rules for icmp](https://www.crybit.com/iptables-rules-for-icmp/ "Allow/deny ping on Linux server – iptables rules for icmp") 
+3. [Allow/deny ping on Linux server – iptables rules for icmp](https://www.crybit.com/iptables-rules-for-icmp/ "Allow/deny ping on Linux server – iptables rules for icmp")
+4. [Firewall iptables rules](https://www.ibm.com/docs/en/linux-on-systems?topic=tests-firewall-iptables-rules "Firewall iptables rules") 
+5. [Настройка IPTables](https://ixnfo.com/iptables.html "Настройка IPTables") 
+6. [!!! Настройка iptables в Linux](https://selectel.ru/blog/setup-iptables-linux/ "!!! Настройка iptables в Linux") 
 ```console
 # Required iptables command switches
 
@@ -1779,261 +1789,231 @@ INFO:
 
 echo-request   :  8
 echo-reply     :  0
+
+# Examples of viewing rules:
+iptables -nvL
+iptables -nvL | grep 192.168.0
+iptables -n -L -v --line-numbers
+iptables -L INPUT -n -v
+iptables -L OUTPUT -n -v --line-numbers
+iptables -L OUTPUT -n --line-numbers | less
+iptables -L OUTPUT -n --line-numbers | grep 192.168.2.14
+iptables -L INPUT --line-numbers
+ 
+ip6tables -nvL
+ip6tables -t filter -nvL
+ 
+iptables -S
+iptables -t raw -S
+iptables -t mangle -S
+ 
+iptables -L -t nat
+iptables -L -t mangle
+
 ```
-4. [Firewall iptables rules](https://www.ibm.com/docs/en/linux-on-systems?topic=tests-firewall-iptables-rules "Firewall iptables rules") 
-
-
-
-__!!! BEFORE Begin !!!__
+__Test request for Client1 & Client2
 ```console
-# !!! Disable UFW for ALL servers!!!
-sudo ufw disable
-
-Firewall stopped and disabled on system startup
-```
-
-Check intenet connection:
-```console
-# Server_1
-ubuntu@server1:~$ wget www.i.ua
---2022-11-19 15:17:03--  http://www.i.ua/
-Resolving www.i.ua (www.i.ua)... 104.18.2.81, 104.18.3.81
-Connecting to www.i.ua (www.i.ua)|104.18.2.81|:80... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: unspecified [text/html]
-Saving to: ‘index.html.1’
-
-index.html.1            [ <=>                ]  73.54K  --.-KB/s    in 0.01s
-2022-11-19 15:17:03 (4.83 MB/s) - ‘index.html.1’ saved [75308]
-# ----------------------------------------------------------------------------
-
-# Client_1
-ubuntu@client1:~$ wget www.i.ua
---2022-11-19 15:16:58--  http://www.i.ua/
-Resolving www.i.ua (www.i.ua)... 104.18.3.81, 104.18.2.81
-Connecting to www.i.ua (www.i.ua)|104.18.3.81|:80... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: unspecified [text/html]
-Saving to: ‘index.html.3’
-
-index.html.3            [ <=>                ]  73.64K  --.-KB/s    in 0.02s
-2022-11-19 15:16:58 (4.70 MB/s) - ‘index.html.3’ saved [75403]
-#
-ubuntu@client1:~$ ping www.i.ua
-PING www.i.ua (104.18.2.81) 56(84) bytes of data.
-64 bytes from 104.18.2.81 (104.18.2.81): icmp_seq=1 ttl=57 time=3.12 ms
-64 bytes from 104.18.2.81 (104.18.2.81): icmp_seq=2 ttl=57 time=2.96 ms
-^C
---- www.i.ua ping statistics ---
-2 packets transmitted, 2 received, 0% packet loss, time 1001ms
-rtt min/avg/max/mdev = 2.959/3.037/3.116/0.078 ms
-# ----------------------------------------------------------------------------
+# ----- FOR Client1 ------
+clear;
+echo "######### Hostname #########";
+hostname; 
+echo; 
+echo "######### Ping Serve1 (Int2) #########";
+ping 10.85.8.1 -c 2;
+echo; 
+echo "######### Ping Client2 #########";
+ping 10.3.85.21 -c 2;
+echo;
+echo "######### Ping 2ip.ua #########";
+ping 2ip.ua -c 2;
+echo;
+echo "######### HTTP/80 2ip.ua #########";
+curl -I http://2ip.ua;
+echo;
+echo "######### HTTPS/443 2ip.ua #########";
+curl -I https://2ip.ua;
 
 
-# Client_2
-ubuntu@client2:~$ wget www.i.ua
---2022-11-19 15:17:08--  http://www.i.ua/
-Resolving www.i.ua (www.i.ua)... 104.18.2.81, 104.18.3.81
-Connecting to www.i.ua (www.i.ua)|104.18.2.81|:80... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: unspecified [text/html]
-Saving to: ‘index.html.1’
-
-index.html.1            [ <=>                ]  73.58K  --.-KB/s    in 0.007s
-2022-11-19 15:17:08 (9.91 MB/s) - ‘index.html.1’ saved [75350]
-#
-ubuntu@client2:~$ ping www.i.ua
-PING www.i.ua (104.18.2.81) 56(84) bytes of data.
-64 bytes from 104.18.2.81 (104.18.2.81): icmp_seq=1 ttl=57 time=2.88 ms
-64 bytes from 104.18.2.81 (104.18.2.81): icmp_seq=2 ttl=57 time=2.94 ms
-^C
---- www.i.ua ping statistics ---
-2 packets transmitted, 2 received, 0% packet loss, time 1001ms
-rtt min/avg/max/mdev = 2.878/2.909/2.941/0.031 ms
-
-# ----------------------------------------------------------------------------
+# ----- TEST FOR Client2  ------
+clear;
+echo "######### Hostname #########";
+hostname; 
+echo; 
+echo "######### Ping Serve1 (Int3) #########";
+ping 10.3.85.1 -c 2;
+echo; 
+echo "######### Ping Client1 #########";
+ping 10.85.8.21 -c 2;
+echo;
+echo "######### Ping 2ip.ua #########";
+ping 2ip.ua -c 2;
+echo;
+echo "######### HTTP/80 2ip.ua #########";
+curl -I http://2ip.ua;
+echo;
+echo "######### HTTPS/443 2ip.ua #########";
+curl -I https://2ip.ua;
 ```
 
-__Firewall seetings on Server_1__
-```console
 
+__IP Tables on Server_1 before EDIT__
 ```console
-Displaying saved rules:
-cat /etc/iptables/rules.v4
-
-# Generated by iptables-save v1.8.7 on Sun Nov 13 01:51:56 2022
+ubuntu@server1:~$ sudo iptables-save
+[sudo] password for ubuntu:
+# Generated by iptables-save v1.8.7 on Sun Nov 20 20:28:20 2022
 *filter
-:INPUT ACCEPT [0:0]
-:FORWARD ACCEPT [0:0]
-:OUTPUT ACCEPT [0:0]
+:INPUT DROP [6:252]
+:FORWARD DROP [0:0]
+:OUTPUT ACCEPT [104:18948]
+-A INPUT -p tcp -m tcp --dport 22 -j ACCEPT
+-A INPUT -p icmp -j ACCEPT
+-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+-A INPUT -p tcp -m tcp --dport 53 -j ACCEPT
+-A INPUT -p udp -m udp --dport 53 -j ACCEPT
 -A FORWARD -i enp0s8 -o enp0s3 -j ACCEPT
 -A FORWARD -i enp0s9 -o enp0s3 -j ACCEPT
--A FORWARD -i enp0s3 -o enp0s8 -m state --state RELATED,ESTABLISHED -j ACCEPT
--A FORWARD -i enp0s3 -o enp0s9 -m state --state RELATED,ESTABLISHED -j ACCEPT
+-A FORWARD -i enp0s8 -o enp0s9 -j ACCEPT
+-A FORWARD -i enp0s9 -o enp0s8 -j ACCEPT
+-A FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
+-A FORWARD -p icmp -j ACCEPT
 COMMIT
-# Completed on Sun Nov 13 01:51:56 2022
-# Generated by iptables-save v1.8.7 on Sun Nov 13 01:51:56 2022
+# Completed on Sun Nov 20 20:28:20 2022
+# Generated by iptables-save v1.8.7 on Sun Nov 20 20:28:20 2022
 *nat
-:PREROUTING ACCEPT [0:0]
-:INPUT ACCEPT [0:0]
-:OUTPUT ACCEPT [0:0]
-:POSTROUTING ACCEPT [0:0]
+:PREROUTING ACCEPT [8:356]
+:INPUT ACCEPT [2:104]
+:OUTPUT ACCEPT [4:294]
+:POSTROUTING ACCEPT [1:78]
 -A POSTROUTING -o enp0s3 -j MASQUERADE
--A POSTROUTING -o enp0s8 -j MASQUERADE
--A POSTROUTING -o enp0s9 -j MASQUERADE
 COMMIT
-# Completed on Sun Nov 13 01:51:56 2022
-
-
-# Server_1 NAT Table 
-
-ubuntu@server1:~$ sudo iptables -t nat -L -nv
-Chain PREROUTING (policy ACCEPT 176 packets, 11290 bytes)
- pkts bytes target     prot opt in     out     source               destination
-
-Chain INPUT (policy ACCEPT 43 packets, 3115 bytes)
- pkts bytes target     prot opt in     out     source               destination
-
-Chain OUTPUT (policy ACCEPT 67 packets, 4709 bytes)
- pkts bytes target     prot opt in     out     source               destination
-
-Chain POSTROUTING (policy ACCEPT 55 packets, 3885 bytes)
- pkts bytes target     prot opt in     out     source               destination
-   23  1662 MASQUERADE  all  --  *      enp0s3  0.0.0.0/0            0.0.0.0/0
-    1    48 MASQUERADE  all  --  *      enp0s8  0.0.0.0/0            0.0.0.0/0
-    1    48 MASQUERADE  all  --  *      enp0s9  0.0.0.0/0            0.0.0.0/0
-
-# Server_1 IP Table 
-sudo iptables -L -nv
-Chain INPUT (policy ACCEPT 1636 packets, 488K bytes)
- pkts bytes target     prot opt in     out     source               destination
-
-Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
- pkts bytes target     prot opt in     out     source               destination
-32630 1844K ACCEPT     all  --  enp0s8 enp0s3  0.0.0.0/0            0.0.0.0/0
-  114 11653 ACCEPT     all  --  enp0s9 enp0s3  0.0.0.0/0            0.0.0.0/0
-56424  101M ACCEPT     all  --  enp0s3 enp0s8  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
-  133  179K ACCEPT     all  --  enp0s3 enp0s9  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
-    0     0 ACCEPT     all  --  enp0s8 enp0s9  0.0.0.0/0            0.0.0.0/0
-    0     0 ACCEPT     all  --  enp0s9 enp0s8  0.0.0.0/0            0.0.0.0/0
-
-Chain OUTPUT (policy ACCEPT 703 packets, 85334 bytes)
- pkts bytes target     prot opt in     out     source               destination
-
-Chain ufw-after-logging-forward (0 references)
- pkts bytes target     prot opt in     out     source               destination
-
-Chain ufw-after-logging-input (0 references)
- pkts bytes target     prot opt in     out     source               destination
-
-Chain ufw-after-logging-output (0 references)
- pkts bytes target     prot opt in     out     source               destination
-
-Chain ufw-before-logging-forward (0 references)
- pkts bytes target     prot opt in     out     source               destination
-
-Chain ufw-before-logging-input (0 references)
- pkts bytes target     prot opt in     out     source               destination
-
-Chain ufw-before-logging-output (0 references)
- pkts bytes target     prot opt in     out     source               destination
+# Completed on Sun Nov 20 20:28:20 2022
 ```
 
-So, rules will be change like to this:
+Use this script and change iptables:
+[A8_IP_Tables_only_PING.sh](https://github.com/Ivan2navI/L1_EPAM/blob/main/4.%20Linux%20Networking/.settings/A8_IP_Tables_only_PING.sh "A8_IP_Tables_only_PING.sh")
 ```console
-# Required iptables command switches
+#!/bin/bash
+# Объявление переменных
+export FW="sudo iptables"
 
-# The below pasted switches are required for creating a rule for managing icmp.
+# Интерфейс, подключенный к Интернету
+Int1_WAN="enp0s3"
 
-    -A : Add a rule
-    -D : Delete rule from table
-    -p : To specify protocol (here 'icmp')
-    --icmp-type : For specifying type
-    -J : Jump to target
+# Интерфейсы, подключенные к локальной сети + Их диапазон адресов для этой локальной сети
+Int2="enp0s8"
+IP_2Client1="10.85.8.0/24"
 
-# Normally using icmp types and its Codes Click here for ICMP Types and Codes
+Int3="enp0s9"
+IP_2Client2="10.3.85.0/24"
 
-    echo-request   :  8
-    echo-reply     :  0
+# Очистка всех цепочек и удаление правил
+$FW -F
+$FW -F -t nat
+$FW -F -t mangle
+$FW -X
+$FW -t nat -X
+$FW -t mangle -X
 
-# !!! The rules used for firewall were:
+# Разрешить входящий трафик к интерфейсу локальной петли,
+# это необходимо для корректной работы некоторых сервисов
+$FW -A INPUT -i lo -j ACCEPT
 
-    # - Stop all incoming traffic by using the following command:
-    sudo iptables -P INPUT DROP
-        
-        # * Allow SSH session to firewall 1 by using the following command:
-        sudo iptables -A INPUT -p tcp --dport 22 -s 0/0 -j ACCEPT
+# Разрешить на внутреннем интерфейсе весь трафик из локальной сети Int2 (Client_1), Int3 (Client_2) к Server_1
+$FW -A INPUT -i $Int2 -s $IP_2Client1 -j ACCEPT
+$FW -A INPUT -i $Int3 -s $IP_2Client2 -j ACCEPT
 
-        # * Allow ICMP traffic to firewall 1 by using the following command:
-        sudo iptables -A INPUT -p icmp -j ACCEPT
-        
-        # * Allow all related and established traffic for firewall 1 by using the following command:
-        sudo iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+# Разрешить входящие соединения, которые были разрешены в рамках других соединений
+$FW -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+
+# Разрешить перенаправление трафика Ping с внутренней сети наружу, как для новых,
+# так и уже имеющихся соединений в системе, остальные подключения в интернет - заблокировать.
+#----- Для Client_1 настройки -----
+#-- Позволяем два, наиболее безопасных типа пинга 8 (эхо-запрос) и 0 (эхо-ответ). --
+$FW -A FORWARD -i $Int1_WAN -o $Int2 -p icmp --icmp-type 0 -m conntrack --ctstate NEW -j ACCEPT
+$FW -A FORWARD -i $Int2 -o $Int1_WAN -p icmp --icmp-type 0 -m conntrack --ctstate NEW -j ACCEPT
+#
+$FW -A FORWARD -i $Int1_WAN -o $Int2 -p icmp --icmp-type 8 -m conntrack --ctstate NEW -j ACCEPT
+$FW -A FORWARD -i $Int2 -o $Int1_WAN -p icmp --icmp-type 8 -m conntrack --ctstate NEW -j ACCEPT
+#
+$FW -A FORWARD -i $Int2 -o $Int3 -p icmp --icmp-type 0 -m conntrack --ctstate NEW -j ACCEPT
+$FW -A FORWARD -i $Int2 -o $Int3 -p icmp --icmp-type 8 -m conntrack --ctstate NEW -j ACCEPT
+#--	Позволяем DNS запрос --
+$FW -A FORWARD -i $Int1_WAN -o $Int2 -p tcp -m tcp --dport 53 -m conntrack --ctstate NEW -j ACCEPT
+$FW -A FORWARD -i $Int2 -o $Int1_WAN -p tcp -m tcp --dport 53 -m conntrack --ctstate NEW -j ACCEPT
+$FW -A FORWARD -i $Int1_WAN -o $Int2 -p udp -m udp --dport 53 -m conntrack --ctstate NEW -j ACCEPT
+$FW -A FORWARD -i $Int2 -o $Int1_WAN -p udp -m udp --dport 53 -m conntrack --ctstate NEW -j ACCEPT
+#--	По умолчанию пакеты DROP, но для информирования клиента будет выполнен REJECT для интернет пакетов (80,443) --
+$FW -A FORWARD -i $Int1_WAN -o $Int2 -p tcp -m multiport --ports 80,443 -m conntrack --ctstate NEW -j REJECT
+$FW -A FORWARD -i $Int2 -o $Int1_WAN -p tcp -m multiport --ports 80,443 -m conntrack --ctstate NEW -j REJECT
+$FW -A FORWARD -i $Int1_WAN -o $Int2 -p udp -m multiport --ports 80,443 -m conntrack --ctstate NEW -j REJECT
+$FW -A FORWARD -i $Int2 -o $Int1_WAN -p udp -m multiport --ports 80,443 -m conntrack --ctstate NEW -j REJECT
+#--	Разрешить перенаправление только тех пакетов с внешней сети внутрь, 						--
+#--	которые уже являются частью имеющихся соединений + Обмен пакетами между внутренними сетями	--
+$FW -A FORWARD -i $Int1_WAN -o $Int2 -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+$FW -A FORWARD -i $Int2 -o $Int1_WAN -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+$FW -A FORWARD -i $Int2 -o $Int3 -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+#--
+#----- Для Client_2 настройки -----
+#-- Позволяем два, наиболее безопасных типа пинга 8 (эхо-запрос) и 0 (эхо-ответ). --
+$FW -A FORWARD -i $Int1_WAN -o $Int3 -p icmp --icmp-type 0 -m conntrack --ctstate NEW -j ACCEPT
+$FW -A FORWARD -i $Int3 -o $Int1_WAN -p icmp --icmp-type 0 -m conntrack --ctstate NEW -j ACCEPT
+#--
+$FW -A FORWARD -i $Int1_WAN -o $Int3 -p icmp --icmp-type 8 -m conntrack --ctstate NEW -j ACCEPT
+$FW -A FORWARD -i $Int3 -o $Int1_WAN -p icmp --icmp-type 8 -m conntrack --ctstate NEW -j ACCEPT
+#--
+$FW -A FORWARD -i $Int3 -o $Int2 -p icmp --icmp-type 0 -m conntrack --ctstate NEW -j ACCEPT
+$FW -A FORWARD -i $Int3 -o $Int2 -p icmp --icmp-type 8 -m conntrack --ctstate NEW -j ACCEPT
+#--	Позволяем DNS запрос --
+$FW -A FORWARD -i $Int1_WAN -o $Int3 -p tcp -m tcp --dport 53 -m conntrack --ctstate NEW -j ACCEPT
+$FW -A FORWARD -i $Int3 -o $Int1_WAN -p tcp -m tcp --dport 53 -m conntrack --ctstate NEW -j ACCEPT
+$FW -A FORWARD -i $Int1_WAN -o $Int3 -p udp -m udp --dport 53 -m conntrack --ctstate NEW -j ACCEPT
+$FW -A FORWARD -i $Int3 -o $Int1_WAN -p udp -m udp --dport 53 -m conntrack --ctstate NEW -j ACCEPT
+#--	По умолчанию пакеты DROP, но для информирования клиента будет выполнен REJECT для интернет пакетов (80,443) --
+$FW -A FORWARD -i $Int1_WAN -o $Int3 -p tcp -m multiport --ports 80,443 -m conntrack --ctstate NEW -j REJECT
+$FW -A FORWARD -i $Int3 -o $Int1_WAN -p tcp -m multiport --ports 80,443 -m conntrack --ctstate NEW -j REJECT
+$FW -A FORWARD -i $Int1_WAN -o $Int3 -p udp -m multiport --ports 80,443 -m conntrack --ctstate NEW -j REJECT
+$FW -A FORWARD -i $Int3 -o $Int1_WAN -p udp -m multiport --ports 80,443 -m conntrack --ctstate NEW -j REJECT
+#--	Разрешить перенаправление только тех пакетов с внешней сети внутрь, 						--
+#--	которые уже являются частью имеющихся соединений + Обмен пакетами между внутренними сетями	--
+$FW -A FORWARD -i $Int1_WAN -o $Int3 -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+$FW -A FORWARD -i $Int3 -o $Int1_WAN -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+$FW -A FORWARD -i $Int3 -o $Int2 -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+
+# Выполняем трансляцию сетевых адресов, принадлежащих локальной сети
+$FW -t nat -A POSTROUTING -o $Int1_WAN -s $IP_2Client1 -j MASQUERADE
+$FW -t nat -A POSTROUTING -o $Int1_WAN -s $IP_2Client2 -j MASQUERADE
+
+# Устанавливаем политики по умолчанию:
+# Входящий трафик — сбрасывать; Проходящий трафик — сбрасывать; Исходящий — разрешать
+$FW -P INPUT DROP
+$FW -P FORWARD DROP
+$FW -P OUTPUT ACCEPT
+
+# Сохранить настройки в iptables
+sudo iptables-save
+```
 
 
-    # - Stop all forwarding by using the following command:
-    sudo iptables -P FORWARD DROP
-        # * Allow forwarding of ICMP traffic by using the following command:
-        sudo iptables -A FORWARD -p icmp -j ACCEPT
-        # * Allow forwarding of all related and established traffic by using the following command:
-        sudo iptables -A FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
 
 
-    # - Allow output traffic for ICMP by using the following command:
-    sudo iptables -A OUTPUT -p icmp -j ACCEPT
+```console
 
 #!!! The current rules will be saved during package installation but can still save them thereafter by running the command:
 
 sudo iptables-save
-
 sudo sh -c "iptables-save > /etc/iptables/rules.v4"
+
+sudo service netfilter-persistent reload
+
+sudo nano /etc/iptables/rules.v4
+
+
+# !!! Restore the saved rules by reading the file you saved.
+# Overwrite the current rules
+    sudo iptables-restore < /etc/iptables/rules.v4 && sudo iptables-save && sudo service netfilter-persistent reload
 ```
 
-Result:
-```console
-# Displaying saved rules:
-ubuntu@server1:~$ cat /etc/iptables/rules.v4
-      # Generated by iptables-save v1.8.7 on Sat Nov 19 16:56:39 2022
-      *filter
-      :INPUT DROP [68:5876]
-      :FORWARD ACCEPT [0:0]
-      :OUTPUT ACCEPT [973:120794]
-      :ufw-after-logging-forward - [0:0]
-      :ufw-after-logging-input - [0:0]
-      :ufw-after-logging-output - [0:0]
-      :ufw-before-logging-forward - [0:0]
-      :ufw-before-logging-input - [0:0]
-      :ufw-before-logging-output - [0:0]
-      -A INPUT -p tcp -m tcp --dport 22 -j ACCEPT
-      -A INPUT -p icmp -j ACCEPT
-      -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
-      -A FORWARD -i enp0s8 -o enp0s3 -j ACCEPT
-      -A FORWARD -i enp0s9 -o enp0s3 -j ACCEPT
-      -A FORWARD -i enp0s3 -o enp0s8 -m state --state RELATED,ESTABLISHED -j ACCEPT
-      -A FORWARD -i enp0s3 -o enp0s9 -m state --state RELATED,ESTABLISHED -j ACCEPT
-      -A FORWARD -i enp0s8 -o enp0s9 -j ACCEPT
-      -A FORWARD -i enp0s9 -o enp0s8 -j ACCEPT
-      -A FORWARD -p icmp -j ACCEPT
-      -A FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
-      -A OUTPUT -p icmp -j ACCEPT
-      COMMIT
-      # Completed on Sat Nov 19 16:56:39 2022
-      # Generated by iptables-save v1.8.7 on Sat Nov 19 16:56:39 2022
-      *nat
-      :PREROUTING ACCEPT [657:47685]
-      :INPUT ACCEPT [451:34370]
-      :OUTPUT ACCEPT [88:6472]
-      :POSTROUTING ACCEPT [59:4161]
-      -A POSTROUTING -o enp0s3 -j MASQUERADE
-      -A POSTROUTING -o enp0s8 -j MASQUERADE
-      -A POSTROUTING -o enp0s9 -j MASQUERADE
-      COMMIT
-      # Completed on Sat Nov 19 16:56:39 2022
 
-
-
-
-```
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
