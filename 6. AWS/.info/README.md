@@ -32,8 +32,7 @@
 -   [Terminate Your Instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/terminating-instances.html)
 -   [Termination Protection for an Instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/terminating-instances.html)
 
-
-__PS: [Paste to Markdown](https://euangoddard.github.io/clipboard2markdown/)__
+### PS: [Paste to Markdown](https://euangoddard.github.io/clipboard2markdown/)
 
 Instructions
 
