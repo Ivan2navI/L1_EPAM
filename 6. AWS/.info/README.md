@@ -33,4 +33,13 @@
 -   [Termination Protection for an Instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/terminating-instances.html)
 
 
-PS: https://euangoddard.github.io/clipboard2markdown/ 
+__PS: [Paste to Markdown](https://euangoddard.github.io/clipboard2markdown/)__
+
+Instructions
+
+    Find the text to convert to Markdown (e.g., in another browser tab)
+    Copy it to the clipboard (Ctrl+C, or ⌘+C on Mac)
+    Paste it into this window (Ctrl+V, or ⌘+V on Mac)
+    The converted Markdown will appear!
+
+The conversion is carried out by [to-markdown](https://github.com/domchristie/to-markdown), a Markdown converter written in JavaScript and running locally in the browser.
