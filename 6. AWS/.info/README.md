@@ -33,7 +33,7 @@
 -   [Termination Protection for an Instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/terminating-instances.html)
 
 ## DynamoDB Additional Resources
--   For more information about DynamoDB, see [http://aws.amazon.com/documentation/dynamodb](https://aws.amazon.com/documentation/dynamodb).
+* For more information about DynamoDB, see https://aws.amazon.com/documentation/dynamodb.
 
 
 
