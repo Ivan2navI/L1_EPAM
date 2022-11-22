@@ -32,6 +32,14 @@
 -   [Terminate Your Instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/terminating-instances.html)
 -   [Termination Protection for an Instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/terminating-instances.html)
 
+## DynamoDB Additional Resources
+-   For more information about DynamoDB, see [http://aws.amazon.com/documentation/dynamodb](https://aws.amazon.com/documentation/dynamodb).
+
+
+
+
+
+
 ### PS: [Paste to Markdown](https://euangoddard.github.io/clipboard2markdown/)
 
 Instructions
