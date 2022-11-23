@@ -37,9 +37,6 @@
 
 
 
-
-
-
 ### PS: [Paste to Markdown](https://euangoddard.github.io/clipboard2markdown/)
 
 Instructions
