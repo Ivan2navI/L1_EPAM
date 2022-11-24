@@ -4,6 +4,13 @@
 2. [Register  with AWS  ](https://portal.aws.amazon.com/billing/signup?redirect_url=https%3A%2F%2Faws.amazon.com%2Fregistration-confirmation#/start)(first priority) or alternatively, you can request access to courses  in[  AWS ](https://aws.amazon.com/training/awsacademy/member-list/) [Academy  ](https://aws.amazon.com/training/awsacademy/member-list/)if you are currently a student of[  certain University.](https://aws.amazon.com/training/awsacademy/member-list/)
 3. Find the[  hands-on tutorials  ](https://aws.amazon.com/ru/getting-started/hands-on/?awsf.getting-started-category=category%23compute&amp;awsf.getting-started-content-type=content-type%23hands-on&amp;?e=gs2020&amp;p=gsrc&amp;awsf.getting-started-level=*all)and[  AWS Well-Architected Labs  ](https://www.wellarchitectedlabs.com/)for  your AWS  needs. Explore list of step-by-step tutorials for deferent  category. Use, repeat as  many as you  can and have fun))
 4. Register and pass courses on[  AWS Educate.](https://www.awseducate.com/) Filter by checking Topic Cloud Computing and Foundational Level. Feel free to pass more. 
+
+* [AWS Educate Introduction to Cloud 101](https://www.credly.com/badges/91260238-f8a4-43cb-a5be-225bf28ece76/public_url)
+
+* [AWS Educate Getting Started with Compute](https://www.credly.com/badges/c55b57e4-31ab-40fd-a2b4-ff4e1ea87cf7/public_url)
+
+* [AWS Educate Getting Started with Storage](https://www.credly.com/badges/8a610240-9c44-4ac7-b22c-a447c0addd1e/public_url)
+
 5. Register and pass free courses  on[  AWS Skillbuilder.](https://explore.skillbuilder.aws/learn) AWS Cloud  Practitioner Essentials: Core Services, AWS Cloud  Practitioner Essentials: Cloud Concepts. Try AWS Cloud  Quest: Cloud Practitioner. 
 6. Pass free courses on[  Amazon  qwiklabs ](https://amazon.qwiklabs.com/)
 7. Review[  Getting  Started  with  Amazon  EC2.](https://aws.amazon.com/ec2/getting-started/?nc1=h_ls)  Log  Into  Your  AWS  Account,  Launch,  Configure,  Connect and Terminate Your Instance. Do not use Amazon Lightsail. It is recommended to use the t2 or t3.micro instance and the CentOS operating system. 
