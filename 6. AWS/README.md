@@ -7,14 +7,14 @@
 <p align="center">
   <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main//6.%20AWS/.info/A%204.1..png">
 </p>
-<p align="center">
-  <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main//6.%20AWS/.info/A%204.2..png">
-</p>
 
 > Actual links to __Credly__:
 > - [AWS Educate Introduction to Cloud 101](https://www.credly.com/badges/91260238-f8a4-43cb-a5be-225bf28ece76/public_url)
 > - [AWS Educate Getting Started with Compute](https://www.credly.com/badges/c55b57e4-31ab-40fd-a2b4-ff4e1ea87cf7/public_url)
 > - [AWS Educate Getting Started with Storage](https://www.credly.com/badges/8a610240-9c44-4ac7-b22c-a447c0addd1e/public_url)
+<p align="center">
+  <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main//6.%20AWS/.info/A%204.2..png">
+</p>
 
 5. Register and pass free courses  on[  AWS Skillbuilder.](https://explore.skillbuilder.aws/learn) AWS Cloud  Practitioner Essentials: Core Services, AWS Cloud  Practitioner Essentials: Cloud Concepts. Try AWS Cloud  Quest: Cloud Practitioner. 
 6. Pass free courses on[  Amazon  qwiklabs ](https://amazon.qwiklabs.com/)
