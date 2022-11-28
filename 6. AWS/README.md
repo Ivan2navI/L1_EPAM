@@ -42,7 +42,8 @@
   <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main//6.%20AWS/.info/A%208..png">
 </p>
 
-9. Create and attach a Disk_D (EBS) to your instance to add more storage space. Create and save some file on Disk_D. 
+9. Create and attach a Disk_D (EBS) to your instance to add more storage space. Create and save some file on Disk_D.
+[Make an Amazon EBS volume available for use on Linux](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-using-volumes.html)
 ```console
 # Login to your ec2 instance and list the available disks using the following command.
 lsblk
