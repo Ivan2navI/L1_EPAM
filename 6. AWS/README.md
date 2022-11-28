@@ -32,6 +32,15 @@
 </p>
 
 8. Create a snapshot of  your instance to keep as a backup. 
+> __To create multi-volume snapshots using the console__
+> - Open the Amazon EC2 console at https://console.aws.amazon.com/ec2/
+> - In the navigation pane, choose Snapshots, Create snapshot.
+> - For Resource type, choose Instance.
+> - For Description, enter a brief description for the snapshots. This description is applied to all of the snapshots.
+> - Choose Create snapshot.
+<p align="center">
+  <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main//6.%20AWS/.info/A%208..png">
+</p>
 9. Create and attach a Disk_D (EBS) to your instance to add more storage space. Create and save some file on Disk_D. 
 10. Launch the second instance from backup.    
 11. Detach Disk_D from the 1st instance and attach  disk_D to the new instance. 
