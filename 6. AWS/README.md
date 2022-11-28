@@ -1,9 +1,9 @@
 # 6. AWS Cloud Basic 
 
-1. Read the terms of Using the[  AWS Free Tier  ](https://docs.aws.amazon.com/en_us/awsaccountbilling/latest/aboutv2/billing-free-tier.html)and the ability to control their own costs.
-2. [Register  with AWS  ](https://portal.aws.amazon.com/billing/signup?redirect_url=https%3A%2F%2Faws.amazon.com%2Fregistration-confirmation#/start)(first priority) or alternatively, you can request access to courses  in[  AWS ](https://aws.amazon.com/training/awsacademy/member-list/) [Academy  ](https://aws.amazon.com/training/awsacademy/member-list/)if you are currently a student of[  certain University.](https://aws.amazon.com/training/awsacademy/member-list/)
-3. Find the[  hands-on tutorials  ](https://aws.amazon.com/ru/getting-started/hands-on/?awsf.getting-started-category=category%23compute&amp;awsf.getting-started-content-type=content-type%23hands-on&amp;?e=gs2020&amp;p=gsrc&amp;awsf.getting-started-level=*all)and[  AWS Well-Architected Labs  ](https://www.wellarchitectedlabs.com/)for  your AWS  needs. Explore list of step-by-step tutorials for deferent  category. Use, repeat as  many as you  can and have fun))
-4. Register and pass courses on[  AWS Educate.](https://www.awseducate.com/) Filter by checking Topic Cloud Computing and Foundational Level. Feel free to pass more. 
+### 1. Read the terms of Using the[  AWS Free Tier  ](https://docs.aws.amazon.com/en_us/awsaccountbilling/latest/aboutv2/billing-free-tier.html)and the ability to control their own costs.
+### 2. [Register  with AWS  ](https://portal.aws.amazon.com/billing/signup?redirect_url=https%3A%2F%2Faws.amazon.com%2Fregistration-confirmation#/start)(first priority) or alternatively, you can request access to courses  in[  AWS ](https://aws.amazon.com/training/awsacademy/member-list/) [Academy  ](https://aws.amazon.com/training/awsacademy/member-list/)if you are currently a student of[  certain University.](https://aws.amazon.com/training/awsacademy/member-list/)
+### 3. Find the[  hands-on tutorials  ](https://aws.amazon.com/ru/getting-started/hands-on/?awsf.getting-started-category=category%23compute&amp;awsf.getting-started-content-type=content-type%23hands-on&amp;?e=gs2020&amp;p=gsrc&amp;awsf.getting-started-level=*all)and[  AWS Well-Architected Labs  ](https://www.wellarchitectedlabs.com/)for  your AWS  needs. Explore list of step-by-step tutorials for deferent  category. Use, repeat as  many as you  can and have fun))
+### 4. Register and pass courses on[  AWS Educate.](https://www.awseducate.com/) Filter by checking Topic Cloud Computing and Foundational Level. Feel free to pass more. 
 <p align="center">
   <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main//6.%20AWS/.info/A%204.1..png">
 </p>
@@ -16,22 +16,22 @@
   <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main//6.%20AWS/.info/A%204.2..png">
 </p>
 
-5. Register and pass free courses  on[  AWS Skillbuilder](https://explore.skillbuilder.aws/learn). AWS Cloud  Practitioner Essentials: Core Services, AWS Cloud  Practitioner Essentials: Cloud Concepts. Try AWS Cloud  Quest: Cloud Practitioner. 
+### 5. Register and pass free courses  on[  AWS Skillbuilder](https://explore.skillbuilder.aws/learn). AWS Cloud  Practitioner Essentials: Core Services, AWS Cloud  Practitioner Essentials: Cloud Concepts. Try AWS Cloud  Quest: Cloud Practitioner. 
 <p align="center">
   <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main//6.%20AWS/.info/A%205..png">
 </p>
 
-6. Pass free courses on[  Amazon  qwiklabs ](https://amazon.qwiklabs.com/)
+### 6. Pass free courses on[  Amazon  qwiklabs ](https://amazon.qwiklabs.com/)
 <p align="center">
   <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main//6.%20AWS/.info/A%206..png">
 </p>
 
-7. Review[  Getting  Started  with  Amazon  EC2.](https://aws.amazon.com/ec2/getting-started/?nc1=h_ls)  Log  Into  Your  AWS  Account,  Launch,  Configure,  Connect and Terminate Your Instance. Do not use Amazon Lightsail. It is recommended to use the t2 or t3.micro instance and the CentOS operating system. 
+### 7. Review[  Getting  Started  with  Amazon  EC2.](https://aws.amazon.com/ec2/getting-started/?nc1=h_ls)  Log  Into  Your  AWS  Account,  Launch,  Configure,  Connect and Terminate Your Instance. Do not use Amazon Lightsail. It is recommended to use the t2 or t3.micro instance and the CentOS operating system. 
 <p align="center">
   <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main//6.%20AWS/.info/A%207..png">
 </p>
 
-8. Create a snapshot of  your instance to keep as a backup.
+### 8. Create a snapshot of  your instance to keep as a backup.
 __[Amazon EC2 backup and recovery with snapshots and AMIs](https://docs.aws.amazon.com/prescriptive-guidance/latest/backup-recovery/ec2-backup.html)__
 > __To create multi-volume snapshots using the console__
 > - Open the Amazon EC2 console at https://console.aws.amazon.com/ec2/
@@ -43,7 +43,7 @@ __[Amazon EC2 backup and recovery with snapshots and AMIs](https://docs.aws.amaz
   <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main//6.%20AWS/.info/A%208..png">
 </p>
 
-9. Create and attach a Disk_D (EBS) to your instance to add more storage space. Create and save some file on Disk_D.
+### 9. Create and attach a Disk_D (EBS) to your instance to add more storage space. Create and save some file on Disk_D.
 
 [Make an Amazon EBS volume available for use on Linux](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-using-volumes.html)
 ```console
@@ -73,7 +73,7 @@ umount /dev/xvdf
   <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main//6.%20AWS/.info/A%209..png">
 </p>
 
-10. Launch the second instance from backup.
+### 10. Launch the second instance from backup.
 
 __[Restoring from an Amazon EBS snapshot or an AMI](https://docs.aws.amazon.com/prescriptive-guidance/latest/backup-recovery/restore.html)__
 > Follow these steps to restore a volume to an earlier point-in-time backup by using the console:
@@ -94,7 +94,7 @@ __[Restoring from an Amazon EBS snapshot or an AMI](https://docs.aws.amazon.com/
 > - Select the instance that you want to attach the volume to, and use the same device name that you noted earlier.
 
 
-11. Detach Disk_D from the 1st instance and attach  disk_D to the new instance. 
+### 11. Detach Disk_D from the 1st instance and attach  disk_D to the new instance. 
 12. Review the 10-minute [example.](https://aws.amazon.com/getting-started/hands-on/get-a-domain/?nc1=h_ls) Explore the possibilities of creating your own domain and domain  name  for  your  site.  Note,  that  Route  53  not  free  service. Alternatively  you  can  free register the  domain name *.PP.UA and use it. 
 13. Launch and configure a WordPress instance with Amazon Lightsail[  link  ](https://aws.amazon.com/getting-started/hands-on/launch-a-wordpress-website/?trk=gs_card) 
 14. Review the 10-minute[  Store and Retrieve a File.](https://aws.amazon.com/getting-started/hands-on/backup-files-to-amazon-s3/) Repeat, creating your own repository.
