@@ -41,7 +41,35 @@
 <p align="center">
   <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main//6.%20AWS/.info/A%208..png">
 </p>
+
 9. Create and attach a Disk_D (EBS) to your instance to add more storage space. Create and save some file on Disk_D. 
+```console
+# Login to your ec2 instance and list the available disks using the following command.
+lsblk
+
+# Check if the volume has any data using the following command.
+sudo file -s /dev/xvdf
+# If the above command output shows “/dev/xvdf: data“, it means your volume is empty.
+
+# Format the volume to the ext4 filesystem using the following command.
+sudo mkfs -t ext4 /dev/xvdf
+# Alternatively, you can also use the xfs format. You have to use either ext4 or xfs.
+sudo mkfs -t xfs /dev/xvdf
+
+# Create a directory of your choice to mount our new ext4 volume.
+sudo mkdir Disc_D
+
+# cd into Disc_D directory and check the disk space to validate the volume mount.
+cd Disc_D
+df -h
+
+# To unmount the volume, use the unmount command as shown below..
+umount /dev/xvdf
+```
+<p align="center">
+  <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main//6.%20AWS/.info/A%209..png">
+</p>
+
 10. Launch the second instance from backup.    
 11. Detach Disk_D from the 1st instance and attach  disk_D to the new instance. 
 12. Review the 10-minute [example.](https://aws.amazon.com/getting-started/hands-on/get-a-domain/?nc1=h_ls) Explore the possibilities of creating your own domain and domain  name  for  your  site.  Note,  that  Route  53  not  free  service. Alternatively  you  can  free register the  domain name *.PP.UA and use it. 
