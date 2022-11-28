@@ -12,7 +12,7 @@ _4. [Linux Networking](https://github.com/Ivan2navI/L1_EPAM/tree/main/4.%20Linux
 
 _5. Azure Cloud_
 
-_6. AWS_
+_6. [AWS](https://github.com/Ivan2navI/L1_EPAM/tree/main/6.%20AWS)_
 
 _7. Jenkins_
 
