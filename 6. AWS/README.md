@@ -31,7 +31,8 @@
   <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main//6.%20AWS/.info/A%207..png">
 </p>
 
-8. Create a snapshot of  your instance to keep as a backup. 
+8. Create a snapshot of  your instance to keep as a backup.
+__[Amazon EC2 backup and recovery with snapshots and AMIs](https://docs.aws.amazon.com/prescriptive-guidance/latest/backup-recovery/ec2-backup.html)__
 > __To create multi-volume snapshots using the console__
 > - Open the Amazon EC2 console at https://console.aws.amazon.com/ec2/
 > - In the navigation pane, choose Snapshots, Create snapshot.
@@ -42,7 +43,8 @@
   <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main//6.%20AWS/.info/A%208..png">
 </p>
 
-9. Create and attach a Disk_D (EBS) to your instance to add more storage space. Create and save some file on Disk_D. \
+9. Create and attach a Disk_D (EBS) to your instance to add more storage space. Create and save some file on Disk_D.
+
 [Make an Amazon EBS volume available for use on Linux](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-using-volumes.html)
 ```console
 # Login to your ec2 instance and list the available disks using the following command.
@@ -71,7 +73,27 @@ umount /dev/xvdf
   <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main//6.%20AWS/.info/A%209..png">
 </p>
 
-10. Launch the second instance from backup.    
+10. Launch the second instance from backup.
+
+__[Restoring from an Amazon EBS snapshot or an AMI](https://docs.aws.amazon.com/prescriptive-guidance/latest/backup-recovery/restore.html)__
+> Follow these steps to restore a volume to an earlier point-in-time backup by using the console:
+> - On the Amazon EC2 console, on the Elastic Block Store menu, choose Snapshots.
+> - Search for the snapshot that you want to restore, and select it.
+> - Choose Actions, and then choose Create Volume.
+> - Create the new volume in the same Availability Zone as your EC2 instance.
+> - On the Amazon EC2 console, select the instance.
+> - In the instance details, make note of the device name that you want to replace in the Root device entry or Block Devices entries.
+> - Attach the volume. The process differs for root volumes and non-root volumes.
+    
+> For root volumes:
+> - Stop the EC2 instance.
+> - On the EC2 Elastic Block Store Volumes menu, select the root volume that you want to replace.
+> - Choose Actions, and then choose Detach Volume.
+> - On the EC2 Elastic Block Store Volumes menu, select the new volume.
+> - Choose Actions, and then choose Attach Volume.
+> - Select the instance that you want to attach the volume to, and use the same device name that you noted earlier.
+
+
 11. Detach Disk_D from the 1st instance and attach  disk_D to the new instance. 
 12. Review the 10-minute [example.](https://aws.amazon.com/getting-started/hands-on/get-a-domain/?nc1=h_ls) Explore the possibilities of creating your own domain and domain  name  for  your  site.  Note,  that  Route  53  not  free  service. Alternatively  you  can  free register the  domain name *.PP.UA and use it. 
 13. Launch and configure a WordPress instance with Amazon Lightsail[  link  ](https://aws.amazon.com/getting-started/hands-on/launch-a-wordpress-website/?trk=gs_card) 
