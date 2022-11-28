@@ -62,6 +62,9 @@ sudo mkfs -t xfs /dev/xvdf
 # Create a directory of your choice to mount our new ext4 volume.
 sudo mkdir Disc_D
 
+# Mount the volume to “Disc_D” directory using the following command.
+sudo mount /dev/xvdf Disc_D
+
 # cd into Disc_D directory and check the disk space to validate the volume mount.
 cd Disc_D
 df -h
@@ -99,7 +102,13 @@ __[Restoring from an Amazon EBS snapshot or an AMI](https://docs.aws.amazon.com/
   <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main//6.%20AWS/.info/A%2010_2..png">
 </p>
 
-### 11. Detach Disk_D from the 1st instance and attach  disk_D to the new instance. 
+### 11. Detach Disk_D from the 1st instance and attach  disk_D to the new instance.
+In this case the volume mount to “Disc_D_v2” and check that a file "test_file_from_inst1_RH8" is available.
+<p align="center">
+  <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main//6.%20AWS/.info/A%2011..png">
+</p>
+
+
 ### 12. Review the 10-minute [example.](https://aws.amazon.com/getting-started/hands-on/get-a-domain/?nc1=h_ls) Explore the possibilities of creating your own domain and domain  name  for  your  site.  Note,  that  Route  53  not  free  service. Alternatively  you  can  free register the  domain name *.PP.UA and use it. 
 ### 13. Launch and configure a WordPress instance with Amazon Lightsail[  link  ](https://aws.amazon.com/getting-started/hands-on/launch-a-wordpress-website/?trk=gs_card) 
 ### 14. Review the 10-minute[  Store and Retrieve a File.](https://aws.amazon.com/getting-started/hands-on/backup-files-to-amazon-s3/) Repeat, creating your own repository.
