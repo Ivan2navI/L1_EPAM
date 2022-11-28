@@ -84,7 +84,10 @@ __[Restoring from an Amazon EBS snapshot or an AMI](https://docs.aws.amazon.com/
 > - On the Amazon EC2 console, select the instance.
 > - In the instance details, make note of the device name that you want to replace in the Root device entry or Block Devices entries.
 > - Attach the volume. The process differs for root volumes and non-root volumes.
-    
+<p align="center">
+  <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main//6.%20AWS/.info/A%2010_1..png">
+</p>
+
 > For root volumes:
 > - Stop the EC2 instance.
 > - On the EC2 Elastic Block Store Volumes menu, select the root volume that you want to replace.
@@ -92,16 +95,18 @@ __[Restoring from an Amazon EBS snapshot or an AMI](https://docs.aws.amazon.com/
 > - On the EC2 Elastic Block Store Volumes menu, select the new volume.
 > - Choose Actions, and then choose Attach Volume.
 > - Select the instance that you want to attach the volume to, and use the same device name that you noted earlier.
-
+<p align="center">
+  <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main//6.%20AWS/.info/A%2010_2..png">
+</p>
 
 ### 11. Detach Disk_D from the 1st instance and attach  disk_D to the new instance. 
-12. Review the 10-minute [example.](https://aws.amazon.com/getting-started/hands-on/get-a-domain/?nc1=h_ls) Explore the possibilities of creating your own domain and domain  name  for  your  site.  Note,  that  Route  53  not  free  service. Alternatively  you  can  free register the  domain name *.PP.UA and use it. 
-13. Launch and configure a WordPress instance with Amazon Lightsail[  link  ](https://aws.amazon.com/getting-started/hands-on/launch-a-wordpress-website/?trk=gs_card) 
-14. Review the 10-minute[  Store and Retrieve a File.](https://aws.amazon.com/getting-started/hands-on/backup-files-to-amazon-s3/) Repeat, creating your own repository.
-15. Review  the  10-minute[  example  ](https://aws.amazon.com/getting-started/hands-on/backup-to-s3-cli/?nc1=h_ls)Batch  upload  files  to  the  cloud  to  Amazon  S3  using  the  AWS  CLI. Create a user AWS  IAM, configure CLI AWS and upload any files  to S3.
-16. Review the 10-minute[  example  ](https://aws.amazon.com/getting-started/hands-on/deploy-docker-containers/?nc1=h_ls)Deploy Docker Containers on Amazon Elastic Container Service (Amazon  ECS).  Repeat,  create  a  cluster,  and  run  the  online  demo  application  or  better  other application with custom settings.
-17. [Run a Serverless "Hello, World!"  ](https://aws.amazon.com/getting-started/hands-on/run-serverless-code/?nc1=h_ls)with  AWS Lambda. 
-18. Create a static website on Amazon S3, publicly available [(link1  ](https://docs.aws.amazon.com/AmazonS3/latest/dev/HostingWebsiteOnS3Setup.html)or[  link2  ](https://docs.aws.amazon.com/AmazonS3/latest/dev/website-hosting-custom-domain-walkthrough.html)- using a custom domain registered with Route 53). Post on the page your own photo, the name of the educational program  (**EPAM  Cloud&DevOps  Fundamentals  Autumn  2022**),  the  list  of  AWS  services  with which the student worked within the educational program or earlier and the full list with links of  completed  labs  (based  on[  tutorials  ](https://aws.amazon.com/getting-started/hands-on/?awsf.getting-started-content-type=content-type%23hands-on&amp;?e=gs2020&amp;p=gsrc)or[  qwiklabs)](https://amazon.qwiklabs.com/).  Provide  the  link  to  the  website  in  your  report and СV.
+### 12. Review the 10-minute [example.](https://aws.amazon.com/getting-started/hands-on/get-a-domain/?nc1=h_ls) Explore the possibilities of creating your own domain and domain  name  for  your  site.  Note,  that  Route  53  not  free  service. Alternatively  you  can  free register the  domain name *.PP.UA and use it. 
+### 13. Launch and configure a WordPress instance with Amazon Lightsail[  link  ](https://aws.amazon.com/getting-started/hands-on/launch-a-wordpress-website/?trk=gs_card) 
+### 14. Review the 10-minute[  Store and Retrieve a File.](https://aws.amazon.com/getting-started/hands-on/backup-files-to-amazon-s3/) Repeat, creating your own repository.
+### 15. Review  the  10-minute[  example  ](https://aws.amazon.com/getting-started/hands-on/backup-to-s3-cli/?nc1=h_ls)Batch  upload  files  to  the  cloud  to  Amazon  S3  using  the  AWS  CLI. Create a user AWS  IAM, configure CLI AWS and upload any files  to S3.
+### 16. Review the 10-minute[  example  ](https://aws.amazon.com/getting-started/hands-on/deploy-docker-containers/?nc1=h_ls)Deploy Docker Containers on Amazon Elastic Container Service (Amazon  ECS).  Repeat,  create  a  cluster,  and  run  the  online  demo  application  or  better  other application with custom settings.
+### 17. [Run a Serverless "Hello, World!"  ](https://aws.amazon.com/getting-started/hands-on/run-serverless-code/?nc1=h_ls)with  AWS Lambda. 
+### 18. Create a static website on Amazon S3, publicly available [(link1  ](https://docs.aws.amazon.com/AmazonS3/latest/dev/HostingWebsiteOnS3Setup.html)or[  link2  ](https://docs.aws.amazon.com/AmazonS3/latest/dev/website-hosting-custom-domain-walkthrough.html)- using a custom domain registered with Route 53). Post on the page your own photo, the name of the educational program  (**EPAM  Cloud&DevOps  Fundamentals  Autumn  2022**),  the  list  of  AWS  services  with which the student worked within the educational program or earlier and the full list with links of  completed  labs  (based  on[  tutorials  ](https://aws.amazon.com/getting-started/hands-on/?awsf.getting-started-content-type=content-type%23hands-on&amp;?e=gs2020&amp;p=gsrc)or[  qwiklabs)](https://amazon.qwiklabs.com/).  Provide  the  link  to  the  website  in  your  report and СV.
 
 ---
 ### PS: [Paste to Markdown](https://euangoddard.github.io/clipboard2markdown/)
