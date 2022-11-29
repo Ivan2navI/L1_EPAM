@@ -159,7 +159,7 @@ echo Apache on RHEL 8 / CentOS 8 > /var/www/html/index.html
 
 13.2. For WordPress instance, I will use the previously created elastic IP and DNS zone from Route 53.
 <p align="center">
-  <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main//6.%20AWS/.info/A%2013_1..png">
+  <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main//6.%20AWS/.info/A%2013_2..png">
 </p>
 
 ### 14. Review the 10-minute[  Store and Retrieve a File.](https://aws.amazon.com/getting-started/hands-on/backup-files-to-amazon-s3/) Repeat, creating your own repository.
