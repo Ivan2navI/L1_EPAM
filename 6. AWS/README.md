@@ -175,6 +175,56 @@ echo Apache on RHEL 8 / CentOS 8 > /var/www/html/index.html
 </p>
 
 ### 15. Review  the  10-minute[  example  ](https://aws.amazon.com/getting-started/hands-on/backup-to-s3-cli/?nc1=h_ls)Batch  upload  files  to  the  cloud  to  Amazon  S3  using  the  AWS  CLI. Create a user AWS  IAM, configure CLI AWS and upload any files  to S3.
+
+15.1. Create an AWS IAM User.
+<p align="center">
+  <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main//6.%20AWS/.info/A%2015_1..png">
+</p>
+
+15.2. Using the AWS CLI with Amazon S3
+```console
+Microsoft Windows [Version 10.0.19043.2251]
+(c) Корпорация Майкрософт (Microsoft Corporation). Все права защищены.
+
+C:\>aws configure
+AWS Access Key ID [None]: AKIAT47************
+AWS Secret Access Key [None]: zBnv9dBKW1******************
+Default region name [None]: eu-central-1
+Default output format [None]: json
+
+C:\>aws s3 mb s3://my-backup-bucket
+make_bucket failed: s3://my-backup-bucket An error occurred (BucketAlreadyExists) when calling the CreateBucket operation: The requested bucket name is not available. The bucket namespace is shared by all users of the system. Please select a different name and try again.
+
+C:\>aws s3 mb s3://1van-backup-bucket
+make_bucket: 1van-backup-bucket
+
+C:\>aws s3 cp "C:\AWS\From PC to AWS.bak" s3://1van-backup-bucket
+upload: AWS\From PC to AWS.bak to s3://1van-backup-bucket/From PC to AWS.bak
+
+C:\>aws s3 cp s3://1van-backup-bucket/From_AWS_to_PC.txt C:\AWS\
+download: s3://1van-backup-bucket/From_AWS_to_PC.txt to AWS\From_AWS_to_PC.txt
+
+C:\>dir AWS
+ Том в устройстве C имеет метку HDD1 [System]
+ Серийный номер тома: 07E5-12A8
+
+ Содержимое папки C:\AWS
+
+29.11.2022  22:37    <DIR>          .
+29.11.2022  22:37    <DIR>          ..
+29.11.2022  22:04                 0 From PC to AWS.bak
+29.11.2022  22:31                 0 From_AWS_to_PC.txt
+               2 файлов              0 байт
+               2 папок  149 939 314 688 байт свободно
+
+C:\>aws s3 rm s3://1van-backup-bucket/From_AWS_to_PC.txt
+delete: s3://1van-backup-bucket/From_AWS_to_PC.txt
+```
+<p align="center">
+  <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main//6.%20AWS/.info/A%2015_2..png">
+</p>
+
+
 ### 16. Review the 10-minute[  example  ](https://aws.amazon.com/getting-started/hands-on/deploy-docker-containers/?nc1=h_ls)Deploy Docker Containers on Amazon Elastic Container Service (Amazon  ECS).  Repeat,  create  a  cluster,  and  run  the  online  demo  application  or  better  other application with custom settings.
 ### 17. [Run a Serverless "Hello, World!"  ](https://aws.amazon.com/getting-started/hands-on/run-serverless-code/?nc1=h_ls)with  AWS Lambda. 
 ### 18. Create a static website on Amazon S3, publicly available [(link1  ](https://docs.aws.amazon.com/AmazonS3/latest/dev/HostingWebsiteOnS3Setup.html)or[  link2  ](https://docs.aws.amazon.com/AmazonS3/latest/dev/website-hosting-custom-domain-walkthrough.html)- using a custom domain registered with Route 53). Post on the page your own photo, the name of the educational program  (**EPAM  Cloud&DevOps  Fundamentals  Autumn  2022**),  the  list  of  AWS  services  with which the student worked within the educational program or earlier and the full list with links of  completed  labs  (based  on[  tutorials  ](https://aws.amazon.com/getting-started/hands-on/?awsf.getting-started-content-type=content-type%23hands-on&amp;?e=gs2020&amp;p=gsrc)or[  qwiklabs)](https://amazon.qwiklabs.com/).  Provide  the  link  to  the  website  in  your  report and СV.
