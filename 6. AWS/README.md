@@ -138,7 +138,7 @@ systemctl enable httpd
 systemctl start httpd
 systemctl status httpd
 
-#Apache web server to be accessed from remote locations open HTTP firewall port 80: 
+# Apache web server to be accessed from remote locations open HTTP firewall port 80: 
 firewall-cmd --zone=public --permanent --add-service=http
 firewall-cmd --reload
 
