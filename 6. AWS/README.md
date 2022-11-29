@@ -145,6 +145,10 @@ firewall-cmd --reload
 # !!! --- Add index.html --- 
 echo Apache on RHEL 8 / CentOS 8 > /var/www/html/index.html
 ```
+12.2. Add domain PP.UA to Route 53:
+<p align="center">
+  <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main//6.%20AWS/.info/A%2012..png">
+</p>
 
 
 ### 13. Launch and configure a WordPress instance with Amazon Lightsail[  link  ](https://aws.amazon.com/getting-started/hands-on/launch-a-wordpress-website/?trk=gs_card) 
