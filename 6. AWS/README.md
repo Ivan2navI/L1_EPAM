@@ -158,7 +158,6 @@ echo Apache on RHEL 8 / CentOS 8 > /var/www/html/index.html
 </p>
 
 13.2. For WordPress instance, I will use the previously created elastic IP and DNS zone from Route 53.
-13.1 Creating an Amazon Lightsail account & WordPress instance there is.
 <p align="center">
   <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main//6.%20AWS/.info/A%2013_1..png">
 </p>
