@@ -109,7 +109,44 @@ In this case the volume mount to “Disc_D_v2” and check that a file "test_fil
 </p>
 
 
-### 12. Review the 10-minute [example.](https://aws.amazon.com/getting-started/hands-on/get-a-domain/?nc1=h_ls) Explore the possibilities of creating your own domain and domain  name  for  your  site.  Note,  that  Route  53  not  free  service. Alternatively  you  can  free register the  domain name *.PP.UA and use it. 
+### 12. Review the 10-minute [example.](https://aws.amazon.com/getting-started/hands-on/get-a-domain/?nc1=h_ls) Explore the possibilities of creating your own domain and domain  name  for  your  site.  Note,  that  Route  53  not  free  service. Alternatively  you  can  free register the  domain name *.PP.UA and use it.
+
+12.1. Install Apache on RHEL 8
+```console
+#!!! Install firewall-cmd
+dnf in firewalld -y
+
+# Start firewalld and enable it to auto-start at the system boot.
+systemctl start firewalld
+systemctl enable firewalld
+
+# Check the status of firewalld running.
+systemctl status firewalld
+
+# Configure the rules.
+firewall-cmd --zone=public --add-port=80/tcp --permanent
+firewall-cmd --reload
+
+#!!! Install package httpd
+dnf install httpd
+
+# Verify the version of Apache
+rpm -qi httpd
+
+# Run and enable the Apache webserver to start after reboot:
+systemctl enable httpd
+systemctl start httpd
+systemctl status httpd
+
+#Apache web server to be accessed from remote locations open HTTP firewall port 80: 
+firewall-cmd --zone=public --permanent --add-service=http
+firewall-cmd --reload
+
+# !!! Add index.html
+echo Apache on RHEL 8 / CentOS 8 > /var/www/html/index.html
+```
+
+
 ### 13. Launch and configure a WordPress instance with Amazon Lightsail[  link  ](https://aws.amazon.com/getting-started/hands-on/launch-a-wordpress-website/?trk=gs_card) 
 ### 14. Review the 10-minute[  Store and Retrieve a File.](https://aws.amazon.com/getting-started/hands-on/backup-files-to-amazon-s3/) Repeat, creating your own repository.
 ### 15. Review  the  10-minute[  example  ](https://aws.amazon.com/getting-started/hands-on/backup-to-s3-cli/?nc1=h_ls)Batch  upload  files  to  the  cloud  to  Amazon  S3  using  the  AWS  CLI. Create a user AWS  IAM, configure CLI AWS and upload any files  to S3.
