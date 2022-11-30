@@ -238,7 +238,7 @@ delete: s3://1van-backup-bucket/From_AWS_to_PC.txt
 
 ### 18. Create a static website on Amazon S3, publicly available [(link1  ](https://docs.aws.amazon.com/AmazonS3/latest/dev/HostingWebsiteOnS3Setup.html)or[  link2  ](https://docs.aws.amazon.com/AmazonS3/latest/dev/website-hosting-custom-domain-walkthrough.html)- using a custom domain registered with Route 53). Post on the page your own photo, the name of the educational program  (**EPAM  Cloud&DevOps  Fundamentals  Autumn  2022**),  the  list  of  AWS  services  with which the student worked within the educational program or earlier and the full list with links of  completed  labs  (based  on[  tutorials  ](https://aws.amazon.com/getting-started/hands-on/?awsf.getting-started-content-type=content-type%23hands-on&amp;?e=gs2020&amp;p=gsrc)or[  qwiklabs)](https://amazon.qwiklabs.com/).  Provide  the  link  to  the  website  in  your  report and СV.
 
-To grant public read access for your website, copy the following bucket policy, and paste it in the Bucket policy editor.
+Add a bucket policy that makes bucket content publicly available.
 ```console
 {
     "Version": "2012-10-17",
@@ -251,12 +251,25 @@ To grant public read access for your website, copy the following bucket policy, 
                 "s3:GetObject"
             ],
             "Resource": [
-                "arn:aws:s3:::1van.com/*"
+                "arn:aws:s3:::1van.pp.ua/*"
             ]
         }
     ]
 }
 ```
+Configuring Amazon Route 53 to route traffic to an S3 Bucket:
+<p align="center">
+  <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main//6.%20AWS/.info/A%2018_1..png">
+</p>
+
+Test websites and domain name PP.UA
+- from: http://1van.pp.ua.s3-website.eu-central-1.amazonaws.com/
+- to: http://1van.pp.ua/
+<p align="center">
+  <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main//6.%20AWS/.info/A%2018_2..png">
+</p>
+
+
 ---
 ### PS: [Paste to Markdown](https://euangoddard.github.io/clipboard2markdown/)
 
