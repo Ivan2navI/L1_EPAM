@@ -5,17 +5,16 @@
 
 ## 1. Create azure subscription
 ## 2. Create azure devops organization
-## 3. Read information about github flow branching strategy\
+## 3. Read information about github flow branching strategy
 ## 4. terraform should be installed
-## 5. Terraform knowledge is also required to do the stuff\
+## 5. Terraform knowledge is also required to do the stuff
 ## 6. Az  cli should  be  installed
 
 ### ----------------------- Homework -----------------------
 
 ### Part 1 -- Configure application
 1. Create a service connection in a Azure DevOps project to your subscription -
-https://learn.microsoft.com/en-us/azure/devops/pipelines/library/service-
-endpoints?view=azure-devops&tabs=yaml
+<https://learn.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops&tabs=yaml> 
 2. Find a .net pet project for the experiments
 3. Build your app locally .net project via dotnet tool. dotnet restore/build/run 
 4. Create an Azure DevOps repo -  https://learn.microsoft.com/en-us/azure/devops/repos/git/create-new-repo?view=azure-devops 
@@ -36,7 +35,7 @@ In this storage account you will be store your tf state file
 #### Terraform preparation
 1. Create another repo to store devops code
 2. Create a folder terraform
-3. Add app service implementation - <https://learn.microsoft.com/en-us/azure/app-service/provision-resource-terraform\
+3. Add app service implementation - <https://learn.microsoft.com/en-us/azure/app-service/provision-resource-terraform\> 
 4. Integrate application insights with app service
 5. Updated backend “azurerm” according to the guide - <https://learn.microsoft.com/en-us/azure/developer/terraform/store-state-in-azure-storage?tabs=azure-cli> \
 ![Graphical user interface, application, Word](5_Azure_Cloud.003.png)
