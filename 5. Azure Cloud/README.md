@@ -27,10 +27,10 @@ As branching strategy use a github flow (It will be applied by default when you 
 Below is describing on how to do it via terraform. If you want to use terraform you need to create  service connection in manual way. Otherwise you won't be able to deploy your iac -- Navigate to the  last section
 
 #### Terraform storage account
-1. Create a separate resource group and deploy azure storage account - <https://learn.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal>
-2. Create a container with the name “tfstate” and remember the name. use portal settings 
-![Graphical user interface, application](5_Azure_Cloud.001.png) 
-![Graphical user interface, text, application](5_Azure_Cloud.002.png)
+1. Create a separate resource group and deploy azure storage account - <https://learn.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal> \
+2. Create a container with the name “tfstate” and remember the name. use portal settings \
+![Graphical user interface, application](5_Azure_Cloud.001.png) \
+![Graphical user interface, text, application](5_Azure_Cloud.002.png) \
 In this storage account you will be store your tf state file
 
 #### Terraform preparation
@@ -38,7 +38,7 @@ In this storage account you will be store your tf state file
 2. Create a folder terraform
 3. Add app service implementation - <https://learn.microsoft.com/en-us/azure/app-service/provision-resource-terraform\
 4. Integrate application insights with app service
-5. Updated backend “azurerm” according to the guide - <https://learn.microsoft.com/en-us/azure/developer/terraform/store-state-in-azure-storage?tabs=azure-cli> 
+5. Updated backend “azurerm” according to the guide - <https://learn.microsoft.com/en-us/azure/developer/terraform/store-state-in-azure-storage?tabs=azure-cli> \
 ![Graphical user interface, application, Word](5_Azure_Cloud.003.png)
 6. Run az login or Connect-AzAccount to connect the azure subscription from your local\
 7. Run terraform apply to deploy infrastructure
@@ -54,17 +54,16 @@ In this storage account you will be store your tf state file
 
 ### Part 3  -- Create a  deploy pipeline to  app service
 1. Add yml pipeline to the application folder
-2. Your pipeline structure should contain 2 stages. 1^st^ -- build, create zip archieve, and publish an artifact. 2^nd^ -- download an artifact and deploy it to azure app service\
+2. Your pipeline structure should contain 2 stages. 1st -- build, create zip archieve, and publish an artifact. 2nd -- download an artifact and deploy it to azure app service \
 3. To deploy .zip to app service use azure app service deployment task
 
-### Service connection -- manual way\
+### Service connection -- manual way
 <https://4bes.nl/2019/07/11/step-by-step-manually-create-an-azure-devops-service-connection-to-azure/>
-
 Don’t forget to grant access on the subscription level for your enterprise application (service principal)
 
 ### Useful readings
-1. How to share variables 
-![A picture containing graphical user interface](5_Azure_Cloud.004.png)
+1. How to share variables \
+![A picture containing graphical user interface](5_Azure_Cloud.004.png) \
 2. Templates example for variables - <https://learn.microsoft.com/en-us/samples/azure-samples/azure-pipelines-variable-templates/azure-pipelines-variable-templates/>
 3. Good example how to do a pipeline to build .net app and deplot tf iac - <https://azuredevopslabs.com/labs/vstsextend/terraform/> Only via UI. Hence don’t forget about view yaml button in UI
 4. Example of the Angular application from lecture 2 - <https://epam-my.sharepoint.com/:u:/p/yevhen_husiev/EWXdflfwT7pBijqGNXZnvRgBRdpB_EXlN0cJy8_SFA6_eA?e=Fc3LQW> password – AQ!sw2DE£fr4
