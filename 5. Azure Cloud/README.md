@@ -2,13 +2,12 @@
 # 5. Azure Cloud
 
 ## Prerequisites
-
-## 1. Create azure subscription
-## 2. Create azure devops organization
-## 3. Read information about github flow branching strategy
-## 4. terraform should be installed
-## 5. Terraform knowledge is also required to do the stuff
-## 6. Az  cli should  be  installed
+__1. Create azure subscription__
+__2. Create azure devops organization__
+__3. Read information about github flow branching strategy__
+__4. terraform should be installed__
+__5. Terraform knowledge is also required to do the stuff__
+__6. Az  cli should  be  installed__
 
 ### ----------------------- Homework -----------------------
 
