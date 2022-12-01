@@ -15,7 +15,7 @@ __6. Az  cli should  be  installed__
 <https://learn.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops&tabs=yaml>
 
 ---
-Answer:
+:bulb: __Answer__:
 <p align="center">
   <img src="./.info/P1_A1.png">
 </p>
