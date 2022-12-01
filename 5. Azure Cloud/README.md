@@ -12,7 +12,14 @@ __6. Az  cli should  be  installed__
 
 ### Part 1 -- Configure application
 1. Create a service connection in a Azure DevOps project to your subscription -
-<https://learn.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops&tabs=yaml> 
+<https://learn.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops&tabs=yaml>
+
+---
+Answer:
+<p align="center">
+  <img src="./.info/P1_A1.png">
+</p>
+
 2. Find a .net pet project for the experiments
 3. Build your app locally .net project via dotnet tool. dotnet restore/build/run 
 4. Create an Azure DevOps repo -  https://learn.microsoft.com/en-us/azure/devops/repos/git/create-new-repo?view=azure-devops 
