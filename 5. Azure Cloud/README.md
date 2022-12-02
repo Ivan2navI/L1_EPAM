@@ -31,7 +31,7 @@ __6. Az  cli should  be  installed__
 #### 3. Build your app locally .net project via dotnet tool. dotnet restore/build/run 
 
 :bulb: __Answer__: \
-##### 3.1. Download and install Azure CLI and add Azure DevOps extension
+__3.1. Download and install Azure CLI and add Azure DevOps extension__
 -  [Install the Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli). You must have at least `v2.0.49`, which you can verify with `az --version` command.
 -  Add the Azure DevOps Extension `az extension add --name azure-devops`
 -  Run the `az login` command.
