@@ -14,7 +14,6 @@ __6. Az  cli should  be  installed__
 #### 1. Create a service connection in a Azure DevOps project to your subscription -
 <https://learn.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops&tabs=yaml>
 
-
 :bulb: __Answer__:
 <p align="center">
   <img src="./.info/P1_A1.png">
@@ -26,12 +25,12 @@ __6. Az  cli should  be  installed__
 :bulb: __Answer__: \
 <https://learn.microsoft.com/en-us/azure/devops/pipelines/ecosystems/dotnet-core?view=azure-devops&tabs=dotnetfive>
 
-
 ---
 #### 3. Build your app locally .net project via dotnet tool. dotnet restore/build/run 
 
 :bulb: __Answer__: \
 __3.1. Download and install Azure CLI and add Azure DevOps extension__
+<https://learn.microsoft.com/en-us/azure/devops/repos/git/share-your-code-in-git-cmdline?view=azure-devops>
 -  [Install the Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli). You must have at least `v2.0.49`, which you can verify with `az --version` command.
 -  Add the Azure DevOps Extension `az extension add --name azure-devops`
 -  Run the `az login` command.
@@ -47,7 +46,11 @@ __3.1. Download and install Azure CLI and add Azure DevOps extension__
 4. Create an Azure DevOps repo -  https://learn.microsoft.com/en-us/azure/devops/repos/git/create-new-repo?view=azure-devops 
 You can use import  repository to import from existing source control version like github
 
+:bulb: __Answer__: \
+__Create your Git repo in Azure Repos__
+<https://learn.microsoft.com/en-us/azure/devops/repos/git/share-your-code-in-git-cmdline?view=azure-devops>
 ---
+
 5. Create a branching policy for you application. Added yourself as a reviewer - <https://learn.microsoft.com/en-us/azure/devops/repos/git/branch-policies?view=azure-devops&tabs=browser> 
 As branching strategy use a github flow (It will be applied by default when you strict commit to your main branch)
 
