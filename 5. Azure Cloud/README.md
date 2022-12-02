@@ -15,7 +15,7 @@ __6. Az  cli should  be  installed__
 <https://learn.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops&tabs=yaml>
 
 
-:bulb: __Answer__: \
+:bulb: __Answer__:
 <p align="center">
   <img src="./.info/P1_A1.png">
 </p>
@@ -31,26 +31,17 @@ __6. Az  cli should  be  installed__
 #### 3. Build your app locally .net project via dotnet tool. dotnet restore/build/run 
 
 :bulb: __Answer__: \
-3.1. Download and install Azure CLI and add Azure DevOps extension
-```console
-
-```
+##### 3.1. Download and install Azure CLI and add Azure DevOps extension
 -  [Install the Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli). You must have at least `v2.0.49`, which you can verify with `az --version` command.
-
 -  Add the Azure DevOps Extension `az extension add --name azure-devops`
-
 -  Run the `az login` command.
 
     If the CLI can open your default browser, it will do so and load a sign-in page. Otherwise, you need to open a browser page and follow the instructions on the command line to enter an authorization code after navigating to <https://aka.ms/devicelogin> in your browser. For more information, see the [Azure CLI login page](https://learn.microsoft.com/en-us/cli/azure/authenticate-azure-cli?preserve-view=true&view=azure-cli-latest).
-
 -  For seamless commanding, set the organization and project as defaults in configuration.
-
     `az devops configure --defaults organization=https://dev.azure.com/contoso project=contoso`
-
-
-4. Create an Azure DevOps repo -  https://learn.microsoft.com/en-us/azure/devops/repos/git/create-new-repo?view=azure-devops 
+-  Create an Azure DevOps repo -  https://learn.microsoft.com/en-us/azure/devops/repos/git/create-new-repo?view=azure-devops 
 You can use import  repository to import from existing source control version like github
-5. Create a branching policy for you application. Added yourself as a reviewer - <https://learn.microsoft.com/en-us/azure/devops/repos/git/branch-policies?view=azure-devops&tabs=browser> 
+-  Create a branching policy for you application. Added yourself as a reviewer - <https://learn.microsoft.com/en-us/azure/devops/repos/git/branch-policies?view=azure-devops&tabs=browser> 
 As branching strategy use a github flow (It will be applied by default when you strict commit to your main branch)
 
 ### Part 2 -- Configure a pipeline to deploy infrastructure
