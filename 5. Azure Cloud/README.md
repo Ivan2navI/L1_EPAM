@@ -11,7 +11,7 @@ __6. Az  cli should  be  installed__
 ### ----------------------- Homework -----------------------
 
 ### Part 1 -- Configure application
-1. Create a service connection in a Azure DevOps project to your subscription -
+#### 1. Create a service connection in a Azure DevOps project to your subscription -
 <https://learn.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops&tabs=yaml>
 
 ---
@@ -20,12 +20,12 @@ __6. Az  cli should  be  installed__
   <img src="./.info/P1_A1.png">
 </p>
 
-2. Find a .net pet project for the experiments
+#### 2. Find a .net pet project for the experiments
 ---
 :bulb: __Answer__:
 <https://learn.microsoft.com/en-us/azure/devops/pipelines/ecosystems/dotnet-core?view=azure-devops&tabs=dotnetfive>
 
-3. Build your app locally .net project via dotnet tool. dotnet restore/build/run 
+#### 3. Build your app locally .net project via dotnet tool. dotnet restore/build/run 
 ---
 :bulb: __Answer__:
 3.1. Download and install Azure CLI and add Azure DevOps extension
