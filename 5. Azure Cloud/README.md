@@ -37,7 +37,7 @@ __3.1. Download and install Azure CLI and add Azure DevOps extension__
 -  Run the `az login` command.
     If the CLI can open your default browser, it will do so and load a sign-in page. Otherwise, you need to open a browser page and follow the instructions on the command line to enter an authorization code after navigating to <https://aka.ms/devicelogin> in your browser. For more information, see the [Azure CLI login page](https://learn.microsoft.com/en-us/cli/azure/authenticate-azure-cli?preserve-view=true&view=azure-cli-latest).
 -  For seamless commanding, set the organization and project as defaults in configuration.
-    `az devops configure --defaults organization="https://dev.azure.com/ivasenkoivan/L1_EPAM Azure Cloud" project=net_project`
+    `az devops configure --defaults organization=https://dev.azure.com/ivasenkoivan project="L1_EPAM Azure Cloud"`
 
 ---
 4. Create an Azure DevOps repo -  https://learn.microsoft.com/en-us/azure/devops/repos/git/create-new-repo?view=azure-devops 
