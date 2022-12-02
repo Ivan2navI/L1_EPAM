@@ -14,20 +14,23 @@ __6. Az  cli should  be  installed__
 #### 1. Create a service connection in a Azure DevOps project to your subscription -
 <https://learn.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops&tabs=yaml>
 
----
-:bulb: __Answer__:
+
+:bulb: __Answer__: \
 <p align="center">
   <img src="./.info/P1_A1.png">
 </p>
 
-#### 2. Find a .net pet project for the experiments
 ---
-:bulb: __Answer__:
+#### 2. Find a .net pet project for the experiments
+
+:bulb: __Answer__: \
 <https://learn.microsoft.com/en-us/azure/devops/pipelines/ecosystems/dotnet-core?view=azure-devops&tabs=dotnetfive>
 
-#### 3. Build your app locally .net project via dotnet tool. dotnet restore/build/run 
+
 ---
-:bulb: __Answer__:
+#### 3. Build your app locally .net project via dotnet tool. dotnet restore/build/run 
+
+:bulb: __Answer__: \
 3.1. Download and install Azure CLI and add Azure DevOps extension
 ```console
 
