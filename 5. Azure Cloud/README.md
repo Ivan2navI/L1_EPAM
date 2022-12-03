@@ -11,7 +11,7 @@ __6. Az  cli should  be  installed__
 ### ----------------------- Homework -----------------------
 
 ### Part 1 -- Configure application
-#### 1. Create a service connection in a Azure DevOps project to your subscription [link](<https://learn.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops&tabs=yaml>) -
+#### 1. Create a service connection in a Azure DevOps project to your subscription [(link)](<https://learn.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops&tabs=yaml>)
 
 :bulb: __Answer__:
 <p align="center">
@@ -22,7 +22,7 @@ __6. Az  cli should  be  installed__
 #### 2. Find a .net pet project for the experiments
 
 :bulb: __Answer__: \
-Create a .NET project <https://learn.microsoft.com/en-us/azure/devops/pipelines/ecosystems/dotnet-core?view=azure-devops&tabs=dotnetfive>
+Create a .NET project :arrow_right: <https://learn.microsoft.com/en-us/azure/devops/pipelines/ecosystems/dotnet-core?view=azure-devops&tabs=dotnetfive>
 
 ---
 #### 3. Build your app locally .net project via dotnet tool. dotnet restore/build/run 
@@ -63,14 +63,14 @@ To install additional .NET runtimes or SDKs:
 ```
 Learned these materials:
 <https://learn.microsoft.com/ru-ru/dotnet/core/tools/troubleshoot-usage-issues> \
-<https://learn.microsoft.com/ru-ru/dotnet/core/tools/dotnet-tool-install?source=recommendations> \
+<https://learn.microsoft.com/ru-ru/dotnet/core/tools/dotnet-tool-install?source=recommendations>
 
 Completed the settings for the PC:
 - Use:
 ```console
 dotnet-install.ps1 -Channel 7.0 -Runtime aspnetcore
 ```
-_ OR:
+- OR:
 <p align="center">
   <img src="./.info/P1_A3.1.png">
 </p>
@@ -96,13 +96,10 @@ dotnet run
 </p>
 
 ---
-4. Create an Azure DevOps repo -  https://learn.microsoft.com/en-us/azure/devops/repos/git/create-new-repo?view=azure-devops 
-You can use import  repository to import from existing source control version like github
+#### 4. Create an Azure DevOps repo -  https://learn.microsoft.com/en-us/azure/devops/repos/git/create-new-repo?view=azure-devops . You can use import  repository to import from existing source control version like github
 
 :bulb: __Answer__: \
 __[Create your Git repo in Azure Repos](https://learn.microsoft.com/en-us/azure/devops/repos/git/share-your-code-in-git-cmdline?view=azure-devops)__
-
-
 __4.1. Download and install Azure CLI and add Azure DevOps extension__
 <https://learn.microsoft.com/en-us/azure/devops/repos/git/share-your-code-in-git-cmdline?view=azure-devops>
 -  [Install the Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli). You must have at least `v2.0.49`, which you can verify with `az --version` command.
