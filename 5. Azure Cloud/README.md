@@ -100,8 +100,7 @@ dotnet run
 
 :bulb: __Answer__: \
 __[Create your Git repo in Azure Repos](https://learn.microsoft.com/en-us/azure/devops/repos/git/share-your-code-in-git-cmdline?view=azure-devops)__\
-__4.1. Download and install Azure CLI and add Azure DevOps extension__
-<https://learn.microsoft.com/en-us/azure/devops/repos/git/share-your-code-in-git-cmdline?view=azure-devops>
+__4.1. Download and install Azure CLI and add Azure DevOps extension [(link)](<https://learn.microsoft.com/en-us/azure/devops/repos/git/share-your-code-in-git-cmdline?view=azure-devops>)__ \
 -  [Install the Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli). You must have at least `v2.0.49`, which you can verify with `az --version` command.
 -  Add the Azure DevOps Extension `az extension add --name azure-devops`
 -  Run the `az login` command.
@@ -111,6 +110,8 @@ __4.1. Download and install Azure CLI and add Azure DevOps extension__
 <p align="center">
   <img src="./.info/P1_A4.1.png">
 </p>
+
+
 ---
 
 5. Create a branching policy for you application. Added yourself as a reviewer - <https://learn.microsoft.com/en-us/azure/devops/repos/git/branch-policies?view=azure-devops&tabs=browser> 
