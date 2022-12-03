@@ -121,10 +121,10 @@ git add --all
 git commit -m "first commit of my code"
 ```
 Create a new Git repo in Azure Repos for ".NET 6 webapp".
-`az repos create --name Test_Web_App`
+`az repos create --name Test_Web_App` \
 Copy the clone URL from the remote URL attribute in the JSON output.
 
-Connect local repo to the Git repo in Azure Repos using the copied clone URL in the git remote command:
+Connect local repo to the Git repo in Azure Repos using the copied clone URL in the git remote command: \
 `git remote add origin "https://dev.azure.com/ivasenkoivan/L1_EPAM%20Azure%20Cloud/_git/Test_Web_App"`
 
 <p align="center">
