@@ -99,8 +99,7 @@ dotnet run
 #### 4. Create an Azure DevOps repo -  https://learn.microsoft.com/en-us/azure/devops/repos/git/create-new-repo?view=azure-devops. You can use import  repository to import from existing source control version like github
 
 :bulb: __Answer__: \
-__[Create your Git repo in Azure Repos](https://learn.microsoft.com/en-us/azure/devops/repos/git/share-your-code-in-git-cmdline?view=azure-devops)__\
-__4.1. Download and install Azure CLI and add Azure DevOps extension [(link)](<https://learn.microsoft.com/en-us/azure/devops/repos/git/share-your-code-in-git-cmdline?view=azure-devops>)__ \
+__4.1. Download and install Azure CLI and add Azure DevOps extension [(link)](<https://learn.microsoft.com/en-us/azure/devops/repos/git/share-your-code-in-git-cmdline?view=azure-devops>)__
 -  [Install the Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli). You must have at least `v2.0.49`, which you can verify with `az --version` command.
 -  Add the Azure DevOps Extension `az extension add --name azure-devops`
 -  Run the `az login` command.
@@ -111,7 +110,33 @@ __4.1. Download and install Azure CLI and add Azure DevOps extension [(link)](<h
   <img src="./.info/P1_A4.1.png">
 </p>
 
+__4.2. Create Git repo in Azure Repos__
 
+Create local repo.
+```console
+git init .
+
+git add --all
+
+git commit -m "first commit of my code"
+```
+Create a new Git repo in Azure Repos for ".NET 6 webapp".
+`az repos create --name Test_Web_App`
+Copy the clone URL from the remote URL attribute in the JSON output.
+
+Connect local repo to the Git repo in Azure Repos using the copied clone URL in the git remote command:
+`git remote add origin "https://dev.azure.com/ivasenkoivan/L1_EPAM%20Azure%20Cloud/_git/Test_Web_App"`
+
+<p align="center">
+  <img src="./.info/P1_A4.2_1.png">
+</p>
+
+Before pushing code, set up authentication with "Credential Managers".
+`git push --set-upstream origin master`
+
+<p align="center">
+  <img src="./.info/P1_A4.2_2.png">
+</p>
 ---
 
 5. Create a branching policy for you application. Added yourself as a reviewer - <https://learn.microsoft.com/en-us/azure/devops/repos/git/branch-policies?view=azure-devops&tabs=browser> 
