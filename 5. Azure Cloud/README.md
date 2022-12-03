@@ -131,12 +131,13 @@ Connect local repo to the Git repo in Azure Repos using the copied clone URL in 
   <img src="./.info/P1_A4.2_1.png">
 </p>
 
-Before pushing code, set up authentication with "Credential Managers".
+Before pushing code, set up authentication with "Credential Managers". \
 `git push --set-upstream origin master`
 
 <p align="center">
   <img src="./.info/P1_A4.2_2.png">
 </p>
+
 ---
 
 5. Create a branching policy for you application. Added yourself as a reviewer - <https://learn.microsoft.com/en-us/azure/devops/repos/git/branch-policies?view=azure-devops&tabs=browser> 
