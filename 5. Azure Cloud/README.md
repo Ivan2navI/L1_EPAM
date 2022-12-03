@@ -96,10 +96,10 @@ dotnet run
 </p>
 
 ---
-#### 4. Create an Azure DevOps repo -  https://learn.microsoft.com/en-us/azure/devops/repos/git/create-new-repo?view=azure-devops . You can use import  repository to import from existing source control version like github
+#### 4. Create an Azure DevOps repo -  https://learn.microsoft.com/en-us/azure/devops/repos/git/create-new-repo?view=azure-devops .\ You can use import  repository to import from existing source control version like github
 
 :bulb: __Answer__: \
-__[Create your Git repo in Azure Repos](https://learn.microsoft.com/en-us/azure/devops/repos/git/share-your-code-in-git-cmdline?view=azure-devops)__
+__[Create your Git repo in Azure Repos](https://learn.microsoft.com/en-us/azure/devops/repos/git/share-your-code-in-git-cmdline?view=azure-devops)__\
 __4.1. Download and install Azure CLI and add Azure DevOps extension__
 <https://learn.microsoft.com/en-us/azure/devops/repos/git/share-your-code-in-git-cmdline?view=azure-devops>
 -  [Install the Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli). You must have at least `v2.0.49`, which you can verify with `az --version` command.
