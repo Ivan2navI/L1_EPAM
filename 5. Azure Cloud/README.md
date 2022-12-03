@@ -28,9 +28,9 @@ __6. Az  cli should  be  installed__
 ---
 #### 3. Build your app locally .net project via dotnet tool. dotnet restore/build/run 
 
-:bulb: __Answer__: \
+:bulb: __Answer__:
 
-__3.1. Troubleshoot .NET tool usage issues__
+__3.1. Troubleshoot .NET tool usage issues__ \
 An attempt to run the application displays an error.
 ```console
 PS E:\Azure_Home_Task> dotnet new webapp -f net6.0
@@ -44,10 +44,10 @@ Possible reasons for this include:
         https://aka.ms/dotnet-download
 
 PS E:\Azure_Home_Task> dotnet --list-runtimes
-Microsoft.NETCore.App 5.0.10 [C:\Program Files (x86)\dotnet\shared\Microsoft.NETCore.App]
-Microsoft.WindowsDesktop.App 5.0.10 [C:\Program Files (x86)\dotnet\shared\Microsoft.WindowsDesktop.App]
-PS E:\Azure_Home_Task> dotnet --info
+    Microsoft.NETCore.App 5.0.10 [C:\Program Files (x86)\dotnet\shared\Microsoft.NETCore.App]
+    Microsoft.WindowsDesktop.App 5.0.10 [C:\Program Files (x86)\dotnet\shared\Microsoft.WindowsDesktop.App]
 
+PS E:\Azure_Home_Task> dotnet --info
 Host (useful for support):
   Version: 5.0.10
   Commit:  e1825b4928
@@ -63,14 +63,15 @@ To install additional .NET runtimes or SDKs:
   https://aka.ms/dotnet-download
 ```
 Learned these materials:
-<https://learn.microsoft.com/ru-ru/dotnet/core/tools/troubleshoot-usage-issues>
-<https://learn.microsoft.com/ru-ru/dotnet/core/tools/dotnet-tool-install?source=recommendations>
+<https://learn.microsoft.com/ru-ru/dotnet/core/tools/troubleshoot-usage-issues> \
+<https://learn.microsoft.com/ru-ru/dotnet/core/tools/dotnet-tool-install?source=recommendations> \
 
 Completed the settings for the PC:
+- Use:
 ```console
 dotnet-install.ps1 -Channel 7.0 -Runtime aspnetcore
 ```
-OR:
+_ OR:
 <p align="center">
   <img src="./.info/P1_A3.1.png">
 </p>
