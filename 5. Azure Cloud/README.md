@@ -29,6 +29,76 @@ __6. Az  cli should  be  installed__
 #### 3. Build your app locally .net project via dotnet tool. dotnet restore/build/run 
 
 :bulb: __Answer__: \
+
+__3.1. Troubleshoot .NET tool usage issues__
+An attempt to run the application displays an error.
+```console
+PS E:\Azure_Home_Task> dotnet new webapp -f net6.0
+Could not execute because the application was not found or a compatible .NET SDK is not installed.
+Possible reasons for this include:
+  * You intended to execute a .NET program:
+      The application 'new' does not exist.
+  * You intended to execute a .NET SDK command:
+      It was not possible to find any installed .NET SDKs.
+      Install a .NET SDK from:
+        https://aka.ms/dotnet-download
+
+PS E:\Azure_Home_Task> dotnet --list-runtimes
+Microsoft.NETCore.App 5.0.10 [C:\Program Files (x86)\dotnet\shared\Microsoft.NETCore.App]
+Microsoft.WindowsDesktop.App 5.0.10 [C:\Program Files (x86)\dotnet\shared\Microsoft.WindowsDesktop.App]
+PS E:\Azure_Home_Task> dotnet --info
+
+Host (useful for support):
+  Version: 5.0.10
+  Commit:  e1825b4928
+
+.NET SDKs installed:
+  No SDKs were found.
+
+.NET runtimes installed:
+  Microsoft.NETCore.App 5.0.10 [C:\Program Files (x86)\dotnet\shared\Microsoft.NETCore.App]
+  Microsoft.WindowsDesktop.App 5.0.10 [C:\Program Files (x86)\dotnet\shared\Microsoft.WindowsDesktop.App]
+
+To install additional .NET runtimes or SDKs:
+  https://aka.ms/dotnet-download
+```
+Learned these materials:
+<https://learn.microsoft.com/ru-ru/dotnet/core/tools/troubleshoot-usage-issues>
+<https://learn.microsoft.com/ru-ru/dotnet/core/tools/dotnet-tool-install?source=recommendations>
+
+Completed the settings for the PC:
+```console
+dotnet-install.ps1 -Channel 7.0 -Runtime aspnetcore
+```
+OR:
+<p align="center">
+  <img src="./.info/P1_A3.1.png">
+</p>
+
+__3.2. Check & Create a .NET project:__
+```console
+PS E:\Azure_Home_Task> dotnet --list-runtimes
+      Microsoft.AspNetCore.App 6.0.11 [C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App]
+      Microsoft.NETCore.App 6.0.11 [C:\Program Files\dotnet\shared\Microsoft.NETCore.App]
+      Microsoft.WindowsDesktop.App 6.0.11 [C:\Program Files\dotnet\shared\Microsoft.WindowsDesktop.App]
+```
+```console
+# Create a new .NET 6 webapp.
+# .NET CLI
+dotnet new webapp -f net6.0
+
+# From the same terminal session, run the application locally using the dotnet run command from your project directory.
+# .NET CLI
+dotnet run
+```
+<p align="center">
+  <img src="./.info/P1_A3.2.png">
+</p>
+
+---
+4. Create an Azure DevOps repo -  https://learn.microsoft.com/en-us/azure/devops/repos/git/create-new-repo?view=azure-devops 
+You can use import  repository to import from existing source control version like github
+
 __3.1. Download and install Azure CLI and add Azure DevOps extension__
 <https://learn.microsoft.com/en-us/azure/devops/repos/git/share-your-code-in-git-cmdline?view=azure-devops>
 -  [Install the Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli). You must have at least `v2.0.49`, which you can verify with `az --version` command.
@@ -38,13 +108,9 @@ __3.1. Download and install Azure CLI and add Azure DevOps extension__
 -  For seamless commanding, set the organization and project as defaults in configuration.
     `az devops configure --defaults organization=https://dev.azure.com/ivasenkoivan project="L1_EPAM Azure Cloud"`
 <p align="center">
-  <img src="./.info/P1_A3.1.png">
+  <img src="./.info/P1_A4.1.png">
 </p>
 
-
----
-4. Create an Azure DevOps repo -  https://learn.microsoft.com/en-us/azure/devops/repos/git/create-new-repo?view=azure-devops 
-You can use import  repository to import from existing source control version like github
 
 :bulb: __Answer__: \
 __Create your Git repo in Azure Repos__
