@@ -140,8 +140,9 @@ Before pushing code, set up authentication with "Credential Managers". \
 
 ---
 #### 5. Create a branching policy for you application. Added yourself as a reviewer - <https://learn.microsoft.com/en-us/azure/devops/repos/git/branch-policies?view=azure-devops&tabs=browser>. As branching strategy use a github flow (It will be applied by default when you strict commit to your main branch)
+:bulb: __Answer__: \
 
-:grey_question:[GitHub Flow](https://www.flagship.io/git-branching-strategies/)
+:grey_question:__[GitHub Flow](https://www.flagship.io/git-branching-strategies/)__
 [GitHub Flow](https://docs.github.com/en/get-started/quickstart/github-flow) is a **simpler alternative to GitFlow ideal for smaller teams as they don't need to manage multiple versions.**
 
 Unlike GitFlow, this model doesn't have release branches. You start off with the main branch then developers create branches, feature branches that stem directly from the master, to isolate their work which are then merged back into main. The feature branch is then deleted. \
