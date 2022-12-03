@@ -96,7 +96,7 @@ dotnet run
 </p>
 
 ---
-#### 4. Create an Azure DevOps repo -  https://learn.microsoft.com/en-us/azure/devops/repos/git/create-new-repo?view=azure-devops . \ You can use import  repository to import from existing source control version like github
+#### 4. Create an Azure DevOps repo -  https://learn.microsoft.com/en-us/azure/devops/repos/git/create-new-repo?view=azure-devops. You can use import  repository to import from existing source control version like github
 
 :bulb: __Answer__: \
 __[Create your Git repo in Azure Repos](https://learn.microsoft.com/en-us/azure/devops/repos/git/share-your-code-in-git-cmdline?view=azure-devops)__\
@@ -106,7 +106,7 @@ __4.1. Download and install Azure CLI and add Azure DevOps extension__
 -  Add the Azure DevOps Extension `az extension add --name azure-devops`
 -  Run the `az login` command.
     If the CLI can open your default browser, it will do so and load a sign-in page. Otherwise, you need to open a browser page and follow the instructions on the command line to enter an authorization code after navigating to <https://aka.ms/devicelogin> in your browser. For more information, see the [Azure CLI login page](https://learn.microsoft.com/en-us/cli/azure/authenticate-azure-cli?preserve-view=true&view=azure-cli-latest).
--  For seamless commanding, set the organization and project as defaults in configuration.
+-  For seamless commanding, set the organization and project as defaults in configuration. \
     `az devops configure --defaults organization=https://dev.azure.com/ivasenkoivan project="L1_EPAM Azure Cloud"`
 <p align="center">
   <img src="./.info/P1_A4.1.png">
