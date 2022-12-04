@@ -216,6 +216,10 @@ Add reviewers to pull requests that change files in specific directories and fil
   <img src="./.info/P1_A5.2_3.png">
 </p>
 
+Check of Git repository settings and policies.
+<p align="center">
+  <img src="./.info/P1_A5.2_4.png">
+</p>
 
 ---
 
