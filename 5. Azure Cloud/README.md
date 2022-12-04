@@ -143,29 +143,24 @@ Before pushing code, set up authentication with "Credential Managers". \
 :bulb: __Answer__: \
 
 :grey_question:__[GitHub Flow](https://www.flagship.io/git-branching-strategies/)__
+
 [GitHub Flow](https://docs.github.com/en/get-started/quickstart/github-flow) is a **simpler alternative to GitFlow ideal for smaller teams as they don't need to manage multiple versions.**
 
 Unlike GitFlow, this model doesn't have release branches. You start off with the main branch then developers create branches, feature branches that stem directly from the master, to isolate their work which are then merged back into main. The feature branch is then deleted. \
-The main idea behind this model is keeping the master code in a constant deployable state and hence can support continuous integration and continuous delivery processes.\
+The main idea behind this model is keeping the master code in a constant deployable state and hence can support continuous integration and continuous delivery processes.
 
 <p align="center">
   <img src="./.info/P1_A5.png">
 </p>
 
-__GitHub Flow pros and cons__
+:grey_question:__[GitHub Flow pros and cons](https://www.flagship.io/git-branching-strategies/)__
 
-Github Flow focuses on Agile principles and so it is a fast and streamlined branching strategy with short production cycles and frequent releases. 
-
-This strategy also allows for fast feedback loops so that teams can quickly identify issues and resolve them.
-
-Since there is no development branch as you are testing and automating changes to one branch which allows for quick and continuous deployment.
-
-This strategy is particularly suited for small teams and web applications and it is ideal when you need to maintain a single production version.
-
-Thus, this strategy is not suitable for handling multiple versions of the code.
-
-Furthermore, the lack of development branches makes this strategy more susceptible to bugs and so can lead to an unstable production code if branches are not properly tested before merging with the master-release preparation and bug fixes happen in this branch. The master branch, as a result, can become cluttered more easily as it serves as both a production and development branch.
-
+Github Flow focuses on Agile principles and so it is a fast and streamlined branching strategy with short production cycles and frequent releases. \
+This strategy also allows for fast feedback loops so that teams can quickly identify issues and resolve them.  \
+Since there is no development branch as you are testing and automating changes to one branch which allows for quick and continuous deployment.  \
+This strategy is particularly suited for small teams and web applications and it is ideal when you need to maintain a single production version.  \
+Thus, this strategy is not suitable for handling multiple versions of the code. \
+Furthermore, the lack of development branches makes this strategy more susceptible to bugs and so can lead to an unstable production code if branches are not properly tested before merging with the master-release preparation and bug fixes happen in this branch. The master branch, as a result, can become cluttered more easily as it serves as both a production and development branch.  \
 A further disadvantage is as this model is more suited to small teams and hence, as teams grow merge conflicts can occur as everyone is merging to the same branch and there is a lack of transparency meaning developers cannot see what other developers are working on.
 
 
