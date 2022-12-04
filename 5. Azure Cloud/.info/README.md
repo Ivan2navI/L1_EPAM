@@ -142,51 +142,6 @@ Before pushing code, set up authentication with "Credential Managers". \
 #### 5. Create a branching policy for you application. Added yourself as a reviewer - <https://learn.microsoft.com/en-us/azure/devops/repos/git/branch-policies?view=azure-devops&tabs=browser>. As branching strategy use a github flow (It will be applied by default when you strict commit to your main branch)
 :bulb: __Answer__:
 
-# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! V0 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-:grey_question:__[Git Flow to the rescue](https://devtks.github.io/2019-08-09-GitFlowAzureDevops/)__
-
-With Git Flow branching strategy and some settings on Dev Ops **no commits can be done** directly on the `develop` branch. Each developer is required to create a feature branch off the `develop` branch. All work related to the feature they are working on will be done there. Once a feature is considered done, the developer has to create a pull request to merge their feature into the `develop` branch. Their pull request then has to be reviewed and approved by the project lead, or another member of the team.
-
-Pros we see:
-
--   It forces the project to be split into little features
--   Corrupted commits don't affect other team members
--   Dev can easily relate their feature (pull request ) with bugs, tasks, and stories
--   Dev branch will receive only approved code (more stable, less potential bugs)
-
-:grey_question:__Pull Request & Azure DevOps to the rescue__
-
-Once a feature is considered done the developer has to create a pull request asking his feature to be merged to the `develop` branch. With a few settings on Azure DevOps, we can set multiple criteria for a pull request to be approved.
-
--   Be approved by one or multiple team members
--   The project has to build with no errors
--   All code review comments must be resolved
--   One or more work items must be associated with the pull request
-
-A distributed source control system has each user create a copy or clone of a repository on their local machine. All commits made by the user are done so only on their local repository and not directly to the origin repository (server). To synchronize changes between a client and origin repository the user performs, pull and push commands. This allows the user to work independently of others. Then pushing their changes and pulling in the most recent changes when they need to.
-
-In the figure below we have the origin repository while each user has their own repository. With changes being synced back and forth between the origin.
-
-<p align="center">
-  <img src="./P1_A5v2.png">
-</p>
-
-__Key Benefits of GitFlow__
-
-- __Parallel Development__ \
-One of the great things about GitFlow is that it makes parallel development very easy, by isolating new development from finished work. New development (such as features and non-emergency bug fixes) is done in **feature branches**, and is only merged back into main body of code when the developer(s) is happy that the code is ready for release.
-Although interruptions are a BadThing(tm), if you are asked to switch from one task to another, all you need to do is commit your changes and then create a new feature branch for your new task. When that task is done, just checkout your original feature branch and you can continue where you left off.
-
-- __Collaboration__ \
-Feature branches also make it easier for two or more developers to collaborate on the same feature, because each feature branch is a sandbox where the only changes are the changes necessary to get the new feature working. That makes it very easy to see and follow what each collaborator is doing.
-
-- __Release Staging Area__\
-As new development is completed, it gets merged back into the **develop branch**, which is a staging area for all completed features that haven't yet been released. So when the next release is branched off of **develop**, it will automatically contain all of the new stuff that has been finished.
-
-- __Support For Emergency Fixes__ \
-GitFlow supports **hotfix branches** - branches made from a tagged release. You can use these to make an emergency change, safe in the knowledge that the hotfix will only contain your emergency fix. There's no risk that you'll accidentally merge in new development at the same time.
-
-
 
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! V1 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -257,6 +212,49 @@ Unlike the tree metaphor, developers frequently select and merge parallel softwa
 
 Validation follows the merge and is critical to test the merged project's main line. This demands careful CI implementation and automated testing techniques. Branch testing validates each branch before a merge to reduce problems in the final merge, but there is no substitute for testing post-merge.
 
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! V3 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+:grey_question:__[Git Flow to the rescue](https://devtks.github.io/2019-08-09-GitFlowAzureDevops/)__
+
+With Git Flow branching strategy and some settings on Dev Ops **no commits can be done** directly on the `develop` branch. Each developer is required to create a feature branch off the `develop` branch. All work related to the feature they are working on will be done there. Once a feature is considered done, the developer has to create a pull request to merge their feature into the `develop` branch. Their pull request then has to be reviewed and approved by the project lead, or another member of the team.
+
+Pros we see:
+
+-   It forces the project to be split into little features
+-   Corrupted commits don't affect other team members
+-   Dev can easily relate their feature (pull request ) with bugs, tasks, and stories
+-   Dev branch will receive only approved code (more stable, less potential bugs)
+
+:grey_question:__Pull Request & Azure DevOps to the rescue__
+
+Once a feature is considered done the developer has to create a pull request asking his feature to be merged to the `develop` branch. With a few settings on Azure DevOps, we can set multiple criteria for a pull request to be approved.
+
+-   Be approved by one or multiple team members
+-   The project has to build with no errors
+-   All code review comments must be resolved
+-   One or more work items must be associated with the pull request
+
+A distributed source control system has each user create a copy or clone of a repository on their local machine. All commits made by the user are done so only on their local repository and not directly to the origin repository (server). To synchronize changes between a client and origin repository the user performs, pull and push commands. This allows the user to work independently of others. Then pushing their changes and pulling in the most recent changes when they need to.
+
+In the figure below we have the origin repository while each user has their own repository. With changes being synced back and forth between the origin.
+
+<p align="center">
+  <img src="./P1_A5v2.png">
+</p>
+
+__Key Benefits of GitFlow__
+
+- __Parallel Development__ \
+One of the great things about GitFlow is that it makes parallel development very easy, by isolating new development from finished work. New development (such as features and non-emergency bug fixes) is done in **feature branches**, and is only merged back into main body of code when the developer(s) is happy that the code is ready for release.
+Although interruptions are a BadThing(tm), if you are asked to switch from one task to another, all you need to do is commit your changes and then create a new feature branch for your new task. When that task is done, just checkout your original feature branch and you can continue where you left off.
+
+- __Collaboration__ \
+Feature branches also make it easier for two or more developers to collaborate on the same feature, because each feature branch is a sandbox where the only changes are the changes necessary to get the new feature working. That makes it very easy to see and follow what each collaborator is doing.
+
+- __Release Staging Area__\
+As new development is completed, it gets merged back into the **develop branch**, which is a staging area for all completed features that haven't yet been released. So when the next release is branched off of **develop**, it will automatically contain all of the new stuff that has been finished.
+
+- __Support For Emergency Fixes__ \
+GitFlow supports **hotfix branches** - branches made from a tagged release. You can use these to make an emergency change, safe in the knowledge that the hotfix will only contain your emergency fix. There's no risk that you'll accidentally merge in new development at the same time.
 
 
 

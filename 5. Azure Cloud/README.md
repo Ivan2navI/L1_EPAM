@@ -142,8 +142,7 @@ Before pushing code, set up authentication with "Credential Managers". \
 #### 5. Create a branching policy for you application. Added yourself as a reviewer - <https://learn.microsoft.com/en-us/azure/devops/repos/git/branch-policies?view=azure-devops&tabs=browser>. As branching strategy use a github flow (It will be applied by default when you strict commit to your main branch)
 :bulb: __Answer__:
 
-# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! V0 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-:grey_question:__[Git Flow to the rescue](https://devtks.github.io/2019-08-09-GitFlowAzureDevops/)__
+:grey_question:__5.1. [Git Flow to the rescue](https://devtks.github.io/2019-08-09-GitFlowAzureDevops/)__
 
 With Git Flow branching strategy and some settings on Dev Ops **no commits can be done** directly on the `develop` branch. Each developer is required to create a feature branch off the `develop` branch. All work related to the feature they are working on will be done there. Once a feature is considered done, the developer has to create a pull request to merge their feature into the `develop` branch. Their pull request then has to be reviewed and approved by the project lead, or another member of the team.
 
@@ -186,78 +185,28 @@ As new development is completed, it gets merged back into the **develop branch**
 - __Support For Emergency Fixes__ \
 GitFlow supports **hotfix branches** - branches made from a tagged release. You can use these to make an emergency change, safe in the knowledge that the hotfix will only contain your emergency fix. There's no risk that you'll accidentally merge in new development at the same time.
 
+__5.2 Setting Branch Policies and Pull Request__
 
+As mentioned earlier we want to block people from pushing directly to the `develop` branch forcing them to create pull request and also setting some rules for a pull request to be approved. (like can’t be approved by yourself and so on.)
 
-# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! V1 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-:grey_question:__[GitHub Flow](https://www.flagship.io/git-branching-strategies/)__
-
-[GitHub Flow](https://docs.github.com/en/get-started/quickstart/github-flow) is a **simpler alternative to GitFlow ideal for smaller teams as they don't need to manage multiple versions.**
-
-Unlike GitFlow, this model doesn't have release branches. You start off with the main branch then developers create branches, feature branches that stem directly from the master, to isolate their work which are then merged back into main. The feature branch is then deleted. \
-The main idea behind this model is keeping the master code in a constant deployable state and hence can support continuous integration and continuous delivery processes.
-
+Go on Repo-> Branches menu of Azure Devops, and create `develop` branch. \
+First, little thing to do (optional) is setting the `develop` branch as the Compare one. Then all the features branch will take the `develop` branch as a comparation reference and show how many commits behind or ahead it is. \
+Click on the 3 dots and then `Set as compare branch`
 <p align="center">
-  <img src="./.info/P1_A5.png">
+  <img src="./.info/P1_A5.2_1.png">
 </p>
 
-:grey_question:__[GitHub Flow pros and cons](https://www.flagship.io/git-branching-strategies/)__
+Then we want to setup Branch Policies by again clicking the 3 dots and then `Branch policies`
 
-Github Flow focuses on Agile principles and so it is a fast and streamlined branching strategy with short production cycles and frequent releases. \
-This strategy also allows for fast feedback loops so that teams can quickly identify issues and resolve them.  \
-Since there is no development branch as you are testing and automating changes to one branch which allows for quick and continuous deployment.  \
-This strategy is particularly suited for small teams and web applications and it is ideal when you need to maintain a single production version.  \
-Thus, this strategy is not suitable for handling multiple versions of the code. \
-Furthermore, the lack of development branches makes this strategy more susceptible to bugs and so can lead to an unstable production code if branches are not properly tested before merging with the master-release preparation and bug fixes happen in this branch. The master branch, as a result, can become cluttered more easily as it serves as both a production and development branch.  \
-A further disadvantage is as this model is more suited to small teams and hence, as teams grow merge conflicts can occur as everyone is merging to the same branch and there is a lack of transparency meaning developers cannot see what other developers are working on.
+Now set the rules as you wish.
+-   Having Reviewers
+-   Linked work items
+-   Resolved Comments
+-   Merge type
+-   Build validation
+-   etc
 
-
-# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! V2 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-__Branching strategies__
-
-Businesses can adapt and tailor branching strategies to meet a project's unique needs. There are five generic strategy types:
-
-1.  **Trunk and release branching.** Release branching creates a branch for the desired release candidate. Developers create and maintain the main code line or trunk branch, and then create a branch to release or deploy to production. Release branching requires developers to apply other branches, such as changes or fixes, to both the release branch and the main code line.
-2.  **Feature branching.** Feature branching creates a branch to implement a new feature or user story in the project. When the feature branch merges to the project, it adds the new feature. Flags are often used with feature branches to enable or disable the feature while it's in development -- or it's disabled so that users don't see or use the feature until it's ready.
-3.  **Change and development branching.** Sometimes associated with feature branching, change or development branching represents a longer-lived branch that contains changes and enhancements. Change and development branches are not the result of defects or the addition of new features, which have their own respective branches. Change and development branches can receive input from numerous developers and must undergo extensive testing and validation.
-4.  **Fix branching.** Fix branching implements bug fixes or optimizations. A fix branch represents a longer-lived, broader and more comprehensive fix for low- and medium-priority issues -- or a short-lived emergency [hotfix](https://www.techtarget.com/searchwindowsserver/definition/hotfix) for critical issues, such as unexpected server instability. An organization might use two different fix branching types for regular fixes and hotfixes.
-5.  **Task branching.** Task branching addresses development by envisioning every fix, change or feature as a task, which an issue tracking platform, such as Jira, can follow and reference. Each issue corresponds to its own branch. By coupling tasks with issues, developers and project managers can readily see which code addresses which issue.
-
-
-These branching strategies can be implemented using several popular branching flow paradigms, such as the following:
-
-__GitFlow__
-
-GitFlow first appeared in 2010 to enable long-term trunk and development branches -- though the strategy supports every branching strategy type. Teams perform development work, such as new features or regular bug fixes, in development branches. Merges only occur when the developers are satisfied with the development branch. GitFlow also handles emergency bug fixes or hotfix branches.
-
-While the GitFlow strategy proved popular, its support for large numbers of long-term branches makes branch maintenance and merges problematic. Today's GitFlow users must focus on short-term feature branches and frequent merges to reduce potential limitations. Many organizations have stepped away from GitFlow in favor of other [strategies](https://www.nomachetejuggling.com/2017/04/09/a-different-branching-strategy/).
-
-__GitHub flow__
-
-GitHub flow, an alternative to GitFlow, addresses every change as a feature branch. Developers use GitHub flow to create new feature branches from the trunk, and can test and validate feature branches before or after a merge. Developers can then merge feature branches back into the trunk branch in a releasable form. The trunk can generate a release branch for additional release preparation, such as packaging into a container image file. Consequently, this is a simpler approach for branch maintenance and merges.
-
-One crucial limitation with GitHub flow is trunk vulnerability -- a bad merge can leave the trunk undeployable. Trunk protection measures, such as backups prior to merge, are essential. Neither GitFlow nor GitHub flow support continuous integration as smoothly as development teams might demand.
-
-__GitLab flow__
-
-GitLab flow is a Git-based strategy that relies on clearly defined policies and practices to combine feature branching with an issue tracking system. Thus, every branch and its associated development work can be traced to a specific issue -- whether it's a bug, a new feature or an emergency issue -- with the issue tracking system.
-
-GitLab flow merges all features and fixes to the trunk branch, which generates a stable branch and a production branch. When a trunk branch is ready for deployment, it can merge into the production and release branch. Established guidelines and best practices manage this process.
-
-__Trunk-based development__
-
-Trunk-based development (TBD) is a variation of GitHub flow where developers rely on a releasable trunk and draw branches from the trunk. TBD requires developers to commit and integrate changes daily. This keeps branches short-lived, means changes are small with less effect and emphasizes frequent collaboration between developers. TBD supports many kinds of branches, but generally aligns well with CI/CD requirements.
-
-Longer-term efforts can use mechanisms such as [feature flags](https://www.techtarget.com/searchitoperations/tip/Ways-to-use-feature-flags-in-DevOps) to toggle work in progress on or off. In effect, the developer creates a switch in the code where in one condition, the software works as normal, and in the other, the state executes the new code and disables the old. This enables branches to merge daily with the new features disabled until the work is complete. Once tested and validated, IT teams can remove and clean up the old code.
-
-__Merging and validation__
-
-Unlike the tree metaphor, developers frequently select and merge parallel software development branches to form a project's main code line. This merge keeps a project on track as a single cohesive arc. However, merges can be difficult. Any branching strategy must consider the merge's speed and effectiveness. Larger and longer-lasting tasks can make merges more difficult and highlight the benefits of smaller, shorter-lived branches. Branching strategies and tools can play a huge role in a merge's success or failure.
-
-Validation follows the merge and is critical to test the merged project's main line. This demands careful CI implementation and automated testing techniques. Branch testing validates each branch before a merge to reduce problems in the final merge, but there is no substitute for testing post-merge.
-
-
+Activate a reviewer and comment being set to resolve. 
 
 
 ---
