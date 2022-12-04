@@ -203,7 +203,7 @@ Trunk-based development (TBD) is a variation of GitHub flow where developers rel
 
 Longer-term efforts can use mechanisms such as [feature flags](https://www.techtarget.com/searchitoperations/tip/Ways-to-use-feature-flags-in-DevOps) to toggle work in progress on or off. In effect, the developer creates a switch in the code where in one condition, the software works as normal, and in the other, the state executes the new code and disables the old. This enables branches to merge daily with the new features disabled until the work is complete. Once tested and validated, IT teams can remove and clean up the old code.
 
-___Merging and validation__
+__Merging and validation__
 
 Unlike the tree metaphor, developers frequently select and merge parallel software development branches to form a project's main code line. This merge keeps a project on track as a single cohesive arc. However, merges can be difficult. Any branching strategy must consider the merge's speed and effectiveness. Larger and longer-lasting tasks can make merges more difficult and highlight the benefits of smaller, shorter-lived branches. Branching strategies and tools can play a huge role in a merge's success or failure.
 
@@ -212,7 +212,7 @@ Validation follows the merge and is critical to test the merged project's main l
 
 
 
-
+---
 
 ### Part 2 -- Configure a pipeline to deploy infrastructure
 Below is describing on how to do it via terraform. If you want to use terraform you need to create  service connection in manual way. Otherwise you won't be able to deploy your iac -- Navigate to the  last section
