@@ -213,7 +213,7 @@ Unlike the tree metaphor, developers frequently select and merge parallel softwa
 Validation follows the merge and is critical to test the merged project's main line. This demands careful CI implementation and automated testing techniques. Branch testing validates each branch before a merge to reduce problems in the final merge, but there is no substitute for testing post-merge.
 
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! V3 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-:grey_question:__[Git Flow to the rescue](https://devtks.github.io/2019-08-09-GitFlowAzureDevops/)__
+:grey_question:__5.1. [Git Flow to the rescue](https://devtks.github.io/2019-08-09-GitFlowAzureDevops/)__
 
 With Git Flow branching strategy and some settings on Dev Ops **no commits can be done** directly on the `develop` branch. Each developer is required to create a feature branch off the `develop` branch. All work related to the feature they are working on will be done there. Once a feature is considered done, the developer has to create a pull request to merge their feature into the `develop` branch. Their pull request then has to be reviewed and approved by the project lead, or another member of the team.
 
@@ -256,7 +256,41 @@ As new development is completed, it gets merged back into the **develop branch**
 - __Support For Emergency Fixes__ \
 GitFlow supports **hotfix branches** - branches made from a tagged release. You can use these to make an emergency change, safe in the knowledge that the hotfix will only contain your emergency fix. There's no risk that you'll accidentally merge in new development at the same time.
 
+__5.2 Setting Branch Policies and Pull Request__
 
+As mentioned earlier we want to block people from pushing directly to the `develop` branch forcing them to create pull request and also setting some rules for a pull request to be approved. (like can’t be approved by yourself and so on.)
+
+Go on Repo-> Branches menu of Azure Devops, and create `develop` branch. \
+First, little thing to do (optional) is setting the `develop` branch as the Compare one. Then all the features branch will take the `develop` branch as a comparation reference and show how many commits behind or ahead it is. \
+Click on the 3 dots and then `Set as compare branch`
+<p align="center">
+  <img src="./P1_A5.2_1.png">
+</p>
+
+Then we want to setup Branch Policies by again clicking the 3 dots and then `Branch policies`
+
+Now set the rules as you wish.
+-   Having Reviewers
+-   Linked work items
+-   Resolved Comments
+-   Merge type
+-   Build validation
+-   etc
+
+Activate a reviewer and comment being set to resolve [(link)](https://learn.microsoft.com/en-us/azure/devops/repos/git/repository-settings?view=azure-devops&tabs=browser). 
+<p align="center">
+  <img src="./P1_A5.2_2.png">
+</p>
+
+Add reviewers to pull requests that change files in specific directories and files, or to all pull requests in a repo.
+<p align="center">
+  <img src="./P1_A5.2_3.png">
+</p>
+
+Check of Git repository settings and policies.
+<p align="center">
+  <img src="./P1_A5.2_4.png">
+</p>
 
 ---
 
