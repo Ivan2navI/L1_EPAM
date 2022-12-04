@@ -140,7 +140,7 @@ Before pushing code, set up authentication with "Credential Managers". \
 
 ---
 #### 5. Create a branching policy for you application. Added yourself as a reviewer - <https://learn.microsoft.com/en-us/azure/devops/repos/git/branch-policies?view=azure-devops&tabs=browser>. As branching strategy use a github flow (It will be applied by default when you strict commit to your main branch)
-:bulb: __Answer__: \
+:bulb: __Answer__:
 
 :grey_question:__[GitHub Flow](https://www.flagship.io/git-branching-strategies/)__
 
