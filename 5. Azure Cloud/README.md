@@ -206,7 +206,15 @@ Now set the rules as you wish.
 -   Build validation
 -   etc
 
-Activate a reviewer and comment being set to resolve. 
+Activate a reviewer and comment being set to resolve [(link)](https://learn.microsoft.com/en-us/azure/devops/repos/git/repository-settings?view=azure-devops&tabs=browser). 
+<p align="center">
+  <img src="./.info/P1_A5.2_2.png">
+</p>
+
+Add reviewers to pull requests that change files in specific directories and files, or to all pull requests in a repo.
+<p align="center">
+  <img src="./.info/P1_A5.2_3.png">
+</p>
 
 
 ---
