@@ -89,5 +89,5 @@ Jenkins will download the plugin and restart if not job has been scheduled.
 - Under the text box, check the checkBox called "Ignore browser preference and force this language to all users".
 
 <p align="center">
-  <img src="https://github.com/Ivan2navI/L1_EPAM/tree/main/7.%20Jenkins/.info/1.1.png">
+  <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main/7.%20Jenkins/.info/1.1.png">
 </p>
