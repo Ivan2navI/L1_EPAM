@@ -80,7 +80,8 @@ __Jenkins to show the UI in English language?__
 1. Download and install the locale plugin:
 - From the main page of Jenkins, go to Manage Jenkins -> Manage Plugins
 - Click on Availables
-- Check the "Locale plugin" and clicks on "Download now and install after restart".  \
+- Check the "Locale plugin" and clicks on "Download now and install after restart".
+
 Jenkins will download the plugin and restart if not job has been scheduled.
 
 2. Once the plugin has been installed, change the language using following steps:
