@@ -123,34 +123,34 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword == a6bf48e7d0a84bca880c17
 ```
 ============================ 3 ========================== \
 		Plugin Manager
-- Dashboard 
+- Dashboard  
 	View Customizable dashboard that can present various views of job information. 
 
-- Workspace Cleanup 
+- Workspace Cleanup  
 	This plugin deletes the project workspace when invoked. 
 
-- JUnit 
+- JUnit  
 	Allows JUnit-format test results to be published. 
 
-- Pipeline 
+- Pipeline  
 	A suite of plugins that lets you orchestrate automation, simple or complex. See Pipeline as Code with Jenkins for more details. 
 
-- Parameterized Trigger 
+- Parameterized Trigger  
 	This plugin lets you trigger new builds when your build has completed, with various ways of specifying parameters for the new build. 
 
-- Copy Artifact 
+- Copy Artifact  
 	Adds a build step to copy artifacts from another project. 
 
-- Git 
+- Git  
 	This plugin integrates Git with Jenkins. 
 
-- Matrix Project 
+- Matrix Project  
 	Multi-configuration (matrix) project type. 
 
-- SSH Build Agents 
+- SSH Build Agents  
 	Allows to launch agents over SSH, using a Java implementation of the SSH protocol. 
 
-- WMI Windows Agents 
+- WMI Windows Agents  
 	Allows you to setup agents on Windows machines over Windows Management Instrumentation (WMI) 
 
 ============================ 4 ========================== \
