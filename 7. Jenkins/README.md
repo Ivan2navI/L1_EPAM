@@ -75,6 +75,20 @@ httpPort=8080
 sudo cat /var/lib/jenkins/secrets/initialAdminPassword == a6bf48e7d0a84bca880c17b218042c59
 ```
 
+__Update Jenkins from a war file__
+```console
+#on ubuntu, in /usr/share/jenkins:
+
+# !!! /usr/share/java/jenkins.war
+
+cd /usr/share/jenkins
+
+sudo service jenkins stop
+sudo mv jenkins.war jenkins.war.old
+sudo wget https://updates.jenkins-ci.org/latest/jenkins.war
+sudo service jenkins start
+```
+
 __Jenkins to show the UI in English language?__
 
 1. Download and install the locale plugin:
@@ -92,3 +106,5 @@ Jenkins will download the plugin and restart if not job has been scheduled.
 <p align="center">
   <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main/7.%20Jenkins/.info/1.1.png">
 </p>
+
+## 3. Create Simple Job 
