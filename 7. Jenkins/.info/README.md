@@ -293,10 +293,10 @@ Finally, if you really must SSH from your office laptop to an EC2 instance in a 
 
 Then you have to tunnel through the bastion host. See [Securely Connect to Linux Instances Running in a Private Amazon VPC](https://aws.amazon.com/blogs/security/securely-connect-to-linux-instances-running-in-a-private-amazon-vpc/) for more.
 
-# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-# ============================ NOT USED ====================================
-# !!!!!!!! ------- Connect to Jenkins Agent [192.168.11.12] over SSH ------- !!!!!!!! :
-# !!! Add new user with password !!!: 
+##### !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+##### ============================ NOT USED ====================================
+##### !!!!!!!! ------- Connect to Jenkins Agent [192.168.11.12] over SSH ------- !!!!!!!! :
+##### !!! Add new user with password !!!: 
 
 ```console
 # Evaluate OpenSSH Status
