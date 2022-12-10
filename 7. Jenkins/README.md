@@ -93,7 +93,6 @@ sudo ufw status
 
 # Step 3 — Checking your Web Serve
 # Make sure the service is active by running the command for the systemd init system:
-
 sudo systemctl status apache2
 
 # Step 4 — Managing the Apache Process
