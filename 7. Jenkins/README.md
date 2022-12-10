@@ -159,3 +159,8 @@ sudo nano /var/www/html/index.html
 </html>
 ```
 
+### 4.3. Deploy from Jenkins MAIN Server to Jenkins Agent over SSH
+<p align="center">
+  <img src=".info/4.3.Deploy_over_SSH.png">
+</p>
+
