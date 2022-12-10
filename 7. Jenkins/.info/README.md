@@ -239,6 +239,9 @@ sudo systemctl start noip2
 # !! With a restart, it updates the public IP:
 sudo systemctl restart noip2
 
+# Get status
+sudo systemctl status noip2
+
 # See logs
 sudo journalctl -u noip2
 ```
