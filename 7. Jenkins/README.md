@@ -129,7 +129,7 @@ sudo nano /var/www/html/index.html
             <p style="text-align:center">
               <a href="http://jenkins0agent1van.myddns.me">Agent for Jenkins</a>
             </p>
-            <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main/7.%20Jenkins/.info/Jenkins_MAIN.png" alt="Jenkins" class="center">
+            <img src="https://raw.githubusercontent.com/Ivan2navI/L1_EPAM/main/7.%20Jenkins/.info/Jenkins_MAIN.png" alt="Jenkins" class="center">
       </center>
     </body>
 </html>
@@ -153,7 +153,7 @@ sudo nano /var/www/html/index.html
               <h2>L1 EPAM</h2>
             </p>
 
-            <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main/7.%20Jenkins/.info/Jenkins_Agent.png" alt="Jenkins Agent" class="center">
+            <img src="https://raw.githubusercontent.com/Ivan2navI/L1_EPAM/main/7.%20Jenkins/.info/Jenkins_Agent.png" alt="Jenkins Agent" class="center">
       </center>
     </body>
 </html>
@@ -202,11 +202,42 @@ sudo find /var/www -type d -exec chmod g+s {} +
 sudo chmod -R o-rwx /var/www/
 ```
 
+```console
+echo "Creating HTML"
+cat << EOF >index.html
+<html>
+    <head>
+        <title>Welcome to AGENT!</title>
+    </head>
+        
+    <body>
+      <center>
+            <p style="text-align:center">
+              <h1 style="background-color:powderblue;">Welcome to Jenkins AGENT!</h1>
+              <h2>L1 EPAM</h2>
+              <h2>Jenkins build number: $BUILD_NUMBER</h2>
+            </p>
+
+            <img src="https://raw.githubusercontent.com/Ivan2navI/L1_EPAM/main/7.%20Jenkins/.info/Jenkins_Agent.png" alt="Jenkins Agent" class="center">
+      </center>
+    </body>
+</html>
+EOF
+
+echo "-------------------------"
+whoami
+pwd
+ls -la
+scp -i home/ubuntu/.ssh/jenkins_agent.pem ./index.html ubuntu@192.168.11.12:/var/www/html/
+
+```
+
+
 
 `sudo scp -i jenkins_agent.pem ./index.html ubuntu@192.168.11.12:/var/www/html/`
 
 cd "/var/lib/jenkins/workspace/4.3. Deploy from Jenkins MAIN Server to Jenkins Agent over SSH"
-sudo scp -i ~/.ssh/jenkins_agent.pem ./index.html ubuntu@192.168.11.12:~/
+sudo scp -i ~/.ssh/jenkins_agent.pem ./index.html ubuntu@192.168.11.12:/var/www/html/
 
 
 
