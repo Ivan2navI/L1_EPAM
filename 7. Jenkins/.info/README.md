@@ -181,3 +181,64 @@ Once the plugin has been installed, change the language using following steps:
     Under Locale, there will be a field called "Default Language". Enter the new language. It could be "en" or "ENGLISH".
 
     Under the text box, check the checkBox called "Ignore browser preference and force this language to all users".
+
+
+============================ 6 ========================== \
+## JENKINS AWS
+### [Install & Configure NoIP](https://thanoskoutr.com/posts/noip2-install-and-service-commands/)
+No-IP is a Free Dynamic DNS and Managed DNS Provider, that we can use to get a free domain name. There a lot of free Dynamic DNS services, you can find a good comprehensive of them here that we can choose from, but this was the first service that I personally tried.
+
+The good with this service is that we have a big selection of free domain names that we can choose, so we can easily find a domain that is available for the hostname we want to have.
+
+The negative is that every 30 days they send a notification email, and we have to sign in to www.noip.com and confirm that we still use the hostname. After some time that I have used the service, I can say that it becomes annoying to verify it once every month.
+```console
+# Login as root
+sudo su
+
+# Type the following commands:
+cd /usr/local/src/
+wget http://www.noip.com/client/linux/noip-duc-linux.tar.gz
+tar xf noip-duc-linux.tar.gz
+cd noip-2.1.9-1/
+make
+make install
+
+# On the configuration stage:
+#    => Add email and password.
+#    => The hostname to update (choose only one).
+
+# To launch the client
+/usr/local/bin/noip2
+
+# !! Add an executable (noip2) as a service !!
+# Create noip2.service in /etc/systemd/system
+# And add the following:
+
+[Unit]
+Description=No-Ip Dynamic DNS Update Service
+After=network.service
+
+[Service]
+Type=forking
+ExecStart=/usr/local/bin/noip2
+
+[Install]
+WantedBy=default.target
+
+# ------------------------------------
+# Restart systemctl to accept changes
+sudo systemctl daemon-reload
+
+# Enable service
+sudo systemctl enable noip2
+
+# Start service
+sudo systemctl start noip2
+
+# Restart service
+# !! With a restart, it updates the public IP:
+sudo systemctl restart noip2
+
+# See logs
+sudo journalctl -u noip2
+```
