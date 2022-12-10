@@ -62,7 +62,7 @@ Jenkins will download the plugin and restart if not job has been scheduled.
 </p>
 
 ## 4. Deploy from Jenkins over SSH
-### 4.1. [Install the Apache Web Server](https://www.digitalocean.com/community/tutorials/how-to-install-the-apache-web-server-on-ubuntu-22-04)
+### 4.1. [Install the Apache Web Server on Main Jenkins Server](https://www.digitalocean.com/community/tutorials/how-to-install-the-apache-web-server-on-ubuntu-22-04)
 ```console
 # Step 1 — Installing Apache
 sudo apt update
@@ -123,11 +123,39 @@ sudo nano /var/www/html/index.html
       <center>
             <p style="text-align:center">
               <h1>Welcome to Jenkins MAIN Server!</h1>
-              <a href="http://jenkins1van.myddns.me:8080/">Jenkins MAIN Server</a> 
+              <h2>L1 EPAM</h2>
+              <a href="http://jenkins1van.myddns.me:8080/">Jenkins MAIN Server</a>
             </p>
-
+            <p style="text-align:center">
+              <a href="http://jenkins0agent1van.myddns.me">Agent for Jenkins</a>
+            </p>
             <img src="https://miro.medium.com/max/720/1*H9jHoRaRnJ0KnqmPs6xeUA.webp" alt="Jenkins" class="center">
       </center>
     </body>
 </html>
 ```
+
+### 4.2. Install the Apache Web Server for Jenkins Agent
+Use the information from the previous paragraph and create a sample `index.html`:
+```html
+sudo nano /var/www/html/index.html
+
+# add the following sample HTML:
+<html>
+    <head>
+        <title>Welcome to AGENT!</title>
+    </head>
+        
+    <body>
+      <center>
+            <p style="text-align:center">
+              <h1 style="background-color:powderblue;">Welcome to Jenkins AGENT!</h1>
+              <h2>L1 EPAM</h2>
+            </p>
+
+            <img src="https://miro.medium.com/max/720/0*n85OoNCH3HWgfrtc" alt="Jenkins Agent" class="center">
+      </center>
+    </body>
+</html>
+```
+

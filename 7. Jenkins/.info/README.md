@@ -195,6 +195,11 @@ The negative is that every 30 days they send a notification email, and we have t
 # Login as root
 sudo su
 
+# The command installs a packages `make` & `gcc`.
+apt-get update
+apt install make 
+apt install make gcc -y
+
 # Type the following commands:
 cd /usr/local/src/
 wget http://www.noip.com/client/linux/noip-duc-linux.tar.gz
@@ -229,7 +234,7 @@ sudo make install
 
 # ------------------------------------
 # !! Add an executable (noip2) as a service !!
-# Create noip2.service in /etc/systemd/system
+# Create `noip2.service` in `/etc/systemd/system`
 # And add the following:
 
 [Unit]
