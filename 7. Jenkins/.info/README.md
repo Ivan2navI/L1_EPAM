@@ -269,7 +269,7 @@ sudo systemctl status noip2
 sudo journalctl -u noip2
 ```
 
-## SSH'ing into AWS EC2 Instance located in Private Subnet in a VPC
+## [SSH'ing into AWS EC2 Instance located in Private Subnet in a VPC](https://stackoverflow.com/questions/52816990/sshing-into-aws-ec2-instance-located-in-private-subnet-in-a-vpc)
 [Использование Amazon EC2 Instance Connect для доступа к вашим EC2-инстансам по SSH](https://aws.amazon.com/ru/blogs/rus/using-amazon-ec2-instance-connect-for-ssh-access-to-your-ec2/)
 
 [How to Connect Public and private subnet in same VPC](https://cloudiofy.com/how-to-connect-public-and-private-subnet-in-same-vpc/)
@@ -292,3 +292,84 @@ Finally, if you really must SSH from your office laptop to an EC2 instance in a 
 5.  security group on the private EC2 instance that allows inbound SSH from the bastion
 
 Then you have to tunnel through the bastion host. See [Securely Connect to Linux Instances Running in a Private Amazon VPC](https://aws.amazon.com/blogs/security/securely-connect-to-linux-instances-running-in-a-private-amazon-vpc/) for more.
+
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# ============================ NOT USED ====================================
+# !!!!!!!! ------- Connect to Jenkins Agent [192.168.11.12] over SSH ------- !!!!!!!! :
+# !!! Add new user with password !!!: 
+
+```console
+# Evaluate OpenSSH Status
+sudo systemctl status ssh
+
+# The Ubuntu systems ships with default UFW firewall, If the UFW is active, you need to allow SSH port 22 for remote users. To allow port 22 in UFW type:
+sudo ufw allow 22/tcp 
+
+sudo useradd -m -d /home/jenkins_agent -s /bin/bash jenkins_agent
+sudo passwd jenkins_agent
+
+# Change user:
+su jenkins_agent
+cd ~
+
+# Create a .ssh directory in the new_user home directory:
+mkdir /home/jenkins_agent/.ssh
+
+# ensure the directory ir owned by the new user
+# chown -R username:username /home/username/.ssh
+chown -R jenkins_agent:jenkins_agent /home/jenkins_agent/.ssh
+
+# Use the chmod command to change the .ssh directory's permissions to 700. Changing the permissions restricts access so that only the new_user can read, write, or open the .ssh directory.
+# chmod 700 /home/username/.ssh
+chmod 700 /home/jenkins_agent/.ssh
+
+# Use the touch command to create the authorized_keys file in the .ssh directory:
+# touch /home/username/.ssh/authorized_keys
+touch /home/jenkins_agent/.ssh/authorized_keys
+
+# Use the chmod command to change the .ssh/authorized_keys file permissions to 600. Changing the file permissions restricts read or write access to the new_user.
+# chmod 600 /home/username/.ssh/authorized_keys
+chmod 600 /home/jenkins_agent/.ssh/authorized_keys
+
+
+# !!!!!!!! ------- Generate SSH keys on Jenkins MAIN Server [192.168.11.11] over SSH ------- !!!!!!!! :
+
+ubuntu@ip-192-168-11-11:~$ cd /home/ubuntu/.ssh/
+ubuntu@ip-192-168-11-11:~/.ssh$ ssh-keygen
+# Generating public/private rsa key pair.
+# Enter file in which to save the key (/home/ubuntu/.ssh/id_rsa):
+# Enter passphrase (empty for no passphrase):
+# Enter same passphrase again:
+Your identification has been saved in /home/ubuntu/.ssh/id_rsa
+Your public key has been saved in /home/ubuntu/.ssh/id_rsa.pub
+The key fingerprint is:
+SHA256:YmX/m9un4ugZSslg2A9dNZDxqjs3hD1nW8ryefaIidQ ubuntu@ip-192-168-11-11
+The key's randomart image is:
++---[RSA 3072]----+
+|          o+o    |
+|          .o .   |
+|        o . .    |
+|     o + o .     |
+|    . B Soo      |
+|     o *.o+oo .  |
+|        *.o=E+   |
+|       ..++==Bo..|
+|        o+==X=++.|
++----[SHA256]-----+
+
+# Use the ssh-copy-id command for connect to Jenkins Agent [192.168.11.12] with user `jenkins_agent`:
+
+scp ~/.ssh/id_rsa.pub jenkins_agent@192.168.11.12:~/.ssh/authorized_keys
+
+
+ssh-copy-id jenkins_agent@192.168.11.12
+# OR
+ssh-copy-id -i ~/.ssh/id_rsa.pub jenkins_agent@192.168.11.12
+
+scp ~/.ssh/id_rsa.pub ubuntu@192.168.11.12:~/.ssh/authorized_keys
+
+ssh-copy-id -i ~/.ssh/id_rsa.pub ubuntu@192.168.11.12
+
+```
+# ============================ ======== ====================================
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
