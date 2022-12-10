@@ -60,3 +60,52 @@ Jenkins will download the plugin and restart if not job has been scheduled.
 <p align="center">
   <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main/7.%20Jenkins/.info/3.Create_Simple_Job.png">
 </p>
+
+## 4. Deploy from Jenkins over SSH
+### 4.1. [Install the Apache Web Server](https://www.digitalocean.com/community/tutorials/how-to-install-the-apache-web-server-on-ubuntu-22-04)
+```console
+# Step 1 — Installing Apache
+sudo apt update
+sudo apt install apache2
+
+# Step 2 — Adjusting the Firewall
+sudo ufw app list
+
+# Your output will be a list of the application profiles:
+#
+# Output
+# Available applications:
+#  Apache
+#  Apache Full
+#  Apache Secure
+#  OpenSSH
+
+# As indicated by the output, there are three profiles available for Apache:
+# 	- Apache: This profile opens only port 80 (normal, unencrypted web traffic)
+# 	- Apache Full: This profile opens both port 80 (normal, unencrypted web traffic) and port 443 (TLS/SSL encrypted traffic)
+# 	- Apache Secure: This profile opens only port 443 (TLS/SSL encrypted traffic)
+
+# It is recommended that you enable the most restrictive profile that will still allow the traffic you’ve configured. Since you haven’t configured SSL for your server yet in this guide, you’ll only need to allow traffic on port 80:
+sudo ufw allow 'Apache'
+
+# You can verify the change by checking the status:
+sudo ufw status
+
+# Step 3 — Checking your Web Serve
+# Make sure the service is active by running the command for the systemd init system:
+
+sudo systemctl status apache2
+
+# Step 4 — Managing the Apache Process
+sudo systemctl stop apache2
+
+sudo systemctl start apache2
+
+sudo systemctl restart apache2
+
+sudo systemctl reload apache2
+
+sudo systemctl disable apache2
+
+sudo systemctl enable apache2
+```
