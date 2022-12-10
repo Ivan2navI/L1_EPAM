@@ -129,7 +129,7 @@ sudo nano /var/www/html/index.html
             <p style="text-align:center">
               <a href="http://jenkins0agent1van.myddns.me">Agent for Jenkins</a>
             </p>
-            <img src="https://miro.medium.com/max/720/1*H9jHoRaRnJ0KnqmPs6xeUA.webp" alt="Jenkins" class="center">
+            <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main/7.%20Jenkins/.info/Jenkins_MAIN.png" alt="Jenkins" class="center">
       </center>
     </body>
 </html>
@@ -153,7 +153,7 @@ sudo nano /var/www/html/index.html
               <h2>L1 EPAM</h2>
             </p>
 
-            <img src="https://miro.medium.com/max/720/0*n85OoNCH3HWgfrtc" alt="Jenkins Agent" class="center">
+            <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main/7.%20Jenkins/.info/Jenkins_Agent.png" alt="Jenkins Agent" class="center">
       </center>
     </body>
 </html>
