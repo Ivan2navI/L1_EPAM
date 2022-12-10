@@ -242,3 +242,24 @@ scp ~/.ssh/id_rsa.pub ubuntu@192.168.11.12:~/.ssh/authorized_keys
 ssh-copy-id -i ~/.ssh/id_rsa.pub ubuntu@192.168.11.12
 
 ```
+
+
+
+
+
+
+
+
+
+
+---
+### PS: [Paste to Markdown](https://euangoddard.github.io/clipboard2markdown/)
+
+Instructions
+
+    Find the text to convert to Markdown (e.g., in another browser tab)
+    Copy it to the clipboard (Ctrl+C, or ⌘+C on Mac)
+    Paste it into this window (Ctrl+V, or ⌘+V on Mac)
+    The converted Markdown will appear!
+
+The conversion is carried out by [to-markdown](https://github.com/domchristie/to-markdown), a Markdown converter written in JavaScript and running locally in the browser.

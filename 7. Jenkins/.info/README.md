@@ -268,3 +268,22 @@ sudo systemctl status noip2
 # See logs
 sudo journalctl -u noip2
 ```
+
+## SSH'ing into AWS EC2 Instance located in Private Subnet in a VPC
+[Использование Amazon EC2 Instance Connect для доступа к вашим EC2-инстансам по SSH](https://aws.amazon.com/ru/blogs/rus/using-amazon-ec2-instance-connect-for-ssh-access-to-your-ec2/)
+
+The 1st option to consider for SSH access to EC2 instances is [EC2 Instance Connect](https://aws.amazon.com/blogs/compute/new-using-amazon-ec2-instance-connect-for-ssh-access-to-your-ec2-instances/) which allows you to control access to your EC2 instances using IAM and provides access from either the AWS console or your regular command line SSH tools.
+
+The 2nd option is [AWS Systems Manager Session Manager for Shell Access to EC2 Instances](https://aws.amazon.com/blogs/aws/new-session-manager/). You basically run an SSH session in your browser and it can target all EC2 instances, regardless of public/private IP or subnet. EC2 instances have to be running an up to date version of the SSM Agent and must have been launched with an appropriate IAM role (including the key policies from AmazonEC2RoleForSSM). No need for a bastion host or firewall rules allowing inbound port 22.
+
+The 3rd option to consider is [AWS Systems Manager Run Command](https://docs.aws.amazon.com/systems-manager/latest/userguide/execute-remote-commands.html) which allows you to run commands remotely on your EC2 instances. It's not interactive like SSH but if you simply want to run a sequence of scripts then it's very good. Again, the instance has to be running the SSM Agent and have an appropriate IAM policy, and this option avoids the need to tunnel through bastion hosts.
+
+Finally, if you really must SSH from your office laptop to an EC2 instance in a private subnet, you can do so via a bastion host. You need a few things:
+
+1.  IGW and NAT in the VPC
+2.  bastion host with public IP in the VPC's public subnet
+3.  security group on the bastion allowing inbound SSH from your laptop
+4.  a default route from the private subnet to the NAT
+5.  security group on the private EC2 instance that allows inbound SSH from the bastion
+
+Then you have to tunnel through the bastion host. See [Securely Connect to Linux Instances Running in a Private Amazon VPC](https://aws.amazon.com/blogs/security/securely-connect-to-linux-instances-running-in-a-private-amazon-vpc/) for more.
