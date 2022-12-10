@@ -210,6 +210,24 @@ make install
 # To launch the client
 /usr/local/bin/noip2
 
+# ------------------------------------
+# Update Credentials
+cd /usr/local/src/noip-2.1.9-1
+sudo rm -r /usr/local/bin/noip2
+sudo make
+# --> make: 'noip2' is up to date.
+sudo make install
+# 	if [ ! -d /usr/local/bin ]; then mkdir -p /usr/local/bin;fi
+# 	if [ ! -d /usr/local/etc ]; then mkdir -p /usr/local/etc;fi
+# 	cp noip2 /usr/local/bin/noip2
+# 	/usr/local/bin/noip2 -C -c /tmp/no-ip2.conf
+
+#	Auto configuration for Linux client of no-ip.com.
+
+#	Please enter the login/email string for no-ip.com  your_mail@mail.com
+#	Please enter the password for user 'your_mail@mail.com'  ********
+
+# ------------------------------------
 # !! Add an executable (noip2) as a service !!
 # Create noip2.service in /etc/systemd/system
 # And add the following:
