@@ -182,7 +182,35 @@ ubuntu@ip-192-168-11-11:~/.ssh$ ssh ubuntu@192.168.11.12 -i jenkins_agent.pem
 ubuntu@ip-192-168-11-12:~$
 ```
 
+[Add permissions](https://askubuntu.com/questions/767504/permissions-problems-with-var-www-html-and-my-own-home-directory-for-a-website/767534#767534) to `/var/www/html` on Jenkins Agent [192.168.11.12] for `ubuntu`
 
+```console
+# You can do the all the recommended steps in just 3 commands instead of 8 commands:
+# ===> 3 commands:
+
+sudo chown -R ubuntu:www-data /var/www
+sudo find /var/www -type d -exec chmod 2750 {} \+
+sudo find /var/www -type f -exec chmod 640 {} \+
+
+# ===> do the same work as following 8 commands:
+
+sudo chgrp -R www-data /var/www
+sudo find /var/www -type d -exec chmod g+rx {} +
+sudo find /var/www -type f -exec chmod g+r {} +
+sudo chown -R ubuntu /var/www/
+sudo find /var/www -type d -exec chmod u+rwx {} +
+sudo find /var/www -type f -exec chmod u+rw {} +
+sudo find /var/www -type d -exec chmod g+s {} +
+sudo chmod -R o-rwx /var/www/
+
+
+```
+
+
+`sudo scp -i jenkins_agent.pem ./index.html ubuntu@192.168.11.12:/var/www/html/`
+
+cd "/var/lib/jenkins/workspace/4.3. Deploy from Jenkins MAIN Server to Jenkins Agent over SSH"
+sudo scp -i ~/.ssh/jenkins_agent.pem ./index.html ubuntu@192.168.11.12:~/
 
 
 
