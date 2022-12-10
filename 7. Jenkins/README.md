@@ -108,3 +108,26 @@ sudo systemctl disable apache2
 
 sudo systemctl enable apache2
 ```
+Create a sample `index.html`:
+```html
+
+sudo nano /var/www/html/index.html
+
+# add the following sample HTML:
+<html>
+    <head>
+        <title>Welcome to Jenkins MAIN Server!</title>
+    </head>
+        
+    <body>
+      <center>
+            <p style="text-align:center">
+              <h1>Welcome to Jenkins MAIN Server!</h1>
+              <a href="http://jenkins1van.myddns.me:8080/">Jenkins MAIN Server</a> 
+            </p>
+
+            <img src="https://miro.medium.com/max/720/1*H9jHoRaRnJ0KnqmPs6xeUA.webp" alt="Jenkins" class="center">
+      </center>
+    </body>
+</html>
+```
