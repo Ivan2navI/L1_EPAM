@@ -301,6 +301,13 @@ For project testing, create on GitHub `index.html` with this code:
 </html>
 ```
 
+Then add **[Poll SCM Trigger]** with the such **[Schedule]**:`H/2 * * * *`, after that new commit to GitHub repository, waiting 2 minutes and check results on Jenkins Agent [192.168.11.12].
+<p align="center">
+  <img src=".info/5.4.Poll_SCM_Trigger.png">
+</p>
+
+
+
 
 
 
