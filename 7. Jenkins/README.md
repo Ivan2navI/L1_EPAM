@@ -306,10 +306,30 @@ Then add **[Poll SCM Trigger]** with the such **[Schedule]**:`H/2 * * * *`, afte
   <img src=".info/5.4.Poll_SCM_Trigger.png">
 </p>
 
+## 6. Jenkins nodes (agent)
+Use SSH for connecting to Jenkins Agent [192.168.11.12] and check java verion there:
+```console
+ubuntu@ip-192-168-11-12:~$ java --version
+# Command 'java' not found, but can be installed with:
+# sudo apt install default-jre              # version 2:1.11-72build2, or
+# sudo apt install openjdk-11-jre-headless  # version 11.0.17+8-1ubuntu2~22.04
+# sudo apt install openjdk-17-jre-headless  # version 17.0.5+8-2ubuntu1~22.04
 
+sudo apt update && sudo apt upgrade -y
 
+sudo apt-get install openjdk-17-jdk -y
 
+java --version
+```
+Create directory on Agent: `ubuntu@ip-192-168-11-12:~$ mkdir /home/ubuntu/jenkins`
+Come back to MAIN Server [192.168.11.11] and get private ssh key, which used for connect to Jenkins Agent [192.168.11.12]:  
+`/var/lib/jenkins/.ssh$ sudo cat jenkins_agent`
 
+Jenkins Node Agent is quite easy to configure, we only need to insert the Jenkins workspace directory and the agent’ ip asking to connect with it by using the credentials.
+
+<p align="center">
+  <img src=".info/6.Jenkins_Node_Agent_configure.png">
+</p>
 
 
 
