@@ -201,7 +201,19 @@ sudo find /var/www -type f -exec chmod u+rw {} +
 sudo find /var/www -type d -exec chmod g+s {} +
 sudo chmod -R o-rwx /var/www/
 ```
+From Jenkins MAIN Server [192.168.11.11] try connect to Agent:
+`ssh ubuntu@192.168.11.12 -i ~/.ssh/jenkins_agent.pem`
 
+After that create .ssh in jenkins directory:
+`mkdir /var/lib/jenkins/.ssh`
+and copy there 2 files from `ubuntu/.ssh`:
+```console
+ubuntu@ip-192-168-11-11:/var/lib/jenkins/.ssh$ ls
+jenkins_agent.pem 
+known_hosts
+```
+
+To Build Steps add such Execute shell
 ```console
 echo "Creating HTML"
 cat << EOF >index.html
@@ -228,22 +240,11 @@ echo "-------------------------"
 whoami
 pwd
 ls -la
-scp -i home/ubuntu/.ssh/jenkins_agent.pem ./index.html ubuntu@192.168.11.12:/var/www/html/
-
+scp -i ~/.ssh/jenkins_agent.pem ./index.html ubuntu@192.168.11.12:/var/www/html/
 ```
-
-
-
-`sudo scp -i jenkins_agent.pem ./index.html ubuntu@192.168.11.12:/var/www/html/`
-
-cd "/var/lib/jenkins/workspace/4.3. Deploy from Jenkins MAIN Server to Jenkins Agent over SSH"
-sudo scp -i ~/.ssh/jenkins_agent.pem ./index.html ubuntu@192.168.11.12:/var/www/html/
-
-
-
-
-
-
+<p align="center">
+  <img src=".info/4.3.Deploy_over_SSH_2.png">
+</p>
 
 ---
 ### PS: [Paste to Markdown](https://euangoddard.github.io/clipboard2markdown/)
