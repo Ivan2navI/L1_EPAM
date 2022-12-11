@@ -335,6 +335,12 @@ Create project *6. Jenkins nodes (agent)* and launch job:
   <img src=".info/6.1.Jenkins_Node_Agent_launch_job.png">
 </p>
 
+Create project *6.1. Jenkins nodes (agent) and GitHub* and launch job:
+<p align="center">
+  <img src=".info/6.1.Jenkins_Node_Agent_launch_job.png">
+</p>
+
+
 
 P.S.: [Another way to connect Master with Slave is using JNLP(JAVA NETWORK LAUNCH PROTOCOL) protocol which makes allow the communication between two nodes.](https://techannotation.wordpress.com/2021/06/29/scale-up-jenkins-with-slave-nodes/)
 
