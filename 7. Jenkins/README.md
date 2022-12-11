@@ -213,7 +213,7 @@ jenkins_agent.pem
 known_hosts
 ```
 
-To Build Steps add such Execute shell
+To [Build Steps] add such [Execute shell]:
 ```console
 echo "Creating HTML"
 cat << EOF >index.html
