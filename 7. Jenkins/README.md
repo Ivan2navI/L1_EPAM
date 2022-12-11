@@ -307,6 +307,9 @@ Then add **[Poll SCM Trigger]** with the such **[Schedule]**:`H/2 * * * *`, afte
 </p>
 
 ## 6. Jenkins nodes (agent)
+<p align="center">
+  <img src=".info/Jenkins_Node_Agent.png">
+</p>
 Use SSH for connecting to Jenkins Agent [192.168.11.12] and check java verion there:
 ```console
 ubuntu@ip-192-168-11-12:~$ java --version
