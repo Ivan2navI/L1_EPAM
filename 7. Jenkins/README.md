@@ -280,7 +280,7 @@ Don't forget check or change [Branches to build]:
   <img src=".info/5.3.Add_Private_key.png">
 </p>
 
-For testing project, create on GitHub `index.html` with this code: 
+For project testing, create on GitHub `index.html` with this code: 
 ```html
 <html>
     <head>
@@ -302,7 +302,14 @@ For testing project, create on GitHub `index.html` with this code:
 ```
 
 
-<h2>Jenkins build number: $BUILD_NUMBER</h2>
+
+
+
+
+
+
+
+
 
 ---
 ### PS: [Paste to Markdown](https://euangoddard.github.io/clipboard2markdown/)
