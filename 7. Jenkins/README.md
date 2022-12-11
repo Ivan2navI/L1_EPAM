@@ -206,7 +206,7 @@ From Jenkins MAIN Server [192.168.11.11] try connect to Agent:
 
 After that create .ssh in jenkins directory:
 `mkdir /var/lib/jenkins/.ssh`
-and copy {!!! ONLY FOR TEST !!!} there 2 files from `ubuntu/.ssh`:
+and copy ***{!!! ONLY FOR TEST !!!}*** there 2 files from `ubuntu/.ssh`:
 ```console
 ubuntu@ip-192-168-11-11:/var/lib/jenkins/.ssh$ ls
 jenkins_agent.pem 
@@ -245,6 +245,14 @@ scp -i ~/.ssh/jenkins_agent.pem ./index.html ubuntu@192.168.11.12:/var/www/html/
 <p align="center">
   <img src=".info/4.3.Deploy_over_SSH_2.png">
 </p>
+
+## 5. Deploy from Git over SSH
+<p align="center">
+  <img src=".info/5.From_GIT_with_SSH">
+</p>
+
+Create SSH keys with custom filename:
+ssh-keygen -t rsa -f L1_EPAM_from_Git2Jenkins
 
 ---
 ### PS: [Paste to Markdown](https://euangoddard.github.io/clipboard2markdown/)
