@@ -248,11 +248,11 @@ scp -i ~/.ssh/jenkins_agent.pem ./index.html ubuntu@192.168.11.12:/var/www/html/
 
 ## 5. Deploy from Git over SSH
 <p align="center">
-  <img src=".info/5.From_GIT_with_SSH">
+  <img src=".info/5.From_GIT_with_SSH.png">
 </p>
 
 Create SSH keys with custom filename:
-ssh-keygen -t rsa -f L1_EPAM_from_Git2Jenkins
+`ssh-keygen -t rsa -f L1_EPAM_from_Git2Jenkins`
 
 ---
 ### PS: [Paste to Markdown](https://euangoddard.github.io/clipboard2markdown/)
