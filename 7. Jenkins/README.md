@@ -274,8 +274,14 @@ Add public key to GitHub repository:
   <img src=".info/5.2.Add_Public_key.png">
 </p>
 
+Add credentials (Username, ID + Description, Private Key) to pipeline.
+Don't forget check or change [Branches to build]:  
+<p align="center">
+  <img src=".info/5.3.Add_Private_key.png">
+</p>
 
-Add be
+
+
 
 ---
 ### PS: [Paste to Markdown](https://euangoddard.github.io/clipboard2markdown/)
