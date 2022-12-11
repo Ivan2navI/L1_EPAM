@@ -326,12 +326,17 @@ Than come back to MAIN Server [192.168.11.11] and get private ssh key, which use
 `/var/lib/jenkins/.ssh$ sudo cat jenkins_agent`
 
 Jenkins Node Agent is quite easy to configure, we only need to insert the Jenkins workspace directory and the agent’ ip asking to connect with it by using the credentials:
-
 <p align="center">
   <img src=".info/6.Jenkins_Node_Agent_configure.png">
 </p>
 
+Create project *6. Jenkins nodes (agent)* and launch job:
+<p align="center">
+  <img src=".info/6.1.Jenkins_Node_Agent_launch_job.png">
+</p>
 
+
+P.S.: [Another way to connect Master with Slave is using JNLP(JAVA NETWORK LAUNCH PROTOCOL) protocol which makes allow the communication between two nodes.](https://techannotation.wordpress.com/2021/06/29/scale-up-jenkins-with-slave-nodes/)
 
 
 
