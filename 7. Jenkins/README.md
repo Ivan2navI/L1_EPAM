@@ -251,8 +251,31 @@ scp -i ~/.ssh/jenkins_agent.pem ./index.html ubuntu@192.168.11.12:/var/www/html/
   <img src=".info/5.From_GIT_with_SSH.png">
 </p>
 
-Create SSH keys with custom filename:
-`ssh-keygen -t rsa -f L1_EPAM_from_Git2Jenkins`
+Create new repository on GitHub and add it to Jenkins.  
+But it will throw an error:
+<p align="center">
+  <img src=".info/5.1.No_ED25519_host_key_is_known.png">
+</p>
+
+[Open Jenkins MAIN Server terminal login under Jenkins](https://stackoverflow.com/questions/15174194/jenkins-host-key-verification-failed):  
+`sudo su jenkins`  
+In directory `.ssh` generate public private key:
+```console
+jenkins@ip-192-168-11-11:~/.ssh$ ssh-keygen
+# Generating public/private rsa key pair.
+# Enter file in which to save the key (/var/lib/jenkins/.ssh/id_rsa): L1_Epam_jenkins2
+# Enter passphrase (empty for no passphrase):
+# Enter same passphrase again:
+# Your identification has been saved in L1_Epam_jenkins2
+# Your public key has been saved in L1_Epam_jenkins2.pub
+```
+Add public key to GitHub repository:
+<p align="center">
+  <img src=".info/5.2.Add_Public_key.png">
+</p>
+
+
+Add be
 
 ---
 ### PS: [Paste to Markdown](https://euangoddard.github.io/clipboard2markdown/)
