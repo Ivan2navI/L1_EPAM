@@ -206,7 +206,7 @@ From Jenkins MAIN Server [192.168.11.11] try connect to Agent:
 
 After that create .ssh in jenkins directory:
 `mkdir /var/lib/jenkins/.ssh`
-and copy there 2 files from `ubuntu/.ssh`:
+and copy {!!! ONLY FOR TEST !!!} there 2 files from `ubuntu/.ssh`:
 ```console
 ubuntu@ip-192-168-11-11:/var/lib/jenkins/.ssh$ ls
 jenkins_agent.pem 
