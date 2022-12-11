@@ -274,14 +274,35 @@ Add public key to GitHub repository:
   <img src=".info/5.2.Add_Public_key.png">
 </p>
 
-Add credentials (Username, ID + Description, Private Key) to pipeline.
+Add credentials (Username, ID + Description, Private Key) to project.
 Don't forget check or change [Branches to build]:  
 <p align="center">
   <img src=".info/5.3.Add_Private_key.png">
 </p>
 
+For testing project, create on GitHub `index.html` with this code: 
+```html
+<html>
+    <head>
+        <title>Welcome to AGENT!</title>
+    </head>
+        
+    <body>
+      <center>
+            <p style="text-align:center">
+              <h1 style="background-color:powderblue;">Welcome to Jenkins AGENT!</h1>
+              <h2>L1 EPAM</h2>
+              <h2>Jenkins_TEST from GitHub </h2>
+            </p>
+
+            <img src="https://raw.githubusercontent.com/Ivan2navI/L1_EPAM/main/7.%20Jenkins/.info/5.From_GIT_with_SSH.png" alt="Jenkins Agent" class="center">
+      </center>
+    </body>
+</html>
+```
 
 
+<h2>Jenkins build number: $BUILD_NUMBER</h2>
 
 ---
 ### PS: [Paste to Markdown](https://euangoddard.github.io/clipboard2markdown/)
