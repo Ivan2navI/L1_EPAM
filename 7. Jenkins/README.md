@@ -321,8 +321,8 @@ sudo apt-get install openjdk-17-jdk -y
 
 java --version
 ```
-Create directory on Agent: `ubuntu@ip-192-168-11-12:~$ mkdir /home/ubuntu/jenkins`
-Come back to MAIN Server [192.168.11.11] and get private ssh key, which used for connect to Jenkins Agent [192.168.11.12]:  
+Create directory on Agent: `ubuntu@ip-192-168-11-12:~$ mkdir /home/ubuntu/jenkins`  
+Than come back to MAIN Server [192.168.11.11] and get private ssh key, which used for connect to Jenkins Agent [192.168.11.12]:  
 `/var/lib/jenkins/.ssh$ sudo cat jenkins_agent`
 
 Jenkins Node Agent is quite easy to configure, we only need to insert the Jenkins workspace directory and the agent’ ip asking to connect with it by using the credentials:
