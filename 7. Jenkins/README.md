@@ -1,4 +1,7 @@
 # 7. Jenkins
+<p align="center">
+  <img src="https://github.com/Ivan2navI/L1_EPAM/blob/main/7.%20Jenkins/.info/0.Jenkins.png">
+</p>
 
 ## 1. [How to Install OpenJDK 18 on Ubuntu 22.04 LTS](https://www.linuxcapable.com/how-to-install-openjdk-18-on-ubuntu-22-04-lts/)
 
@@ -334,17 +337,19 @@ Jenkins Node Agent is quite easy to configure, we only need to insert the Jenkin
   <img src=".info/6.Jenkins_Node_Agent_configure.png">
 </p>
 
-#### Create project *6. Jenkins nodes (agent)* and launch job:
-<p align="center">
-  <img src=".info/6.1.Jenkins_Node_Agent_launch_job.png">
-</p>
+#### Create project *[6.1. Jenkins nodes (agent)]* and launch job:
 
-#### Create project *6v2. Jenkins nodes (agent) and GitHub* launch job:
-<p align="center">
-  <img src=".info/6.1.Jenkins_Node_Agent_launch_job.png">
-</p>
 
-#### Create project *6v3. Jenkins nodes (agent) and GitHub* GitHook
+#### Create project *[6v2. Jenkins nodes (agent) GitHub HOOK]* 
+For this job your Jenkins Server must has a real IP address or DNS name.
+And add on GitHub `http://[Jenkins Real IP/DNS name]/github-webhook/` + `application/json`
+<p align="center">
+  <img src=".info/6.2.Jenkins_nodes_(agent)_GitHub_HOOK.png">
+</p>
+Result:
+<p align="center">
+  <img src=".info/6.2.Jenkins_nodes_(agent)_GitHub_HOOK2.png">
+</p>
 
 P.S.: [Another way to connect Master with Slave is using JNLP(JAVA NETWORK LAUNCH PROTOCOL) protocol which makes allow the communication between two nodes.](https://techannotation.wordpress.com/2021/06/29/scale-up-jenkins-with-slave-nodes/)
 
