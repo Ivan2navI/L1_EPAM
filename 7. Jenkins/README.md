@@ -401,7 +401,7 @@ java -jar jenkins-cli.jar -s http://192.168.11.11:8080 get-job Jobs_For_CLI > My
 java -jar jenkins-cli.jar -s http://192.168.11.11:8080 create-job Jobs_from_VM_CLI < MyJOB_CLI.xml
 ```
 <p align="center">
-  <img src=".info/7.2.Get_and_Create jobs.png
+  <img src=".info/7.2.Get_and_Create jobs.png">
 </p>
 
 
@@ -431,7 +431,7 @@ pipeline {
 		}
 ```
 <p align="center">
-  <img src=".info/8.Pipeline.png
+  <img src=".info/8.Pipeline.png">
 </p>
 
 
