@@ -310,6 +310,7 @@ Then add **[Poll SCM Trigger]** with the such **[Schedule]**:`H/2 * * * *`, afte
 <p align="center">
   <img src=".info/Jenkins_Node_Agent.png">
 </p>
+
 Use SSH for connecting to Jenkins Agent [192.168.11.12] and check java verion there:
 ```console
 ubuntu@ip-192-168-11-12:~$ java --version
@@ -324,7 +325,7 @@ sudo apt-get install openjdk-17-jdk -y
 
 java --version
 ```
-Create directory on Agent: `ubuntu@ip-192-168-11-12:~$ mkdir /home/ubuntu/jenkins`  
+Create a directory on Agent: `ubuntu@ip-192-168-11-12:~$ mkdir /home/ubuntu/jenkins`  
 Than come back to MAIN Server [192.168.11.11] and get private ssh key, which used for connect to Jenkins Agent [192.168.11.12]:  
 `/var/lib/jenkins/.ssh$ sudo cat jenkins_agent`
 
@@ -333,22 +334,100 @@ Jenkins Node Agent is quite easy to configure, we only need to insert the Jenkin
   <img src=".info/6.Jenkins_Node_Agent_configure.png">
 </p>
 
-Create project *6. Jenkins nodes (agent)* and launch job:
+#### Create project *6. Jenkins nodes (agent)* and launch job:
 <p align="center">
   <img src=".info/6.1.Jenkins_Node_Agent_launch_job.png">
 </p>
 
-Create project *6.1. Jenkins nodes (agent) and GitHub* and launch job:
+#### Create project *6v2. Jenkins nodes (agent) and GitHub* launch job:
 <p align="center">
   <img src=".info/6.1.Jenkins_Node_Agent_launch_job.png">
 </p>
 
-
+#### Create project *6v3. Jenkins nodes (agent) and GitHub* GitHook
 
 P.S.: [Another way to connect Master with Slave is using JNLP(JAVA NETWORK LAUNCH PROTOCOL) protocol which makes allow the communication between two nodes.](https://techannotation.wordpress.com/2021/06/29/scale-up-jenkins-with-slave-nodes/)
 
+## 7. CLI (command-line interface tool)
+To get started, download jenkins-cli.jar, and run it as follows:
+
+```console
+ubuntu@ubuntu-VirtualBox:~$ wget http://192.168.11.11:8080/jnlpJars/jenkins-cli.jar
+# --2022-12-12 01:30:28--  http://192.168.11.11:8080/jnlpJars/jenkins-cli.jar
+# Connecting to 192.168.11.11:8080... connected.
+# HTTP request sent, awaiting response... 200 OK
+# Length: 3438037 (3,3M) [application/java-archive]
+# Saving to: ‘jenkins-cli.jar’
+
+# jenkins-cli.jar         100%[==============================>]   3,28M  --.-KB/s    in 0,03s
+
+# 2022-12-12 01:30:28 (112 MB/s) - ‘jenkins-cli.jar’ saved [3438037/3438037]
+
+ubuntu@ubuntu-VirtualBox:~$ java -jar jenkins-cli.jar -auth username:password -s http://192.168.11.11:8080 who-am-i
+```
+Create a new user: `CLI_Test_User` and check CLI connection:
+```console
+ubuntu@ubuntu-VirtualBox:~$ java -jar jenkins-cli.jar -auth CLI_Test_User:11fa6c8a570b2b719fc3b09b463423b06d -s http://192.168.11.11:8080 who-am-i
+# Authenticated as: CLI_Test_User
+# Authorities:
+  # authenticated
+
+ubuntu@ubuntu-VirtualBox:~$ java -jar jenkins-cli.jar -auth CLI_Test_User:11fa6c8a570b2b719fc3b09b463423b06d -s http://192.168.11.11:8080 who-am-i
+# Authenticated as: CLI_Test_User
+# Authorities:
+  # authenticated
+```
+Then use it for login to Jenkins and create a **TOKEN**:
+```console
+ubuntu@ubuntu-VirtualBox:~$ export JENKINS_USER_ID=CLI_Test_User
+ubuntu@ubuntu-VirtualBox:~$ export JENKINS_API_TOKEN=11fa6c8a570b2b719fc3b09b463423b06d
+ubuntu@ubuntu-VirtualBox:~$ env | grep JENKINS
+# JENKINS_API_TOKEN=11fa6c8a570b2b719fc3b09b463423b06d
+# JENKINS_USER_ID=CLI_Test_User
+
+ubuntu@ubuntu-VirtualBox:~$ java -jar jenkins-cli.jar -s http://192.168.11.11:8080 who-am-i                      
+# Authenticated as: CLI_Test_User
+# Authorities:
+  # authenticated
+```
+<p align="center">
+  <img src=".info/7.1.Create_CLI_user.png">
+</p>
+
+Get and Create jobs from CLI:
+```console
+java -jar jenkins-cli.jar -s http://192.168.11.11:8080 get-job Jobs_For_CLI > MyJOB.xml
+
+java -jar jenkins-cli.jar -s http://192.168.11.11:8080 create-job Jobs_from_VM_CLI < MyJOB_CLI.xml
+```
+<p align="center">
+  <img src=".info/7.2.Get_and_Create jobs.png
+</p>
 
 
+8. Pipeline
+```console
+pipeline {
+		agent any
+			stages {
+				stage('Build') {
+					steps {
+						echo 'Building..'
+					}
+				}
+				stage('Test') {
+					steps {
+						echo 'Testing..'
+					}
+				}
+				stage('Deploy') {
+					steps {
+						echo 'Deploying....'
+					}
+				}
+			}
+		}
+```
 
 
 
