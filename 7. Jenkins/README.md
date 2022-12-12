@@ -338,10 +338,12 @@ Jenkins Node Agent is quite easy to configure, we only need to insert the Jenkin
 </p>
 
 #### Create project *[6.1. Jenkins nodes (agent)]* and launch job:
-
+<p align="center">
+  <img src=".info/6.1.Jenkins_Node_Agent_launch_job.png">
+</p>
 
 #### Create project *[6v2. Jenkins nodes (agent) GitHub HOOK]* 
-For this job your Jenkins Server must has a real IP address or DNS name.
+For this job your Jenkins Server must has a real IP address or DNS name.  
 And add on GitHub `http://[Jenkins Real IP/DNS name]/github-webhook/` + `application/json`
 <p align="center">
   <img src=".info/6.2.Jenkins_nodes_(agent)_GitHub_HOOK.png">
