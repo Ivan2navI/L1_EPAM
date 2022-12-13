@@ -35,8 +35,8 @@ resource "aws_security_group" "Security_Group_4Explicit" {
 
   ingress {
     description      = "ingress Security_Group_4Explicit"
-    from_port        = ["443", "80", "22"]
-    to_port          = ["443", "80", "22"]
+    from_port        = 443, 80, 22
+    to_port          = 443, 80, 22
     protocol         = "tcp"
     cidr_blocks      = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]   
