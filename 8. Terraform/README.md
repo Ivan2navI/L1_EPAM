@@ -185,9 +185,14 @@ In this task was created two EC2 instances ["Web Server (4Explicit)", "Data Base
 &  Security Group ["Security_Group_4Explicit"].  
 In addition, the following dependency has been added - "Database Server (4 Explicit)" must be created before "Web Server (4Explicit)".  
 Source code [link](https://github.com/Ivan2navI/L1_EPAM/blob/main/8.%20Terraform/home_task/3.%20Explicit%20dependencies%20example/Explicit%20dependencies%20example.tf)  
-**To complete the task - execute:** `terraform destroy`.
 <p align="center">
   <img src="./.info/2.3.Explicit_dependencies_examplepng.png">
+</p>
+
+**To complete the task - execute:** `terraform destroy`.  
+The destruction order will be as follows:
+<p align="center">
+  <img src="./.info/2.3.Explicit_dependencies_examplepng_2.png">
 </p>
 
 https://spacelift.io/blog/how-to-destroy-terraform-resources
