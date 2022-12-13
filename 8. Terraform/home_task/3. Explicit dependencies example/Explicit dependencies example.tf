@@ -16,6 +16,8 @@ resource "aws_instance" "Web_Server_for_Explicit" {
     ami           = "ami-0f15e0a4c8d3ee5fe"
     instance_type = "t2.micro"                   
 
+    vpc_security_group_ids = [ "aws_security_group.Security_Group_4Explicit.id" ]
+
     tags = {
         Name    = "Web Server (4Explicit)"
         Owner   = "DevOps Student"
@@ -42,14 +44,6 @@ resource "aws_security_group" "Security_Group_4Explicit" {
     ipv6_cidr_blocks = ["::/0"]   
     #cidr_blocks      = [aws_vpc.main.cidr_block]
     #ipv6_cidr_blocks = [aws_vpc.main.ipv6_cidr_block]
-  }
-
-  egress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
-    ipv6_cidr_blocks = ["::/0"]
   }
 
   ingress {
