@@ -80,7 +80,7 @@ provider "aws" {
 # Virtual server type (instance type)
 # t2.micro
 
-resourse "aws_instance" "1.Fisrt_Step_create_Amazone_Linux" {
+resource "aws_instance" "Fisrt_Step_create_Amazone_Linux" {
     ami           = "ami-0f15e0a4c8d3ee5fe"
     instance_type = "t2.micro"
 
@@ -112,7 +112,7 @@ Add one more EC2 & check results:
 # Virtual server type (instance type)
 # t2.micro
 
-resourse "aws_instance" "1.Fisrt_Step_create_Ubuntu_22.04" {
+resource "aws_instance" "Fisrt_Step_create_Ubuntu_22.04" {
     ami           = "ami-0f15e0a4c8d3ee5fe"
     instance_type = "t2.micro"
 
@@ -124,7 +124,7 @@ resourse "aws_instance" "1.Fisrt_Step_create_Ubuntu_22.04" {
 }
 ```
 
-Now delete one of instances: `terraform destroy --target aws_instance.1.Fisrt_Step_create_Amazone_Linux`  
+Now delete one of instances: `terraform destroy --target aws_instance.Fisrt_Step_create_Amazone_Linux`  
 or cut/comment code one of them from `.tf` file.  
 
 Delete all instances: `terraform destroy`  
@@ -143,7 +143,7 @@ provider "aws" {
 # Virtual server type (instance type)
 # t2.micro
 
-resourse "aws_instance" "1.Fisrt_Step_create_Amazone_Linux" {
+resource "aws_instance" "Fisrt_Step_create_Amazone_Linux" {
     count         = 2                                           # to add 2 (or more) identical EC2's                      
     ami           = "ami-0f15e0a4c8d3ee5fe"
     instance_type = "t2.micro"

@@ -19,7 +19,7 @@ provider "aws" {
 # Virtual server type (instance type)
 # t2.micro
 
-resourse "aws_instance" "1.Fisrt_Step_create_Amazone_Linux" {
+resource "aws_instance" "Fisrt_Step_create_Amazone_Linux" {
     ami           = "ami-0f15e0a4c8d3ee5fe"
     instance_type = "t2.micro"
 
@@ -37,7 +37,7 @@ resourse "aws_instance" "1.Fisrt_Step_create_Amazone_Linux" {
 # Virtual server type (instance type)
 # t2.micro
 
-resourse "aws_instance" "1.Fisrt_Step_create_Ubuntu_22.04" {
+resource "aws_instance" "Fisrt_Step_create_Ubuntu_22.04" {
     ami           = "ami-0f15e0a4c8d3ee5fe"
     instance_type = "t2.micro"
 
