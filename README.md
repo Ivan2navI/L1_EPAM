@@ -10,7 +10,7 @@ _3. [Databases Task](https://github.com/Ivan2navI/L1_EPAM/tree/main/3.%20Databas
 
 _4. [Linux Networking](https://github.com/Ivan2navI/L1_EPAM/tree/main/4.%20Linux%20Networking)_
 
-_5. Azure Cloud_
+_5. [Azure Cloud](https://github.com/Ivan2navI/L1_EPAM/tree/main/5.%20Azure%20Cloud)_
 
 _6. [AWS](https://github.com/Ivan2navI/L1_EPAM/tree/main/6.%20AWS)_
 
