@@ -14,7 +14,7 @@ _5. Azure Cloud_
 
 _6. [AWS](https://github.com/Ivan2navI/L1_EPAM/tree/main/6.%20AWS)_
 
-_7. Jenkins_
+_7. [Jenkins](https://github.com/Ivan2navI/L1_EPAM/tree/main/7.%20Jenkins)_
 
 _8. Terraform_
 
