@@ -99,10 +99,16 @@ resource "aws_instance" "Fisrt_Step_create_Amazone_Linux" {
 ```
 
 Run in this folder [Winows Command Prompt] with command: `terraform init`.  
-Then wait for dowloading (AWS) provider plugins.  
+Then wait for dowloading (AWS) provider plugins (~400Mb).  
+<p align="center">
+  <img src="./.info/2.1.terraform_init.png">
+</p>
 
 Next, command: `terraform plan`.  
 If configuration of EC2 instances correct, enter: `terraform apply`  
+<p align="center">
+  <img src="./.info/2.1.terraform_init2.png">
+</p>
 
 Add one more EC2 & check results:  
 ```console
@@ -112,7 +118,7 @@ Add one more EC2 & check results:
 # Virtual server type (instance type)
 # t2.micro
 
-resource "aws_instance" "Fisrt_Step_create_Ubuntu_22.04" {
+resource "aws_instance" "Fisrt_Step_create_Ubuntu_2204" {
     ami           = "ami-0f15e0a4c8d3ee5fe"
     instance_type = "t2.micro"
 
@@ -123,6 +129,9 @@ resource "aws_instance" "Fisrt_Step_create_Ubuntu_22.04" {
     }
 }
 ```
+<p align="center">
+  <img src="./.info/2.1.terraform_init3.png">
+</p>
 
 Now delete one of instances: `terraform destroy --target aws_instance.Fisrt_Step_create_Amazone_Linux`  
 or cut/comment code one of them from `.tf` file.  

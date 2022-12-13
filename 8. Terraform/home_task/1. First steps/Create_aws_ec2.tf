@@ -30,14 +30,14 @@ resource "aws_instance" "Fisrt_Step_create_Amazone_Linux" {
     }
 }
 
-/* 
+
 # Canonical, Ubuntu, 22.04 LTS, amd64 jammy image build on 2022-12-01: 
 # ami-03b755af568109dc3
 # -------------------------------------------------------------
 # Virtual server type (instance type)
 # t2.micro
 
-resource "aws_instance" "Fisrt_Step_create_Ubuntu_22.04" {
+resource "aws_instance" "Fisrt_Step_create_Ubuntu_2204" {
     ami           = "ami-0f15e0a4c8d3ee5fe"
     instance_type = "t2.micro"
 
@@ -47,4 +47,3 @@ resource "aws_instance" "Fisrt_Step_create_Ubuntu_22.04" {
         Project = "Terraform (L1 EPAM)"
     }
 }
-*/
