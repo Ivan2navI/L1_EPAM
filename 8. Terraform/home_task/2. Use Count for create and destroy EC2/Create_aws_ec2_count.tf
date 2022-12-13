@@ -11,7 +11,7 @@ provider "aws" {
 # t2.micro
 
 resource "aws_instance" "Count_Amazone_Linux" {
-    count         = 2                           # to add 2 (or more) identical EC2's 
+    count         = 2                          # to add 2 (or more) identical EC2's 
     ami           = "ami-0f15e0a4c8d3ee5fe"
     instance_type = "t2.micro"                   
 
