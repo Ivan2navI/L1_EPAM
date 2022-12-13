@@ -158,14 +158,14 @@ provider "aws" {
 # Virtual server type (instance type)
 # t2.micro
 
-resource "aws_instance" "Fisrt_Step_create_Amazone_Linux" {
-    count         = 2                                           # to add 2 (or more) identical EC2's                      
+resource "aws_instance" "Count_Amazone_Linux" {
+    count         = 2                           # to add 2 (or more) identical EC2's 
     ami           = "ami-0f15e0a4c8d3ee5fe"
-    instance_type = "t2.micro"
+    instance_type = "t2.micro"                   
 
     tags = {
-        Name = "Amazon Linux"
-        Owner = "DevOps Student"
+        Name    = "Amazon Linux (Count)"
+        Owner   = "DevOps Student"
         Project = "Terraform (L1 EPAM)"
     }
 }
