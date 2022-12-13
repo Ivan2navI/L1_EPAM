@@ -34,9 +34,9 @@ resource "aws_security_group" "Security_Group_4Explicit" {
   #vpc_id      = aws_vpc.main.id
 
   ingress {
-    description      = "ingress"
-    from_port        = 443
-    to_port          = 443
+    description      = "ingress Security_Group_4Explicit"
+    from_port        = ["443", "80", "22"]
+    to_port          = ["443", "80", "22"]
     protocol         = "tcp"
     cidr_blocks      = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]   
