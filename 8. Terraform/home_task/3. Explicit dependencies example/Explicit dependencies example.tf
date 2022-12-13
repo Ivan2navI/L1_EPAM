@@ -16,11 +16,9 @@ resource "aws_instance" "Web_Server_for_Explicit" {
     ami           = "ami-0f15e0a4c8d3ee5fe"
     instance_type = "t2.micro"                   
 
-    vpc_security_group_ids = [ "aws_security_group.Security_Group_4Explicit.id" ]           #1st dependency from aws_security_group
+    vpc_security_group_ids = [aws_security_group.Security_Group_4Explicit.id]           # 1st dependency from aws_security_group
 
-    depends_on = [
-      aws_instance.Data_Base_for_Explicit                                                   # Add 2nd dependency => Creation DB before Web Server                                                
-    ]
+    depends_on = [aws_instance.Data_Base_for_Explicit]                                  # Add 2nd dependency => Creation DB before Web Server                                                
 
     tags = {
         Name    = "Web Server (4Explicit)"
@@ -34,7 +32,7 @@ resource "aws_instance" "Data_Base_for_Explicit" {
     ami           = "ami-0f15e0a4c8d3ee5fe"
     instance_type = "t2.micro"                   
 
-    vpc_security_group_ids = [ "aws_security_group.Security_Group_4Explicit.id" ]           #1st dependency from aws_security_group
+    vpc_security_group_ids = [aws_security_group.Security_Group_4Explicit.id]           # 1st dependency from aws_security_group
 
     tags = {
         Name    = "Data Base Server (4Explicit)"
