@@ -176,7 +176,9 @@ If configuration of EC2 instances correct, enter: `terraform apply`
 If you want delete one of instances, you can change `count=1`,  
 if change `count=0` - that delete all instances.  
 But, you can also use: `terraform destroy`.
-
+<p align="center">
+  <img src="./.info/2.2.Use_Count.png">
+</p>
 
 https://spacelift.io/blog/how-to-destroy-terraform-resources
 Step 3 – Destroy Protected Resources
