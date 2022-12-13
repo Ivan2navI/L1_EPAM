@@ -99,7 +99,7 @@ resource "aws_instance" "Fisrt_Step_create_Amazone_Linux" {
 ```
 
 Run in this folder [Winows Command Prompt] with command: `terraform init`.  
-Then wait for dowloading (AWS) provider plugins (~400Mb).  
+Then wait for dowloading (AWS) provider plugins (~ 325Mb).  
 <p align="center">
   <img src="./.info/2.1.terraform_init.png">
 </p>
@@ -179,6 +179,10 @@ But, you can also use: `terraform destroy`.
 <p align="center">
   <img src="./.info/2.2.Use_Count.png">
 </p>
+
+### 2.3. Explicit dependencies example
+
+
 
 https://spacelift.io/blog/how-to-destroy-terraform-resources
 Step 3 – Destroy Protected Resources
