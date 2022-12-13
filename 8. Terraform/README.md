@@ -1,7 +1,9 @@
 # 8. Terraform
 
-# 1. AWS Credentials Setup &  Installation on Linux/Windows
-
+# 1. AWS Credentials Setup & Installation on Linux/Windows
+<p align="center">
+  <img src="./.info/1.1.AWS_Credentials_Setup.png">
+</p>
 
 
 ```console
