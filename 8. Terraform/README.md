@@ -41,3 +41,8 @@ First option => Download archive, unpack `teterraform.exe` to `C:\Windows\System
 <p align="center">
   <img src="./.info/1.2.Setup_Windows_v1.png">
 </p>
+Second option => Download archive, unpack `teterraform.exe` for example `C:\Terraform`.  
+Use `Win+R` and `sysdm.cpl` to add new eviroment variable:
+<p align="center">
+  <img src="./.info/1.2.Setup_Windows_v2.png">
+</p>
