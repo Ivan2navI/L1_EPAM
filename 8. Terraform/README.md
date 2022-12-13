@@ -195,6 +195,8 @@ The destruction order will be as follows:
   <img src="./.info/2.3.Explicit_dependencies_examplepng_2.png">
 </p>
 
-https://spacelift.io/blog/how-to-destroy-terraform-resources
-Step 3 – Destroy Protected Resources
-Step 4 – Destroy All Except a Few
+### 2.4. Variables
+
+# https://spacelift.io/blog/how-to-destroy-terraform-resources  
+# Step 3 – Destroy Protected Resources  
+# Step 4 – Destroy All Except a Few  
