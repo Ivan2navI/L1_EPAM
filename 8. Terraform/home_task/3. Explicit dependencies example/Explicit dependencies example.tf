@@ -1,5 +1,6 @@
 # 2.3. Explicit dependencies example
 
+# Europe (Paris): eu-west-3
 # Select cloud provider: AWS
 provider "aws" {
     region = "eu-west-3"
@@ -21,3 +22,4 @@ resource "aws_instance" "Web_Server_for_Explicit" {
         Project = "Explicit dependencies example (L1 EPAM)"
     }
 }
+
