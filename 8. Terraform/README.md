@@ -37,7 +37,7 @@ terraform --version
 #   on linux_amd64
 ```
 There are two installation options for Windows:
-
+First option => Download archive, unpack `teterraform.exe` to `C:\Windows\System32` and check `C:\Windows\System32` in Command Prompt.
 <p align="center">
   <img src="./.info/1.2.Setup_Windows_v1.png">
 </p>
