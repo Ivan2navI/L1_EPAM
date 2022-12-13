@@ -29,7 +29,7 @@ $env:AWS_DEFAULT_REGION="eu-central-1"
 ## 1.2. Installing on Linux/Windows
 Use this [link](https://developer.hashicorp.com/terraform/downloads) to select your actual OS.  
 
-But in my case for Linux (Ubuntu), [this installation option worked](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli).  
+In my case for Linux (Ubuntu), [this installation option worked](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli).  
 Check results:
 ```console
 terraform --version
