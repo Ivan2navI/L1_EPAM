@@ -182,8 +182,12 @@ But, you can also use: `terraform destroy`.
 
 ### 2.3. Explicit dependencies example
 In this task was created two EC2 instances ["Web Server (4Explicit)", "Data Base Server (4Explicit)"]  
-&  Security Group []
+&  Security Group ["Security_Group_4Explicit"].  
+In addition, the following dependency has been added - "Database Server (4 Explicit)" must be created before "Web Server (4Explicit)".
 
+<p align="center">
+  <img src="./.info/2.3.Explicit_dependencies_examplepng.png">
+</p>
 
 https://spacelift.io/blog/how-to-destroy-terraform-resources
 Step 3 – Destroy Protected Resources
