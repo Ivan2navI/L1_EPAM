@@ -135,8 +135,14 @@ resource "aws_instance" "Fisrt_Step_create_Ubuntu_2204" {
 
 Now delete one of instances: `terraform destroy --target aws_instance.Fisrt_Step_create_Amazone_Linux`  
 or cut/comment code one of them from `.tf` file.  
+<p align="center">
+  <img src="./.info/2.1.1.terraform_destroy.png">
+</p>
 
 Delete all instances: `terraform destroy`  
+<p align="center">
+  <img src="./.info/2.1.2.terraform_destroy_all.png">
+</p>
 
 ### 2.2. Use Count for create and destroy EC2.
 Add paramentr `count = 2` to add 2 (or more) identical EC2's:
