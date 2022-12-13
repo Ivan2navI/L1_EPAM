@@ -24,13 +24,13 @@ resourse "aws_instance" "1.Fisrt_Step_create_Amazone_Linux" {
     instance_type = "t2.micro"
 
     tags = {
-        Name = "Amazon Linux"
-        Owner = "DevOps Student"
+        Name    = "Amazon Linux"
+        Owner   = "DevOps Student"
         Project = "Terraform (L1 EPAM)"
     }
 }
 
-
+/* 
 # Canonical, Ubuntu, 22.04 LTS, amd64 jammy image build on 2022-12-01: 
 # ami-03b755af568109dc3
 # -------------------------------------------------------------
@@ -42,8 +42,9 @@ resourse "aws_instance" "1.Fisrt_Step_create_Ubuntu_22.04" {
     instance_type = "t2.micro"
 
     tags = {
-        Name = "Ubuntu 22.04 LTS"
-        Owner = "DevOps Student"
+        Name    = "Ubuntu 22.04 LTS"
+        Owner   = "DevOps Student"
         Project = "Terraform (L1 EPAM)"
     }
 }
+*/
