@@ -23,3 +23,36 @@ resource "aws_instance" "Web_Server_for_Explicit" {
     }
 }
 
+# Security Group
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group
+
+#Basic Usage
+
+resource "aws_security_group" "Security_Group_4Explicit" {
+  name        = "Security_Group_4Explicit"
+  description = "Allow TLS inbound traffic"
+  #vpc_id      = aws_vpc.main.id
+
+  ingress {
+    description      = "ingress"
+    from_port        = 443
+    to_port          = 443
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]   
+    #cidr_blocks      = [aws_vpc.main.cidr_block]
+    #ipv6_cidr_blocks = [aws_vpc.main.ipv6_cidr_block]
+  }
+
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+  }
+
+  tags = {
+    Name = "Security_Group_4Explicit"
+  }
+}
