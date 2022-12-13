@@ -181,7 +181,8 @@ But, you can also use: `terraform destroy`.
 </p>
 
 ### 2.3. Explicit dependencies example
-
+In this task was created two EC2 instances ["Web Server (4Explicit)", "Data Base Server (4Explicit)"]  
+&  Security Group []
 
 
 https://spacelift.io/blog/how-to-destroy-terraform-resources
