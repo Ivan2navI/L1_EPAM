@@ -16,7 +16,7 @@ resource "aws_instance" "Web_Server_for_Explicit" {
     ami           = "ami-0f15e0a4c8d3ee5fe"
     instance_type = "t2.micro"                   
 
-    vpc_security_group_ids = [ "aws_security_group.Security_Group_4Explicit.id" ]
+    vpc_security_group_ids = [ "aws_security_group.Security_Group_4Explicit.id" ]           #1st dependency from aws_security_group
 
     tags = {
         Name    = "Web Server (4Explicit)"
@@ -25,10 +25,22 @@ resource "aws_instance" "Web_Server_for_Explicit" {
     }
 }
 
-# Security Group
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group
+resource "aws_instance" "Data_Base_for_Explicit" {
+    ami           = "ami-0f15e0a4c8d3ee5fe"
+    instance_type = "t2.micro"                   
 
-#Basic Usage
+    vpc_security_group_ids = [ "aws_security_group.Security_Group_4Explicit.id" ]           #1st dependency from aws_security_group
+
+    tags = {
+        Name    = "Data Base Server (4Explicit)"
+        Owner   = "DevOps Student"
+        Project = "Explicit dependencies example (L1 EPAM)"
+    }
+}
+
+# Security Group
+# Basic Usage
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group
 
 resource "aws_security_group" "Security_Group_4Explicit" {
   name        = "Security_Group_4Explicit"
