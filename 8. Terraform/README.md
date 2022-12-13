@@ -29,19 +29,15 @@ $env:AWS_DEFAULT_REGION="eu-central-1"
 ## 1.2. Installing on Linux/Windows
 Use this [link](https://developer.hashicorp.com/terraform/downloads) to select your actual OS.  
 
-In my case for Linux (Ubuntu), [this installation option worked](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli).  
+In my case for **Linux (Ubuntu)**, [this installation option worked](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli).  
 Check results:
 ```console
 terraform --version
 #   Terraform v1.3.6
 #   on linux_amd64
 ```
+There are two installation options for Windows:
 
-
-```console
-Windows / Linux
-https://developer.hashicorp.com/terraform/downloads
-wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
-echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
-sudo apt update && sudo apt install terraform
-```
+<p align="center">
+  <img src="./.info/1.2.Setup_Windows_v1.png">
+</p>
