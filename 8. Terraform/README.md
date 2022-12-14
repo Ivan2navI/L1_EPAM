@@ -13,7 +13,6 @@ Using environment variables to contain your credentials prevents you from accide
 
 To authenticate to Amazon Web Services, the SDK first checks for credentials in your environment variables. The SDK uses the getenv() function to look for the AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, and AWS_SESSION_TOKEN environment variables. These credentials are referred to as environment credentials.
 
-
 ```console
 # Set credentials on:
 # => Linux
@@ -56,7 +55,7 @@ Use `Win+R` and `sysdm.cpl` to add new eviroment variable:
   <img src="./.info/1.2.Setup_Windows_v2.png">
 </p>
 
-## 2. Terraform. First steps.
+## 2. [Terraform. First steps.](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/aws-build?in=terraform%2Faws-get-started)
 For testing I will use region Europe (Paris): `eu-west-3`  
 
 In Windows Command Prompt set credentials:
@@ -201,6 +200,8 @@ Source code [(link)](https://github.com/Ivan2navI/L1_EPAM/tree/main/8.%20Terrafo
 <p align="center">
   <img src="./.info/2.4.Variables.png">
 </p>
+
+### 2.5. Outputs
 
 `https://spacelift.io/blog/how-to-destroy-terraform-resources  
 Step 3 – Destroy Protected Resources  
