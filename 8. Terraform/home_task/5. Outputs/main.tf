@@ -16,29 +16,29 @@ provider "aws" {
 # Virtual server type (instance type)
 # t2.micro
 # --------------------------------------------------------------------
-resource "aws_instance" "Web_Server_for_Variable_Task" {
+resource "aws_instance" "Web_Server" {
     ami           = var.ami_amazon_linux                                          # VAR Amazon Machine Images: "Amazon Linux" 
     instance_type = var.instance_type                                             # VAR instance_type: "t2.micro"
 
-    vpc_security_group_ids = [aws_security_group.Security_Group_4Variable_Task.id]           
+    vpc_security_group_ids = [aws_security_group.Security_Group.id]           
 
-    depends_on = [aws_instance.Data_Base_for_Variable_Task]                                 
+    depends_on = [aws_instance.Data_Base]                                 
 
     tags = merge (var.commom_tags, {Name = var.ec2_name1}, {Region  = var.region})                        # MERGE 2 VARIABLES: var.commom_tags(MAP TAGS) & var.region
 }
 
-resource "aws_instance" "Data_Base_for_Variable_Task" {
+resource "aws_instance" "Data_Base" {
     ami           = var.ami_ubuntu                                                # VAR Amazon Machine Images: "Ubuntu, 22.04 LTS" 
     instance_type = var.instance_type                                             # VAR instance_type: "t2.micro"
 
-    vpc_security_group_ids = [aws_security_group.Security_Group_4Variable_Task.id]        
+    vpc_security_group_ids = [aws_security_group.Security_Group.id]        
 
     tags = merge (var.commom_tags, {Name = var.ec2_name2}, {Region  = var.region})                           # MERGE 2 VARIABLES: var.commom_tags(MAP TAGS) & var.region 
 }
 # --------------------------------------------------------------------
 # Security Group
-resource "aws_security_group" "Security_Group_4Variable_Task" {
-  name = "Security_Group_4Variable_Task"
+resource "aws_security_group" "Security_Group" {
+  name = "Security_Group"
 
   dynamic "ingress" {
     for_each = var.allow_ports                                                  # VAR allow_ports: [ "80", "443", "22", "8080" ]
@@ -58,5 +58,5 @@ resource "aws_security_group" "Security_Group_4Variable_Task" {
     #ipv6_cidr_blocks = ["::/0"]
   }
 
-  tags = merge (var.commom_tags, {Name = "Security_Group_4Variable_Task"})
+  tags = merge (var.commom_tags, {Name = "Security_Group"})
 }

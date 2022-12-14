@@ -26,13 +26,13 @@ variable "ami_ubuntu" {
 variable "ec2_name1" {
     description = "EC2 name for instance 1"
     type        = string
-    default     = "Web Server (4Variable_Task)"
+    default     = "Web Server (5_Outputs_Task)"
 }
 
 variable "ec2_name2" {
     description = "EC2 name for instance 2"
     type        = string
-    default     = "Data Base (4Variable_Task)"
+    default     = "Data Base (5_Outputs_Task)"
 }
 
 variable "allow_ports" {
@@ -45,8 +45,8 @@ variable "commom_tags" {
   description = "Common Tags to apply to all resources"
   type        = map
   default     = {
-    Name    = "Web Server (4Variable_Task)"
+    Name    = "Web Server (5_Outputs_Task)"
     Owner   = "DevOps Student"
-    Project = "Variable_Task (L1 EPAM)"
+    Project = "Outputs_Task (L1 EPAM)"
   }
 }

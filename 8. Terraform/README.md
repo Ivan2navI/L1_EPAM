@@ -202,6 +202,20 @@ Source code [(link)](https://github.com/Ivan2navI/L1_EPAM/tree/main/8.%20Terrafo
 </p>
 
 ### 2.5. Outputs
+In this task, you must first create an `otputs.tf` file.  
+Copy File `main.tf` and `variables.tf` from the pre-project and run the following commands:  
+```console 
+terraform init
+terraform plan
+terraform apply
+```
+Show all variants wich we can use, for creating `otputs.tf`:   
+`terraform show`
+
+Source code [(link)](https://github.com/Ivan2navI/L1_EPAM/tree/main/8.%20Terraform/home_task/5.%20Outputs).
+<p align="center">
+  <img src="./.info/2.5.Outputs.png">
+</p>
 
 `https://spacelift.io/blog/how-to-destroy-terraform-resources  
 Step 3 – Destroy Protected Resources  
