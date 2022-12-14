@@ -218,6 +218,22 @@ Source code [(link)](https://github.com/Ivan2navI/L1_EPAM/tree/main/8.%20Terrafo
 </p>
 
 ### 2.6. Modules
+You will use modules to create an example AWS environment using a Virtual Private Cloud
+(VPC) and two EC2 instances. You can create it by manually building the directory structure and files
+using the following commands to clone this GitHub repo.  
+
+Clone the GitHub repository.  
+
+$ git clone https://github.com/hashicorp/learn-terraform-modules.git
+
+Change into that directory in your terminal.  
+
+$ cd learn-terraform-modules  
+
+Check out the ec2-instances tag into a local branch.  
+
+$ git checkout tags/ec2-instances -b ec2-instances  
+
 
 `https://spacelift.io/blog/how-to-destroy-terraform-resources  
 Step 3 – Destroy Protected Resources  
