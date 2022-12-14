@@ -217,6 +217,8 @@ Source code [(link)](https://github.com/Ivan2navI/L1_EPAM/tree/main/8.%20Terrafo
   <img src="./.info/2.5.Outputs.png">
 </p>
 
+### 2.6. Modules
+
 `https://spacelift.io/blog/how-to-destroy-terraform-resources  
 Step 3 – Destroy Protected Resources  
 Step 4 – Destroy All Except a Few  `
