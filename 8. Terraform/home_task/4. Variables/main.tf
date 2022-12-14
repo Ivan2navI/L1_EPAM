@@ -58,7 +58,5 @@ resource "aws_security_group" "Security_Group_4Variable_Task" {
     #ipv6_cidr_blocks = ["::/0"]
   }
 
-  tags = {
-    Name = "Security_Group_4Variable_Task"
-  }
+  tags = merge (var.commom_tags, {Name = "Security_Group_4Variable_Task"})
 }
