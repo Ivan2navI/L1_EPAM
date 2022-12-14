@@ -1,27 +1,9 @@
 # 2.4. Variables
 
 # Europe (Paris): eu-west-3
-variable "region" {
-  description = "Pls, Enter AWS region"
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Europe (Paris): eu-west-3
 # Select cloud provider: AWS
 provider "aws" {
-    region = var.region
+    region = var.region                                                           # VAR region: "eu-west-3"
 }
 
 # Amazon Linux 2 Kernel 5.10 AMI 2.0.20221103.3 x86_64 HVM gp2: 
@@ -32,7 +14,7 @@ provider "aws" {
 
 resource "aws_instance" "Web_Server_for_Explicit" {
     ami           = "ami-0f15e0a4c8d3ee5fe"
-    instance_type = "t2.micro"                   
+    instance_type = var.instance_type                                             # VAR instance_type: "t2.micro" 
 
     vpc_security_group_ids = [aws_security_group.Security_Group_4Explicit.id]           
 
@@ -42,14 +24,14 @@ resource "aws_instance" "Web_Server_for_Explicit" {
         Name    = "Web Server (4Explicit)"
         Owner   = "DevOps Student"
         Project = "Explicit dependencies example (L1 EPAM)"
-        Region  = var.region                                                          # VAR region
+        Region  = var.region                                                      # VAR region: "eu-west-3"
     }
 }
 
 
 resource "aws_instance" "Data_Base_for_Explicit" {
     ami           = "ami-0f15e0a4c8d3ee5fe"
-    instance_type = "t2.micro"                   
+    instance_type = var.instance_type                                             # VAR instance_type: "t2.micro"
 
     vpc_security_group_ids = [aws_security_group.Security_Group_4Explicit.id]        
 
@@ -68,6 +50,9 @@ resource "aws_security_group" "Security_Group_4Explicit" {
   name        = "Security_Group_4Explicit"
   description = "Allow TLS inbound traffic"
   #vpc_id      = aws_vpc.main.id
+
+
+  
 
   ingress {
     description      = "Port 80 ingress Security_Group_4Explicit"
