@@ -210,8 +210,8 @@ terraform plan
 terraform apply
 ```
 Show all variants wich we can use, for creating `otputs.tf`:   
-`terraform show`
-
+`terraform show`  
+To create the `otputs.tf` file, data is taken from "Web_Server" and "Security_Group".  
 Source code [(link)](https://github.com/Ivan2navI/L1_EPAM/tree/main/8.%20Terraform/home_task/5.%20Outputs).
 <p align="center">
   <img src="./.info/2.5.Outputs.png">
