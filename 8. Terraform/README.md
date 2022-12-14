@@ -196,6 +196,11 @@ The destruction order will be as follows:
 </p>
 
 ### 2.4. Variables
+In this task, most of the variables have been moved to a separate file `variables.tf`.
+Source code [link](https://github.com/Ivan2navI/L1_EPAM/tree/main/8.%20Terraform/home_task/4.%20Variables)
+<p align="center">
+  <img src="./.info/2.4.Variables.png">
+</p>
 
 `https://spacelift.io/blog/how-to-destroy-terraform-resources  
 Step 3 – Destroy Protected Resources  
