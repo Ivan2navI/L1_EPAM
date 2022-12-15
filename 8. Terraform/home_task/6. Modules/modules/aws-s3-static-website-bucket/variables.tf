@@ -8,5 +8,11 @@ variable "bucket_name" {
 variable "tags" {
   description = "Tags to set on the bucket."
   type = map(string)
-  default = {}
+  default     = {
+    Name    = "EC2 & S3 bucket site (Modules_Task)"
+    Owner   = "DevOps Student"
+    Project = "Modules_Task (L1 EPAM)"
+    Terraform   = "true"
+    Environment = "dev"
+  }
 }

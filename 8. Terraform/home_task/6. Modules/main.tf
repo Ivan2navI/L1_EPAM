@@ -1,12 +1,12 @@
 # Terraform configuration
 
 provider "aws" {
-  region = "us-west-2"
+  region = var.region
 }
 
 module "vpc" {
-  source  = "terraform-aws-modules/vpc/aws"
-  version = "2.21.0"
+  source  = var.source_vpc
+  version = var.source_vpc_version
 
   name = var.vpc_name
   cidr = var.vpc_cidr
@@ -21,27 +21,24 @@ module "vpc" {
 }
 
 module "ec2_instances" {
-  source  = "terraform-aws-modules/ec2-instance/aws"
-  version = "2.12.0"
+  source  = var.source_aws
+  version = var.source_aws_version
 
-  name           = "my-ec2-cluster"
-  instance_count = 2
+  name  = var.ec2_instances_name
+  count = var.ec2_instances_count
 
   # ami                    = "ami-0c5204531f799e0c6"
   
   # Amazon Linux 2 AMI (HVM) - Kernel 5.10, SSD Volume Type
   # ami-0f15e0a4c8d3ee5fe (64-bit (x86))
-  ami                    = "ami-0f15e0a4c8d3ee5fe"
-  instance_type          = "t2.micro"
-
+  # instance_type: "t2.micro"
+  ami           = var.ami_amazon_linux
+  instance_type = var.instance_type 
 
   vpc_security_group_ids = [module.vpc.default_security_group_id]
   subnet_id              = module.vpc.public_subnets[0]
 
-  tags = {
-    Terraform   = "true"
-    Environment = "dev"
-  }
+  tags = merge (var.commom_tags, {Name = var.ec2_instances_name}, {Region  = var.region})
 }
 
 /*
