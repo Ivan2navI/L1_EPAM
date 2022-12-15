@@ -14,12 +14,13 @@ variable "vpc_cidr" {
 
 variable "vpc_azs" {
   description = "Availability zones for VPC"
-  # type        = list(string)
-  type        = string
+  type        = list(string)
   
   # default     = ["us-west-2a", "us-west-2b", "us-west-2c"]
-  # Europe (Paris)eu-west-3
-  default     = "eu-west-3"
+  # Europe (Ireland)  eu-west-1
+  # Europe (London)   eu-west-2
+  # Europe (Paris)    eu-west-3
+  default     = ["eu-west-1", "eu-west-2", "eu-west-3"]
 }
 
 variable "vpc_private_subnets" {

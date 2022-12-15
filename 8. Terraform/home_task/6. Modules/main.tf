@@ -44,6 +44,7 @@ module "ec2_instances" {
   }
 }
 
+/*
 module "website_s3_bucket" {
   source = "./modules/aws-s3-static-website-bucket"
 
@@ -54,3 +55,4 @@ module "website_s3_bucket" {
     Environment = "dev"
   }
 }
+*/
