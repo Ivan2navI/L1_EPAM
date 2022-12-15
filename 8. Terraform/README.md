@@ -237,7 +237,7 @@ My project structure looks like [this](https://github.com/Ivan2navI/L1_EPAM/tree
   <img src="./.info/2.6.Modules_1.png">
 </p>
 
-And I got the following results:
+And I got the following results after using `modules`:
 <p align="center">
   <img src="./.info/2.6.Modules_2.png">
 </p>
