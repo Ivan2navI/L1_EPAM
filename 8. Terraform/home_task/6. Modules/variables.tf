@@ -9,7 +9,7 @@ variable "region" {
   type        = string
   default     = "eu-west-3"
 }
-
+/*
 variable "source_aws" {
   description = "terraform-aws-modules/ec2-instance/aws"
   type        = string
@@ -33,7 +33,7 @@ variable "source_vpc_version" {
   type        = string
   default     = "2.21.0"  
 }
-
+*/
 variable "ec2_instances_name" {
   description = "Name of EC2 Instances"
   type        = string

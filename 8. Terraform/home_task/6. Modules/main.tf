@@ -5,8 +5,13 @@ provider "aws" {
 }
 
 module "vpc" {
-  source  = var.source_vpc
-  version = var.source_vpc_version
+ /* source  = var.source_vpc
+  version = var.source_vpc_version*/
+  
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "2.21.0"
+
+
 
   name = var.vpc_name
   cidr = var.vpc_cidr
@@ -21,12 +26,15 @@ module "vpc" {
 }
 
 module "ec2_instances" {
-  source  = var.source_aws
-  version = var.source_aws_version
+  # source  = var.source_aws
+  source  = "terraform-aws-modules/ec2-instance/aws"  
+  version = "2.12.0"
 
   name  = var.ec2_instances_name
-  count = var.ec2_instances_count
+  #count = 2
 
+  # ami                    = "ami-0c5204531f799e0c6"
+  
   # Amazon Linux 2 AMI (HVM) - Kernel 5.10, SSD Volume Type
   # ami-0f15e0a4c8d3ee5fe (64-bit (x86))
   # instance_type: "t2.micro"
