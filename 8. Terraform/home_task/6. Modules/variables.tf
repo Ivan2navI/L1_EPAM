@@ -19,8 +19,9 @@ variable "vpc_azs" {
   # default     = ["us-west-2a", "us-west-2b", "us-west-2c"]
   # Europe (Ireland)  eu-west-1
   # Europe (London)   eu-west-2
-  # Europe (Paris)    eu-west-3
-  default     = ["eu-west-1", "eu-west-2", "eu-west-3"]
+  # Europe (Paris)    eu-west-3   Subnets can currently only be created in the following availability zones: eu-west-3a, eu-west-3b, eu-west-3c.
+
+  default     = ["eu-west-3a", "eu-west-3b", "eu-west-3c"]
 }
 
 variable "vpc_private_subnets" {

@@ -1,7 +1,13 @@
 # Terraform configuration
 
 provider "aws" {
-  region = "us-west-2"
+  #region = "us-west-2"
+
+  # Europe (Ireland)  eu-west-1
+  # Europe (London)   eu-west-2
+  # Europe (Paris)    eu-west-3
+
+  region = "eu-west-3"
 }
 
 module "vpc" {
