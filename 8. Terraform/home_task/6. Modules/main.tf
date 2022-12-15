@@ -27,8 +27,6 @@ module "ec2_instances" {
   name  = var.ec2_instances_name
   count = var.ec2_instances_count
 
-  # ami                    = "ami-0c5204531f799e0c6"
-  
   # Amazon Linux 2 AMI (HVM) - Kernel 5.10, SSD Volume Type
   # ami-0f15e0a4c8d3ee5fe (64-bit (x86))
   # instance_type: "t2.micro"
