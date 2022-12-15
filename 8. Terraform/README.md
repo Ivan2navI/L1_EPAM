@@ -232,6 +232,18 @@ cd learn-terraform-modules
 git checkout tags/ec2-instances -b ec2-instances  
 ```
 
+
+My project structure looks like [this](https://github.com/Ivan2navI/L1_EPAM/tree/main/8.%20Terraform/home_task/6.%20Modules): 
+<p align="left">
+  <img src="./.info/2.6.Modules_1.png">
+</p>
+
+And I got the following results:
+<p align="center">
+  <img src="./.info/2.6.Modules_2.png">
+</p>
+
+
 `https://spacelift.io/blog/how-to-destroy-terraform-resources  
 Step 3 – Destroy Protected Resources  
 Step 4 – Destroy All Except a Few  `
