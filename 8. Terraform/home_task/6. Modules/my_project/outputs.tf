@@ -48,11 +48,6 @@ output "public_subnets_cidr_blocks" {
   value       = module.vpc.public_subnets_cidr_blocks
 }
 
-output "database_subnets_cidr_blocks" {
-  description = "List of cidr_blocks of database subnets"
-  value       = module.vpc.database_subnets_cidr_blocks
-}
-
 output "vpc_public_subnets" {
   description = "IDs of the VPC's public subnets"
   value       = module.vpc.public_subnets
