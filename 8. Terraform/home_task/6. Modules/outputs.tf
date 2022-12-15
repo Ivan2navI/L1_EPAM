@@ -1,50 +1,26 @@
-### otputs.tf
+# Output variable definitions
 
-# aws_instance.Data_Base
-output "Data_Base_ami" {
-  value = aws_instance.Data_Base.ami
+output "vpc_public_subnets" {
+  description = "IDs of the VPC's public subnets"
+  value       = module.vpc.public_subnets
 }
 
-output "Data_Base_arn" {
-  value = aws_instance.Data_Base.arn
+output "ec2_instance_public_ips" {
+  description = "Public IP addresses of EC2 instances"
+  value       = module.ec2_instances.public_ip
 }
 
-output "Data_Base_private_ip" {
-  value = aws_instance.Data_Base.private_ip
+output "website_bucket_arn" {
+  description = "ARN of the bucket"
+  value       = module.website_s3_bucket.arn
 }
 
-output "Data_Base_public_ip" {
-  value = aws_instance.Data_Base.public_ip 
+output "website_bucket_name" {
+  description = "Name (id) of the bucket"
+  value       = module.website_s3_bucket.name
 }
 
-output "Data_Base_subnet_id" {
-  value = aws_instance.Data_Base.subnet_id 
+output "website_endpoint" {
+  description = "Domain name of the bucket"
+  value       = module.website_s3_bucket.website_endpoint
 }
-
-output "Data_Base_vpc_security_group_ids" {
-  value = aws_instance.Data_Base.vpc_security_group_ids
-}
-
-output "Data_Base_tags_all" {
-  value = aws_instance.Data_Base.tags_all
-}
-
-
-# aws_security_group.Security_Group:
-
-output "Security_Group_arn" {
-  value = aws_security_group.Security_Group.arn
-}
-output "Security_Group_id" {
-  value = aws_security_group.Security_Group.id
-}
-
-output "Security_Group_vpc_id" {
-  value = aws_security_group.Security_Group.vpc_id
-}
-
-
-
-
-
-
