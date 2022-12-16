@@ -38,11 +38,53 @@ cd dockerfiles
 
 # Edit it and add the commands with nano:
 nano Dockerfile
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+FROM ubuntu:20.04
+
+ENV TZ=Europe/Kiev
+RUN apt-get -y update
+RUN DEBIAN_FRONTEND="noninteractive" \
+apt-get -y install apache2
+RUN echo 'Hi there, what is love?' > /var/www/html/index.html
+RUN echo 'It is just a song ...' >> /var/www/html/index.html
+
+CMD ["/usr/sbin/apache2ctl", "-DFOREGROUND"]
+
+EXPOSE 80
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 # Finally build it:
-docker build -t <tag> .
+# docker build -t <tag> .
+docker build -t dev_ops:v1 .
 ```
 
+
+TASK B:
+```console
+# Create directory for Dockerfile(-s) and and dive into it.
+mkdir dockerfiles
+cd dockerfiles
+
+# Edit it and add the commands with nano:
+nano Dockerfile
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+FROM centos:7
+
+RUN yum -y update
+RUN yum -y install httpd
+RUN echo 'Hi there, what is love?' > /var/www/html/index.html
+CMD ["/usr/sbin/httpd", "-DFOREGROUND"]
+
+EXPOSE 80
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+# Finally build it:
+# docker build -t <tag> .
+docker build -t dev_ops:v1 .
+```
+<p align="center">
+  <img src="./.info/1.1.AWS_Credentials_Setup.png">
+</p>
 
 
 
