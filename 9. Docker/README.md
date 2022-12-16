@@ -65,7 +65,12 @@ EXPOSE 80
 
 # Finally build it:
 # docker build -t <tag> .
-docker build -t dev_ops:v1 .
+sudo docker build -t dev_ops:v1 .
+
+sudo docker images
+
+sudo docker run -d -p 9998:80 dev_ops:v1
+
 ```
 <p align="left">
   <img src="./.info/1.2.Create directory_TASK_A.png">
@@ -74,10 +79,6 @@ docker build -t dev_ops:v1 .
 
 TASK B:
 ```console
-# Create directory for Dockerfile(-s) and and dive into it.
-mkdir dockerfiles
-cd dockerfiles
-
 # Edit it and add the commands with nano:
 nano Dockerfile
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -85,7 +86,7 @@ FROM centos:7
 
 RUN yum -y update
 RUN yum -y install httpd
-RUN echo 'Hi there, what is love?' > /var/www/html/index.html
+RUN echo 'TASK B: FROM centos:7' > /var/www/html/index.html
 CMD ["/usr/sbin/httpd", "-DFOREGROUND"]
 
 EXPOSE 80
@@ -93,10 +94,14 @@ EXPOSE 80
 
 # Finally build it:
 # docker build -t <tag> .
-docker build -t dev_ops:v2 .
+sudo docker build -t dev_ops:v2 .
+
+sudo docker images
+
+sudo docker run -d -p 9988:80 dev_ops:v2
 ```
 <p align="left">
-  <img src="./.info/1.2.Create directory_TASK_A.png">
+  <img src="./.info/1.2.Create directory_TASK_B.png">
 </p>
 
 
