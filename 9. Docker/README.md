@@ -1,7 +1,8 @@
 # 9. Docker :whale:
 
 ## 1. [Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/)
-Before you install Docker Engine for the first time on a new host machine, you need to [set up the Docker repository](https://docs.docker.com/engine/install/ubuntu/). Afterward, you can install and update Docker from the repository.
+
+### 1.1. Before you install Docker Engine for the first time on a new host machine, you need to [set up the Docker repository](https://docs.docker.com/engine/install/ubuntu/). Afterward, you can install and update Docker from the repository.
 ```console
 sudo docker run hello-world
 > Unable to find image 'hello-world:latest' locally
@@ -27,6 +28,23 @@ cat /etc/os-release
 > VERSION="22.04.1 LTS (Jammy Jellyfish)"
 > VERSION_CODENAME=jammy
 ```
+
+### 1.2. Create directory for Docker file(-s) and dive into it.
+TASK A:
+```console
+# Create directory for Dockerfile(-s) and and dive into it.
+mkdir dockerfiles
+cd dockerfiles
+
+# Edit it and add the commands with nano:
+nano Dockerfile
+
+# Finally build it:
+docker build -t <tag> .
+```
+
+
+
 
 ### :hammer: Optimizing Docker (OPTION) :hammer:
 [You can skip this step](https://devdotnet.org/post/ustanovka-docker-dlya-arm-i-64-bit-arm-armbian-linux/).  
