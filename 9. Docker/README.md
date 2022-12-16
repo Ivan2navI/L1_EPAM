@@ -104,19 +104,6 @@ sudo docker run -d -p 9988:80 dev_ops:v2
   <img src="./.info/1.2.Create directory_TASK_B.png">
 </p>
 
-
-
-
-
-
-
-
-<p align="center">
-  <img src="./.info/xxxxxxx.png">
-</p>
-
-
-
 ### :hammer: Optimizing Docker (OPTION) :hammer:
 [You can skip this step](https://devdotnet.org/post/ustanovka-docker-dlya-arm-i-64-bit-arm-armbian-linux/).  
 While running, the container can be very active in writing data to the event log, and the size of the log file will only increase. Therefore, it is necessary to limit the size and number of log files created by creating the  `/etc/docker/daemon.json`  file .  
@@ -142,6 +129,10 @@ Restart the Docker service for the new settings to take effect:
 `sudo systemctl restart docker`
 
 
+---
+<p align="center">
+  <img src="./.info/xxxxxxx.png">
+</p>
 
 
 
