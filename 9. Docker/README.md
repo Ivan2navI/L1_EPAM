@@ -71,6 +71,8 @@ sudo docker images
 
 sudo docker run -d -p 9998:80 dev_ops:v1
 
+# !
+sudo docker ps -a
 ```
 <p align="left">
   <img src="./.info/1.2.Create directory_TASK_A.png">
