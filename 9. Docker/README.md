@@ -47,7 +47,8 @@ Open/create  `nano /etc/docker/daemon.json`  file:
 Description of parameters:  
     - **"log-driver": "local"** - options for local log files  
     - **"max-size": "10m"** - the maximum size of one log file is 10 MB  
-    - **"max-file": "3"** - the maximum number of log files is 3  
+    - **"max-file": "3"** - the maximum number of log files is 3
+    
 Restart the Docker service for the new settings to take effect:  
 `sudo systemctl restart docker`
 
