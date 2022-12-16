@@ -1,4 +1,4 @@
-# 9. Docker
+# 9. Docker :whale:
 
 ## 1. [Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/)
 Before you install Docker Engine for the first time on a new host machine, you need to [set up the Docker repository](https://docs.docker.com/engine/install/ubuntu/). Afterward, you can install and update Docker from the repository.
@@ -28,11 +28,28 @@ cat /etc/os-release
 > VERSION_CODENAME=jammy
 ```
 
-
-
-
-
-
+### :hammer: Optimizing Docker (OPTION) :hammer:
+Docker [optimization option](https://devdotnet.org/post/ustanovka-docker-dlya-arm-i-64-bit-arm-armbian-linux/), but you can skip this step.  
+While running, the container can be very active in writing data to the event log, and the size of the log file will only increase. Therefore, it is necessary to limit the size and number of log files created by creating the  `/etc/docker/daemon.json`  file .  
+To publish ports outside the container, Docker creates a separate TCP or UDP proxy for each port. If there are a lot of ports, then this reduces the network exchange speed and loads the processor more. To disable userland-proxy, you need to make changes to the  `/etc/docker/daemon.json`  file .  
+  
+Open/create  `nano /etc/docker/daemon.json`  file:
+```console
+{
+    "log-driver": "local" , 
+    "log-opts": { 
+        "max-size": "10m" , 
+        "maxfile": "3"
+    } ,
+    "userland-proxy": false 
+}
+```
+Description of parameters:  
+    - **"log-driver": "local"** - options for local log files
+    - **"max-size": "10m"** - the maximum size of one log file is 10 MB
+    - **"max-file": "3"** - the maximum number of log files is 3  
+Restart the Docker service for the new settings to take effect:  
+`sudo systemctl restart docker`
 
 
 
