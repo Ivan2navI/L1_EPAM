@@ -28,6 +28,16 @@ cat /etc/os-release
 > VERSION="22.04.1 LTS (Jammy Jellyfish)"
 > VERSION_CODENAME=jammy
 ```
+If you would like to use Docker as a non-root user, you should now consider adding your user to the
+“docker” group with something like:  
+`sudo usermod -aG docker ubuntu`  
+  
+Purging All Unused or Dangling Images, Containers, Volumes, and Networks Docker provides a single command that will clean up any resources — images, containers, volumes, and
+networks — that are dangling (not associated with a container):
+`docker system prune`  
+  
+To additionally remove any stopped containers and all unused images (not just dangling images), add the -a flag to the command:  
+`docker system prune -a`  
 
 ### 1.2. Create directory for Docker file(-s) and dive into it.
 TASK A:
@@ -41,7 +51,7 @@ nano Dockerfile
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 FROM ubuntu:20.04
 
-ENV TZ=Europe/Kiev
+ENV TZ=China/Bejin
 RUN apt-get -y update
 RUN DEBIAN_FRONTEND="noninteractive" \
 apt-get -y install apache2
@@ -57,6 +67,9 @@ EXPOSE 80
 # docker build -t <tag> .
 docker build -t dev_ops:v1 .
 ```
+<p align="left">
+  <img src="./.info/1.2.Create directory_TASK_A.png">
+</p>
 
 
 TASK B:
@@ -80,10 +93,21 @@ EXPOSE 80
 
 # Finally build it:
 # docker build -t <tag> .
-docker build -t dev_ops:v1 .
+docker build -t dev_ops:v2 .
 ```
+<p align="left">
+  <img src="./.info/1.2.Create directory_TASK_A.png">
+</p>
+
+
+
+
+
+
+
+
 <p align="center">
-  <img src="./.info/1.1.AWS_Credentials_Setup.png">
+  <img src="./.info/xxxxxxx.png">
 </p>
 
 
