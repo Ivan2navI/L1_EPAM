@@ -1,7 +1,7 @@
 # 9. Docker
 
 ## 1. [Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/)
-Before you install Docker Engine for the first time on a new host machine, you need to set up the Docker repository. Afterward, you can install and update Docker from the repository.
+Before you install Docker Engine for the first time on a new host machine, you need to [set up the Docker repository](https://docs.docker.com/engine/install/ubuntu/). Afterward, you can install and update Docker from the repository.
 ```console
 sudo docker run hello-world
 Unable to find image 'hello-world:latest' locally
