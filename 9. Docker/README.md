@@ -106,12 +106,32 @@ sudo docker run -d -p 9988:80 dev_ops:v2
   <img src="./.info/1.2.Create directory_TASK_B.png">
 </p>
 
+### 1.3. Frequently used Docker commands
+```console
+$ docker ps [-a]
+$ docker stop $(docker ps -a -q)
+$ docker rm 0fd99ee0cb61
+$ docker images -a
+$ docker rmi $(docker images -a -q)
 
 docker system df
-
 docker system df -v
 
-### :hammer: Optimizing Docker (OPTION) :hammer:
+# list
+# stop all containers [you need stop before delete]
+# remove a single container
+# list
+# remove all images
+
+$ docker search tomcat
+$ docker pull tomcat
+$ docker search nginx
+$ docker pull nginx
+$ docker run -it -p 8889:8080 tomcat
+$ docker run -it -p 8888:80 nginx
+$ docker run -d -p 8890:80 nginx
+```
+### 1.4. :hammer: Optimizing Docker (OPTION) :hammer:
 :pushpin: [You can skip this step](https://devdotnet.org/post/ustanovka-docker-dlya-arm-i-64-bit-arm-armbian-linux/). :pushpin:  
 While running, the container can be very active in writing data to the event log, and the size of the log file will only increase. Therefore, it is necessary to limit the size and number of log files created by creating the  `/etc/docker/daemon.json`  file .  
 To publish ports outside the container, Docker creates a separate TCP or UDP proxy for each port. If there are a lot of ports, then this reduces the network exchange speed and loads the processor more. To disable userland-proxy, you need to make changes to the  `/etc/docker/daemon.json`  file .  
