@@ -159,8 +159,8 @@ Restart the Docker service for the new settings to take effect:
 
 The goal of this exercise is to create a Docker image which will run a Flask app.  
 We'll do this by first pulling together the components for a random cat picture generator built with Python Flask, then dockerizing it by writing a Dockerfile.  
-Finally, we'll build the image, and then run it.
-Create a Python Flask app that displays random cat pix
+Finally, we'll build the image, and then run it.  
+Create a Python Flask app that displays random cat pix  
 ➢ Write a Dockerfile  
 ➢ Build the image  
 ➢ Run your image  
