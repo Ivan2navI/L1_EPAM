@@ -130,7 +130,7 @@ docker pull nginx                   |
 docker run -it -p 8889:8080 tomcat  |
 docker run -it -p 8888:80 nginx     |
 docker run -d -p 8890:80 nginx      |
------------------------------------ | -------------
+----------------------------------- | ---------------------------------------------------
 docker run                          | Runs a command in a new container.
 docker start                        | Starts one or more stopped containers
 docker stop                         | Stops one or more running containers
