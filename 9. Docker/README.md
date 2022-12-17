@@ -108,29 +108,32 @@ sudo docker run -d -p 9988:80 dev_ops:v2
 
 ### 1.3. Frequently used Docker commands
 ```console
-$ docker ps [-a]
-$ docker stop $(docker ps -a -q)
-$ docker rm 0fd99ee0cb61
-$ docker images -a
-$ docker rmi $(docker images -a -q)
+# To delete all containers including its volumes use,
 
-docker system df
-docker system df -v
+docker rm -vf $(docker ps -aq)
 
-# list
-# stop all containers [you need stop before delete]
-# remove a single container
-# list
-# remove all images
+# To delete all the images,
 
-$ docker search tomcat
-$ docker pull tomcat
-$ docker search nginx
-$ docker pull nginx
-$ docker run -it -p 8889:8080 tomcat
-$ docker run -it -p 8888:80 nginx
-$ docker run -d -p 8890:80 nginx
+docker rmi -f $(docker images -aq)
 ```
+Docker Command                      | Task
+----------------------------------- | -------------
+docker ps [-a]                      | list
+docker stop $(docker ps -a -q)      | stop all containers [you need stop before delete]
+docker rm 0fd99ee0cb61              | remove a single container
+docker images -a                    | list
+docker rmi $(docker images -a -q)   | remove all images
+docker search tomcat                |
+docker pull tomcat                  |
+docker search nginx                 |
+docker pull nginx                   |
+docker run -it -p 8889:8080 tomcat  |
+docker run -it -p 8888:80 nginx     |
+docker run -d -p 8890:80 nginx      |
+
+
+
+
 ### 1.4. :hammer: Optimizing Docker (OPTION) :hammer:
 :pushpin: [You can skip this step](https://devdotnet.org/post/ustanovka-docker-dlya-arm-i-64-bit-arm-armbian-linux/). :pushpin:  
 While running, the container can be very active in writing data to the event log, and the size of the log file will only increase. Therefore, it is necessary to limit the size and number of log files created by creating the  `/etc/docker/daemon.json`  file .  
