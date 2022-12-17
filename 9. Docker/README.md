@@ -117,7 +117,7 @@ docker rm -vf $(docker ps -aq)
 docker rmi -f $(docker images -aq)
 ```
 Docker Command                      | Task
------------------------------------ | -------------
+----------------------------------- | ---------------------------------------------------
 docker ps [-a]                      | list
 docker stop $(docker ps -a -q)      | stop all containers [you need stop before delete]
 docker rm 0fd99ee0cb61              | remove a single container
@@ -180,7 +180,10 @@ Create a Python Flask app that displays random cat pix
 ➢ Run your image  
 ➢ Push your image to the Docker registry  
 
-
+Prepairing all needed files:
+<p align="center">
+  <img src="./.info/2.Webapps_with_Docker.png">
+</p>
 
 ---
 <p align="center">
