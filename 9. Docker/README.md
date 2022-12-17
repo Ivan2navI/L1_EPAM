@@ -40,7 +40,7 @@ To additionally remove any stopped containers and all unused images (not just da
 `docker system prune -a`  
 
 ### 1.2. Create directory for Docker file(-s) and dive into it.
-TASK A:
+TASK :a: :
 ```console
 # Create directory for Dockerfile(-s) and and dive into it.
 mkdir dockerfiles
@@ -71,7 +71,7 @@ sudo docker images
 
 sudo docker run -d -p 9998:80 dev_ops:v1
 
-# !
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 sudo docker ps -a
 ```
 <p align="left">
@@ -79,7 +79,7 @@ sudo docker ps -a
 </p>
 
 
-TASK B:
+TASK :b: :
 ```console
 # Edit it and add the commands with nano:
 nano Dockerfile
@@ -106,8 +106,13 @@ sudo docker run -d -p 9988:80 dev_ops:v2
   <img src="./.info/1.2.Create directory_TASK_B.png">
 </p>
 
+
+docker system df
+
+docker system df -v
+
 ### :hammer: Optimizing Docker (OPTION) :hammer:
-[You can skip this step](https://devdotnet.org/post/ustanovka-docker-dlya-arm-i-64-bit-arm-armbian-linux/).  
+:pushpin: [You can skip this step](https://devdotnet.org/post/ustanovka-docker-dlya-arm-i-64-bit-arm-armbian-linux/). :pushpin:
 While running, the container can be very active in writing data to the event log, and the size of the log file will only increase. Therefore, it is necessary to limit the size and number of log files created by creating the  `/etc/docker/daemon.json`  file .  
 To publish ports outside the container, Docker creates a separate TCP or UDP proxy for each port. If there are a lot of ports, then this reduces the network exchange speed and loads the processor more. To disable userland-proxy, you need to make changes to the  `/etc/docker/daemon.json`  file .  
   
@@ -130,6 +135,7 @@ Description of parameters:
 Restart the Docker service for the new settings to take effect:  
 `sudo systemctl restart docker`
 
+## 2. Webapps with Docker
 
 ---
 <p align="center">
