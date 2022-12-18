@@ -195,16 +195,17 @@ Prepairing all needed files:
 </p>
 
 Docker image building:
-<p align="center">
-  <img src="./.info/2.Webapps_with_Docker_v2.png">
-</p>
-
 ```console
 docker build -t dev_ops/mycatapp .
 
 docker run -p 8888:5000 --name mycatapp dev_ops/mycatapp
-
 ```
+<p align="center">
+  <img src="./.info/2.Webapps_with_Docker_v2.png">
+</p>
+
+
+
 ---
 <p align="center">
   <img src="./.info/xxxxxxx.png">
