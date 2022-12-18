@@ -267,64 +267,75 @@ docker start  <container-name>
 </p>
 
 ## 3. Docker Compose
+You can use Docker Compose to easily run WordPress in an isolated environment built with Docker containers.
+
+### 3.1. Install Docker Compose
+To make sure you obtain the most updated stable version of Docker Compose, you'll download this software from its [official Github repository](https://github.com/docker/compose).
+
+First, confirm the latest version available in their [releases page](https://github.com/docker/compose/releases).  
+At the time of [this writing](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-22-04), the most current stable version is `v2.14.1`.  
+Use the following command to download:
+
+
+
+
+
+
+
+Actual  docker compose [releases](https://github.com/docker/compose/releases).
+ 
+Run this command to download the current stable release of Docker Compose:
+
+sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-\
+$(uname -m)" -o /usr/local/bin/docker-compose
+
+Apply executable permissions to the binary:
+sudo chmod +x /usr/local/bin/docker-compose
+
+
+
+
+
+
+
+
+```console
+services:
+  db:
+    # We use a mariadb image which supports both amd64 & arm64 architecture
+    image: mariadb:10.6.4-focal
+    # If you really want to use MySQL, uncomment the following line
+    #image: mysql:8.0.27
+    command: '--default-authentication-plugin=mysql_native_password'
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=somewordpress
+      - MYSQL_DATABASE=wordpress
+      - MYSQL_USER=wordpress
+      - MYSQL_PASSWORD=wordpress
+    expose:
+      - 3306
+      - 33060
+  wordpress:
+    image: wordpress:latest
+    ports:
+      - 80:80
+    restart: always
+    environment:
+      - WORDPRESS_DB_HOST=db
+      - WORDPRESS_DB_USER=wordpress
+      - WORDPRESS_DB_PASSWORD=wordpress
+      - WORDPRESS_DB_NAME=wordpress
+volumes:
+  db_data:
+
+````
+
 
 ---
 <p align="center">
   <img src="./.info/xxxxxxx.png">
 </p>
 
----
-
-- **2 spaces** – for indentation
-- **No unused variables** – this one catches tons of bugs!
-- **No semicolons** – It's fine. Really!
-- Never start a line with `(` , `[` , or `````
-    - This is the only gotcha with omitting semicolons – automatically checked for you!
-- **Space after keywords** `if (condition) { ... }`
-- Always use `===` instead of `==` – but `obj == null` is allowed to check `null || undefined` .
-
----
-
-The easiest way to use JavaScript Standard Style to check your code is to install it globally as a Node command line program. To do so, simply run the following command in your terminal (flag `-g` installs standard globally on your system, omit it if you want to install in the current working directory):
-
-```bash
-npm install standard -g
-```
-
-After you've done that you should be able to use the `standard` program. The simplest use case would be checking the style of all JavaScript files in the current working directory:
-
-```bash
-$ standard
-Error: Use JavaScript Standard Style
- lib/torrent.js:950:11: Expected '===' and instead saw '=='.
-```
-
-This guide is based on [https://github.com/feross/standard](https://github.com/feross/standard)
-
-# 2**. xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx**
-
----
-
-- **2 spaces** – for indentation
-- **No unused variables** – this one catches tons of bugs!
-- **No semicolons** – It's fine. Really!
-- Never start a line with `(` , `[` , or `````
-    - This is the only gotcha with omitting semicolons – automatically checked for you!
-- **Space after keywords** `if (condition) { ... }`
-- Always use `===` instead of `==` – but `obj == null` is allowed to check `null || undefined` .
-
----
-
-The easiest way to use JavaScript Standard Style to check your code is to install it globally as a Node command line program. To do so, simply run the following command in your terminal (flag `-g` installs standard globally on your system, omit it if you want to install in the current working directory):
-
-```bash
-npm install standard -g
-```
-
-After you've done that you should be able to use the `standard` program. The simplest use case would be checking the style of all JavaScript files in the current working directory:
-
-```bash
-$ standard
-Error: Use JavaScript Standard Style
- lib/torrent.js:950:11: Expected '===' and instead saw '=='.
-```
