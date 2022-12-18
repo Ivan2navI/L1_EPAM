@@ -241,7 +241,7 @@ docker push risabyxo/mycatapp:tagname
   <img src="./.info/2.2.Create_Docker_Hub.png">
 </p>
 
-Pull Docker Image from Docker Hub and Run it
+Pull Docker Image from Docker Hub and Run it:
 ```console
 # Verify Docker version and also login to Docker Hub
 docker version
@@ -252,7 +252,7 @@ docker pull risabyxo/mycatapp:latest
 
 # Run the downloaded Docker Image & Access the Application
 docker run --name my_app_from_DockerHub -p 80:5000 -d risabyxo/mycatapp:latest
-# OR
+# !!! OR !!!
 docker run -p 80:5000 --name my_app_from_DockerHub risabyxo/mycatapp:latest
 
 # Connect to Container Terminal
