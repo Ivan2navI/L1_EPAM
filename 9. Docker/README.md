@@ -334,8 +334,4 @@ volumes:
 </p>
 
 
----
-<p align="center">
-  <img src="./.info/x.Final.png">
-</p>
 
