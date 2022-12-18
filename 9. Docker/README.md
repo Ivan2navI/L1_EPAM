@@ -241,6 +241,31 @@ docker push risabyxo/mycatapp:tagname
   <img src="./.info/2.2.Create_Docker_Hub.png">
 </p>
 
+Pull Docker Image from Docker Hub and Run it
+```console
+# Verify Docker version and also login to Docker Hub
+docker version
+docker login
+
+# Pull Image from Docker Hub 
+docker pull risabyxo/mycatapp:latest
+
+# Run the downloaded Docker Image & Access the Application
+docker run --name my_app_from_DockerHub -p 80:5000 -d risabyxo/mycatapp:latest
+# OR
+docker run -p 80:5000 --name my_app_from_DockerHub risabyxo/mycatapp:latest
+
+# Connect to Container Terminal
+docker exec -it <container-name> /bin/sh
+
+# Container Stop, Start
+docker stop <container-name>
+docker start  <container-name>
+```
+<p align="center">
+  <img src="./.info/2.2.Create_Docker_Hub_2pull.png">
+</p>
+
 ## 3. Docker Compose
 
 ---
