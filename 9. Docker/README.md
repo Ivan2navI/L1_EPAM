@@ -204,7 +204,18 @@ docker run -p 8888:5000 --name mycatapp dev_ops/mycatapp
   <img src="./.info/2.Webapps_with_Docker_v2.png">
 </p>
 
+**But since this was not the only one problem, I decided to update the versions of all programs, and also find and update the link to the `gif` files with cats.**    
+**Final result:**
+```console
+docker build -t dev_ops/mycatapp .
 
+docker run -p 8888:5000 --name mycatapp dev_ops/mycatapp
+```
+<p align="center">
+  <img src="./.info/2.Webapps_with_Docker_v3.png">
+</p>
+
+**All updated files are [here](https://github.com/Ivan2navI/L1_EPAM/tree/main/9.%20Docker/flask-app).**
 
 
 ---
