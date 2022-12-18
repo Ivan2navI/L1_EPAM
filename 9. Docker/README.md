@@ -221,9 +221,11 @@ docker run -p 8888:5000 --name mycatapp dev_ops/mycatapp
 </p>
 
 ### 2.2. Create an account in Docker Hub
-
+Pushing to docker registry:
 ```console 
 docker login
+> Username: risabyxo
+> Password:
 > Login Succeeded
 
 # docker tag image_name YOUR_DOCKERHUB_NAME/image_name
@@ -231,19 +233,13 @@ docker tag dev_ops/mycatapp risabyxo/mycatapp
 
 # docker push YOUR_DOCKERHUB_NAME/image_name
 docker push risabyxo/mycatapp
-> Using default tag: latest
-> The push refers to repository [docker.io/risabyxo/mycatapp]
-> bf3d8cdaecff: Pushed
-> ebde32d54cd2: Pushed
-> 722a7760cb2e: Pushed
-> 17ff9a7ae937: Pushed
-> 7dbb75d55c89: Pushed
-> e2178bb79a78: Pushed
-> 63493a9ab2d4: Pushed
-> latest: digest: sha256:3ddc66fa990cf88a591417bb02f11e3834b63eba6ade02953b4bc1fa5b290f6e size: 1783
 
-
+# To push a new tag to this repository,
+docker push risabyxo/mycatapp:tagname
 ```
+<p align="center">
+  <img src="./.info/2.2.Create_Docker_Hub.png">
+</p>
 
 ## 3. Docker Compose
 
