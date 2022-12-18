@@ -109,12 +109,21 @@ sudo docker run -d -p 9988:80 dev_ops:v2
 ### 1.3. Frequently used Docker commands
 ```console
 # To delete all containers including its volumes use,
-
 docker rm -vf $(docker ps -aq)
 
 # To delete all the images,
-
 docker rmi -f $(docker images -aq)
+
+# Show docker disk usage
+docker system df
+docker system df -v
+
+# Remove unused data
+docker system prune
+--all , -a 		  Remove all unused images not just dangling ones
+--filter 		    API 1.28+ Provide filter values (e.g. ‘label==')
+--force , -f 		Do not prompt for confirmation
+--volumes 		  Prune volumes
 ```
 Docker Command                      | Task
 ----------------------------------- | ---------------------------------------------------
@@ -190,6 +199,12 @@ Docker image building:
   <img src="./.info/2.Webapps_with_Docker_v2.png">
 </p>
 
+```console
+docker build -t dev_ops/mycatapp .
+
+docker run -p 8888:5000 --name mycatapp dev_ops/mycatapp
+
+```
 ---
 <p align="center">
   <img src="./.info/xxxxxxx.png">
