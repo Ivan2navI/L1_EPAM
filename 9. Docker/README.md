@@ -275,20 +275,16 @@ First, confirm the latest version available in their [releases page](https://git
 At the time of [this writing](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-22-04), the most current stable version is `v2.14.1`.  
 Use the following command to download:
 ```console
-
+mkdir -p ~/.docker/cli-plugins/
+curl -SL "https://github.com/docker/compose/releases/download/v2.14.1/docker-compose-$(uname -s)-$(uname -m)" -o ~/.docker/cli-plugins/docker-compose
 ```
-
-
-Actual  docker compose [releases](https://github.com/docker/compose/releases).
- 
-Run this command to download the current stable release of Docker Compose:
-
- 
-sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-
-
-Apply executable permissions to the binary:
-sudo chmod +x /usr/local/bin/docker-compose
+Next, set the correct permissions so that the docker compose command is executable:  
+`chmod +x ~/.docker/cli-plugins/docker-compose`  
+To verify that the installation was successful, you can run:  
+`docker compose version`  
+<p align="center">
+  <img src="./.info/3.1.Install_Docker_Compose.png">
+</p>
 
 
 
