@@ -179,7 +179,7 @@ Restart the Docker service for the new settings to take effect:
 `sudo systemctl restart docker`
 
 ## 2. Webapps with Docker
-
+### 2.1. Create a Python Flask app that displays random cat pix
 The goal of this exercise is to create a Docker image which will run a Flask app.  
 We'll do this by first pulling together the components for a random cat picture generator built with Python Flask, then dockerizing it by writing a Dockerfile.  
 Finally, we'll build the image, and then run it.  
@@ -219,6 +219,33 @@ docker run -p 8888:5000 --name mycatapp dev_ops/mycatapp
 <p align="center">
   <img src="./.info/2.Webapps_with_Docker_v4.png">
 </p>
+
+### 2.2. Create an account in Docker Hub
+
+```console 
+docker login
+> Login Succeeded
+
+# docker tag image_name YOUR_DOCKERHUB_NAME/image_name
+docker tag dev_ops/mycatapp risabyxo/mycatapp
+
+# docker push YOUR_DOCKERHUB_NAME/image_name
+docker push risabyxo/mycatapp
+> Using default tag: latest
+> The push refers to repository [docker.io/risabyxo/mycatapp]
+> bf3d8cdaecff: Pushed
+> ebde32d54cd2: Pushed
+> 722a7760cb2e: Pushed
+> 17ff9a7ae937: Pushed
+> 7dbb75d55c89: Pushed
+> e2178bb79a78: Pushed
+> 63493a9ab2d4: Pushed
+> latest: digest: sha256:3ddc66fa990cf88a591417bb02f11e3834b63eba6ade02953b4bc1fa5b290f6e size: 1783
+
+
+```
+
+## 3. Docker Compose
 
 ---
 <p align="center">
