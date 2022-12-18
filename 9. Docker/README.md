@@ -215,8 +215,10 @@ docker run -p 8888:5000 --name mycatapp dev_ops/mycatapp
   <img src="./.info/2.Webapps_with_Docker_v3.png">
 </p>
 
-**All updated files are [here](https://github.com/Ivan2navI/L1_EPAM/tree/main/9.%20Docker/flask-app).**
-
+**All updated files are [here](https://github.com/Ivan2navI/L1_EPAM/tree/main/9.%20Docker/flask-app):**
+<p align="center">
+  <img src="./.info/2.Webapps_with_Docker_v4.png">
+</p>
 
 ---
 <p align="center">
