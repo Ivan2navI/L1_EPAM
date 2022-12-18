@@ -267,27 +267,25 @@ docker start  <container-name>
 </p>
 
 ## 3. Docker Compose
-You can use Docker Compose to easily run WordPress in an isolated environment built with Docker containers.
-
+You can use Docker Compose to easily run WordPress in an isolated environment built with Docker containers.  
 ### 3.1. Install Docker Compose
-To make sure you obtain the most updated stable version of Docker Compose, you'll download this software from its [official Github repository](https://github.com/docker/compose).
 
+To make sure you obtain the most updated stable version of Docker Compose, you'll download this software from its [official Github repository](https://github.com/docker/compose).  
 First, confirm the latest version available in their [releases page](https://github.com/docker/compose/releases).  
 At the time of [this writing](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-22-04), the most current stable version is `v2.14.1`.  
 Use the following command to download:
+```console
 
-
-
-
-
+```
 
 
 Actual  docker compose [releases](https://github.com/docker/compose/releases).
  
 Run this command to download the current stable release of Docker Compose:
 
-sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-\
-$(uname -m)" -o /usr/local/bin/docker-compose
+ 
+sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
 
 Apply executable permissions to the binary:
 sudo chmod +x /usr/local/bin/docker-compose
@@ -296,9 +294,8 @@ sudo chmod +x /usr/local/bin/docker-compose
 
 
 
-
-
-
+### 3.2. WordPress with MySQL:
+This example defines one of the basic setups for WordPress. More details on how this works can be found on the official [WordPress image page](https://hub.docker.com/_/wordpress).
 ```console
 services:
   db:
@@ -331,11 +328,14 @@ services:
 volumes:
   db_data:
 
-````
+```
+<p align="center">
+  <img src="./.info/xxxxxxx.png">
+</p>
 
 
 ---
 <p align="center">
-  <img src="./.info/xxxxxxx.png">
+  <img src="./.info/x.Final.png">
 </p>
 
