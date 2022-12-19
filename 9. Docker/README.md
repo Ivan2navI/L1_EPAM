@@ -327,6 +327,7 @@ With the `docker-compose.yml` file in place, you can now execute Docker Compose 
   <img src="./.info/3.2.WordPress_with_MySQL.png">
 </p>
 
+### 3.3. Docker Compose. Use volumes.
 
 
 
