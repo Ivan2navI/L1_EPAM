@@ -335,9 +335,11 @@ If you started Compose with `docker compose up -d`, stop your services once you'
 ```
 docker compose stop
 ```
-You can bring everything down, removing the containers entirely, with the `down` command. Pass `--volumes` to also remove the data volume used by the Redis container:
+You can bring everything down, removing the containers entirely, with the `down` command. To remove all WordPress data, delete the named volumes by passing the `--volumes` or `-v`:
 ```
- docker compose down --volumes
+docker compose down --volumes
+# !!! OR !!!
+docker compose down -v
 ```
 **:warning:You should execute the docker compose command under the correct directory where `docker-compose.yml` file located at :warning: :**
 <p align="center">
