@@ -328,11 +328,22 @@ With the `docker-compose.yml` file in place, you can now execute Docker Compose 
 </p>
 
 ### 3.3. Docker Compose. Use volumes.
+You can create and manage volumes outside the scope of any container.
+```console
+# Create a volume:
+docker volume create my-vol
 
+# List volumes:
+docker volume ls
 
+# Inspect a volume:
+docker volume inspect my-vol
 
+#Remove a volume:
+docker volume rm my-vol
+```
 <p align="center">
-  <img src="./.info/xxxxxxx.png">
+  <img src="./.info/3.3.Docker_Compose.Use_volumes..png">
 </p>
 
 
