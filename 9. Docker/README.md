@@ -339,6 +339,10 @@ You can bring everything down, removing the containers entirely, with the `down`
 ```
  docker compose down --volumes
 ```
+:warning:You should execute the docker compose command under the correct directory where `docker-compose.yml` file located at :warning: :
+<p align="center">
+  <img src="./.info/3.2.WordPress_with_MySQL_2.png">
+</p>
 
 ### 3.3. Docker Compose. Use volumes.
 You can create and manage volumes outside the scope of any container.
