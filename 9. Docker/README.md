@@ -275,31 +275,27 @@ First, confirm the latest version available in their [releases page](https://git
 At the time of [this writing](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-22-04), the most current stable version is `v2.14.1`.  
 Use the following command to download:
 ```console
-mkdir -p ~/.docker/cli-plugins/
-curl -SL "https://github.com/docker/compose/releases/download/v2.14.1/docker-compose-$(uname -s)-$(uname -m)" -o ~/.docker/cli-plugins/docker-compose
+sudo curl -SL "https://github.com/docker/compose/releases/download/v2.14.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 ```
-Next, set the correct permissions so that the docker compose command is executable:  
-`chmod +x ~/.docker/cli-plugins/docker-compose`  
+Next, set the correct permissions so that the docker compose command is executable:   
+`sudo chmod +x /usr/local/bin/docker-compose`
 To verify that the installation was successful, you can run:  
 `docker compose version`  
-<p align="center">
-  <img src="./.info/3.1.Install_Docker_Compose.png">
-</p>
-
-
-
-
 
 ### 3.2. WordPress with MySQL:
-This example defines one of the basic setups for WordPress. More details on how this works can be found on the official [WordPress image page](https://hub.docker.com/_/wordpress).
+This example defines one of the basic setups for WordPress. More details on how this works can be found on the official [WordPress image page](https://hub.docker.com/_/wordpress).  
+
+Create a `my_wordpress` project directory and then change into.
+Create a `docker-compose.yml` file that starts your WordPress blog and a separate MySQL instance with a volume mount for data persistence:
 ```console
+version: '3.7'
 services:
   db:
     # We use a mariadb image which supports both amd64 & arm64 architecture
-    image: mariadb:10.6.4-focal
+    # image: mariadb:10.6.4-focal
     # If you really want to use MySQL, uncomment the following line
-    #image: mysql:8.0.27
-    command: '--default-authentication-plugin=mysql_native_password'
+    image: mysql:8.0.27
+    # command: '--default-authentication-plugin=mysql_native_password'
     volumes:
       - db_data:/var/lib/mysql
     restart: always
@@ -314,7 +310,7 @@ services:
   wordpress:
     image: wordpress:latest
     ports:
-      - 80:80
+      - 8000:80
     restart: always
     environment:
       - WORDPRESS_DB_HOST=db
@@ -323,8 +319,17 @@ services:
       - WORDPRESS_DB_NAME=wordpress
 volumes:
   db_data:
-
 ```
+With the `docker-compose.yml` file in place, you can now execute Docker Compose to bring your environment up. The following command will download the necessary Docker images, create a container for the web service, and run the containerized environment in background mode: 
+`docker-compose up -d`
+
+<p align="center">
+  <img src="./.info/3.2.WordPress_with_MySQL.png">
+</p>
+
+
+
+
 <p align="center">
   <img src="./.info/xxxxxxx.png">
 </p>
