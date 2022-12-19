@@ -327,6 +327,17 @@ With the `docker-compose.yml` file in place, you can now execute Docker Compose 
   <img src="./.info/3.2.WordPress_with_MySQL.png">
 </p>
 
+**Experiment with some other commands**
+This example defines one of the basic setups for WordPress. More details on how this works can be found on the official [WordPress image page](https://hub.docker.com/_/wordpress).  
+If you started Compose with `docker compose up -d`, stop your services once you've finished with them:
+```
+docker compose stop
+```
+You can bring everything down, removing the containers entirely, with the `down` command. Pass `--volumes` to also remove the data volume used by the Redis container:
+```
+ docker compose down --volumes
+```
+
 ### 3.3. Docker Compose. Use volumes.
 You can create and manage volumes outside the scope of any container.
 ```console
