@@ -328,7 +328,8 @@ With the `docker-compose.yml` file in place, you can now execute Docker Compose 
 </p>
 
 **Experiment with some other commands**
-This example defines one of the basic setups for WordPress. More details on how this works can be found on the official [WordPress image page](https://hub.docker.com/_/wordpress).  
+If you want to run your services in the background, you can pass the `-d` flag (for "detached" mode) to `docker compose up` and use `docker compose ps` to see what is currently running.  
+
 If you started Compose with `docker compose up -d`, stop your services once you've finished with them:
 ```
 docker compose stop
