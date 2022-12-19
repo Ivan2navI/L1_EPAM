@@ -18,7 +18,7 @@ _7. [Jenkins](https://github.com/Ivan2navI/L1_EPAM/tree/main/7.%20Jenkins)_
 
 _8. [Terraform](https://github.com/Ivan2navI/L1_EPAM/tree/main/8.%20Terraform)_
 
-_9. Docker_
+_9. [Docker](https://github.com/Ivan2navI/L1_EPAM/tree/main/9.%20Docker)_
 
 _10. Ansible_
 
