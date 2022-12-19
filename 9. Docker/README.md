@@ -332,11 +332,11 @@ If you want to run your services in the background, you can pass the `-d` flag (
 and use `docker compose ps` to see what is currently running.  
 
 If you started Compose with `docker compose up -d`, stop your services once you've finished with them:
-```
+```console
 docker compose stop
 ```
 You can bring everything down, removing the containers entirely, with the `down` command. To remove all WordPress data, delete the named volumes by passing the `--volumes` or `-v`:
-```
+```console
 docker compose down --volumes
 # !!! OR !!!
 docker compose down -v
