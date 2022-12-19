@@ -339,7 +339,7 @@ docker volume ls
 # Inspect a volume:
 docker volume inspect my-vol
 
-#Remove a volume:
+# Remove a volume:
 docker volume rm my-vol
 ```
 <p align="center">
