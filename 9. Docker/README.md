@@ -327,8 +327,9 @@ With the `docker-compose.yml` file in place, you can now execute Docker Compose 
   <img src="./.info/3.2.WordPress_with_MySQL.png">
 </p>
 
-**Experiment with some other commands**  
-If you want to run your services in the background, you can pass the `-d` flag (for "detached" mode) to `docker compose up` and use `docker compose ps` to see what is currently running.  
+:triangular_flag_on_post: **Experiment with some other commands** :triangular_flag_on_post:  
+If you want to run your services in the background, you can pass the `-d` flag (for "detached" mode) to `docker compose up`   
+and use `docker compose ps` to see what is currently running.  
 
 If you started Compose with `docker compose up -d`, stop your services once you've finished with them:
 ```
