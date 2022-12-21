@@ -76,9 +76,9 @@ variable "commom_tags" {
 }
 
 # --------------------------------------------------------------------
-
+/*
  variable "main_vpc_cidr" {
-   main_vpc_cidr = "10.0.0.0/27"
+   main_vpc_cidr = "192.168.11.0/27"
  }
  
  variable "main_vpc_instance_tenancy" {
@@ -89,6 +89,6 @@ variable "commom_tags" {
   }
 
  variable "public_subnets" {
-  public_subnets = "10.0.0.0/28"
+  public_subnets = "192.168.11.0/28"
  }
-
+*/
