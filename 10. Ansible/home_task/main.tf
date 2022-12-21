@@ -12,8 +12,8 @@ provider "aws" {
 }
 
 # --------------------------------------------------------------------
-# Amazon Linux 2 Kernel 5.10 AMI 2.0.20221103.3 x86_64 HVM gp2: 
-# ami-0f15e0a4c8d3ee5fe
+# Amazon Linux 2 Kernel 5.10 AMI 2.0.20221210.1 x86_64 HVM gp2: 
+# ami-0cc814d99c59f3789
 # --------------------------------------------------------------------
 # Canonical, Ubuntu, 22.04 LTS, amd64 jammy image build on 2022-12-01
 # ami-03b755af568109dc3
@@ -21,25 +21,37 @@ provider "aws" {
 # Virtual server type (instance type)
 # t2.micro
 # --------------------------------------------------------------------
-resource "aws_instance" "Web_Server" {
-    ami           = var.ami_amazon_linux                                          # VAR Amazon Machine Images: "Amazon Linux" 
-    instance_type = var.instance_type                                             # VAR instance_type: "t2.micro"
+resource "aws_instance" "Server" {
+    ami           = var.ami_server                                          
+    instance_type = var.instance_type                                            
 
-    vpc_security_group_ids = [aws_security_group.Security_Group.id]           
-
-    depends_on = [aws_instance.Data_Base]                                 
+    vpc_security_group_ids = [aws_security_group.Security_Group.id]                                
 
     tags = merge (var.commom_tags, {Name = var.ec2_name1}, {Region  = var.region})                        # MERGE 2 VARIABLES: var.commom_tags(MAP TAGS) & var.region
 }
 
-resource "aws_instance" "Data_Base" {
-    ami           = var.ami_ubuntu                                                # VAR Amazon Machine Images: "Ubuntu, 22.04 LTS" 
-    instance_type = var.instance_type                                             # VAR instance_type: "t2.micro"
+resource "aws_instance" "Node1" {
+    ami           = var.ami_node1                                                 
+    instance_type = var.instance_type                                             
 
     vpc_security_group_ids = [aws_security_group.Security_Group.id]        
 
+    depends_on = [aws_instance.Server]
+
     tags = merge (var.commom_tags, {Name = var.ec2_name2}, {Region  = var.region})                           # MERGE 2 VARIABLES: var.commom_tags(MAP TAGS) & var.region 
 }
+
+resource "aws_instance" "Node2" {
+    ami           = var.ami_node2                                      
+    instance_type = var.instance_type                                            
+
+    vpc_security_group_ids = [aws_security_group.Security_Group.id]                                
+
+    depends_on = [aws_instance.Server]
+    
+    tags = merge (var.commom_tags, {Name = var.ec2_name3}, {Region  = var.region})                        # MERGE 2 VARIABLES: var.commom_tags(MAP TAGS) & var.region
+}
+
 # --------------------------------------------------------------------
 # Security Group
 resource "aws_security_group" "Security_Group" {
@@ -63,5 +75,5 @@ resource "aws_security_group" "Security_Group" {
     #ipv6_cidr_blocks = ["::/0"]
   }
 
-  tags = merge (var.commom_tags, {Name = "Security_Group"})
+  tags = merge (var.commom_tags, {Name = "Ansible_Security_Group"})
 }
