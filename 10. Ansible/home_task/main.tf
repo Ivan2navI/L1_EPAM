@@ -27,6 +27,7 @@ resource "aws_instance" "Server" {
     
     subnet_id              = aws_subnet.publicsubnets.id
     vpc_security_group_ids = [aws_security_group.Security_Group.id]                            
+    associate_public_ip_address = true
 
     tags = merge (var.commom_tags, {Name = var.ec2_name1}, {Region  = var.region})                        # MERGE 2 VARIABLES: var.commom_tags(MAP TAGS) & var.region
 }
@@ -34,8 +35,10 @@ resource "aws_instance" "Server" {
 resource "aws_instance" "Node1" {
     ami           = var.ami_node1                                                 
     instance_type = var.instance_type                                             
-
+    
+    subnet_id              = aws_subnet.publicsubnets.id
     vpc_security_group_ids = [aws_security_group.Security_Group.id]        
+    associate_public_ip_address = true
 
     depends_on = [aws_instance.Server]
 
@@ -46,8 +49,10 @@ resource "aws_instance" "Node2" {
     ami           = var.ami_node2                                      
     instance_type = var.instance_type                                            
 
+    subnet_id              = aws_subnet.publicsubnets.id
     vpc_security_group_ids = [aws_security_group.Security_Group.id]                                
-
+    associate_public_ip_address = true
+    
     depends_on = [aws_instance.Server]
 
     tags = merge (var.commom_tags, {Name = var.ec2_name3}, {Region  = var.region})                        # MERGE 2 VARIABLES: var.commom_tags(MAP TAGS) & var.region
