@@ -74,3 +74,21 @@ variable "commom_tags" {
     Project = "Ansible (L1 EPAM)"
   }
 }
+
+# --------------------------------------------------------------------
+
+ variable "main_vpc_cidr" {
+   main_vpc_cidr = "10.0.0.0/27"
+ }
+ 
+ variable "main_vpc_instance_tenancy" {
+   instance_tenancy = "default"
+ }
+  variable "vpc_tag" {
+    Name = "AWS VPC main"
+  }
+
+ variable "public_subnets" {
+  public_subnets = "10.0.0.0/28"
+ }
+

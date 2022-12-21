@@ -48,7 +48,7 @@ resource "aws_instance" "Node2" {
     vpc_security_group_ids = [aws_security_group.Security_Group.id]                                
 
     depends_on = [aws_instance.Server]
-    
+
     tags = merge (var.commom_tags, {Name = var.ec2_name3}, {Region  = var.region})                        # MERGE 2 VARIABLES: var.commom_tags(MAP TAGS) & var.region
 }
 
@@ -77,3 +77,37 @@ resource "aws_security_group" "Security_Group" {
 
   tags = merge (var.commom_tags, {Name = "Ansible_Security_Group"})
 }
+
+# --------------------------------------------------------------------
+# Create the VPC
+ resource "aws_vpc" "Main" {                # Creating VPC here
+   cidr_block       = var.main_vpc_cidr     # Defining the CIDR block use 192.168.11.0/27
+   instance_tenancy = var.main_vpc_instance_tenancy
+   
+   tags = var.vpc_tag
+
+# Create Internet Gateway and attach it to VPC
+ resource "aws_internet_gateway" "IGW" {    # Creating Internet Gateway
+    vpc_id =  aws_vpc.Main.id               # vpc_id will be generated after we create VPC
+ }
+
+# Create a Public Subnets.
+ resource "aws_subnet" "publicsubnets" {    # Creating Public Subnets
+   vpc_id =  aws_vpc.Main.id
+   cidr_block = "${var.public_subnets}"        # CIDR block of public subnets
+ }
+
+ # Route table for Public Subnet's
+ resource "aws_route_table" "PublicRT" {    # Creating RT for Public Subnet
+    vpc_id =  aws_vpc.Main.id
+         route {
+    cidr_block = "0.0.0.0/0"               # Traffic from Public Subnet reaches Internet via Internet Gateway
+    gateway_id = aws_internet_gateway.IGW.id
+     }
+ }
+ 
+ # Route table Association with Public Subnet's
+ resource "aws_route_table_association" "PublicRTassociation" {
+    subnet_id = aws_subnet.publicsubnets.id
+    route_table_id = aws_route_table.PublicRT.id
+ }     
