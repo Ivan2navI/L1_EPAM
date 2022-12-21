@@ -7,8 +7,8 @@
 </p>
 
 [The Terraform configuration below:](https://adamtheautomator.com/terraform-vpc/)  
-➢ Creates a VPC;
-➢ Creates an Internet Gateway and attaches it to the VPC to allow traffic within the VPC to be reachable by the outside world;
-➢ Creates a public subnet; 
-➢ Creates a route table for the public subnet and associates the table with the subnet;
-➢ ... ;
+➢ Creates a VPC;  
+➢ Creates an Internet Gateway and attaches it to the VPC to allow traffic within the VPC to be reachable by the outside world;  
+➢ Creates a public subnet;  
+➢ Creates a route table for the public subnet and associates the table with the subnet;  
+➢ ... ;  
