@@ -12,7 +12,7 @@
 ➢ Creates a route table for the public subnet and associates the table with the subnet;  
 ➢ Creates EC2 instances;
 <p align="center">
-  <img src="./.info/Schem/1.Tech_Environment_for_Ansible.png">
+  <img src="./.info/1.Tech_Environment_for_Ansible.png">
 </p>
 
 ## 2. Ansible instalation
