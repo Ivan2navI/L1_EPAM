@@ -23,14 +23,12 @@ provider "aws" {
 # --------------------------------------------------------------------
 resource "aws_instance" "Server" {
     ami           = var.ami_server                                          
-    instance_type = var.instance_type                                            
+    instance_type = var.instance_type
+    key_name      = "ansible_server"                                         
     
-    #subnet_id              = aws_subnet.publicsubnets.id
-    network_interface {
-      network_interface_id = aws_network_interface.foo.id
-      device_index         = 0
-    }
-    vpc_security_group_ids = [aws_security_group.Security_Group.id]                            
+    subnet_id              = aws_subnet.publicsubnets.id
+    private_ip             = "192.168.11.10"
+    vpc_security_group_ids = [aws_security_group.Security_Group.id]
     associate_public_ip_address = true
 
     tags = merge (var.commom_tags, {Name = var.ec2_name1}, {Region  = var.region})                        # MERGE 2 VARIABLES: var.commom_tags(MAP TAGS) & var.region
@@ -39,13 +37,11 @@ resource "aws_instance" "Server" {
 resource "aws_instance" "Node1" {
     ami           = var.ami_node1                                                 
     instance_type = var.instance_type                                             
-    
-    #subnet_id              = aws_subnet.publicsubnets.id
-    network_interface {
-      network_interface_id = aws_network_interface.foo.id
-      device_index         = 1
-    }    
-    vpc_security_group_ids = [aws_security_group.Security_Group.id]        
+    key_name      = "ansible_node1"
+
+    subnet_id              = aws_subnet.publicsubnets.id
+    private_ip             = "192.168.11.11"
+    vpc_security_group_ids = [aws_security_group.Security_Group.id]
     associate_public_ip_address = true
 
     depends_on = [aws_instance.Server]
@@ -56,13 +52,11 @@ resource "aws_instance" "Node1" {
 resource "aws_instance" "Node2" {
     ami           = var.ami_node2                                      
     instance_type = var.instance_type                                            
+    key_name      = "ansible_node2"
 
-    #subnet_id              = aws_subnet.publicsubnets.id
-    network_interface {
-      network_interface_id = aws_network_interface.foo.id
-      device_index         = 2
-    }
-    vpc_security_group_ids = [aws_security_group.Security_Group.id]                                
+    subnet_id              = aws_subnet.publicsubnets.id
+    private_ip             = "192.168.11.12"
+    vpc_security_group_ids = [aws_security_group.Security_Group.id]
     associate_public_ip_address = true
 
     depends_on = [aws_instance.Server]
@@ -107,7 +101,7 @@ resource "aws_subnet" "publicsubnets" {    # Creating Public Subnets
     Name = "main (Public Subnet)"
   }
 }
-
+/*
 resource "aws_network_interface" "foo" {
   subnet_id   = aws_subnet.publicsubnets.id
   private_ips = ["192.168.11.10", "192.168.11.11", "192.168.11.12"]
@@ -116,7 +110,7 @@ resource "aws_network_interface" "foo" {
     Name = "Primary Network Interface"
   }
 }
-
+*/
 # Route table for Public Subnet
 resource "aws_route_table" "PublicRT" {    # Creating RT for Public Subnet
   vpc_id =  aws_vpc.Main.id
@@ -155,6 +149,15 @@ resource "aws_security_group" "Security_Group" {
       protocol    = "tcp"
       cidr_blocks = ["0.0.0.0/0"]
     }
+  }
+
+  ingress {
+    #description = “Allow all incoming ICMP – IPv4 traffic”
+    from_port = -1
+    to_port = -1
+    protocol = "icmp"
+    #cidr_blocks = ["0.0.0.0/0"]                                
+    cidr_blocks = [aws_subnet.publicsubnets.cidr_block]                        #["192.168.11.0/28"] - Allow ping from specific subnets to AWS EC2
   }
 
   egress {

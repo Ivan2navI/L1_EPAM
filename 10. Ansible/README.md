@@ -13,3 +13,8 @@
 ➢ Creates a route table for the public subnet and associates the table with the subnet;  
 ➢ ... ;
 
+```console
+ubuntu@ip-192-168-11-10:~/.ssh$ ssh ubuntu@192.168.11.11 -i ~/.ssh/ansible_node1.pem
+
+ubuntu@ip-192-168-11-10:~/.ssh$ ssh ec2-user@192.168.11.12 -i ~/.ssh/ansible_node2.pem
+```
