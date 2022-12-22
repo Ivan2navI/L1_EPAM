@@ -15,11 +15,11 @@ output "Server_arn" {
 }
 
 output "Server_private_ip" {
-  value = aws_instance.Server.private_ip
+  value = aws_instance.Server.private_dns
 }
 
 output "Server_public_ip" {
-  value = aws_instance.Server.public_ip 
+  value = aws_instance.Server.public_dns
 }
 
 output "Server_subnet_id" {
@@ -46,11 +46,11 @@ output "Node1_arn" {
 }
 
 output "Node1_private_ip" {
-  value = aws_instance.Node1.private_ip
+  value = aws_instance.Node1.private_dns
 }
 
 output "Node1_public_ip" {
-  value = aws_instance.Node1.public_ip 
+  value = aws_instance.Node1.public_dns
 }
 
 output "Node1_subnet_id" {
@@ -77,11 +77,11 @@ output "Node2_arn" {
 }
 
 output "Node2_private_ip" {
-  value = aws_instance.Node2.private_ip
+  value = aws_instance.Node2.private_dns
 }
 
 output "Node2_public_ip" {
-  value = aws_instance.Node2.public_ip 
+  value = aws_instance.Node2.public_dns 
 }
 
 output "Node2_subnet_id" {
@@ -97,9 +97,21 @@ output "Node2_tags_all" {
 }
 
 # --------------------------------------------------------------------
+# aws_internet_gateway.IGW:
+output "AWS_Internet_Gateway" {
+  value = aws_internet_gateway.IGW.id
+}
 
+output "AWS_Internet_Gateway_vpc_id" {
+  value = aws_internet_gateway.IGW.vpc_id
+}
+
+output "AWS_Internet_Gateway_tags_all" {
+  value = aws_internet_gateway.IGW.tags_all
+}
+
+# --------------------------------------------------------------------
 # aws_security_group.Security_Group:
-
 output "Security_Group_arn" {
   value = aws_security_group.Security_Group.arn
 }

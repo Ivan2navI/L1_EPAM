@@ -24,10 +24,10 @@ provider "aws" {
 resource "aws_instance" "Server" {
     ami           = var.ami_server                                          
     instance_type = var.instance_type
-    key_name      = "ansible_server"                                         
+    key_name      = var.ec2_ssh_key1                                         
     
     subnet_id              = aws_subnet.publicsubnets.id
-    private_ip             = "192.168.11.10"
+    private_ip             = var.ec2_private_ip1
     vpc_security_group_ids = [aws_security_group.Security_Group.id]
     associate_public_ip_address = true
 
@@ -37,10 +37,10 @@ resource "aws_instance" "Server" {
 resource "aws_instance" "Node1" {
     ami           = var.ami_node1                                                 
     instance_type = var.instance_type                                             
-    key_name      = "ansible_node1"
+    key_name      = var.ec2_ssh_key2
 
     subnet_id              = aws_subnet.publicsubnets.id
-    private_ip             = "192.168.11.11"
+    private_ip             = var.ec2_private_ip2
     vpc_security_group_ids = [aws_security_group.Security_Group.id]
     associate_public_ip_address = true
 
@@ -52,10 +52,10 @@ resource "aws_instance" "Node1" {
 resource "aws_instance" "Node2" {
     ami           = var.ami_node2                                      
     instance_type = var.instance_type                                            
-    key_name      = "ansible_node2"
+    key_name      = var.ec2_ssh_key3
 
     subnet_id              = aws_subnet.publicsubnets.id
-    private_ip             = "192.168.11.12"
+    private_ip             = var.ec2_private_ip3
     vpc_security_group_ids = [aws_security_group.Security_Group.id]
     associate_public_ip_address = true
 
@@ -67,18 +67,16 @@ resource "aws_instance" "Node2" {
 
 # --------------------------------------------------------------------
 # Create the VPC
- resource "aws_vpc" "Main" {                # Creating VPC here
-/*   cidr_block       = var.main_vpc_cidr     # Defining the CIDR block use 192.168.11.0/27
-   instance_tenancy = var.main_vpc_instance_tenancy
-*/
-  cidr_block       = "192.168.11.0/27"
+ resource "aws_vpc" "Main" {
+
+  cidr_block       = var.main_vpc_cidr
   #instance_tenancy = "default"
 
   enable_dns_support   = true
   enable_dns_hostnames = true
 
   tags = {
-    Name = "main (VPC)"
+    Name = "${var.service_name}-(VPC)"
   }
 }
 
@@ -87,37 +85,23 @@ resource "aws_internet_gateway" "IGW" {    # Creating Internet Gateway
   vpc_id =  aws_vpc.Main.id               # vpc_id will be generated after we create VPC
   
   tags = {
-    Name = "main (IGW)"
+    Name = "${var.service_name}-(IGW)"
   }
 }
 
 # Create a Public Subnets.
 resource "aws_subnet" "publicsubnets" {    # Creating Public Subnets
   vpc_id =  aws_vpc.Main.id
-  #cidr_block = "${var.public_subnets}"        # CIDR block of public subnets
-  cidr_block = "192.168.11.0/28"       # CIDR block of public subnets
+  cidr_block = var.main_publicsubnets_cidr       # CIDR block of public subnets
   
   tags = {
-    Name = "main (Public Subnet)"
+    Name = "${var.service_name}-(Public Subnet)"
   }
 }
-/*
-resource "aws_network_interface" "foo" {
-  subnet_id   = aws_subnet.publicsubnets.id
-  private_ips = ["192.168.11.10", "192.168.11.11", "192.168.11.12"]
 
-  tags = {
-    Name = "Primary Network Interface"
-  }
-}
-*/
 # Route table for Public Subnet
 resource "aws_route_table" "PublicRT" {    # Creating RT for Public Subnet
   vpc_id =  aws_vpc.Main.id
-  /*route {
-    cidr_block = "192.168.11.0/28"            
-    destination_prefix_list_id = "local"
-  }*/
     
   route {
     cidr_block = "0.0.0.0/0"               # Traffic from Public Subnet reaches Internet via Internet Gateway
@@ -125,7 +109,7 @@ resource "aws_route_table" "PublicRT" {    # Creating RT for Public Subnet
   }
   
   tags = {
-    Name = "main (Route table for Public Subnet)"
+    Name = "${var.service_name}-(Route table for Public Subnet)"
   }
 }
  
@@ -138,7 +122,7 @@ resource "aws_route_table_association" "PublicRTassociation" {
 # --------------------------------------------------------------------
 # Security Group
 resource "aws_security_group" "Security_Group" {
-  name = "main (Security_Group)"
+  name = "${var.service_name}-(Security_Group)"
   vpc_id = aws_vpc.Main.id
 
   dynamic "ingress" {
@@ -168,5 +152,5 @@ resource "aws_security_group" "Security_Group" {
     #ipv6_cidr_blocks = ["::/0"]
   }
 
-  tags = merge (var.commom_tags, {Name = "Ansible_Security_Group"})
+  tags = merge (var.commom_tags, {Name = "${var.service_name}-(Security Group)"})
 }

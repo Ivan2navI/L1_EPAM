@@ -4,6 +4,11 @@
 # --------------------------------------------------------------------
 # --------------------------------------------------------------------
 
+variable "service_name" {
+  default = "Ansible"
+}
+
+# -------------------------------------------------------------------
 
 # Europe (Paris): eu-west-3
 variable "region" {
@@ -56,6 +61,55 @@ variable "ec2_name3" {
     type        = string
     default     = "Ansible_Node2_Amazon_Linux"
 }
+
+# -------------------------  SSH keys  -------------------------------
+variable "ec2_ssh_key1" {
+    type        = string
+    default     = "ansible_server"
+}
+
+variable "ec2_ssh_key2" {
+    type        = string
+    default     = "ansible_node1"
+}
+
+variable "ec2_ssh_key3" {
+    type        = string
+    default     = "ansible_node2"
+}
+
+# --------------------------------------------------------------------
+
+variable "ec2_private_ip1" {
+    description = "EC2 name for instance 1"
+    type        = string
+    default     = "192.168.11.10"
+}
+
+variable "ec2_private_ip2" {
+    description = "EC2 name for instance 2"
+    type        = string
+    default     = "192.168.11.11"
+}
+
+variable "ec2_private_ip3" {
+    description = "EC2 name for instance 3"
+    type        = string
+    default     = "192.168.11.12"
+}
+
+# --------------------------------------------------------------------
+
+variable "main_vpc_cidr" {
+    type    = string
+    default = "192.168.11.0/27"
+ }
+ 
+ variable "main_publicsubnets_cidr" {
+    type    = string
+    default = "192.168.11.0/28"
+ }
+
 
 # --------------------------------------------------------------------
 
