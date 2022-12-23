@@ -60,8 +60,26 @@ Node2_Ubuntu    ansible_hosts=192.168.11.12 ansible_user=ec2-user ansible_ssh_pr
 ```
 But, it caused an error:
 <p align="center">
-  <img src="./.info/2.2.Error_Inventory_File.png">
+  <img src="./.info/2.2.1.Error_Inventory_File.png">
 </p>
+
+To get a real hostnames of the instances use:
+```console
+ubuntu@ip-192-168-11-10:~$ hostname
+> ip-192-168-11-10
+```
+Modify the `hosts.txt`:
+```
+# !!! hosts.txt !!!
+[staging_servers]
+ip-192-168-11-11    ansible_hosts=192.168.11.11 ansible_user=ubuntu ansible_ssh_private_key_file=/home/ubuntu/.ssh/ansible_node1.pem
+ip-192-168-11-12    ansible_hosts=192.168.11.12 ansible_user=ec2-user ansible_ssh_private_key_file=/home/ubuntu/.ssh/ansible_node2.pem
+```
+Check results `ansible -i hosts.txt all -m ping`:
+<p align="center">
+  <img src="./.info/2.2.2.Ping_Pong.png">
+</p>
+
 
 
 ```console
