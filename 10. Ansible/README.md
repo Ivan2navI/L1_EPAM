@@ -94,7 +94,9 @@ Ansible uses the configuration file to load the parameters that are required to 
 I have created a custom project directory and created a `ansible.cfg` file. 
 My config file contains only two properties (inventory location, and disabled host key checking):
 ```console
+nano ansible.cfg
+# !!! ansible.cfg !!!
 [defaults]
 host_key_checking = false
-inventory = ./hosts
+inventory = ./hosts.txt
 ```
