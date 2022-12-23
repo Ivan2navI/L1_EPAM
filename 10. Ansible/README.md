@@ -66,7 +66,7 @@ ubuntu@ip-192-168-11-10:~/.ssh$   ssh ubuntu@192.168.11.11 -i ~/.ssh/ansible_nod
 
 ubuntu@ip-192-168-11-10:~/.ssh$   ssh ec2-user@192.168.11.12 -i ~/.ssh/ansible_node2.pem
 ```
-Try `ansible -i hosts.txt all -m ping`  
+And then try commnd `ansible -i hosts.txt all -m ping`,  
 but, it caused an error:
 <p align="center">
   <img src="./.info/2.2.1.Error_Inventory_File.png">
