@@ -224,3 +224,9 @@ all:
               ansible_user: ec2-user
     ungrouped: {}
 ```
+
+### [2.6. setup - Gathers facts about remote hosts](https://docs.ansible.com/ansible/2.5/modules/setup_module.html)
+This module is automatically called by playbooks to gather useful variables about remote hosts that can be used in playbooks.
+<p align="center">
+  <img src="./.info/2.6.Gathers_facts_about_remote_hosts.png">
+</p>
