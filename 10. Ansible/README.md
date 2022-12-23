@@ -36,6 +36,7 @@ sudo apt install ansible
 
 # Check version
 ansible --version
+
 ansible [core 2.13.7]
   config file = /etc/ansible/ansible.cfg
   configured module search path = ['/home/ubuntu/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
