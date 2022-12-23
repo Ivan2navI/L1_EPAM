@@ -312,7 +312,7 @@ nano playbook1.yml
 ```
 And check it `ansible-playbook playbook1.yml`:
 <p align="center">
-  <img src="./.info/3.1.First_playbook.png">
+  <img src="./.info/3.1.1.First_playbook.png">
 </p>
 
 Create 2nd playbook:
@@ -332,3 +332,6 @@ nano playbook2.yml
   - name: Start Apache and enable it during boot
     service: name=httpd state=started enabled=yes
 ```
+<p align="center">
+  <img src="./.info/3.1.2.Second_playbook.png">
+</p>
