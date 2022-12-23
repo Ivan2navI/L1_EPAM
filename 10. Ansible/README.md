@@ -89,4 +89,12 @@ Check results `ansible -i hosts.txt all -m ping`:
   <img src="./.info/2.2.2.Ping_Pong.png">
 </p>
 
-
+### 2.3. Ansible Configuration File
+Ansible uses the configuration file to load the parameters that are required to run the ansible task. If you have installed ansible using the package manager, you will have an `ansible.cfg` file in `/etc/ansible` directory.  
+I have created a custom project directory and created a `ansible.cfg` file. 
+My config file contains only two properties (inventory location, and disabled host key checking):
+```console
+[defaults]
+host_key_checking = false
+inventory = ./hosts
+```
