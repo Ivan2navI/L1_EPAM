@@ -244,3 +244,20 @@ Example **"uptime && df -h"** for all nodes: `ansible all -m shell -a "uptime &&
 <p align="center">
   <img src="./.info/2.7.Ad_hoc_Command.png">
 </p>
+
+To copy files or install packages you can run the following command and set the state to **"present"**. You should choose `-b` or `-become` flag to run the module with `sudo` privilege in the managed nodes. If you have set the password for the sudo user, then you should pass `-K` along with the `-b` flag which will prompt for the **become** password.
+```console
+ansible all -m apt -a "name=cowsay,vim,cmatrix state=present" -b -K
+```
+Copy files example:
+```console
+echo "Hello DevOPS!" > hello.txt
+cat hello.txt
+> Hello DevOPS!
+
+ansible all -m copy -a "src=hello.txt dest=/home" -b   # `-b` or `-become` flag to run the module with `sudo` privilege in the managed nodes.
+ansible all -m copy -a "src=hello.txt dest=/home" -b -K # if you have set the password for the sudo user, then you should pass `-K`
+```
+<p align="center">
+  <img src="./.info/2.7.Ad_hoc_Command_copy_files.png">
+</p>
