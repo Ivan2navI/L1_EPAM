@@ -240,3 +240,7 @@ There are a few inputs you have to provide when running the ad hoc command:
 $ ansible [group] -m [module] -a [module arguments]
 ```
 You can combine other arguments we have seen in the previous sections into ad hoc commands.
+Example **"uptime && df -h"** for all nodes: `ansible all -m shell -a "uptime && df -h"`
+<p align="center">
+  <img src="./.info/2.7.Ad_hoc_Command.png">
+</p>
