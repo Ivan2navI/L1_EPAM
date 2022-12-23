@@ -319,7 +319,7 @@ Create 2nd playbook:
 ```console
 nano playbook2.yml
 
-# !!! playbook1.yml !!!
+# !!! playbook2.yml !!!
 ---
 - name: Install Apache Web Server on AMI Linux
   hosts: all
@@ -330,5 +330,5 @@ nano playbook2.yml
     yum:  name=httpd state=latest
 
   - name: Start Apache and enable it during boot
-    service: name=httpd state=latest enabled=yes
+    service: name=httpd state=started enabled=yes
 ```
