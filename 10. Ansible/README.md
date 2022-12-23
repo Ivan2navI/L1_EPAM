@@ -280,6 +280,10 @@ ansible test -m service -a "name=httpd state=started enabled=yes" -b      # host
 
 ansible test -m shell -a "curl http://2ip.ua"
 >  ip : 13.38.108.20
+
+##################################################
+# Remove httpd
+ansible test -m yum -a "name=httpd state=removed" -b
 ```
 <p align="center">
   <img src="./.info/2.7.Ad_hoc_Command_Example_installing_package.png">
