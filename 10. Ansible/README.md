@@ -263,6 +263,10 @@ ansible all -m shell -a "cat /home/hello.txt"
 >> Hello DevOPS!
 > ip-192-168-11-11 | CHANGED | rc=0 >>
 >> Hello DevOPS!
+
+##################################################
+# Delete this files
+ansible all -m file -a "path=/home/hello.txt state=absent" -b
 ```
 <p align="center">
   <img src="./.info/2.7.Ad_hoc_Command_copy_files.png">
