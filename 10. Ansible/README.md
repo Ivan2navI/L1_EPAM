@@ -276,9 +276,10 @@ ansible all -m file -a "path=/home/hello.txt state=absent" -b
 ```console
 ansible all -m yum -a "name=httpd state=latest" -b
 
-ansible test -m service -a "name=httpd state=started enabled=yes" -b # host.txt => [test] => ip-192-168-11-12
+ansible test -m service -a "name=httpd state=started enabled=yes" -b      # host.txt => [test] => ip-192-168-11-12
 
 ansible test -m shell -a "curl http://2ip.ua"
+>  ip : 13.38.108.20
 ```
 <p align="center">
   <img src="./.info/2.7.Ad_hoc_Command_Example_installing_package.png">
