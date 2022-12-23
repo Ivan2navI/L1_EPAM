@@ -201,3 +201,26 @@ ubuntu@ip-192-168-11-10:~/ansible$ ansible-inventory --list
     }
 }
 ```
+`ansible-inventory --list -y` containing your own server infrastructure as defined in your inventory file:
+```console
+ubuntu@ip-192-168-11-10:~/ansible$ ansible-inventory --list -y
+all:
+  children:
+    test_prod:
+      children:
+        staging_servers:
+          hosts:
+            ip-192-168-11-11:
+              ansible_hosts: 192.168.11.11
+              ansible_python_interpreter: /usr/bin/python3
+              ansible_ssh_private_key_file: /home/ubuntu/.ssh/ansible_node1.pem
+              ansible_user: ubuntu
+        test:
+          hosts:
+            ip-192-168-11-12:
+              ansible_hosts: 192.168.11.12
+              ansible_python_interpreter: /usr/bin/python3
+              ansible_ssh_private_key_file: /home/ubuntu/.ssh/ansible_node2.pem
+              ansible_user: ec2-user
+    ungrouped: {}
+```
