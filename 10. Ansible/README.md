@@ -295,7 +295,7 @@ The playbook is a YAML file that is used to execute one or more tasks against th
 The main difference between ad hoc commands and playbooks is with adhoc commands you can create simple one-liners or use the adhoc command in shell scripts to run simple tasks. When you want to do complex repetitive operations then you should write playbooks and store them in a central repository and use them whenever needed.  
 
 ### 3.1. First playbooks
-
+Create 1st playbook:
 ```console
 # !!! playbook1.yml !!!
 ---
