@@ -297,5 +297,14 @@ The main difference between ad hoc commands and playbooks is with adhoc commands
 ### 3.1. First playbooks
 
 ```console
+# !!! playbook1.yml !!!
+---
+- name: Connection Testing
+  hosts: all
+  become: yes               # `-b` or `-become` flag to run the module with `sudo` privilege in the managed nodes.
 
+  tasks:
+
+  - name: Ping servers
+    ping:
 ```
