@@ -17,6 +17,7 @@
 
 ## 2. :a:nsible instalation
 
+
 ```console
 ubuntu@ip-192-168-11-10:~/.ssh$ ssh ubuntu@192.168.11.11 -i ~/.ssh/ansible_node1.pem
 
