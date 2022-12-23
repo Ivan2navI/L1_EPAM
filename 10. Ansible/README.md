@@ -294,8 +294,8 @@ The playbook is a YAML file that is used to execute one or more tasks against th
 
 The main difference between ad hoc commands and playbooks is with adhoc commands you can create simple one-liners or use the adhoc command in shell scripts to run simple tasks. When you want to do complex repetitive operations then you should write playbooks and store them in a central repository and use them whenever needed.  
 
-### 3.1. First playbook
-Create 1st playbook:
+### 3.1. First playbook - "Connection Testing"
+Create 1st playbook :
 ```console
 nano playbook1.yml
 
@@ -315,6 +315,7 @@ And check it `ansible-playbook playbook1.yml`:
   <img src="./.info/3.1.1.First_playbook.png">
 </p>
 
+### 3.2. Playbook - "Install Apache Web Server on AMI Linux"
 Create 2nd playbook:
 ```console
 nano playbook2.yml
@@ -334,4 +335,33 @@ nano playbook2.yml
 ```
 <p align="center">
   <img src="./.info/3.1.2.Second_playbook.png">
+</p>
+
+### 3.3. Playbook - "Upload web page example"
+Create 3a playbook - old version for module `copy: src={{ source_file }} dest={{ destin_file }} mode=0555`:
+```console
+nano playbook3a.yml
+
+# !!! playbook3a.yml !!!
+---
+- name: Install Apache Web Server on AMI Linux. Upload web page example
+  hosts: all
+  become: yes               # `-b` or `-become` flag to run the module with `sudo` privilege in the managed nodes.
+
+  vars:
+    source_file: index.html
+    destin_file: /var/www/html
+
+  tasks:
+  - name: Install Apache Web Server
+    yum:  name=httpd state=latest
+
+  - name: Copy index.html to target server
+    copy: src={{ source_file }} dest={{ destin_file }} mode=0555
+
+  - name: Start Apache and enable it during boot
+    service: name=httpd state=started enabled=yes
+```
+<p align="center">
+  <img src="./.info/3.1.x.Second_playbook.png">
 </p>
