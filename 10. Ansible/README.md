@@ -314,3 +314,21 @@ And check it `ansible-playbook playbook1.yml`:
 <p align="center">
   <img src="./.info/3.1.First_playbook.png">
 </p>
+
+Create 2nd playbook:
+```console
+nano playbook2.yml
+
+# !!! playbook1.yml !!!
+---
+- name: Install Apache Web Server on AMI Linux
+  hosts: all
+  become: yes               # `-b` or `-become` flag to run the module with `sudo` privilege in the managed nodes.
+
+  tasks:
+  - name: Install Apache Web Server
+    yum:  name=httpd state=latest
+
+  - name: Start Apache and enable it during boot
+    service: name=httpd state=latest enabled=yes
+```
