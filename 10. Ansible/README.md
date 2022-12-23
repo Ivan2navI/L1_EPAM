@@ -289,3 +289,4 @@ ansible test -m yum -a "name=httpd state=removed" -b
   <img src="./.info/2.7.Ad_hoc_Command_Example_installing_package.png">
 </p>
 
+## 3. Playbooks
