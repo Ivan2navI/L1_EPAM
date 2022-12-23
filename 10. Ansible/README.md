@@ -230,3 +230,13 @@ This module is automatically called by playbooks to gather useful variables abou
 <p align="center">
   <img src="./.info/2.6.Gathers_facts_about_remote_hosts.png">
 </p>
+
+### [2.7. Ad hoc Command](https://ostechnix.com/ansible-ad-hoc-commands/)
+There are a few inputs you have to provide when running the ad hoc command:
+- You have to specify the targets(managed nodes). Either you can use the default "all/ungrouped" groups or user-defined groups.
+- You have to pass the module name as an argument to the -m flag.
+- Every module accepts a set of options. Those options should be passed as arguments to -a flag. If there are multiple options then they should be enclosed within quotes.
+```console
+$ ansible [group] -m [module] -a [module arguments]
+```
+You can combine other arguments we have seen in the previous sections into ad hoc commands.
