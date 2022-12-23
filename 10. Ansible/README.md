@@ -289,4 +289,13 @@ ansible test -m yum -a "name=httpd state=removed" -b
   <img src="./.info/2.7.Ad_hoc_Command_Example_installing_package.png">
 </p>
 
-## 3. Playbooks
+## [3. Playbooks](https://ostechnix.com/ansible-playbooks/)  
+The playbook is a YAML file that is used to execute one or more tasks against the managed hosts in the environment.  
+
+The main difference between ad hoc commands and playbooks is with adhoc commands you can create simple one-liners or use the adhoc command in shell scripts to run simple tasks. When you want to do complex repetitive operations then you should write playbooks and store them in a central repository and use them whenever needed.  
+
+### 3.1. First playbooks
+
+```console
+
+```
