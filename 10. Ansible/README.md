@@ -294,9 +294,11 @@ The playbook is a YAML file that is used to execute one or more tasks against th
 
 The main difference between ad hoc commands and playbooks is with adhoc commands you can create simple one-liners or use the adhoc command in shell scripts to run simple tasks. When you want to do complex repetitive operations then you should write playbooks and store them in a central repository and use them whenever needed.  
 
-### 3.1. First playbooks
+### 3.1. First playbook
 Create 1st playbook:
 ```console
+nano playbook1.yml
+
 # !!! playbook1.yml !!!
 ---
 - name: Connection Testing
@@ -308,3 +310,7 @@ Create 1st playbook:
   - name: Ping servers
     ping:
 ```
+And check it `ansible-playbook playbook1.yml`:
+<p align="center">
+  <img src="./.info/3.1.First_playbook.png">
+</p>
