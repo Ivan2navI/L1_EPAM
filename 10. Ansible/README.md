@@ -69,7 +69,7 @@ ubuntu@ip-192-168-11-10:~$ hostname
 > ip-192-168-11-10
 ```
 Modify the `hosts.txt`:
-```
+```console
 # !!! hosts.txt !!!
 [staging_servers]
 ip-192-168-11-11    ansible_hosts=192.168.11.11 ansible_user=ubuntu ansible_ssh_private_key_file=/home/ubuntu/.ssh/ansible_node1.pem
