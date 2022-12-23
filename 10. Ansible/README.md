@@ -58,7 +58,16 @@ ubuntu@ip-192-168-11-10:~$  nano hosts.txt
 Node1_Ubuntu    ansible_hosts=192.168.11.11 ansible_user=ubuntu ansible_ssh_private_key_file=/home/ubuntu/.ssh/ansible_node1.pem
 Node2_Ubuntu    ansible_hosts=192.168.11.12 ansible_user=ec2-user ansible_ssh_private_key_file=/home/ubuntu/.ssh/ansible_node2.pem
 ```
-But, it caused an error:
+Add `chmod 400` for all `*.pem` keys:
+```console
+ubuntu@ip-192-168-11-10:~/.ssh$   chmod 400 ansible_node1.pem ansible_node2.pem
+
+ubuntu@ip-192-168-11-10:~/.ssh$   ssh ubuntu@192.168.11.11 -i ~/.ssh/ansible_node1.pem
+
+ubuntu@ip-192-168-11-10:~/.ssh$   ssh ec2-user@192.168.11.12 -i ~/.ssh/ansible_node2.pem
+```
+Try `ansible -i hosts.txt all -m ping`  
+but, it caused an error:
 <p align="center">
   <img src="./.info/2.2.1.Error_Inventory_File.png">
 </p>
@@ -81,11 +90,3 @@ Check results `ansible -i hosts.txt all -m ping`:
 </p>
 
 
-
-```console
-ubuntu@ip-192-168-11-10:~/.ssh$   chmod 400 ansible_node1.pem ansible_node2.pem
-
-ubuntu@ip-192-168-11-10:~/.ssh$   ssh ubuntu@192.168.11.11 -i ~/.ssh/ansible_node1.pem
-
-ubuntu@ip-192-168-11-10:~/.ssh$   ssh ec2-user@192.168.11.12 -i ~/.ssh/ansible_node2.pem
-```
