@@ -24,6 +24,19 @@
   - **Ansible Node1: [192.168.11.11]** Ubuntu 22.04.1 LTS 
   - **Ansible Node2: [192.168.11.12]** Amazon Linux 2 Kernel 5.10 AMI 2.0.20221210.1 
 
+### 2.1. Installing Ansible
+To begin using Ansible as a means of managing your server infrastructure, you need to install the Ansible software on the machine that will serve as the Ansible control node.
+From your control node, run the following command to include the official project’s PPA (personal package archive) in your system’s list of sources:
+```console
+sudo apt-add-repository ppa:ansible/ansible
+
+sudo apt update
+
+sudo apt install ansible
+```
+
+
+
 ```console
 ubuntu@ip-192-168-11-10:~/.ssh$   chmod 400 ansible_node1.pem ansible_node2.pem
 

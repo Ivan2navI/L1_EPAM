@@ -1,0 +1,79 @@
+<h1 id="install-configure-noip"><a href="https://thanoskoutr.com/posts/noip2-install-and-service-commands/">Install &amp; Configure NoIP</a></h1>
+<p>No-IP is a Free Dynamic DNS and Managed DNS Provider, that we can use to get a free domain name. There a lot of free Dynamic DNS services, you can find a good comprehensive of them here that we can choose from, but this was the first service that I personally tried.</p>
+<p>The good with this service is that we have a big selection of free domain names that we can choose, so we can easily find a domain that is available for the hostname we want to have.</p>
+<p>The negative is that every 30 days they send a notification email, and we have to sign in to www.noip.com and confirm that we still use the hostname. After some time that I have used the service, I can say that it becomes annoying to verify it once every month.</p>
+<pre class="console"><code># Login as root
+sudo su
+
+# The command installs a packages `make` &amp; `gcc`.
+apt-get update
+apt install make 
+apt install make gcc -y
+
+# Type the following commands:
+cd /usr/local/src/
+wget http://www.noip.com/client/linux/noip-duc-linux.tar.gz
+tar xf noip-duc-linux.tar.gz
+cd noip-2.1.9-1/
+make
+make install
+
+# On the configuration stage:
+#    =&gt; Add email and password.
+#    =&gt; The hostname to update (choose only one).
+
+# To launch the client
+/usr/local/bin/noip2
+
+# ------------------------------------
+# Update Credentials
+cd /usr/local/src/noip-2.1.9-1
+sudo rm -r /usr/local/bin/noip2
+sudo make
+# --&gt; make: &#39;noip2&#39; is up to date.
+sudo make install
+#   if [ ! -d /usr/local/bin ]; then mkdir -p /usr/local/bin;fi
+#   if [ ! -d /usr/local/etc ]; then mkdir -p /usr/local/etc;fi
+#   cp noip2 /usr/local/bin/noip2
+#   /usr/local/bin/noip2 -C -c /tmp/no-ip2.conf
+
+#   Auto configuration for Linux client of no-ip.com.
+
+#   Please enter the login/email string for no-ip.com  your_mail@mail.com
+#   Please enter the password for user &#39;your_mail@mail.com&#39;  ********
+
+# ------------------------------------
+# !! Add an executable (noip2) as a service !!
+# Create `noip2.service` in `/etc/systemd/system`
+# And add the following:
+
+[Unit]
+Description=No-Ip Dynamic DNS Update Service
+After=network.service
+
+[Service]
+Type=forking
+ExecStart=/usr/local/bin/noip2
+
+[Install]
+WantedBy=default.target
+
+# ------------------------------------
+# Restart systemctl to accept changes
+sudo systemctl daemon-reload
+
+# Enable service
+sudo systemctl enable noip2
+
+# Start service
+sudo systemctl start noip2
+
+# Restart service
+# !! With a restart, it updates the public IP:
+sudo systemctl restart noip2
+
+# Get status
+sudo systemctl status noip2
+
+# See logs
+sudo journalctl -u noip2</code></pre>
