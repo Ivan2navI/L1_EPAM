@@ -33,7 +33,20 @@ sudo apt-add-repository ppa:ansible/ansible
 sudo apt update
 
 sudo apt install ansible
+
+# Check version
+ansible --version
+ansible [core 2.13.7]
+  config file = /etc/ansible/ansible.cfg
+  configured module search path = ['/home/ubuntu/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /usr/lib/python3/dist-packages/ansible
+  ansible collection location = /home/ubuntu/.ansible/collections:/usr/share/ansible/collections
+  executable location = /usr/bin/ansible
+  python version = 3.10.6 (main, Nov  2 2022, 18:53:38) [GCC 11.3.0]
+  jinja version = 3.0.3
+  libyaml = True
 ```
+### 2.2. Setting Up the Inventory File
 
 
 
