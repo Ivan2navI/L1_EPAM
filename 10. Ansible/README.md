@@ -111,7 +111,7 @@ You can create a group and use other group names under it.
 Inventory file supports host & group variables. Host variables are nothing but variables and their values passed to the host in the inventory file.  
 Group vars is same as host vars but the variables will be applied to the entire group instead of a single host. So you can create a group var where the variables will be inherited by all the nodes in the group. You need to add :vars to make the group as group vars.
 ```console
-# !!! ansible.cfg !!!
+# !!! hosts.txt !!!
 [staging_servers]
 ip-192-168-11-11    ansible_hosts=192.168.11.11 ansible_user=ubuntu ansible_ssh_private_key_file=/home/ubuntu/.ssh/ansible_node1.pem
 
