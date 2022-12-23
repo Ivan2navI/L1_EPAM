@@ -106,7 +106,7 @@ inventory = ./hosts.txt
 ubuntu@ip-192-168-11-10:~/ansible$  ansible all -m ping
 ```
 
-### 2.4.Inventory File With Host Vars, Group Vars & Child Groups
+### 2.4. Inventory File With Host Vars, Group Vars & Child Groups
 You can create a group and use other group names under it.  
 Inventory file supports host & group variables. Host variables are nothing but variables and their values passed to the host in the inventory file.  
 Group vars is same as host vars but the variables will be applied to the entire group instead of a single host. So you can create a group var where the variables will be inherited by all the nodes in the group. You need to add :vars to make the group as group vars.
@@ -124,4 +124,80 @@ test
 
 [test_prod:vars]
 ansible_python_interpreter=/usr/bin/python3
+```
+### 2.5. Ansible Inventory Command
+To get the inventory details in the graph format, use `--graph flag`. If you have different inventory files, you can use -i flag to explicitly point to the inventory file.  
+```console
+ubuntu@ip-192-168-11-10:~/ansible$ ansible-inventory --graph
+@all:
+  |--@test_prod:
+  |  |--@staging_servers:
+  |  |  |--ip-192-168-11-11
+  |  |--@test:
+  |  |  |--ip-192-168-11-12
+  |--@ungrouped:
+```
+You can print the host and group var information by passing `--vars` flag along with `--graph` flag.
+```console
+ubuntu@ip-192-168-11-10:~/ansible$ ansible-inventory --graph --vars
+@all:
+  |--@test_prod:
+  |  |--@staging_servers:
+  |  |  |--ip-192-168-11-11
+  |  |  |  |--{ansible_hosts = 192.168.11.11}
+  |  |  |  |--{ansible_python_interpreter = /usr/bin/python3}
+  |  |  |  |--{ansible_ssh_private_key_file = /home/ubuntu/.ssh/ansible_node1.pem}
+  |  |  |  |--{ansible_user = ubuntu}
+  |  |--@test:
+  |  |  |--ip-192-168-11-12
+  |  |  |  |--{ansible_hosts = 192.168.11.12}
+  |  |  |  |--{ansible_python_interpreter = /usr/bin/python3}
+  |  |  |  |--{ansible_ssh_private_key_file = /home/ubuntu/.ssh/ansible_node2.pem}
+  |  |  |  |--{ansible_user = ec2-user}
+  |  |--{ansible_python_interpreter = /usr/bin/python3}
+  |--@ungrouped:
+```
+When you use the `--list` flag, the output will be in JSON format.
+```console
+ubuntu@ip-192-168-11-10:~/ansible$ ansible-inventory --list
+{
+    "_meta": {
+        "hostvars": {
+            "ip-192-168-11-11": {
+                "ansible_hosts": "192.168.11.11",
+                "ansible_python_interpreter": "/usr/bin/python3",
+                "ansible_ssh_private_key_file": "/home/ubuntu/.ssh/ansible_node1.pem",
+                "ansible_user": "ubuntu"
+            },
+            "ip-192-168-11-12": {
+                "ansible_hosts": "192.168.11.12",
+                "ansible_python_interpreter": "/usr/bin/python3",
+                "ansible_ssh_private_key_file": "/home/ubuntu/.ssh/ansible_node2.pem",
+                "ansible_user": "ec2-user"
+            }
+        }
+    },
+    "all": {
+        "children": [
+            "test_prod",
+            "ungrouped"
+        ]
+    },
+    "staging_servers": {
+        "hosts": [
+            "ip-192-168-11-11"
+        ]
+    },
+    "test": {
+        "hosts": [
+            "ip-192-168-11-12"
+        ]
+    },
+    "test_prod": {
+        "children": [
+            "staging_servers",
+            "test"
+        ]
+    }
+}
 ```
