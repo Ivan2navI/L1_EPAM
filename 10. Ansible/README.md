@@ -89,7 +89,7 @@ Check results `ansible -i hosts.txt all -m ping`:
   <img src="./.info/2.2.2.Ping_Pong.png">
 </p>
 
-### 2.3. Ansible Configuration File
+### [2.3. Ansible Configuration File](https://ostechnix.com/ansible-inventory-and-configuration-files/)
 Ansible uses the configuration file to load the parameters that are required to run the ansible task. If you have installed ansible using the package manager, you will have an `ansible.cfg` file in `/etc/ansible` directory.  
 But, I have created a custom project directory and created a `ansible.cfg` file.  
 My config file contains only two properties (inventory location, and disabled host key checking):
@@ -106,7 +106,7 @@ inventory = ./hosts.txt
 ubuntu@ip-192-168-11-10:~/ansible$  ansible all -m ping
 ```
 
-### 2.4. Inventory File With Host Vars, Group Vars & Child Groups
+### [2.4. Inventory File With Host Vars, Group Vars & Child Groups](https://ostechnix.com/ansible-inventory-and-configuration-files/)
 You can create a group and use other group names under it.  
 Inventory file supports host & group variables. Host variables are nothing but variables and their values passed to the host in the inventory file.  
 Group vars is same as host vars but the variables will be applied to the entire group instead of a single host. So you can create a group var where the variables will be inherited by all the nodes in the group. You need to add :vars to make the group as group vars.
@@ -125,7 +125,7 @@ test
 [test_prod:vars]
 ansible_python_interpreter=/usr/bin/python3
 ```
-### 2.5. Ansible Inventory Command
+### [2.5. Ansible Inventory Command](https://ostechnix.com/ansible-inventory-and-configuration-files/)
 To get the inventory details in the graph format, use `--graph flag`. If you have different inventory files, you can use -i flag to explicitly point to the inventory file.  
 ```console
 ubuntu@ip-192-168-11-10:~/ansible$ ansible-inventory --graph
