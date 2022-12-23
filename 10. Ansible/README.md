@@ -48,6 +48,16 @@ ansible [core 2.13.7]
   libyaml = True
 ```
 ### 2.2. Setting Up the Inventory File
+The inventory file contains all information about the hosts that you will manage with Ansible.
+So, create it:
+```console
+ubuntu@ip-192-168-11-10:~$  mkdir ansible
+ubuntu@ip-192-168-11-10:~$  nano hosts.txt
+# !!! hosts.txt !!!
+[staging_servers]
+Node1_Ubuntu    ansible_hosts=192.168.11.11 ansible_user=ubuntu ansible_ssh_private_key_file=/home/ubuntu/.ssh/ansible_node1.pem
+Node2_Ubuntu    ansible_hosts=192.168.11.12 ansible_user=ec2-user ansible_ssh_private_key_file=/home/ubuntu/.ssh/ansible_node2.pem
+```
 
 
 
