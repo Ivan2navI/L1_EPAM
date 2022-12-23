@@ -249,7 +249,7 @@ To copy files or install packages you can run the following command and set the 
 ```console
 ansible all -m apt -a "name=cowsay,vim,cmatrix state=present" -b -K
 ```
-Copy files example:
+**Example of** copy file:
 ```console
 echo "Hello DevOPS!" > hello.txt
 cat hello.txt
@@ -271,3 +271,8 @@ ansible all -m file -a "path=/home/hello.txt state=absent" -b
 <p align="center">
   <img src="./.info/2.7.Ad_hoc_Command_copy_files.png">
 </p>
+
+**Example of** installing package:
+```console
+ansible all -m yum -a "name=httpd state=latest" -b
+```
