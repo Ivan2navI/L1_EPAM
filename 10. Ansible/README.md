@@ -255,8 +255,8 @@ echo "Hello DevOPS!" > hello.txt
 cat hello.txt
 > Hello DevOPS!
 ##################################################
-ansible all -m copy -a "src=hello.txt dest=/home" -b   # `-b` or `-become` flag to run the module with `sudo` privilege in the managed nodes.
-ansible all -m copy -a "src=hello.txt dest=/home" -b -K # if you have set the password for the sudo user, then you should pass `-K`
+ansible all -m copy -a "src=hello.txt dest=/home" -b      # `-b` or `-become` flag to run the module with `sudo` privilege in the managed nodes.
+ansible all -m copy -a "src=hello.txt dest=/home" -b -K   # if you have set the password for the sudo user, then you should pass `-K`
 ##################################################
 ansible all -m shell -a "cat /home/hello.txt"
 > ip-192-168-11-12 | CHANGED | rc=0 >>
