@@ -674,10 +674,10 @@ ansible-playbook playbook5.yml
 </p>
 
 ### [3.6. Templating (Jinja2)](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_templating.html)  
-➢ [Discovering variables: facts and magic variables](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_vars_facts.html) 
-➢ [How to Use Jinja2 Template in Ansible Playbook](https://www.linuxtechi.com/configure-use-ansible-jinja2-templates/);
-➢ [Template Designer Documentation](https://jinja.palletsprojects.com/en/latest/templates/);
-➢ [Ansible Template Module With Examples](https://tekneed.com/using-ansible-template-module-with-ansible-jinja2/#ansible-template-module-with-examples).
+➢ [Discovering variables: facts and magic variables](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_vars_facts.html);  
+➢ [How to Use Jinja2 Template in Ansible Playbook](https://www.linuxtechi.com/configure-use-ansible-jinja2-templates/);  
+➢ [Template Designer Documentation](https://jinja.palletsprojects.com/en/latest/templates/);  
+➢ [Ansible Template Module With Examples](https://tekneed.com/using-ansible-template-module-with-ansible-jinja2/#ansible-template-module-with-examples).  
 
 
 Ansible uses Jinja2 templating to enable dynamic expressions and access to variables and facts. You can use templating with the template module. For example, you can create a template for a configuration file, then deploy that configuration file to multiple environments and supply the correct data (IP address, hostname, version) for each environment. You can also use templating in playbooks directly, by templating task names and more. You can use all the standard filters and tests included in Jinja2. Ansible includes additional specialized filters for selecting and transforming data, tests for evaluating template expressions, and Lookup plugins for retrieving data from external sources such as files, APIs, and databases for use in templating.
