@@ -430,3 +430,61 @@ ansible-playbook playbook3b.yml
 <p align="center">
   <img src="./.info/3.3.playbook2.png">
 </p>
+
+### 3.4. Playbook 3с - "Installing a web page on all versions of Linux systems"
+Create playbook 3с, add **debug** and **when** checking:
+```console
+nano playbook3c.yml
+
+ansible-playbook playbook3c.yml
+
+# !!! playbook3c.yml !!!
+---
+- name: Install Apache Web Server on AMI Linux. Upload web page example
+  hosts: all
+  become: yes               # `-b` or `-become` flag to run the module with `sudo` privilege in the managed nodes.
+
+  vars:
+    source_file: index.html
+    destin_file: /var/www/html
+
+  tasks:
+  - name:  Check Linux distro                                     # Add to 3c variant
+    debug: var=ansible_os_family                                  # Add to 3c variant
+
+  - name: Install Apache Web Server on AWS Linux / RedHat
+    yum:  name=httpd state=latest
+    when: ansible_os_family == "RedHat"                            # Add to 3c variant
+
+  - name: Install Apache Web Server on Ubuntu / Debian             # Add to 3c variant
+    apt:  update_cache=yes name=apache2 state=latest               # Add to 3c variant
+    when: ansible_os_family == "Debian"                            # Add to 3c variant
+
+  - name: Copy index.html to target server AWS Linux / RedHat
+    copy: src={{ source_file }} dest={{ destin_file }} mode=0555
+    notify: Restart Apache RedHat                                  # Add to 3c variant
+    when: ansible_os_family == "RedHat"                            # Add to 3c variant
+
+  - name: Copy index.html to target server Ubuntu / Debian 
+    copy: src={{ source_file }} dest={{ destin_file }} mode=0555
+    notify: Restart Apache Debian                                  # Add to 3c variant
+    when: ansible_os_family == "Debian"                            # Add to 3c variant
+
+  - name: Start Apache and enable it during boot
+    service: name=httpd state=started enabled=yes
+    when: ansible_os_family == "RedHat"                            # Add to 3c variant
+
+  - name: Start Apache and enable it during boot                   # Add to 3c varian
+    service: name=apache2 state=started enabled=yes                # Add to 3c varian
+    when: ansible_os_family == "Debian"                            # Add to 3c variant
+
+  handlers:
+  - name: Restart Apache RedHat
+    service: name=httpd state=restarted
+
+  - name: Restart Apache Debian                                   # Add to 3c variant
+    service: name=apache2 state=restarted                         # Add to 3c variant
+```
+<p align="center">
+  <img src="./.info/3.4.playbook.png">
+</p>
