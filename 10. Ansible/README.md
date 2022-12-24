@@ -113,10 +113,16 @@ Group vars is same as host vars but the variables will be applied to the entire 
 ```console
 # !!! hosts.txt !!!
 [staging_servers]
-ip-192-168-11-11    ansible_hosts=192.168.11.11 ansible_user=ubuntu ansible_ssh_private_key_file=/home/ubuntu/.ssh/ansible_node1.pem
+ip-192-168-11-11    ansible_hosts=192.168.11.11 ansible_user=ubuntu ansible_ssh_private_key_file=/home/ubuntu/.>
 
 [test]
-ip-192-168-11-12    ansible_hosts=192.168.11.12 ansible_user=ec2-user ansible_ssh_private_key_file=/home/ubuntu/.ssh/ansible_node2.pem
+ip-192-168-11-12    ansible_hosts=192.168.11.12 ansible_user=ec2-user ansible_ssh_private_key_file=/home/ubuntu>
+
+[ubuntu:children]
+staging_servers
+
+[linux:children]
+test
 
 [test_prod:children]
 staging_servers
@@ -431,7 +437,7 @@ ansible-playbook playbook3b.yml
   <img src="./.info/3.3.playbook2.png">
 </p>
 
-### 3.4. Playbook 3с - "Installing a web page on all versions of Linux systems"
+### 3.4. Playbook 3с/4 - "Installing a web page on all versions of Linux systems"
 Create playbook 3с, add **debug** and **when** checking:
 ```console
 nano playbook3c.yml
@@ -488,3 +494,97 @@ ansible-playbook playbook3c.yml
 <p align="center">
   <img src="./.info/3.4.playbook.png">
 </p>
+
+And now we can use **block** for `playbook4.yml`:
+```console
+nano playbook4.yml
+
+ansible-playbook playbook4.yml
+
+# !!! playbook4.yml !!!
+---
+- name: Install Apache Web Server on AMI Linux. Upload web page example
+  hosts: all
+  become: yes               # `-b` or `-become` flag to run the module with `sudo` privilege in the managed nodes.
+
+  vars:
+    source_file: index.html
+    destin_file: /var/www/html
+
+  tasks:
+  - name:  Check Linux distro
+    debug: var=ansible_os_family
+
+  - block: # For "RedHat"
+
+    - name: Install Apache Web Server on AWS Linux / RedHat
+      yum:  name=httpd state=latest
+
+    - name: Copy index.html to target server AWS Linux / RedHat
+      copy: src={{ source_file }} dest={{ destin_file }} mode=0555
+      notify: Restart Apache RedHat
+
+    - name: Start Apache and enable it during boot
+      service: name=httpd state=started enabled=yes
+
+    - name: Add OS info
+      shell: |
+        OS_VERSION=$(cat /etc/os-release | grep "PRETTY_NAME" | sed 's/PRETTY_NAME=//' | sed 's/\"//g')
+        echo "<h3 style="color:DeepSkyBlue" align="center">$OS_VERSION</h3>" >> index.html
+      args:
+        chdir: "/var/www/html/"
+    
+    when: ansible_os_family == "RedHat"
+
+  - block: # For "Debian"
+
+    - name: Start Apache and enable it during boot
+      service: name=apache2 state=started enabled=yes
+
+    - name: Install Apache Web Server on Ubuntu / Debian
+      apt:  update_cache=yes name=apache2 state=latest
+
+    - name: Copy index.html to target server Ubuntu / Debian
+      copy: src={{ source_file }} dest={{ destin_file }} mode=0555
+      notify: Restart Apache Debian
+
+    - name: Start Apache and enable it during boot
+      service: name=apache2 state=started enabled=yes
+
+    - name: Add OS info
+      #shell: cat /etc/os-release | grep "PRETTY_NAME" | sed 's/PRETTY_NAME=//' | sed 's/\"//g' >> /var/www/html/index.html
+      shell: |
+        OS_VERSION=$(cat /etc/os-release | grep "PRETTY_NAME" | sed 's/PRETTY_NAME=//' | sed 's/\"//g')
+        echo "<h3 style="color:Orange" align="center">$OS_VERSION</h3>" >> index.html
+      args:
+        chdir: "/var/www/html/"
+
+    when: ansible_os_family == "Debian"
+
+  handlers:
+  - name: Restart Apache RedHat
+    service: name=httpd state=restarted
+
+  - name: Restart Apache Debian
+    service: name=apache2 state=restarted
+```
+
+ansible ip-192-168-11-12 -m yum -a "name=httpd state=latest" -b
+ansible ip-192-168-11-12 -m yum -a "name=httpd state=removed" -b
+
+ansible ip-192-168-11-11 -m apt -a "name=apache2 state=latest" -b
+ansible ip-192-168-11-11 -m apt -a "name=apache2 state=absent purge=yes" -b
+
+
+ansible ip-192-168-11-11 -m shell -a "echo "privet" >> /var/www/html/index.html | tee" -b
+
+cat /etc/os-release | grep "PRETTY_NAME" | sed 's/PRETTY_NAME=//' | sed 's/\"//g'
+
+cat /etc/os-release | grep "PRETTY_NAME" | sed 's/PRETTY_NAME=//' | sed 's/\"//g'
+
+cat /etc/os-release | grep "PRETTY_NAME" | sed 's/PRETTY_NAME=//' | sed 's/\"//g'
+
+sed -e 's/danger.*stops//g'
+
+
+echo "<p style="color:red" align="center">$my</p>" > index.html
