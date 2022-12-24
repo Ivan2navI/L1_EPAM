@@ -653,7 +653,10 @@ ansible-playbook playbook5.yml
   - name: Add OS info
     shell: |
       OS_VERSION=$(cat /etc/os-release | grep "PRETTY_NAME" | sed 's/PRETTY_NAME=//' | sed 's/\"//g')
-      echo "<h3 style="color:DeepSkyBlue" align="center">$OS_VERSION</h3>" >> index.html
+      echo "<h3 style="color:MediumVioletRed" align="center">$OS_VERSION</h3>" >> index.html
+      
+      IP_ADR=$(hostname -I)
+      echo "<h4 style="color:MediumVioletRed" align="center">$IP_ADR</h4>" >> index.html
     args:
       chdir: "/var/www/html/"
 
@@ -666,6 +669,9 @@ ansible-playbook playbook5.yml
     service: name=apache2 state=restarted
     when: ansible_os_family == "Debian"
 ```
+<p align="center">
+  <img src="./.info/3.5.LOOP_Playbook.png">
+</p>
 
 
 
