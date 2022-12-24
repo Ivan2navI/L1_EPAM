@@ -588,4 +588,17 @@ ansible-playbook playbook_loop1.yml
       - "Frontend"
       - ".NET"
       - "Java"
+ 
+ # Add new tasks
+
+  - name: Until example
+    shell: echo -n A >> example.txt && cat example.txt
+    register: output
+    delay: 2
+    retries: 5
+    until: output.stdout.find("AAA") == false
+
+  - name: Print Output
+    debug:
+      var: output.stdout
 ```
