@@ -600,7 +600,7 @@ ansible-playbook playbook_loop1.yml
       var: output.stdout
 ```
 
-And now we can use **loop** for `playbook5.yml`:
+And now we can use **loop** for `playbook5.yml` and use [index.html](https://github.com/Ivan2navI/L1_EPAM/tree/main/10.%20Ansible/.info/Loop_Site):
 ```yml
 nano playbook5.yml
 
@@ -673,5 +673,74 @@ ansible-playbook playbook5.yml
   <img src="./.info/3.5.LOOP_Playbook.png">
 </p>
 
+### [3.6. Templating (Jinja2)](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_templating.html)  
+➢ [Discovering variables: facts and magic variables](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_vars_facts.html) 
+➢ [How to Use Jinja2 Template in Ansible Playbook](https://www.linuxtechi.com/configure-use-ansible-jinja2-templates/);
+➢ [Template Designer Documentation](https://jinja.palletsprojects.com/en/latest/templates/);
+➢ [Ansible Template Module With Examples](https://tekneed.com/using-ansible-template-module-with-ansible-jinja2/#ansible-template-module-with-examples).
 
 
+Ansible uses Jinja2 templating to enable dynamic expressions and access to variables and facts. You can use templating with the template module. For example, you can create a template for a configuration file, then deploy that configuration file to multiple environments and supply the correct data (IP address, hostname, version) for each environment. You can also use templating in playbooks directly, by templating task names and more. You can use all the standard filters and tests included in Jinja2. Ansible includes additional specialized filters for selecting and transforming data, tests for evaluating template expressions, and Lookup plugins for retrieving data from external sources such as files, APIs, and databases for use in templating.
+
+Web file **index.j2** is [here](https://github.com/Ivan2navI/L1_EPAM/tree/main/10.%20Ansible/.info/Loop_Site):
+```yml
+nano playbook5a.yml
+
+ansible-playbook playbook5a.yml
+
+# !!! playbook_loop1.yml !!!
+---
+- name: Templating (Jinja2). Install Apache Web Server on AMI Linux. Upload web page example 
+  hosts: all
+  become: yes               # `-b` or `-become` flag to run the module with `sudo` privilege in the managed nodes.
+
+  vars:
+    source_dir: ./Loop_Site
+    destin_dir: /var/www/html
+
+  tasks:
+  - name:  Check Linux distro
+    debug: var=ansible_os_family
+
+  - block: # For "RedHat"
+
+    - name: Install Apache Web Server on AWS Linux / RedHat
+      yum:  name=httpd state=latest
+
+    - name: Start Apache and enable it during boot
+      service: name=httpd state=started enabled=yes
+
+    when: ansible_os_family == "RedHat"
+
+  - block: # For "Debian"
+
+    - name: Install Apache Web Server on Ubuntu / Debian
+      apt:  update_cache=yes name=apache2 state=latest
+
+    - name: Start Apache and enable it during boot
+      service: name=apache2 state=started enabled=yes
+
+    when: ansible_os_family == "Debian"
+
+
+  - name: Create index.html using template
+    template: src={{ source_dir }}/index.j2 dest={{ destin_dir }}/index.html mode=0555    #Use template: +  .j2
+    notify:
+        - Restart Apache Debian
+        - Restart Apache RedHat
+
+  - name: Copy image Jinja2.png to Web folder
+    copy: src={{ source_dir }}/Jinja2.png dest={{ destin_dir }}/Jinja2.png mode=0555   
+
+  handlers:
+  - name: Restart Apache RedHat
+    service: name=httpd state=restarted
+    when: ansible_os_family == "RedHat"
+
+  - name: Restart Apache Debian
+    service: name=apache2 state=restarted
+    when: ansible_os_family == "Debian"
+```
+<p align="center">
+  <img src="./.info/3.6.Templating_(Jinja2).png">
+</p>

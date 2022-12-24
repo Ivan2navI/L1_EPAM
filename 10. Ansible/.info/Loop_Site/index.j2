@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html style="font-size: 16px;" lang="ru"><head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+	
+	<head>
+	<title>Ansible - DevOps Fundamentals 2022</title>
+	</head>
+        
+    <body>
+      <center>
+            <p style="text-align:center">
+              <h1 style="background-color:Orange;">Ansible Templating (Jinja2)</h1>
+              <h2>L1 EPAM</h2>
+			  <h2>DevOps Fundamentals 2022</h2>
+            </p>
+            <p style="text-align:center">
+				<table style="border: 1px #000000 dotted">
+					  <colgroup>
+						<col />
+						<col style="background-color: yellow" span="2" />
+					  </colgroup>
+					<tbody>
+						<tr>	       							
+							<td style="border: 1px #000000 dotted"> ansible_hostname </td> <td style="border: 1px #000000 dotted"> {{ ansible_hostname }} </td>							
+						</tr>	       							
+						<tr>	       							
+							<td style="border: 1px #000000 dotted"> ansible_lsb </td> <td style="border: 1px #000000 dotted"> {{ ansible_lsb }} </td>							
+						</tr>	       							
+						<tr>	       							
+							<td style="border: 1px #000000 dotted"> ansible_os_family </td> <td style="border: 1px #000000 dotted"> {{ ansible_os_family }} </td>							
+						</tr>	       							
+						<tr>	       							
+							<td style="border: 1px #000000 dotted"> ansible_bios_date </td> <td style="border: 1px #000000 dotted"> {{ ansible_bios_date }} </td>							
+						</tr>	       							
+						<tr>	       							
+							<td style="border: 1px #000000 dotted"> ansible_distribution </td> <td style="border: 1px #000000 dotted"> {{ ansible_distribution }} </td>							
+						</tr>	       							
+						<tr>	       							
+							<td style="border: 1px #000000 dotted"> ansible_distribution_file_variety </td> <td style="border: 1px #000000 dotted"> {{ ansible_distribution_file_variety }} </td>							
+						</tr>	       							
+						<tr>	       							
+							<td style="border: 1px #000000 dotted"> ansible_distribution_major_version </td> <td style="border: 1px #000000 dotted"> {{ ansible_distribution_major_version }} </td>							
+						</tr>	       							
+						<tr>	       							
+							<td style="border: 1px #000000 dotted"> ansible_processor </td> <td style="border: 1px #000000 dotted"> {{ ansible_processor }} </td>							
+						</tr>	       							
+						<tr>	       							
+							<td style="border: 1px #000000 dotted"> ansible_processor_cores </td> <td style="border: 1px #000000 dotted"> {{ ansible_processor_cores }} </td>							
+						</tr>	       							
+						<tr>	       							
+							<td style="border: 1px #000000 dotted"> ansible_processor_count </td> <td style="border: 1px #000000 dotted"> {{ ansible_processor_count }} </td>							
+						</tr>	       							
+						<tr>	       							
+							<td style="border: 1px #000000 dotted"> ansible_processor_vcpus </td> <td style="border: 1px #000000 dotted"> {{ ansible_processor_vcpus }} </td>							
+						</tr>	       							
+						<tr>	       							
+							<td style="border: 1px #000000 dotted"> ansible_memtotal_mb </td> <td style="border: 1px #000000 dotted"> {{ ansible_memtotal_mb }} </td>							
+						</tr>	       							
+						<tr>	       							
+							<td style="border: 1px #000000 dotted"> ansible_devices </td> <td style="border: 1px #000000 dotted"> {{ ansible_devices }} </td>							
+						</tr>	       							
+						<tr>	       							
+							<td style="border: 1px #000000 dotted"> ansible_mounts </td> <td style="border: 1px #000000 dotted"> {{ ansible_mounts }} </td>							
+						</tr>	       							
+						<tr>	       							
+							<td style="border: 1px #000000 dotted"> ansible_default_ipv4 </td> <td style="border: 1px #000000 dotted"> {{ ansible_default_ipv4 }} </td>							
+						</tr>								
+						<tr>								
+					</tbody>
+				</table>
+            </p>
+            <img src="./Jinja2.png" alt="Ansible Templating (Jinja2)" class="center">
+      </center>
+    </body>
+</html>
