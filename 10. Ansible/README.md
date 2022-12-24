@@ -568,7 +568,8 @@ ansible-playbook playbook4.yml
   - name: Restart Apache Debian
     service: name=apache2 state=restarted
 ```
-### 3.5. LOOP Playbook 
+### [3.5. LOOP Playbook](https://www.linuxtechi.com/how-to-use-loops-in-ansible-playbook/)
+As with any programming language, loops in Ansible provide an easier way of executing repetitive tasks using fewer lines of code in a playbook.
 ```console
 nano playbook_loop1.yml
 
