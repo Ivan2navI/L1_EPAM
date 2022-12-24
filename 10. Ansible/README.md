@@ -395,3 +395,38 @@ Add file `index.hmtl`:
 <p align="center">
   <img src="./.info/3.3.playbook.png">
 </p>
+
+Create playbook 3b, add *restart* and wait info from **handlers**:
+```console
+nano playbook3b.yml
+
+ansible-playbook playbook3b.yml
+
+# !!! playbook3b.yml !!!
+---
+- name: Install Apache Web Server on AMI Linux. Upload web page example
+  hosts: all
+  become: yes               # `-b` or `-become` flag to run the module with `sudo` privilege in the managed nodes.
+
+  vars:
+    source_file: index.html
+    destin_file: /var/www/html
+
+  tasks:
+  - name: Install Apache Web Server
+    yum:  name=httpd state=latest
+
+  - name: Copy index.html to target server
+    copy: src={{ source_file }} dest={{ destin_file }} mode=0555
+    notify: Restart Apache                                        # Add to 3b variant
+
+  - name: Start Apache and enable it during boot
+    service: name=httpd state=started enabled=yes
+
+  handlers:
+  - name: Restart Apache                                          # Add to 3b variant 
+    service: name=httpd state=restarted                           # Add to 3b variant 
+```
+<p align="center">
+  <img src="./.info/3.3.playbook2.png">
+</p>
