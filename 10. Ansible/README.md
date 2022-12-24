@@ -299,6 +299,8 @@ Create 1st playbook :
 ```console
 nano playbook1.yml
 
+ansible-playbook playbook1.yml
+
 # !!! playbook1.yml !!!
 ---
 - name: Connection Testing
@@ -312,13 +314,15 @@ nano playbook1.yml
 ```
 And check it `ansible-playbook playbook1.yml`:
 <p align="center">
-  <img src="./.info/3.1.1.First_playbook.png">
+  <img src="./.info/3.1.First_playbook.png">
 </p>
 
 ### 3.2. Playbook - "Install Apache Web Server on AMI Linux"
 Create 2nd playbook:
 ```console
 nano playbook2.yml
+
+ansible-playbook playbook2.yml
 
 # !!! playbook2.yml !!!
 ---
@@ -334,13 +338,15 @@ nano playbook2.yml
     service: name=httpd state=started enabled=yes
 ```
 <p align="center">
-  <img src="./.info/3.1.2.Second_playbook.png">
+  <img src="./.info/3.2.Second_playbook.png">
 </p>
 
 ### 3.3. Playbook - "Upload web page example"
-Create 3a playbook - old version for module `copy: src={{ source_file }} dest={{ destin_file }} mode=0555`:
+Create 3a playbook with old version for module `copy: src={{ source_file }} dest={{ destin_file }} mode=0555`:
 ```console
 nano playbook3a.yml
+
+ansible-playbook playbook3a.yml
 
 # !!! playbook3a.yml !!!
 ---
@@ -362,7 +368,7 @@ nano playbook3a.yml
   - name: Start Apache and enable it during boot
     service: name=httpd state=started enabled=yes
 ```
-Create such `index.hmtl`:
+Add file `index.hmtl`:
 ```html
 <!DOCTYPE html>
 <html style="font-size: 16px;" lang="ru"><head>
@@ -386,7 +392,6 @@ Create such `index.hmtl`:
     </body>
 </html>
 ```
-
 <p align="center">
-  <img src="./.info/3.1.x.Second_playbook.png">
+  <img src="./.info/3.3.playbook.png">
 </p>
