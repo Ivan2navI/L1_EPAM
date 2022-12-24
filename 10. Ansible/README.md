@@ -601,7 +601,7 @@ ansible-playbook playbook_loop1.yml
 ```
 
 And now we can use **loop** for `playbook5.yml`:
-```console
+```yml
 nano playbook5.yml
 
 ansible-playbook playbook5.yml
