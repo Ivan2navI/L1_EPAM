@@ -27,7 +27,7 @@
 ### 2.1. Installing Ansible
 To begin using Ansible as a means of managing your server infrastructure, you need to install the Ansible software on the machine that will serve as the Ansible control node.
 From your control node, run the following command to include the official project’s PPA (personal package archive) in your system’s list of sources:
-```bash
+```console
 sudo apt-add-repository ppa:ansible/ansible
 
 sudo apt update
@@ -50,7 +50,7 @@ ansible [core 2.13.7]
 ### 2.2. Setting Up the Inventory File
 The inventory file contains all information about the hosts that you will manage with Ansible.
 So, create it:
-```bash
+```console
 ubuntu@ip-192-168-11-10:~$  mkdir ansible
 ubuntu@ip-192-168-11-10:~$  nano hosts.txt
 # !!! hosts.txt !!!
@@ -59,7 +59,7 @@ Node1_Ubuntu    ansible_hosts=192.168.11.11 ansible_user=ubuntu ansible_ssh_priv
 Node2_Ubuntu    ansible_hosts=192.168.11.12 ansible_user=ec2-user ansible_ssh_private_key_file=/home/ubuntu/.ssh/ansible_node2.pem
 ```
 Add `chmod 400` for all `*.pem` keys:
-```bash
+```console
 ubuntu@ip-192-168-11-10:~/.ssh$   chmod 400 ansible_node1.pem ansible_node2.pem
 
 ubuntu@ip-192-168-11-10:~/.ssh$   ssh ubuntu@192.168.11.11 -i ~/.ssh/ansible_node1.pem
@@ -73,12 +73,12 @@ but, it caused an error:
 </p>
 
 To get a real hostnames of the instances use:
-```bash
+```console
 ubuntu@ip-192-168-11-10:~$ hostname
 > ip-192-168-11-10
 ```
 Modify the `hosts.txt`:
-```bash
+```console
 # !!! hosts.txt !!!
 [staging_servers]
 ip-192-168-11-11    ansible_hosts=192.168.11.11 ansible_user=ubuntu ansible_ssh_private_key_file=/home/ubuntu/.ssh/ansible_node1.pem
@@ -93,7 +93,7 @@ Check results `ansible -i hosts.txt all -m ping`:
 Ansible uses the configuration file to load the parameters that are required to run the ansible task. If you have installed ansible using the package manager, you will have an `ansible.cfg` file in `/etc/ansible` directory.  
 But, I have created a custom project directory and created a `ansible.cfg` file.  
 My config file contains only two properties (inventory location, and disabled host key checking):
-```bash
+```console
 ubuntu@ip-192-168-11-10:~/ansible$  nano ansible.cfg
 ##############################
 # !!! ansible.cfg !!!
@@ -242,7 +242,7 @@ There are a few inputs you have to provide when running the ad hoc command:
 - You have to specify the targets(managed nodes). Either you can use the default "all/ungrouped" groups or user-defined groups.
 - You have to pass the module name as an argument to the -m flag.
 - Every module accepts a set of options. Those options should be passed as arguments to -a flag. If there are multiple options then they should be enclosed within quotes.
-```bash
+```console
 $ ansible [group] -m [module] -a [module arguments]
 ```
 You can combine other arguments we have seen in the previous sections into ad hoc commands.
@@ -252,11 +252,11 @@ Example **"uptime && df -h"** for all nodes: `ansible all -m shell -a "uptime &&
 </p>
 
 To copy files or install packages you can run the following command and set the state to **"present"**. You should choose `-b` or `-become` flag to run the module with `sudo` privilege in the managed nodes. If you have set the password for the sudo user, then you should pass `-K` along with the `-b` flag which will prompt for the **become** password.
-```bash
+```console
 ansible all -m apt -a "name=cowsay,vim,cmatrix state=present" -b -K
 ```
 **Example of** `copy file`:
-```bash
+```console
 echo "Hello DevOPS!" > hello.txt
 cat hello.txt
 > Hello DevOPS!
@@ -279,7 +279,7 @@ ansible all -m file -a "path=/home/hello.txt state=absent" -b
 </p>
 
 **Example of** `installing package`:
-```bash
+```console
 ansible all -m yum -a "name=httpd state=latest" -b
 
 ansible test -m service -a "name=httpd state=started enabled=yes" -b      # host.txt => [test] => ip-192-168-11-12
