@@ -568,3 +568,23 @@ ansible-playbook playbook4.yml
   - name: Restart Apache Debian
     service: name=apache2 state=restarted
 ```
+### 3.5. LOOP Playbook 
+```console
+nano playbook_loop1.yml
+
+ansible-playbook playbook_loop1.yml
+
+# !!! playbook_loop1.yml !!!
+---
+- name: LOOP Playbook
+  hosts: linux
+  become: yes               # `-b` or `-become` flag to run the module with `sudo` privilege in the managed nodes.
+
+  tasks:
+  - name: Hello World
+    debug: msg="Hello {{ item }}"
+    with_items:
+      - "Frontend"
+      - ".NET"
+      - "Java"
+```
