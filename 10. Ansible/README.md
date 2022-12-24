@@ -568,23 +568,3 @@ ansible-playbook playbook4.yml
   - name: Restart Apache Debian
     service: name=apache2 state=restarted
 ```
-
-ansible ip-192-168-11-12 -m yum -a "name=httpd state=latest" -b
-ansible ip-192-168-11-12 -m yum -a "name=httpd state=removed" -b
-
-ansible ip-192-168-11-11 -m apt -a "name=apache2 state=latest" -b
-ansible ip-192-168-11-11 -m apt -a "name=apache2 state=absent purge=yes" -b
-
-
-ansible ip-192-168-11-11 -m shell -a "echo "privet" >> /var/www/html/index.html | tee" -b
-
-cat /etc/os-release | grep "PRETTY_NAME" | sed 's/PRETTY_NAME=//' | sed 's/\"//g'
-
-cat /etc/os-release | grep "PRETTY_NAME" | sed 's/PRETTY_NAME=//' | sed 's/\"//g'
-
-cat /etc/os-release | grep "PRETTY_NAME" | sed 's/PRETTY_NAME=//' | sed 's/\"//g'
-
-sed -e 's/danger.*stops//g'
-
-
-echo "<p style="color:red" align="center">$my</p>" > index.html
