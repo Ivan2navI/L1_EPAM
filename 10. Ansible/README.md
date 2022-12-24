@@ -396,7 +396,7 @@ Add file `index.hmtl`:
   <img src="./.info/3.3.playbook.png">
 </p>
 
-Create playbook 3b, add *restart* and wait info from **handlers**:
+Create playbook 3b, add *"restart"* and wait info from **"handlers"**:
 ```console
 nano playbook3b.yml
 
