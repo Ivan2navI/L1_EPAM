@@ -763,6 +763,22 @@ The command creates the `<role-name>` directory. This role directory contains th
 To view role directory structure, run tree command followed by role name.  
 `$ tree <role-name>`
 
+<p align="center">
+  <img src="./.info/4.Create_Ansible_Roles.png">
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ---
