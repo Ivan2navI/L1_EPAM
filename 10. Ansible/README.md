@@ -744,3 +744,6 @@ ansible-playbook playbook5a.yml
 <p align="center">
   <img src="./.info/3.6.Templating_(Jinja2).png">
 </p>
+
+## [4. Create Ansible Roles and Use them in Playbook](https://www.linuxtechi.com/create-use-ansible-roles-in-playbook/)
+Role is a level of abstraction used to simplify how playbook files are written. A role provides a skeleton for reusable components such as variables, modules, tasks, and facts which can be loaded onto a Playbook file.
