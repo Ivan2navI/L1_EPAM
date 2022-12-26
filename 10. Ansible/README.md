@@ -745,5 +745,34 @@ ansible-playbook playbook5a.yml
   <img src="./.info/3.6.Templating_(Jinja2).png">
 </p>
 
-## [4. Create Ansible Roles and Use them in Playbook](https://www.linuxtechi.com/create-use-ansible-roles-in-playbook/)
+## [4. Create Ansible Roles](https://www.linuxtechi.com/create-use-ansible-roles-in-playbook/)
 Role is a level of abstraction used to simplify how playbook files are written. A role provides a skeleton for reusable components such as variables, modules, tasks, and facts which can be loaded onto a Playbook file.
+
+To create a ansible roles from scratch run ansible galaxy command, example is shown below:  
+`$ ansible-galaxy init <role-name>`  
+The command creates the `<role-name>` directory. This role directory contains the following directories or folders by default:  
+-   The 'defaults' folder -- This contains the default variables that will be used by the role.
+-   The 'files' folder -- Contains files that can be deployed by the role.
+-   The 'handlers' folder -- Stores handlers that can be used by this role.
+-   he 'meta' folder -- Contains files that establish the role dependencies.
+-   The 'tasks' folder -- It contains a YAML file that spells out the tasks for the role itself. Usually, this is the main.yml file.
+-   The 'templates' folder -- Contains template files that can be modified and allocated to the remote host being provisioned.
+-   The 'tests' folder -- Integrates testing with Ansible playbook files.
+-   The 'vars' folder -- Contains variables that are going to be used by the role. You can define them in the playbook file, but it's recommended you define them in this directory.
+
+To view role directory structure, run tree command followed by role name.  
+`$ tree <role-name>`
+
+
+
+---
+### PS: [Paste to Markdown](https://euangoddard.github.io/clipboard2markdown/)
+
+Instructions
+
+    Find the text to convert to Markdown (e.g., in another browser tab)
+    Copy it to the clipboard (Ctrl+C, or ⌘+C on Mac)
+    Paste it into this window (Ctrl+V, or ⌘+V on Mac)
+    The converted Markdown will appear!
+
+The conversion is carried out by [to-markdown](https://github.com/domchristie/to-markdown), a Markdown converter written in JavaScript and running locally in the browser.
