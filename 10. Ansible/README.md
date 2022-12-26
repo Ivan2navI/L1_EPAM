@@ -763,77 +763,32 @@ The command creates the `<role-name>` directory. This role directory contains th
 To view role directory structure, run tree command followed by role name.  
 `$ tree <role-name>`
 
+Create `deploy_apache`:
 <p align="center">
   <img src="./.info/4.Create_Ansible_Roles.png">
 </p>
 
-```yml
-# !!! Ansible Roles.yml !!!
----
-- name: LOOP Playbook. Install Apache Web Server on AMI Linux. Upload web page example 
-  hosts: all
-  become: yes               # `-b` or `-become` flag to run the module with `sudo` privilege in the managed nodes.
-
-  vars:
-    source_dir: ./Loop_Site
-    destin_dir: /var/www/html
-
-  tasks:
-  - name:  Check Linux distro
-    debug: var=ansible_os_family
-
-  - block: # For "RedHat"
-
-    - name: Install Apache Web Server on AWS Linux / RedHat
-      yum:  name=httpd state=latest
-
-    - name: Start Apache and enable it during boot
-      service: name=httpd state=started enabled=yes
-
-    when: ansible_os_family == "RedHat"
-
-  - block: # For "Debian"
-
-    - name: Install Apache Web Server on Ubuntu / Debian
-      apt:  update_cache=yes name=apache2 state=latest
-
-    - name: Start Apache and enable it during boot
-      service: name=apache2 state=started enabled=yes
-
-    when: ansible_os_family == "Debian"
-
-
-  - name: Copy index.html to target server Ubuntu / Debian
-    copy: src={{ source_dir }}/{{ item }} dest={{ destin_dir }} mode=0555
-    loop:
-      - "index.html"
-      - "Ansible_Roles.png"
-    notify:
-        - Restart Apache Debian
-        - Restart Apache RedHat
-
-  - name: Add OS info
-    shell: |
-      OS_VERSION=$(cat /etc/os-release | grep "PRETTY_NAME" | sed 's/PRETTY_NAME=//' | sed 's/\"//g')
-      echo "<h3 style="color:Orange" align="center">$OS_VERSION</h3>" >> index.html
-      
-      IP_ADR=$(hostname -I)
-      echo "<h4 style="color:Orange" align="center">$IP_ADR</h4>" >> index.html
-    args:
-      chdir: "/var/www/html/"
-
-  handlers:
-  - name: Restart Apache RedHat
-    service: name=httpd state=restarted
-    when: ansible_os_family == "RedHat"
-
-  - name: Restart Apache Debian
-    service: name=apache2 state=restarted
-    when: ansible_os_family == "Debian"
-```
+Modifying the previous playbook to use `deploy_apache`:
 <p align="center">
   <img src="./.info/4.Create_Ansible_Roles2.png">
 </p>
+
+```yml
+
+nano playbook7.yml
+
+ansible-playbook playbook7.yml
+
+# !!! Ansible Roles.yml !!!
+---
+- name: Ansible Roles
+  hosts: all
+  become: yes               # `-b` or `-become` flag to run the module with `sudo` privilege in the managed nodes.
+
+  roles:
+    - role: deploy_apache
+```
+
 
 
 
