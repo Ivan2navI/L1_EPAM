@@ -768,7 +768,7 @@ Create `deploy_apache`:
   <img src="./.info/4.Create_Ansible_Roles.png">
 </p>
 
-Modifying the previous playbook to use [`deploy_apache`](https://github.com/Ivan2navI/L1_EPAM/tree/main/10.%20Ansible/.info/roles/deploy_apache):
+Modifying the previous playbook to use [deploy_apache](https://github.com/Ivan2navI/L1_EPAM/tree/main/10.%20Ansible/.info/roles/deploy_apache):
 <p align="center">
   <img src="./.info/4.Create_Ansible_Roles2.png">
 </p>
