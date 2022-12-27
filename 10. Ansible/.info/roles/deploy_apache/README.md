@@ -1,4 +1,4 @@
-Role Name
+deploy_apache
 =========
 
 A brief description of the role goes here.
@@ -13,6 +13,41 @@ Role Variables
 
 A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
 
+```yaml
+nano roles/deploy_apache/vars/main.yml
+
+---
+# vars file for deploy_apache
+source_dir: ./roles/deploy_apache/files
+destin_dir: /var/www/html
+```
+
+``` console
+ansible$ tree roles
+roles
+└── deploy_apache
+    ├── README.md
+    ├── defaults
+    │   └── main.yml
+    ├── files
+    │   ├── Ansible_Roles.png
+    │   └── index.html
+    ├── handlers
+    │   └── main.yml
+    ├── meta
+    │   └── main.yml
+    ├── tasks
+    │   └── main.yml
+    ├── templates
+    ├── tests
+    │   ├── inventory
+    │   └── test.yml
+    └── vars
+        └── main.yml
+
+```
+
+
 Dependencies
 ------------
 
@@ -20,12 +55,21 @@ A list of other roles hosted on Galaxy should go here, plus any details in regar
 
 Example Playbook
 ----------------
+Create `playbook7.yml` and run it to check results:
+```yml
+nano playbook7.yml
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+ansible-playbook playbook7.yml
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+# !!! Ansible Roles.yml !!!
+---
+- name: Ansible Roles
+  hosts: all
+  become: yes               # `-b` or `-become` flag to run the module with `sudo` privilege in the managed nodes.
+
+  roles:
+    - role: deploy_apache
+```
 
 License
 -------
