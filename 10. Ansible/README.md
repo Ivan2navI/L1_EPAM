@@ -799,7 +799,7 @@ Add `source_dir: ./roles/deploy_apache/files` and run `playbook7.yml` again:
 </p>
 
 ## 5. Ansible. Troubleshooting.
-The most common strategies for debugging Ansible playbooks are using the modules given below: **Debug** and **Register**
+The most common strategies for debugging Ansible playbooks are using the modules given below: **Debug** and **Register**.  
 These two are the modules available in Ansible. For debugging purpose, we need to use the two modules judiciously.
 
 Use **Verbosity**
