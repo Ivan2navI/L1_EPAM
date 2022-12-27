@@ -20,7 +20,7 @@ _8. [Terraform](https://github.com/Ivan2navI/L1_EPAM/tree/main/8.%20Terraform)_
 
 _9. [Docker](https://github.com/Ivan2navI/L1_EPAM/tree/main/9.%20Docker)_
 
-_10. Ansible_
+_10. [Ansible](https://github.com/Ivan2navI/L1_EPAM/tree/main/10.%20Ansible)_
 
 ```console
 ........................................................................................................................
