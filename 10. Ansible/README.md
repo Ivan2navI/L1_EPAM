@@ -836,12 +836,6 @@ Ansible Vault encrypts variables and files so you can protect sensitive content 
 To use Ansible Vault you need one or more passwords to encrypt and decrypt content. If you store your vault passwords in a third-party tool such as a secret manager, you need a script to access them.  
 Use the passwords with the ***ansible-vault*** command-line tool to ***create*** and ***view*** encrypted variables, ***create*** encrypted files, ***encrypt*** existing files, or ***edit, re-key***, or ***decrypt*** files. You can then place encrypted content under source control and share it more safely.
 
-
-
-
-
-
-
 ---
 ### PS: [Paste to Markdown](https://euangoddard.github.io/clipboard2markdown/)
 
