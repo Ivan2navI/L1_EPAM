@@ -773,8 +773,8 @@ Modifying the previous playbook to use `deploy_apache`:
   <img src="./.info/4.Create_Ansible_Roles2.png">
 </p>
 
+Create `playbook7.yml` and run it to check results:
 ```yml
-
 nano playbook7.yml
 
 ansible-playbook playbook7.yml
@@ -788,10 +788,15 @@ ansible-playbook playbook7.yml
   roles:
     - role: deploy_apache
 ```
+But we get an error, and to fix it, we need to make the following edits to the `deploy_apache/vars/main.yml` file:  
+<p align="center">
+  <img src="./.info/4.Create_Ansible_Roles3_ERROR.png">
+</p>
 
-
-
-
+Add `source_dir: ./roles/deploy_apache/files` and run `playbook7.yml` again:  
+<p align="center">
+  <img src="./.info/4.Create_Ansible_Roles4_Deploy.png">
+</p>
 
 
 
