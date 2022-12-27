@@ -805,12 +805,12 @@ These two are the modules available in Ansible. For debugging purpose, we need t
 Use **Verbosity**
 With the Ansible command, one can provide the verbosity level. You can run the commands with verbosity level `one (-v)` or `two (-vv)`.
 ```yaml
--	name: Print the gateway for each host when defined
+- name: Print the gateway for each host when defined
   ansible.builtin.debug:
     msg: System {{ inventory_hostname }} has gateway {{ ansible_default_ipv4.gateway }}
   when: ansible_default_ipv4.gateway is defined
 
--	name: Get uptime information
+- name: Get uptime information
   ansible.builtin.shell: /usr/bin/uptime
   register: result
 
@@ -829,8 +829,6 @@ With the Ansible command, one can provide the verbosity level. You can run the c
     msg:
     -	"Provisioning based on YOUR_KEY which is: {{ lookup('env', 'YOUR_KEY') }}"
     -	"These servers were built using the password of'{{ password_used }}'. Please retain this for later use."
-
-
 ```
 
 
