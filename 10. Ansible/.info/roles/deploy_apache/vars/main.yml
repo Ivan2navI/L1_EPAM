@@ -1,0 +1,4 @@
+---
+# vars file for deploy_apache
+source_dir: ./roles/deploy_apache/files
+destin_dir: /var/www/html

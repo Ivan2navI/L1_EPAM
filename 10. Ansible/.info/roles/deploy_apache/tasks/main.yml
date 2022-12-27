@@ -1,0 +1,44 @@
+---
+# tasks file for deploy_apache
+- name:  Check Linux distro
+  debug: var=ansible_os_family
+
+- block: # For "RedHat"
+
+  - name: Install Apache Web Server on AWS Linux / RedHat
+    yum:  name=httpd state=latest
+
+  - name: Start Apache and enable it during boot
+    service: name=httpd state=started enabled=yes
+
+  when: ansible_os_family == "RedHat"
+
+- block: # For "Debian"
+
+  - name: Install Apache Web Server on Ubuntu / Debian
+    apt:  update_cache=yes name=apache2 state=latest
+
+  - name: Start Apache and enable it during boot
+    service: name=apache2 state=started enabled=yes
+
+  when: ansible_os_family == "Debian"
+
+
+- name: Copy index.html to target server Ubuntu / Debian
+  copy: src={{ source_dir }}/{{ item }} dest={{ destin_dir }} mode=0555
+  loop:
+    - "index.html"
+    - "Ansible_Roles.png"
+  notify:
+      - Restart Apache Debian
+      - Restart Apache RedHat
+
+- name: Add OS info
+  shell: |
+    OS_VERSION=$(cat /etc/os-release | grep "PRETTY_NAME" | sed 's/PRETTY_NAME=//' | sed 's/\"//g')
+    echo "<h3 style="color:Orange" align="center">$OS_VERSION</h3>" >> index.html
+
+    IP_ADR=$(hostname -I)
+    echo "<h4 style="color:Orange" align="center">$IP_ADR</h4>" >> index.html
+  args:
+    chdir: "/var/www/html/"
