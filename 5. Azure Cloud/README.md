@@ -247,7 +247,7 @@ In this storage account you will be store your tf state file
 <p align="center">
   <img src="./.md/5_Azure_Cloud.003.png">
 </p>
-6. Run az login or Connect-AzAccount to connect the azure subscription from your local
+6. Run az login or Connect-AzAccount to connect the azure subscription from your local  
 7. Run terraform apply to deploy infrastructure
 
 **Important note: Use only freshest version of tf module like** <https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/windows_web_app>
