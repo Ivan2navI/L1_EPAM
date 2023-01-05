@@ -276,7 +276,7 @@ Don’t forget to grant access on the subscription level for your enterprise app
 
 2. Templates example for variables - <https://learn.microsoft.com/en-us/samples/azure-samples/azure-pipelines-variable-templates/azure-pipelines-variable-templates/>
 3. Good example how to do a pipeline to build .net app and deplot tf iac - <https://azuredevopslabs.com/labs/vstsextend/terraform/> Only via UI. Hence don’t forget about view yaml button in UI
-4. Example of the Angular application from lecture 2
+4. [Example](https://github.com/Ivan2navI/L1_EPAM/blob/main/5.%20Azure%20Cloud/.info/test-ui-app.zip) of the Angular application from lecture 2
 ---
 ### PS: [Paste to Markdown](https://euangoddard.github.io/clipboard2markdown/)
 
