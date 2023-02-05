@@ -1,0 +1,18 @@
+Vining Ivy
+
+rgb: 75, 115, 120
+hex: #4b7378
+cmyk: 37, 4, 0, 53
+
+
+Line: 87CFD9
+
+
+Sherwin-Williams
+
+rgb: 174, 142, 126
+hex: #ae8e7e
+cmyk: 0, 18, 28, 32
+
+Line: E8BDA7
+Line: 594940
