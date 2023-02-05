@@ -1,0 +1,101 @@
+CREATE DATABASE trackizer;
+
+# 1. createadmintable.sql
+use trackizer;
+create table if not exists admin(
+ username varchar(20),
+ password varchar(8),
+ email varchar(45));
+ insert into admin(username, password, email) values('Admin', 'Admin123', 'admin@gmail.com');
+
+select * from admin;
+
+
+# 2. createapplicationtable.sql
+use trackizer;
+create table if not exists application( 
+ appno int(4) NOT NULL AUTO_INCREMENT,
+ username varchar(20),
+ password varchar(8),
+ email varchar(45),
+ reason varchar(100),
+ PRIMARY KEY (appno));
+insert into application(appno, username, password, email, reason) values('100','Akshita','1234', 'akshitadixit.int@gmail.com', 'I am verified by DHCL and also have an experince of 7 years');
+insert into application(appno, username, password, email, reason) values('111','Akshita111','1234', 'akshitadixit111.int@gmail.com', 'Also have an experince of 111 years');
+insert into application(appno, username, password, email, reason) values('222','Akshita222','1234', 'akshitadixit222.int@gmail.com', 'Also have an experince of 222 years');
+
+select * from application;
+
+
+# 3. createorderstable.sql
+create database if not exists trackizer;
+use trackizer;
+create table orders( 
+ ts timestamp ,
+ orderid int(5) NOT NULL AUTO_INCREMENT,
+ username varchar(30), 
+ src varchar(20) NOT NULL, 
+ dest varchar(20) NOT NULL, 
+ bill varchar(7), 
+ payment varchar(4),
+ retailer varchar(20),
+ PRIMARY KEY (orderid));
+insert into orders(ts, username, src, dest, bill, payment, retailer) values(current_timestamp(), 'abc1', 'England', 'India', '3499.00', 'done', 'Hitachi');
+insert into orders(ts, username, src, dest, bill, payment, retailer) values(current_timestamp(), 'abc2', 'England', 'India', '499.00', 'done', 'Canon');
+
+select * from orders;
+
+
+# 4. createretailertable.sql
+use trackizer;
+create table if not exists retailer( 
+ regno int(6) NOT NULL AUTO_INCREMENT,
+ username varchar(20),
+ password varchar(8),
+ email varchar(45),
+ PRIMARY KEY (regno));
+insert into retailer(regno, username, password, email) values('67395','Hitachi','1234', 'contact@hitachi.co.in');
+insert into retailer(regno, username, password, email) values('67396','Canon','1234', 'contact@canon.co.in');
+select * from retailer;
+
+
+# 5. createtracktable.sql
+use trackizer;
+create table track(
+ id int(5),
+ status varchar(20));
+ insert into track(id, status) values('1', 'delivered');
+ 
+select * from track;
+
+
+# 6. createusertable.sql
+use trackizer;
+create table if not exists user( 
+ regno int(6) NOT NULL AUTO_INCREMENT,
+ username varchar(20),
+ password int(8),
+ email varchar(45),
+ PRIMARY KEY (regno));
+insert into user(regno, username, password, email) values('38765','abc1','1234', null);
+insert into user(username, password, email) values('abc2','1234','abc2@gmail.com');
+
+select * from trackizer.user;
+
+
+# 7. getuserpanelresults.sql
+use trackizer;
+select ts, orderid, src, dest, bill, payment, id, status
+from orders ord, track tr
+where username = 'abc'
+and ord.orderid = tr.id;
+
+
+# 8. viewalltables.sql
+use trackizer;
+select * from trackizer.user;
+select * from trackizer.orders;
+select * from trackizer.track;
+select * from trackizer.admin;
+select * from trackizer.retailer;
+select * from trackizer.application;
