@@ -2,7 +2,7 @@
 ## --- Home Task ---
 __Consist of:__
 
-_1. Final project_
+_1. [Final project](https://github.com/Ivan2navI/L1_EPAM/tree/main/1.%20Final%20project)_
 
 _2. [Linux Bash Task](https://github.com/Ivan2navI/L1_EPAM/tree/main/2.%20Linux%20Bash%20Task)_
 
