@@ -154,12 +154,7 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword == a6bf48e7d0a84bca880c17
 	Allows you to setup agents on Windows machines over Windows Management Instrumentation (WMI) 
 
 ============================ 4 ========================== \
-Admin_Jenkins
-Test.2022
-
-Admin Jenkins
-Admin_Jenkins@test.net
-http://192.168.2.12:8080/
+xxx
 
 ============================ 5 ========================== \
 	Jenkins to show the UI in English language?
