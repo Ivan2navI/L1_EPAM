@@ -1,0 +1,35 @@
+# !!! hosts !!!
+
+[Node1]
+ip-192-168-11-11    ansible_hosts=192.168.11.11 ansible_user=admin ansible_ssh_private_key_file=/home/admin/.ssh/L1_Fin_Node1.pem
+
+[Node2]
+ip-192-168-11-12    ansible_hosts=192.168.11.12 ansible_user=ubuntu ansible_ssh_private_key_file=/home/admin/.ssh/L1_Fin_Node2.pem
+
+[Node3]
+ip-192-168-11-13    ansible_hosts=192.168.11.13 ansible_user=admin ansible_ssh_private_key_file=/home/admin/.ssh/L1_Fin_Node1.pem
+
+[Node4]
+ip-192-168-11-14    ansible_hosts=192.168.11.14 ansible_user=ubuntu ansible_ssh_private_key_file=/home/admin/.ssh/L1_Fin_Node2.pem
+
+[prod:children]
+Node1
+Node2
+
+[staging:children]
+Node3
+Node4
+
+[debian:children]
+Node1
+Node3
+
+[ubuntu:children]
+Node2
+Node4
+
+[db_servers:children]
+Node1
+Node2
+Node3
+Node4

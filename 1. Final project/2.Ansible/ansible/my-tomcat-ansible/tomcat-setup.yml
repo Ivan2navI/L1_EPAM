@@ -1,0 +1,34 @@
+---
+- name: Tomcat deployment playbook [Debian]
+  hosts: debian             # Inventory hosts group / server to act on
+  become: yes               # If to escalate privilege
+  become_method: sudo       # Set become method
+  remote_user: admin         # Update username for remote server
+  
+  vars:
+    tomcat_ver: 10.0.27                         # Tomcat version to install
+    ui_manager_user: manager                    # User who can access the UI manager section only
+    ui_manager_pass: _Str0ngManagerPassw3rd_      # UI manager user password
+    ui_admin_username: admin                    # User who can access bpth manager and admin UI sections
+    ui_admin_pass: _Str0ngAdminPassw3rd_          # UI admin password
+  roles:
+    - tomcat
+
+- name: Tomcat deployment playbook [Ubuntu]
+  hosts: ubuntu             # Inventory hosts group / server to act on
+  become: yes               # If to escalate privilege
+  become_method: sudo       # Set become method
+  remote_user: ubuntu         # Update username for remote 
+  
+  vars:
+    tomcat_ver: 10.0.27                         # Tomcat version to install
+    ui_manager_user: manager                    # User who can access the UI manager section only
+    ui_manager_pass: _Str0ngManagerPassw3rd_      # UI manager user password
+    ui_admin_username: admin                    # User who can access bpth manager and admin UI sections
+    ui_admin_pass: _Str0ngAdminPassw3rd_          # UI admin password
+  roles:
+    - tomcat
+
+
+
+  # Original GIT: https://github.com/jmutai/tomcat-ansible

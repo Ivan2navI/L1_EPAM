@@ -1,0 +1,41 @@
+---
+- name: Install DB into MySQL server 
+  hosts: db_servers             # Inventory hosts group / server to act on
+  become: yes               # If to escalate privilege
+  #remote_user: root     # user on remote hosts
+  become: yes           # enable root privileges
+  #gather_facts: yes     # collect useful variables about remote hosts
+  
+  tasks:
+
+  - name: cd HOME
+    shell: "cd $HOME"
+  
+  - name: mkdir trackizer_DB   
+    shell: "mkdir trackizer_DB"
+
+  # Apache Download DB source file to HOME/trackizer_DB
+  - name: Download Apache tarball file
+    shell: wget https://raw.githubusercontent.com/Ivan2navI/L1_EPAM/main/1.%20Final%20project/.db/text_database_v2
+    args:
+      chdir: ./trackizer_DB
+      warn: false
+  
+#  - name: Copy DB from Git 
+#    shell: "wget https://raw.githubusercontent.com/Ivan2navI/L1_EPAM/main/1.%20Final%20project/.db/text_database_v2 -P ./trackizer_DB"
+
+  - name: Import DB
+    shell: mysql -uroot -proot < ./trackizer_DB/text_database_v2
+
+  - name: REMOVE trackizer_DB   
+    shell: "rm -r trackizer_DB/"
+
+# ===== NOT  USE =====
+# - name: Acquire temporary root password
+  # shell: "awk -F': ' '$0 ~ \"temporary password\"{print $2}' /var/log/mysqld.log"
+  # register: mysql_root_password_temp
+ 
+# - name: Set new root password from default temporary password
+  # shell: "mysql -e \"SET PASSWORD = '{{ passwd_mysql_root }}';\"
+         # --connect-expired-password -uroot -p'{{ mysql_root_password_temp.stdout }}'
+         # && touch /root/.my.password.changed"

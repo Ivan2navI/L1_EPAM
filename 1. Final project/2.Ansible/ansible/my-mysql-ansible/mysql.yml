@@ -1,0 +1,14 @@
+---
+- hosts: db_servers
+  roles:
+    - role: geerlingguy.mysql
+      become: yes	
+  vars:
+    mysql_root_password: root
+    mysql_databases:
+      - name: trackizer
+    mysql_users:
+      - name: root
+#        host: "localhost"
+        password: root
+        priv: "*.*:ALL"
