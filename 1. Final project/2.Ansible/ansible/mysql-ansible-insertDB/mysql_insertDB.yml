@@ -14,8 +14,8 @@
   - name: mkdir trackizer_DB   
     shell: "mkdir trackizer_DB"
 
-  # Apache Download DB source file to HOME/trackizer_DB
-  - name: Download Apache tarball file
+  # Download DB source file to HOME/trackizer_DB
+  - name: Download DB source file to HOME/trackizer_DB
     shell: wget https://raw.githubusercontent.com/Ivan2navI/L1_EPAM/main/1.%20Final%20project/.db/text_database_v2
     args:
       chdir: ./trackizer_DB
