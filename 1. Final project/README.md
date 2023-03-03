@@ -764,8 +764,10 @@ Make some change in **[Maven_Project_Trackizer](https://github.com/Ivan2navI/Mav
 # (:whale: Docker + Apache + Jenkins Pipeline)
 
 ## [7.1. Web Page with a description and credentials](http://jenkinsmainserver.myddns.me/)  
-I've decided that a **[web page](http://jenkinsmainserver.myddns.me/)** with a description and credentials is necessary for the final project.  
-All necessary files are located **[here](https://github.com/Ivan2navI/L1_EPAM/tree/main/1.%20Final%20project/4.Docker/apache_web_for_docker)**.
+
+I've decided to create a **[Web Page](http://jenkinsmainserver.myddns.me/)** with a description and login credentials for this final project.  
+
+All necessary web files are located **[here](https://github.com/Ivan2navI/L1_EPAM/tree/main/1.%20Final%20project/4.Docker/apache_web_for_docker)**.
 
 <p align="center">
   <img src=".info/7.1.Web_Page.png">
