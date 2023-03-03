@@ -759,3 +759,121 @@ Make some change in **[Maven_Project_Trackizer](https://github.com/Ivan2navI/Mav
   <img src=".info/6.4.2.GitHub_Hook_Results.png">
 </p>  
 
+
+# [7. Main Web Page for Final Project](https://github.com/Ivan2navI/L1_EPAM/tree/main/1.%20Final%20project/4.Docker)  
+# (:whale: Docker + Apache + Jenkins Pipeline)
+
+## [7.1. Web Page with a description and credentials](http://jenkinsmainserver.myddns.me/)  
+I've decided that a **[web page](http://jenkinsmainserver.myddns.me/)** with a description and credentials is necessary for the final project.  
+All necessary files are located **[here](https://github.com/Ivan2navI/L1_EPAM/tree/main/1.%20Final%20project/4.Docker/apache_web_for_docker)**.
+
+<p align="center">
+  <img src=".info/7.1.Web_Page.png">
+</p> 
+
+## 7.2. :whale: Docker  
+The website will be deployed in a Docker container, which is based on Centos 7 and Apache.  
+The Docker file is located **[here](https://github.com/Ivan2navI/L1_EPAM/tree/main/1.%20Final%20project/4.Docker/docker_file)**, and an example of its code is presented below:  
+```Dockerfile
+FROM centos:7
+
+# Install Apache
+RUN yum -y update
+RUN yum -y install httpd httpd-tools
+
+EXPOSE 80
+
+# Start Apache
+CMD ["/usr/sbin/httpd","-D","FOREGROUND"]
+```
+
+**To check docker version:**   
+`docker -v`
+
+If it didn't available, you can use **[this script for install](https://github.com/Ivan2navI/L1_EPAM/blob/main/1.%20Final%20project/4.Docker/Install_Docker.sh)**.  
+
+**If you would like to use Docker as a non-root user**,  
+you should now consider adding your user to the “docker” group with something like:  
+```console
+sudo usermod -aG docker $USER
+sudo usermod -aG docker jenkins
+sudo reboot
+```  
+
+## 7.3. Jenkins Pipeline  
+Jenkins Pipeline will be used to automate the build of the Docker container and deployment of the web page in it.  
+
+The Jenkinsfile is located **[here](https://github.com/Ivan2navI/L1_EPAM/blob/main/1.%20Final%20project/4.Docker/jenkins_file/jenkinsfile)**.  
+
+The Pipeline we are defining, have four stages:
+-   Remove Previous Docker Container & Image;
+-   Select Dockerfile from GitHub & Build Image;
+-   Select Web Apache files from GitHub & copy it to container;
+-   Run Container.
+
+Now, we are ready to create new Pipeline.  
+On Jenkins go to  `New Item → Pipeline`, type the name **"Docker_Apache_Web"** for this Pipeline project and then click "OK".
+We will also use the GitHub hook trigger to automate the rebuild of the container:  
+
+<p align="center">
+  <img src=".info/7.3.Jenkins_Pipeline.png">
+</p>
+
+The first time we run the Pipeline manually, we will receive an error because the variable `def CONTAINER_TAG_PREVIOUS="v0.${currentBuild.previousBuild.getNumber()}"` of the previous build  is undefined.  
+Subsequent runs - whether manually or triggered by the GitHub hook, will work correctly.  
+<p align="center">
+  <img src=".info/7.3.1.Jenkins_Pipeline_Run.png">
+</p> 
+
+Let's check the result of the Pipeline execution:
+```console
+
+$ docker ps -a
+CONTAINER ID   IMAGE                COMMAND                  CREATED          STATUS          PORTS                               NAMES
+2999dc7bb386   docker_apache:v0.3   "/usr/sbin/httpd -D …"   50 minutes ago   Up 50 minutes   0.0.0.0:80->80/tcp, :::80->80/tcp   docker_apache
+
+
+$ docker images -a
+REPOSITORY      TAG       IMAGE ID       CREATED       SIZE
+docker_apache   v0.3      d32a2ecec0c4   2 hours ago   744MB
+
+# !!! -------------------------------------------------------------------------------------------------------------------------------------------
+# !!! Show docker disk usage
+# docker system df
+# docker system df -v
+
+
+$ docker system df
+TYPE            TOTAL     ACTIVE    SIZE      RECLAIMABLE
+Images          1         1         744.2MB   0B (0%)
+Containers      1         1         3.395kB   0B (0%)
+Local Volumes   0         0         0B        0B
+Build Cache     5         0         155B      155B
+
+
+$ docker system df -v
+Images space usage:
+
+REPOSITORY      TAG       IMAGE ID       CREATED       SIZE      SHARED SIZE   UNIQUE SIZE   CONTAINERS
+docker_apache   v0.3      d32a2ecec0c4   2 hours ago   744.2MB   0B            744.2MB       1
+
+Containers space usage:
+
+CONTAINER ID   IMAGE                COMMAND                  LOCAL VOLUMES   SIZE      CREATED       STATUS       NAMES
+2999dc7bb386   docker_apache:v0.3   "/usr/sbin/httpd -D …"   0               3.4kB     2 hours ago   Up 2 hours   docker_apache
+
+Local Volumes space usage:
+
+VOLUME NAME   LINKS     SIZE
+
+Build cache usage: 155B
+
+CACHE ID       CACHE TYPE     SIZE      CREATED       LAST USED     USAGE     SHARED
+ydnxg1nieazg   regular        0B        2 hours ago   2 hours ago   1         true
+71cp5wov6810   regular        336MB     2 hours ago   2 hours ago   1         true
+0r4tkiknmx52   regular        204MB     2 hours ago   2 hours ago   1         true
+w1k7dymib2ob   source.local   0B        2 hours ago   2 hours ago   1         false
+1cycf5j32x8s   source.local   155B      2 hours ago   2 hours ago   1         false
+```
+And let's go to the **Main Web Page for Final Project** at the following link:  
+http://jenkinsmainserver.myddns.me/
