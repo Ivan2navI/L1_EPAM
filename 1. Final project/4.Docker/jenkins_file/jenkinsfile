@@ -1,0 +1,78 @@
+def CONTAINER_NAME="docker_apache"
+//def CONTAINER_TAG="v0.$BUILD_NUMBER"
+def CONTAINER_TAG="v0.${currentBuild.number}"
+def CONTAINER_TAG_PREVIOUS="v0.${currentBuild.previousBuild.getNumber()}"
+
+def containerStop(containerName){
+    try {
+        echo "docker stop $containerName"
+        sh "docker stop $containerName"
+    } catch(error){}
+}
+
+def containerRemove(containerName){
+    try {
+        echo "docker rm $containerName"
+        sh "docker rm $containerName"
+    } catch(error){}
+}
+
+def imageRemove(containerName, tag_previous){
+    try {
+        echo "docker rmi $containerName:$tag_previous"
+        sh "docker rmi $containerName:$tag_previous"
+
+        echo "docker system prune -a -f"
+        sh "docker system prune -a -f"
+    } catch(error){}
+}
+
+def imageBuild(containerName, tag){
+    sh "docker build -t $containerName:$tag --pull --no-cache ."
+    echo "Image build complete"
+}
+
+def runApacheWeb(containerName, tag){
+    //sh "docker run -d --rm -p 80:80 --name $containerName $containerName:$tag"
+    sh "docker run -dit --restart unless-stopped -p 80:80 --name $containerName -v ./:/var/www/html $containerName:$tag"
+    echo "Apache WEB started"
+}
+
+
+pipeline {
+    agent any
+
+    stages {
+        stage("Docker Container/Image Remove"){
+            steps {
+                echo "============          Remove Previous      ============"
+                echo "============    Docker Container / Image   ============"
+                containerStop(CONTAINER_NAME)
+                containerRemove(CONTAINER_NAME)
+                imageRemove(CONTAINER_NAME, CONTAINER_TAG_PREVIOUS)
+            }
+        }
+
+       	stage('Image Build'){
+            steps {
+                echo "============ Select dockerfile from GitHub ============"
+                echo "============        & Build Image          ============"
+                // GitHub, chahge directory to 'docker_file'
+                dir('docker_file') {
+                    imageBuild(CONTAINER_NAME, CONTAINER_TAG)
+                }
+		    }
+	    } 
+
+       	stage('Run Container (Web Apache)'){
+            steps {
+                echo "============ Select Web Apache from GitHub ============"
+                echo "============ Run Container & Copy Webfiles ============"
+                // GitHub, chahge directory to 'apache_web_for_docker'
+                dir('apache_web_for_docker') {
+                    runApacheWeb(CONTAINER_NAME, CONTAINER_TAG)
+                }
+		    }
+	    } 
+    }
+}
