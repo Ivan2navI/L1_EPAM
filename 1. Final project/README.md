@@ -87,8 +87,8 @@ And got the result:
   - An SSH keypair associated [with this user](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys-on-debian-11).
 
 - One or more Ansible Hosts:
-  - **Node1/3: [192.168.11.11]** Debian 11  
-  - **Node2/4: [192.168.11.12]** Ubuntu Server 20.04 LTS  \
+  - **Node1/3: [192.168.11.11/13]** Debian 11  
+  - **Node2/4: [192.168.11.12/14]** Ubuntu Server 20.04 LTS  \
     An Ansible host is any machine that your Ansible control node is configured to automate.
   
 ## [2.1. Installing Ansible (bash)](https://github.com/Ivan2navI/L1_EPAM/blob/main/1.%20Final%20project/2.Ansible/Install_Ansible.sh)  
